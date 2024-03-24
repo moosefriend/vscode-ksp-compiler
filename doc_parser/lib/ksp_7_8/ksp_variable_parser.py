@@ -20,4 +20,22 @@ from ksp_base.base_variable_parser import BaseVariableParser
 
 
 class KspVariableParser(BaseVariableParser):
-    pass
+    MERGE_LINES = {
+        # <start line>: <character used to merge with the next line>
+        9072: " ",
+        9074: " ",
+        9075: " ",
+        9076: " ",
+        9078: " "
+    }
+    """List of lines to be merged, because they are wrapped and therefore not correctly identified"""
+    # TODO: WRAPPED_VARIABLES are tables with 2 columns. Maybe for such complex use cases it would be easier to have
+    #    an overwrite mechanism, so to ignore lines and manually configure the values.
+    WRAPPED_VARIABLES = {
+        # <line no in the text file>: (<variable part in the first line>, <variable part in the second line>)
+        9905: ("$CONTROL_PAR_WAVE_END_", "COLOR"),
+        9907: ("$CONTROL_PAR_WAVE_END_", "ALPHA"),
+        9909: ("$CONTROL_PAR_WAVETABLE", "_END_COLOR"),
+        9911: ("$CONTROL_PAR_WAVETABLE", "_END_ALPHA")
+    }
+

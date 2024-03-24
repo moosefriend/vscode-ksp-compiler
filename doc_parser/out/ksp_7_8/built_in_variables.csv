@@ -143,16 +143,12 @@ KSP_Reference_Manual.txt.py;262;9066;21. Built-in Variables and Constants;Events
 KSP_Reference_Manual.txt.py;262;9067;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_CUSTOM;;;;BUILT-IN
 KSP_Reference_Manual.txt.py;262;9068;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_MOD_VALUE_ID;;;;BUILT-IN
 KSP_Reference_Manual.txt.py;262;9069;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_MOD_VALUE_EX_ID;;;;BUILT-IN
-KSP_Reference_Manual.txt.py;262;9071;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_SOURCE;;(-1 if event originates from outside, otherwise slot number 0 ... 4);"• $EVENT_PAR_PLAY_POS (Returns the absolute position of the play cursor within a zone in
-microseconds)
-• $EVENT_PAR_ZONE_ID (Returns the zone ID of the event- Can only be used with active events.
-Returns -1 if no zone is triggered. Returns the highest zone ID if more than one zone is triggered
-by the event. Make sure the voice is running by writing e.g. wait (1) before retrieving the zone
-ID!)
-Event parameters to be used with set_event_par() and get_event_par() in multi scripts";BUILT-IN
-KSP_Reference_Manual.txt.py;262;9080;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;only;$EVENT_PAR_MIDI_COMMAND;;;;BUILT-IN
-KSP_Reference_Manual.txt.py;262;9081;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;only;$EVENT_PAR_MIDI_BYTE_1;;;;BUILT-IN
-KSP_Reference_Manual.txt.py;262;9082;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;only;$EVENT_PAR_MIDI_BYTE_2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9071;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_SOURCE;;(-1 if event originates from outside, otherwise slot number 0 ... 4);;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9072;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_PLAY_POS;;(Returns the absolute position of the play cursor within a zone in microseconds);;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9074;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_ZONE_ID;;(Returns the zone ID of the event- Can only be used with active events. Returns -1 if no zone is triggered. Returns the highest zone ID if more than one zone is triggered by the event. Make sure the voice is running by writing e.g. wait (1) before retrieving the zone ID!);;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9080;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par() in multi scripts only;$EVENT_PAR_MIDI_COMMAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9081;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par() in multi scripts only;$EVENT_PAR_MIDI_BYTE_1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9082;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par() in multi scripts only;$EVENT_PAR_MIDI_BYTE_2;;;;BUILT-IN
 KSP_Reference_Manual.txt.py;262;9084;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_POS;;;;BUILT-IN
 KSP_Reference_Manual.txt.py;262;9085;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_NOTE_LENGTH;;;;BUILT-IN
 KSP_Reference_Manual.txt.py;262;9086;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_ID;;;;BUILT-IN

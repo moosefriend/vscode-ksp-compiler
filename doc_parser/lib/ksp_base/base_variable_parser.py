@@ -71,7 +71,8 @@ class BaseVariableParser:
     """List of lines to be merged, because they are wrapped and therefore not correctly identified"""
     WRAPPED_VARIABLES = {
         # <line no in the text file>: (<variable part in the first line>, <variable part in the second line>)
-        7578: ("$CONTROL_PAR_WAVETABLE", "_END_ALPHA")
+        9783: ("$CONTROL_PAR_WAVETABLE", "_END_COLOR"),
+        9785: ("$CONTROL_PAR_WAVETABLE", "_END_ALPHA")
     }
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str, page_offset: int = 0):
@@ -131,7 +132,7 @@ class BaseVariableParser:
         """
         Scan variables and constants.
         """
-        self.reader.merge_lines = BaseVariableParser.MERGE_LINES
+        self.reader.merge_lines = self.MERGE_LINES
         self.variable_list = []
         self.headline: str = ""
         self.chapter_categories = {}
@@ -195,6 +196,8 @@ class BaseVariableParser:
                         self.variable_list.append(variable)
             # Check for item list headlines
             elif line.endswith(":"):
+                # TODO: When the line also contains a "." then the item list headline shall only be after the "."
+                #    The text before the "." should be added to the description of the previous variable.
                 # Remove the colon from the end
                 self.item_list_headline = line[:-1]
                 log.info(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
