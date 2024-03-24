@@ -1,0 +1,1661 @@
+File;Page No;Line No;Headline;Category;Table Headline;Item List Headline;Name;Parameter;Comment;Description;Source
+KSP_Reference_Manual.txt.py;256;8720;21. Built-in Variables and Constants;General;;;$CURRENT_SCRIPT_SLOT;;;This variable returns the script slot of the current script (zero-based, i.e. the first script slot is 0).;BUILT-IN
+KSP_Reference_Manual.txt.py;256;8725;21. Built-in Variables and Constants;General;;;%GROUPS_SELECTED;group-idx;;"Each index of this variable array points to the group with the same index.
+If a group is selected for editing, the corresponding array cell contains a 1, otherwise 0.";BUILT-IN
+KSP_Reference_Manual.txt.py;256;8731;21. Built-in Variables and Constants;General;;;$NI_ASYNC_EXIT_STATUS;;;"This variable returns a value of 1 if the command that triggered the on async_complete callback
+has successfully completed its action. 0 if the command could not complete its action, e.g. file not
+found.";BUILT-IN
+KSP_Reference_Manual.txt.py;256;8738;21. Built-in Variables and Constants;General;;;$NI_ASYNC_ID;;;This variable returns the ID of the command that triggered the on async_complete callback.;BUILT-IN
+KSP_Reference_Manual.txt.py;256;8743;21. Built-in Variables and Constants;General;;;$NI_BUS_OFFSET;;;"This constant is to be used in the <generic> part of the engine parameter commands to point to
+the instrument bus level. Add the index of the bus you wish to address, e.g. $NI_BUS_OFFSET + 2
+will point to instrument bus 3.";BUILT-IN
+KSP_Reference_Manual.txt.py;256;8750;21. Built-in Variables and Constants;General;;;$NUM_GROUPS;;;This variable returns the total amount of groups in an instrument.;BUILT-IN
+KSP_Reference_Manual.txt.py;256;8755;21. Built-in Variables and Constants;General;;;$NUM_OUTPUT_CHANNELS;;;"This variable returns the total amount of output channels of the respective KONTAKT multi, not
+counting Aux channels.";BUILT-IN
+KSP_Reference_Manual.txt.py;256;8761;21. Built-in Variables and Constants;General;;;$NUM_ZONES;;;This variable returns the total amount of zones in an instrument.;BUILT-IN
+KSP_Reference_Manual.txt.py;256;8766;21. Built-in Variables and Constants;General;;;$PLAYED_VOICES_INST;;;This variable returns the amount of played voices for the current instrument.;BUILT-IN
+KSP_Reference_Manual.txt.py;256;8771;21. Built-in Variables and Constants;General;;;$PLAYED_VOICES_TOTAL;;;This variable returns the amount of played voices for all instruments.;BUILT-IN
+KSP_Reference_Manual.txt.py;257;8777;21. Built-in Variables and Constants;General;;;$REF_GROUP_IDX;;;"This variable returns the group index of the currently viewed group in KONTAKT's instrument edit
+view.";BUILT-IN
+KSP_Reference_Manual.txt.py;257;8784;21. Built-in Variables and Constants;General;Path Variables;;$GET_FOLDER_LIBRARY_DIR;;;"If used with a Kontakt Player encoded NKI: library folder.
+If used with an unencoded NKI: the user content directory.";BUILT-IN
+KSP_Reference_Manual.txt.py;257;8787;21. Built-in Variables and Constants;General;Path Variables;;$GET_FOLDER_FACTORY_DIR;;;"The factory folder of KONTAKT, mainly used for loading factory IR samples.
+Note: this is not the Kontakt Factory Library folder!";BUILT-IN
+KSP_Reference_Manual.txt.py;257;8790;21. Built-in Variables and Constants;General;Path Variables;;$GET_FOLDER_PATCH_DIR;;;"The directory in which the patch was saved.
+If the patch was not saved before, an empty string is returned.";BUILT-IN
+KSP_Reference_Manual.txt.py;257;8798;21. Built-in Variables and Constants;General;"Time Machine Pro Variables
+User access for the two voice limits (Standard and High Quality) of the Time Machine Pro, to be
+used with set_voice_limit() and get_voice_limit().";;$NI_VL_TMPRO_STANDARD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;257;8799;21. Built-in Variables and Constants;General;"Time Machine Pro Variables
+User access for the two voice limits (Standard and High Quality) of the Time Machine Pro, to be
+used with set_voice_limit() and get_voice_limit().";;$NI_VL_TMRPO_HQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;258;8803;21. Built-in Variables and Constants;Events and MIDI;;;$ALL_GROUPS;;;"This constant addresses all groups in the instrument when used with disallow_group(),
+allow_group() or set_event_par_arr() functions.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8809;21. Built-in Variables and Constants;Events and MIDI;;;$ALL_EVENTS;;;"This constant addresses all events in functions which deal with an event ID number.
+It also works with MIDI object commands that require a MIDI event ID.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_1;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_2;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_3;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_4;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_5;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_6;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_7;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_8;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_9;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_10;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_11;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_12;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_13;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_14;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_15;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_16;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_17;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_18;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_19;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_20;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_21;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_22;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_23;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_24;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_25;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_26;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_27;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8815;21. Built-in Variables and Constants;Events and MIDI;;;$MARK_28;;;"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8822;21. Built-in Variables and Constants;Events and MIDI;;;%CC;controller-number;;"This variable array contains the current value for the specified MIDI CC (continuous controller)
+message.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8828;21. Built-in Variables and Constants;Events and MIDI;;;$CC_NUM;;;"This variable contains the MIDI CC (continuous controller) number of the controller which triggered
+the on controller callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8834;21. Built-in Variables and Constants;Events and MIDI;;;%CC_TOUCHED;controller-number;;"This variable array updates itself whenever a MIDI CC value is changed - 1 if the specified MIDI CC
+value has changed, 0 otherwise.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8840;21. Built-in Variables and Constants;Events and MIDI;;;$EVENT_ID;;;"This variable contains the unique ID number of the event which triggered the on note or on
+release callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8846;21. Built-in Variables and Constants;Events and MIDI;;;$CURRENT_EVENT;;;"This variable contains the unique ID number of the currently selected MIDI event, i.e. the MIDI event
+at the position marker.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8852;21. Built-in Variables and Constants;Events and MIDI;;;$EVENT_NOTE;;;"This variable contains the note number of the event which triggered the on note or on release
+callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;258;8858;21. Built-in Variables and Constants;Events and MIDI;;;$EVENT_VELOCITY;;;This variable contains the velocity of the note which triggered the on note callback.;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8866;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_0;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8866;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8866;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8866;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8867;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8868;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_PAN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8869;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_TUNE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8870;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_NOTE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8871;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_VELOCITY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8872;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par() and get_event_par();$EVENT_PAR_MIDI_CHANNEL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8874;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_ALLOW_GROUP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8875;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_CUSTOM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8876;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_MOD_VALUE_ID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8877;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with set_event_par_arr() and get_event_par_arr();$EVENT_PAR_MOD_VALUE_EX_ID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8879;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_SOURCE;;(-1 if event originates from outside, otherwise slot number 0 ... 4);;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8880;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_PLAY_POS;;(Returns the absolute position of the play cursor within a zone in microseconds);;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8882;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_ZONE_ID;;(Returns the zone ID of the event- Can only be used with active events. Returns -1 if no zone is triggered. Returns the highest zone ID if more than one zone is triggered by the event. Make sure the voice is running by writing e.g. wait (1) before retrieving the zone ID!);"Event parameters to be used with set_event_par() and get_event_par() in multi scripts
+only: • $EVENT_PAR_MIDI_COMMAND";BUILT-IN
+KSP_Reference_Manual.txt.py;259;8889;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_MIDI_BYTE_1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8890;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with get_event_par() only;$EVENT_PAR_MIDI_BYTE_2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8892;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_POS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8893;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_NOTE_LENGTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8894;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_ID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8895;21. Built-in Variables and Constants;Events and MIDI;Event Parameter Constants;Event parameters to be used with mf_set_event_par() and mf_get_event_par();$EVENT_PAR_TRACK_NR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8898;21. Built-in Variables and Constants;Events and MIDI;;;%EVENT_PAR;event-par;;"This variable array contains values of $EVENT_PAR_0... $EVENT_PAR_3 along with
+$EVENT_PAR_CUSTOM indices 4-15, valid for $EVENT_ID.";BUILT-IN
+KSP_Reference_Manual.txt.py;259;8906;21. Built-in Variables and Constants;Events and MIDI;Event Status Constants;These are values returned by event_status() command;$EVENT_STATUS_INACTIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8907;21. Built-in Variables and Constants;Events and MIDI;Event Status Constants;These are values returned by event_status() command;$EVENT_STATUS_NOTE_QUEUE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;259;8909;21. Built-in Variables and Constants;Events and MIDI;Event Status Constants;Multi script only;$EVENT_STATUS_MIDI_QUEUE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;260;8913;21. Built-in Variables and Constants;Events and MIDI;;;%GROUPS_AFFECTED;;;"This variable array contains indices of those groups that are affected by the current MIDI Note On or
+Note Off events.
+The size of the array changes depending on the number of groups the event affects, so use the
+num_elements() command to get the correct array size.
+The returned indices come before any allow_group() or disallow_group() commands, so it
+can be used to analyze the mapping of the instrument.";BUILT-IN
+KSP_Reference_Manual.txt.py;260;8923;21. Built-in Variables and Constants;Events and MIDI;;;$NOTE_HELD;;;This variable contains 1 if the key which triggered the callback is still held, 0 otherwise.;BUILT-IN
+KSP_Reference_Manual.txt.py;260;8928;21. Built-in Variables and Constants;Events and MIDI;;;%POLY_AT;note-number;;This variable array contains current values of MIDI Polyphonic Aftertouch for all MIDI note numbers.;BUILT-IN
+KSP_Reference_Manual.txt.py;260;8933;21. Built-in Variables and Constants;Events and MIDI;;;$POLY_AT_NUM;;;"This variable contains the note number of the MIDI Polyphonic Aftertouch event which triggered the
+on poly_at callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;260;8939;21. Built-in Variables and Constants;Events and MIDI;;;$RPN_ADDRESS;;;This variable contains the address of a received RPN or NRPN message (0... 16383).;BUILT-IN
+KSP_Reference_Manual.txt.py;260;8944;21. Built-in Variables and Constants;Events and MIDI;;;$RPN_VALUE;;;This variable contains the value of a received RPN or NRPN message (0... 16383).;BUILT-IN
+KSP_Reference_Manual.txt.py;260;8949;21. Built-in Variables and Constants;Events and MIDI;;;$VCC_MONO_AT;;;"This constant specifies Virtual Continuous Controller for mono aftertouch (MIDI Channel Pressure
+message), mainly for use in on controller.";BUILT-IN
+KSP_Reference_Manual.txt.py;260;8955;21. Built-in Variables and Constants;Events and MIDI;;;$VCC_PITCH_BEND;;;"This constant specifies Virtual Continuous Controller for MIDI Pitch Bend messages, mainly for use
+in on controller.";BUILT-IN
+KSP_Reference_Manual.txt.py;260;8961;21. Built-in Variables and Constants;Events and MIDI;;;%KEY_DOWN;note-number;;This variable array contains the current state of all keys. 1 if the key is held, 0 otherwise.;BUILT-IN
+KSP_Reference_Manual.txt.py;260;8966;21. Built-in Variables and Constants;Events and MIDI;;;%KEY_DOWN_OCT;note-number;;"This variable array contains 1 if a note, independent of the octave, is held. 0 otherwise. Due to this,
+the note number should be a value between 0 (C) and 11 (B).";BUILT-IN
+KSP_Reference_Manual.txt.py;261;8973;21. Built-in Variables and Constants;Transport and Timing;;;$DISTANCE_BAR_START;;;"This variable returns the time of a MIDI Note On message in microseconds from the beginning of
+the current bar, with respect to the current tempo.";BUILT-IN
+KSP_Reference_Manual.txt.py;261;8979;21. Built-in Variables and Constants;Transport and Timing;;;$DURATION_BAR;;;"This variable returns the duration in microseconds of one bar with respect to the current tempo.
+It only works if the clock is running, otherwise it will return 0.
+You can also retrieve the duration of one bar by using $SIGNATURE_NUM and $SIGNATURE_DENOM
+in combination with various $DURATION_ constants.";BUILT-IN
+KSP_Reference_Manual.txt.py;261;8987;21. Built-in Variables and Constants;Transport and Timing;;;$DURATION_QUARTER;;;This variable returns the duration of a quarter note in microseconds, with respect to the current;BUILT-IN
+KSP_Reference_Manual.txt.py;261;8991;21. Built-in Variables and Constants;Transport and Timing;;tempo. Also available;$DURATION_EIGHTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;261;8992;21. Built-in Variables and Constants;Transport and Timing;;tempo. Also available;$DURATION_SIXTEENTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;261;8993;21. Built-in Variables and Constants;Transport and Timing;;tempo. Also available;$DURATION_QUARTER_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;261;8994;21. Built-in Variables and Constants;Transport and Timing;;tempo. Also available;$DURATION_EIGHTH_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;261;8995;21. Built-in Variables and Constants;Transport and Timing;;tempo. Also available;$DURATION_SIXTEENTH_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;261;8998;21. Built-in Variables and Constants;Transport and Timing;;;$ENGINE_UPTIME;;;"This variable returns the time period in milliseconds (not microseconds!) that has passed since the
+instantiation of KONTAKT. The engine uptime is calculated from the sample rate and can thus be
+used in musical contexts, (eg. building arpeggiators or sequencers) as it remains in sync, even in an
+offline bounce.";BUILT-IN
+KSP_Reference_Manual.txt.py;261;9006;21. Built-in Variables and Constants;Transport and Timing;;;$KSP_TIMER;;;"This variable returns the time period in microseconds that has passed since KONTAKT was
+instantiated.
+It can be reset with reset_ksp_timer.
+The KSP timer is based on the CPU clock and thus runs at a constant rate, regardless of whether or
+not KONTAKT is being used in real time. As such, it should be used to test the efficiency of scripts
+and not to make musical calculations.";BUILT-IN
+KSP_Reference_Manual.txt.py;261;9016;21. Built-in Variables and Constants;Transport and Timing;;;$NI_SONG_POSITION;;;This variable returns the host’s current song position at 960 PPQ (pulses per quarter note).;BUILT-IN
+KSP_Reference_Manual.txt.py;261;9021;21. Built-in Variables and Constants;Transport and Timing;;;$NI_TRANSPORT_RUNNING;;;This variable contains 1 if the host's transport is running, 0 otherwise.;BUILT-IN
+KSP_Reference_Manual.txt.py;261;9026;21. Built-in Variables and Constants;Transport and Timing;;;$SIGNATURE_NUM;;;This variable contains the numerator of the current time signature, i.e. 4/4.;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9032;21. Built-in Variables and Constants;Transport and Timing;;;$SIGNATURE_DENOM;;;This variable contains the denominator of the current time signature, i.e. 4/4.;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9040;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_ABS;;(not synchronized to tempo);;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9041;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_WHOLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9042;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_WHOLE_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9043;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_HALF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9044;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_HALF_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9045;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_QUARTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9046;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_QUARTER_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9047;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_8TH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9048;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_8TH_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9049;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_16TH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9050;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_16TH_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9051;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_32ND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9052;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_32ND_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9053;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_64TH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9054;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_64TH_TRIPLET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;262;9055;21. Built-in Variables and Constants;Transport and Timing;"Tempo Unit Constants
+These constants are used to control the unit parameter of time-related controls (e.g. Delay Time,
+Envelope Attack etc.) with engine parameter variables like $ENGINE_PAR_DL_TIME_UNIT.";;$NI_SYNC_UNIT_256TH;;;"$NI_SYNC_UNIT_ZONE (only applies to the Speed parameter in certain Source module sampler
+modes)";BUILT-IN
+KSP_Reference_Manual.txt.py;262;9060;21. Built-in Variables and Constants;Transport and Timing;;;%NOTE_DURATION;note-number;;"This variable array contains the duration since note start in microseconds for each key. Mostly only
+makes sense in on release callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;262;9066;21. Built-in Variables and Constants;Transport and Timing;;;$NI_BAR_START_POSITION;;;This variable returns the start of current bar in ticks (at 960 PPQ) from the start of the host project.;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9072;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_CALLBACK_ID;;;"This variable returns the ID number of the callback. Every callback has a unique ID number which
+remains the same within a user function.";BUILT-IN
+KSP_Reference_Manual.txt.py;263;9078;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_CALLBACK_TYPE;;;These constants return the callback type of a specific callback ID. Useful for retrieving the callback;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9082;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_ASYNC_OUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9083;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_CONTROLLER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9084;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_INIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9085;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_LISTENER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9086;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_NOTE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9087;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_NRPN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9088;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_PERSISTENCE_CHANGED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9089;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_PGS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9090;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_POLY_AT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9091;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9092;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_RPN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9093;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_UI_CONTROL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9094;21. Built-in Variables and Constants;Callbacks and UI;;type that triggered a specific user function. The following constants are available;$NI_CB_TYPE_UI_UPDATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9096;21. Built-in Variables and Constants;Callbacks and UI;;Multi script only;$NI_CB_TYPE_MIDI_IN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9101;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_NONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9102;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_DB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9103;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_HZ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9104;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_PERCENT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9105;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_MS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9106;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_ST;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9107;21. Built-in Variables and Constants;Callbacks and UI;"Knob Unit Mark Constants
+These constants are to be used with set_knob_unit() or $CONTROL_PAR_UNIT.";;$KNOB_UNIT_OCT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;263;9110;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_UI_ID;;;"This variable returns the ID of the UI widget which triggered the on ui_control or on
+ui_controls callbacks.";BUILT-IN
+KSP_Reference_Manual.txt.py;264;9117;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_SIGNAL_TIMER_BEAT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;264;9118;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_SIGNAL_TIMER_MS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;264;9119;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_SIGNAL_TRANSP_START;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;264;9120;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_SIGNAL_TRANSP_STOP;;;"These constants can be used with set_listener() or change_listener_par() to set which
+signals will trigger the on listener callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;264;9126;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_SIGNAL_TYPE;;;This variable can be used in the on listener callback to determine which signal type triggered it.;BUILT-IN
+KSP_Reference_Manual.txt.py;264;9131;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_KONTAKT_IS_HEADLESS;;;"This variable returns 1 if the GUI of KONTAKT is not available or loadable. Currently this is only
+possible when KONTAKT is used in Maschine+. When KONTAKT is used in a regular host, it will still
+return 0 even if the GUI is not visible.";BUILT-IN
+KSP_Reference_Manual.txt.py;264;9138;21. Built-in Variables and Constants;Callbacks and UI;;;$NI_KONTAKT_IS_STANDALONE;;;This variable returns 1 if KONTAKT is running standalone, 0 if it's loaded as a plugin in a host.;BUILT-IN
+KSP_Reference_Manual.txt.py;265;9144;21. Built-in Variables and Constants;Mathematical Constants;;;~NI_MATH_PI;;;This constant returns the value of π (approximately 3.14159…).;BUILT-IN
+KSP_Reference_Manual.txt.py;265;9149;21. Built-in Variables and Constants;Mathematical Constants;;;~NI_MATH_E;;;This constant returns the value of e (approximately 2.71828…).;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9158;22. Control Parameters;General;;;$CONTROL_PAR_NONE;;;Nothing will be applied to the widget.;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9163;22. Control Parameters;General;;;$CONTROL_PAR_CUSTOM_ID;;;"Sets or returns a custom value bound to a specific UI widget. This allows custom tagging of UI
+widgets, for instance to bind them to a specific parameter in the script.";BUILT-IN
+KSP_Reference_Manual.txt.py;266;9169;22. Control Parameters;General;;;$CONTROL_PAR_TYPE;;;"Returns the type of the UI widget.
+Only works with get_control_par().";BUILT-IN
+KSP_Reference_Manual.txt.py;266;9174;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_NONE;;(UI ID belongs to a normal variable, not a UI widget);;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9175;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_BUTTON;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9176;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_KNOB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9177;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_MENU;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9178;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_VALUE_EDIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9179;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_LABEL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9180;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_TABLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9181;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_WAVEFORM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9182;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_WAVETABLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9183;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_SLIDER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9184;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_TEXT_EDIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9185;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_FILE_SELECTOR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9186;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_SWITCH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9187;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_XY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9188;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_LEVEL_METER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9189;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_MOUSE_AREA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9190;22. Control Parameters;General;;Possible return values are;$NI_CONTROL_TYPE_PANEL;;;Size, Position, and Look;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9194;22. Control Parameters;General;;Possible return values are;$CONTROL_PAR_POS_X;;;Sets or returns the horizontal position in pixels.;BUILT-IN
+KSP_Reference_Manual.txt.py;266;9199;22. Control Parameters;General;;;$CONTROL_PAR_POS_Y;;;Sets or returns the vertical position in pixels.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9205;22. Control Parameters;General;;;$CONTROL_PAR_GRID_X;;;Sets or returns the horizontal position in grid units.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9210;22. Control Parameters;General;;;$CONTROL_PAR_GRID_Y;;;Sets or returns the vertical position in grid units.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9215;22. Control Parameters;General;;;$CONTROL_PAR_WIDTH;;;Sets or returns the width of the control in pixels.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9220;22. Control Parameters;General;;;$CONTROL_PAR_HEIGHT;;;Sets or returns the height of the control in pixels.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9225;22. Control Parameters;General;;;$CONTROL_PAR_GRID_WIDTH;;;Sets or returns the width of the control in grid units.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9230;22. Control Parameters;General;;;$CONTROL_PAR_GRID_HEIGHT;;;Sets or returns the height of the control in grid units.;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9235;22. Control Parameters;General;;;$CONTROL_PAR_HIDE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9238;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_PART_BG;;(background of ui_knob, ui_label, ui_value_edit and ui_table);;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9239;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_PART_VALUE;;(value of ui_knob and ui_table);;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9240;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_PART_TITLE;;(title of ui_knob);;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9241;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_PART_MOD_LIGHT;;(mod ring light of ui_knob);;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9242;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_PART_NOTHING;;(show all elements of the widget);;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9243;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_PART_CURSOR;;(cursor of ui_xy);;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9244;22. Control Parameters;General;;Sets or returns the hide status. Can be used with the following built-in constants;$HIDE_WHOLE_CONTROL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;267;9247;22. Control Parameters;General;;;$CONTROL_PAR_PICTURE;;;"Sets or returns the picture name. Full path and extension are not required. If the instrument
+references a resource container (in this case, KONTAKT will look for the specified filename in the
+pictures subfolder). If the NKI does not reference a resource container, it will first look in the
+user pictures folder (Documents/Native Instruments/Kontakt 7/pictures), then in
+the KONTAKT factory pictures folder.";BUILT-IN
+KSP_Reference_Manual.txt.py;267;9256;22. Control Parameters;General;;;$CONTROL_PAR_PICTURE_STATE;;;"Sets or returns the picture state of the control for ui_label, ui_table, ui_value_edit and
+ui_xy.";BUILT-IN
+KSP_Reference_Manual.txt.py;268;9263;22. Control Parameters;General;;;$CONTROL_PAR_PARENT_PANEL;;;"Assigns a widget to a particular ui_panel. The value should be the UI ID of the panel. A given
+widget can only belong to a single parent panel.";BUILT-IN
+KSP_Reference_Manual.txt.py;268;9269;22. Control Parameters;General;;;$CONTROL_PAR_Z_LAYER;;;"Sets or returns the Z layer position of the widget. Widgets can be placed in one of three layers.
+Within these layers they are then positioned by widget type, and then by declaration order.
+0: Default layer. All widgets are assigned to this layer by default.
+-1: Background layer. Widgets in this layer are placed below the default layer.
+1: Foreground layer. Widgets in this layer are placed on top of the default and background layers.
+1.  Mouse Area
+2.  Text Edit
+3.  XY Pad
+4.  Table
+5.  Menu
+6.  Value Edit
+7.  Button
+8.  Switch
+9.  Slider
+10. Knob
+11. Label
+12. Level Meter
+13. Wavetable
+14. Waveform
+15. File Selector
+
+Values";BUILT-IN
+KSP_Reference_Manual.txt.py;268;9295;22. Control Parameters;General;;Z layer order by widget type (from top to bottom);$CONTROL_PAR_VALUE;;;"Sets or returns the value of the widget. Note that doing this does NOT execute the UI callback of the
+widget!";BUILT-IN
+KSP_Reference_Manual.txt.py;268;9301;22. Control Parameters;General;;;$CONTROL_PAR_DEFAULT_VALUE;;;"Sets or returns the default value of the widget. A widget is set to the default value when clicking
+it with [Ctrl] (Windows) or [Cmd] (macOS) key held. This is only applicable to ui_knob and
+ui_slider.
+
+Text";BUILT-IN
+KSP_Reference_Manual.txt.py;268;9309;22. Control Parameters;General;;;$CONTROL_PAR_TEXT;;;Sets or returns the widget text, similar to set_text().;BUILT-IN
+KSP_Reference_Manual.txt.py;269;9315;22. Control Parameters;General;;;$CONTROL_PAR_TEXTLINE;;;Adds a text line to multiline labels, similar to add_text_line().;BUILT-IN
+KSP_Reference_Manual.txt.py;269;9320;22. Control Parameters;General;;;$CONTROL_PAR_IDENTIFIER;;;"Returns the name of the UI widget as declared in the script, without the type specifier ($, %, @, ?).
+Only works with get_control_par().";BUILT-IN
+KSP_Reference_Manual.txt.py;269;9326;22. Control Parameters;General;;;$CONTROL_PAR_HELP;;;"Sets or returns the help text, which is displayed in KONTAKT's Info pane when hovering above the
+widget.";BUILT-IN
+KSP_Reference_Manual.txt.py;269;9332;22. Control Parameters;General;;;$CONTROL_PAR_LABEL;;;"Sets or returns the widget label, similar to set_knob_label(), except this control parameter is
+not limited to knobs only - it also works with ui_slider, ui_switch and ui_xy.
+This is also the string published to the host when using host automation.";BUILT-IN
+KSP_Reference_Manual.txt.py;269;9339;22. Control Parameters;General;;;$CONTROL_PAR_SHORT_NAME;;;Sets or returns the short name of the widget.;BUILT-IN
+KSP_Reference_Manual.txt.py;269;9344;22. Control Parameters;General;;;$CONTROL_PAR_UNIT;;;Sets or returns the knob unit, similar to set_knob_unit().;BUILT-IN
+KSP_Reference_Manual.txt.py;270;9350;22. Control Parameters;General;;;$CONTROL_PAR_FONT_TYPE;;;"Sets or returns the font type. Numbers 0... 25 are used to select any of the 26 factory fonts, as
+shown below. Combine with get_font_id() to use custom fonts.";BUILT-IN
+KSP_Reference_Manual.txt.py;270;9375;22. Control Parameters;General;For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set;separately for each of the states via the following control parameters;$CONTROL_PAR_FONT_TYPE_ON;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;270;9376;22. Control Parameters;General;For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set;separately for each of the states via the following control parameters;$CONTROL_PAR_FONT_TYPE_OFF_PRESSED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;270;9377;22. Control Parameters;General;For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set;separately for each of the states via the following control parameters;$CONTROL_PAR_FONT_TYPE_ON_PRESSED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;270;9378;22. Control Parameters;General;For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set;separately for each of the states via the following control parameters;$CONTROL_PAR_FONT_TYPE_OFF_HOVER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;270;9379;22. Control Parameters;General;For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set;separately for each of the states via the following control parameters;$CONTROL_PAR_FONT_TYPE_ON_HOVER;;;"Not using any of the five additional state fonts will result in the default
+($CONTROL_PAR_FONT_TYPE) being used instead.";BUILT-IN
+KSP_Reference_Manual.txt.py;270;9384;22. Control Parameters;General;;;$CONTROL_PAR_DISABLE_TEXT_SHIFTING;;;Deactivates text position shifting when clicking on ui_button or ui_switch.;BUILT-IN
+KSP_Reference_Manual.txt.py;270;9389;22. Control Parameters;General;;;$CONTROL_PAR_TEXTPOS_Y;;;"Shifts the vertical position in pixels of text in ui_button, ui_switch, ui_label. ui_menu, and
+parameter name in ui_value_edit.";BUILT-IN
+KSP_Reference_Manual.txt.py;270;9395;22. Control Parameters;General;;;$CONTROL_PAR_TEXT_ALIGNMENT;;;"0: Left
+1: Centered
+2: Right";BUILT-IN
+KSP_Reference_Manual.txt.py;270;9403;22. Control Parameters;General;;;$CONTROL_PAR_VALUEPOS_Y;;;"Shifts the vertical position in pixels of the parameter value in ui_value_edit.
+
+Automation";BUILT-IN
+KSP_Reference_Manual.txt.py;271;9410;22. Control Parameters;General;;;$CONTROL_PAR_ALLOW_AUTOMATION;;;"Sets or returns if a UI widget can be automated (1) or not (0). By default, automation is allowed for
+all automatable widgets (ui_knob, ui_slider, ui_switch, ui_xy cursors).
+This control parameter can only be used in the on init callback.
+When allowing automation for ui_xy cursors, use set_control_par_arr() command instead
+of set_control_par().";BUILT-IN
+KSP_Reference_Manual.txt.py;271;9419;22. Control Parameters;General;;;$CONTROL_PAR_AUTOMATION_NAME;;;"Sets or returns an automation name to a UI widget when used with set_control_par_str().
+$CONTROL_PAR_LABEL can be used to set the automation value string.
+When assigning automation names to ui_xy cursors, use set_control_par_str_arr()
+command instead of set_control_par_str().";BUILT-IN
+KSP_Reference_Manual.txt.py;271;9427;22. Control Parameters;General;;;$CONTROL_PAR_AUTOMATION_ID;;;"Sets or returns an automation ID to a UI widget, in range 0... 2047. Can only be used in the init
+callback.
+Automation IDs can only be assigned to automatable widgets (ui_knob, ui_slider, ui_switch,
+ui_xy cursors).
+When assigning automation IDs to ui_xy cursors, use set_control_par_arr() command
+instead of set_control_par().
+
+Key Modifiers";BUILT-IN
+KSP_Reference_Manual.txt.py;271;9438;22. Control Parameters;General;;;$CONTROL_PAR_KEY_SHIFT;;;"Returns 1 when the shift key was pressed (0 otherwise) while clicking the UI widget.
+ui_menu and ui_value_edit are not supported.
+The basic [Shift] modifier functionality on ui_slider and ui_knob is preserved.";BUILT-IN
+KSP_Reference_Manual.txt.py;271;9445;22. Control Parameters;General;;;$CONTROL_PAR_KEY_ALT;;;"Returns 1 if the [Alt] (Windows) or [Opt] (macOS) key was pressed (0 otherwise) while clicking the UI
+widget.
+ui_menu and ui_value_edit are not supported.";BUILT-IN
+KSP_Reference_Manual.txt.py;271;9452;22. Control Parameters;General;;;$CONTROL_PAR_KEY_CONTROL;;;"Returns 1 if the [Ctrl] (Windows) or [Cmd] (macOS) key was pressed (0 otherwise) while clicking the
+UI widget.
+ui_menu and ui_value_edit are not supported.
+The basic [Ctrl]/[Cmd] modifier functionality on ui_slider and ui_knob is preserved.
+
+Tables";BUILT-IN
+KSP_Reference_Manual.txt.py;272;9463;22. Control Parameters;Specific;;;$NI_CONTROL_PAR_IDX;;;"Returns the index of the ui_table column or ui_xy cursor that triggered the on ui_control
+callback.
+
+Tables and Waveforms";BUILT-IN
+KSP_Reference_Manual.txt.py;272;9470;22. Control Parameters;Specific;;;$CONTROL_PAR_BAR_COLOR;;;"Sets or returns the color of the step bar in ui_table and ui_value_edit.
+0ff0000h { red }
+The 0 at the start is just to let KONTAKT know the value is a number. The h or H at the end is to
+indicate that it is a hexadecimal value.";BUILT-IN
+KSP_Reference_Manual.txt.py;272;9479;22. Control Parameters;Specific;;;$CONTROL_PAR_ZERO_LINE_COLOR;;;"Sets or returns the color of the middle line in ui_table.
+
+Menus";BUILT-IN
+KSP_Reference_Manual.txt.py;272;9485;22. Control Parameters;Specific;;;$CONTROL_PAR_NUM_ITEMS;;;"Returns the number of menu entries in a specific ui_menu.
+Only works with get_control_par().";BUILT-IN
+KSP_Reference_Manual.txt.py;272;9491;22. Control Parameters;Specific;;;$CONTROL_PAR_SELECTED_ITEM_IDX;;;"Returns the index of the currently selected menu entry.
+Only works with get_control_par().
+
+Mouse Area";BUILT-IN
+KSP_Reference_Manual.txt.py;272;9498;22. Control Parameters;Specific;;;$CONTROL_PAR_DND_ACCEPT_AUDIO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;272;9499;22. Control Parameters;Specific;;;$CONTROL_PAR_DND_ACCEPT_MIDI;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;272;9500;22. Control Parameters;Specific;;;$CONTROL_PAR_DND_ACCEPT_ARRAY;;;Enables ui_mouse_area to accept audio, MIDI or NKA array files.;BUILT-IN
+KSP_Reference_Manual.txt.py;272;9504;22. Control Parameters;Specific;;These can be set to one of the following values;$NI_DND_ACCEPT_NONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;272;9505;22. Control Parameters;Specific;;These can be set to one of the following values;$NI_DND_ACCEPT_ONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;272;9506;22. Control Parameters;Specific;;These can be set to one of the following values;$NI_DND_ACCEPT_MULTIPLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;273;9510;22. Control Parameters;Specific;;;$CONTROL_PAR_RECEIVE_DRAG_EVENTS;;;"Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
+event (when set to 0) or also for drag events (when set to 1).
+$NI_MOUSE_EVENT_TYPESpecifies the event type that triggered the callback and can have";BUILT-IN
+KSP_Reference_Manual.txt.py;273;9517;22. Control Parameters;Specific;;one of the following values;$NI_MOUSE_EVENT_TYPE_DND_DROP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;273;9518;22. Control Parameters;Specific;;one of the following values;$NI_MOUSE_EVENT_TYPE_DND_DRAG;;;"$NI_MOUSE_OVER_CONTROL1: The mouse has entered ui_mouse_area on a drag event
+0: The mouse has left ui_mouse_areaon a drag event
+Example
+on ui_control ($aMouseArea)
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+    message(num_elements(!NI_DND_ITEMS_AUDIO))
+  end if
+
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DRAG)
+    message(num_elements(!NI_DND_ITEMS_AUDIO))
+    message($MOUSE_OVER_CONTROL)
+  end if
+end on
+
+Labels";BUILT-IN
+KSP_Reference_Manual.txt.py;273;9535;22. Control Parameters;Specific;;one of the following values;$CONTROL_PAR_DND_BEHAVIOUR;;;"Sets or returns the drag and drop behavior for ui_label. Using a value of 1 sets the label as a drag
+and drop area, allowing the user to export the MIDI object currently held in memory by a simple drag
+and drop action. For more information on MIDI handling in KSP, refer to MIDI Object Commands.";BUILT-IN
+KSP_Reference_Manual.txt.py;273;9542;22. Control Parameters;Specific;;;$CONTROL_PAR_MIDI_EXPORT_AREA_IDX;;;"Assigns one of 512 available MIDI object export areas to be drag and drop exported via a particular
+ui_label. For more information on MIDI handling in KSP, refer to MIDI Object Commands.
+
+Value Edit";BUILT-IN
+KSP_Reference_Manual.txt.py;273;9549;22. Control Parameters;Specific;;;$CONTROL_PAR_SHOW_ARROWS;;;"Hides the arrows of ui_value_edit.
+0: Arrows are hidden
+1: Arrows are shown
+
+Level Meters";BUILT-IN
+KSP_Reference_Manual.txt.py;273;9557;22. Control Parameters;Specific;;;$CONTROL_PAR_BG_COLOR;;;Sets or returns the background color of ui_level_meter.;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9563;22. Control Parameters;Specific;;;$CONTROL_PAR_OFF_COLOR;;;Sets the second background color of ui_level_meter.;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9568;22. Control Parameters;Specific;;;$CONTROL_PAR_ON_COLOR;;;Sets the main level meter color of ui_level_meter.;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9573;22. Control Parameters;Specific;;;$CONTROL_PAR_OVERLOAD_COLOR;;;Sets the color of ui_level_meter overload section.;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9578;22. Control Parameters;Specific;;;$CONTROL_PAR_PEAK_COLOR;;;Sets the color of the little bar showing the current peak level.;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9583;22. Control Parameters;Specific;;;$CONTROL_PAR_VERTICAL;;;Aligns ui_level_meter vertically (1) or horizontally (0, default).;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9588;22. Control Parameters;Specific;;;$CONTROL_PAR_RANGE_MIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;274;9589;22. Control Parameters;Specific;;;$CONTROL_PAR_RANGE_MAX;;;"Sets the minimum and maximum display range of ui_level_meter, with default range 0...
+1000000.
+If the minimum values is smaller than the maximum value, the display is inverted.
+
+File Selector";BUILT-IN
+KSP_Reference_Manual.txt.py;274;9597;22. Control Parameters;Specific;;;$CONTROL_PAR_BASEPATH;;;"Sets or returns the basepath of ui_file_selector. This control parameter can be used in any
+callback.
+Be careful with the number of subfolders in the basepath, as it might take too long to scan the
+filesystem.";BUILT-IN
+KSP_Reference_Manual.txt.py;274;9605;22. Control Parameters;Specific;;;$CONTROL_PAR_COLUMN_WIDTH;;;"Sets or returns the width of ui_file_selector columns. This control par can only be used in on
+init callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;274;9611;22. Control Parameters;Specific;;;$CONTROL_PAR_FILEPATH;;;"Sets or returns the actual path (full path of the file) currently selected in ui_file_selector.
+The file path must be a subpath of the instrument’s basepath. This control parameter is useful for
+recalling the prior state of the file selector upon loading the instrument. Can only be used in on
+init callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;275;9620;22. Control Parameters;Specific;;;$CONTROL_PAR_FILE_TYPE;;;Sets or returns the file type for ui_file_selector. Can only be used in on init callback.;BUILT-IN
+KSP_Reference_Manual.txt.py;275;9624;22. Control Parameters;Specific;;The following file types are available;$NI_FILE_TYPE_MIDI;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;275;9625;22. Control Parameters;Specific;;The following file types are available;$NI_FILE_TYPE_AUDIO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;275;9626;22. Control Parameters;Specific;;The following file types are available;$NI_FILE_TYPE_ARRAY;;;Instrument Icon and Wallpaper;BUILT-IN
+KSP_Reference_Manual.txt.py;275;9630;22. Control Parameters;Specific;;The following file types are available;$INST_ICON_ID;;;"The ID of the instrument icon.
+set_control_par($INST_ICON_ID, $CONTROL_PAR_HIDE, $HIDE_WHOLE_CONTROL)
+set_control_par_str($INST_ICON_ID, $CONTROL_PAR_PICTURE, <file-name>)";BUILT-IN
+KSP_Reference_Manual.txt.py;275;9639;22. Control Parameters;Specific;;;$INST_WALLPAPER_ID;;;"set_control_par_str($INST_WALLPAPER_ID, $CONTROL_PAR_PICTURE,
+<file_name>)
+This command can only be used in on init callback. Note that a wallpaper set via the script
+replaces the one set in Instrument Options dialog, and it will not be checked in the Content Missing
+dialog when loading the wallpaper from the resource container.
+This command only supports wallpapers that are located within the resource container.
+If you use it in different script slots, then the last script slot in which wallpaper was set will be the
+one that is loaded.
+
+Waveform
+
+Waveform Flag Constants
+To be used with attach_zone(). You can combine flag constants using the bitwise.or..
+$UI_WAVEFORM_USE_SLICEDisplay the zone’s slice markers.
+S
+$UI_WAVEFORM_USE_TABLEDisplay a per-slice table.
+Note: this only works if the slice markers are also active.
+$UI_WAVEFORM_TABLE_IS_Make the table bipolar.
+BIPOLAR
+$UI_WAVEFORM_USE_MIDI_Display a MIDI drag and drop icon.
+DRAGNote: this only works if the slice markers are also active.";BUILT-IN
+KSP_Reference_Manual.txt.py;276;9683;22. Control Parameters;Specific;"Waveform Property Constants
+To be used with get_ui_wf_property() and set_ui_wf_property().
+Waveform Property Constants
+$UI_WF_PROP_PLAY_CURSOSets or returns the play cursor position, in microseconds.
+R
+$UI_WF_PROP_FLAGSUsed to set new flag constants after the attach_zone()
+command is used.
+$UI_WF_PROP_TABLE_VALSets or returns the value of the indexed slice’s table.
+$UI_WF_PROP_TABLE_IDX_Highlights the indexed slice within the ui_waveform widget.
+HIGHLIGHT
+$UI_WF_PROP_MIDI_DRAG_Defines the start note for the MIDI drag and drop function.
+START_NOTE";;$CONTROL_PAR_WF_VIS_MODE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9686;22. Control Parameters;Specific;"Waveform Property Constants
+To be used with get_ui_wf_property() and set_ui_wf_property().
+Waveform Property Constants
+$UI_WF_PROP_PLAY_CURSOSets or returns the play cursor position, in microseconds.
+R
+$UI_WF_PROP_FLAGSUsed to set new flag constants after the attach_zone()
+command is used.
+$UI_WF_PROP_TABLE_VALSets or returns the value of the indexed slice’s table.
+$UI_WF_PROP_TABLE_IDX_Highlights the indexed slice within the ui_waveform widget.
+HIGHLIGHT
+$UI_WF_PROP_MIDI_DRAG_Defines the start note for the MIDI drag and drop function.
+START_NOTE";Changes the way the waveform is drawn. Valid values;$NI_WF_VIS_MODE_1;;(Default);;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9687;22. Control Parameters;Specific;"Waveform Property Constants
+To be used with get_ui_wf_property() and set_ui_wf_property().
+Waveform Property Constants
+$UI_WF_PROP_PLAY_CURSOSets or returns the play cursor position, in microseconds.
+R
+$UI_WF_PROP_FLAGSUsed to set new flag constants after the attach_zone()
+command is used.
+$UI_WF_PROP_TABLE_VALSets or returns the value of the indexed slice’s table.
+$UI_WF_PROP_TABLE_IDX_Highlights the indexed slice within the ui_waveform widget.
+HIGHLIGHT
+$UI_WF_PROP_MIDI_DRAG_Defines the start note for the MIDI drag and drop function.
+START_NOTE";Changes the way the waveform is drawn. Valid values;$NI_WF_VIS_MODE_2;;(X-ray);;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9688;22. Control Parameters;Specific;"Waveform Property Constants
+To be used with get_ui_wf_property() and set_ui_wf_property().
+Waveform Property Constants
+$UI_WF_PROP_PLAY_CURSOSets or returns the play cursor position, in microseconds.
+R
+$UI_WF_PROP_FLAGSUsed to set new flag constants after the attach_zone()
+command is used.
+$UI_WF_PROP_TABLE_VALSets or returns the value of the indexed slice’s table.
+$UI_WF_PROP_TABLE_IDX_Highlights the indexed slice within the ui_waveform widget.
+HIGHLIGHT
+$UI_WF_PROP_MIDI_DRAG_Defines the start note for the MIDI drag and drop function.
+START_NOTE";Changes the way the waveform is drawn. Valid values;$NI_WF_VIS_MODE_3;;(X-ray filled);;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9696;22. Control Parameters;Specific;Sets or returns the background color of ui_waveform.;;$CONTROL_PAR_WAVE_COLOR;;;Sets or returns the color of the waveform drawn in ui_waveform.;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9701;22. Control Parameters;Specific;;;$CONTROL_PAR_WAVE_ALPHA;;;"Sets or returns the alpha channel (opacity) of the waveform drawn in ui_waveform.
+Range: 0 (fully transparent) to 255 (fully opaque).";BUILT-IN
+KSP_Reference_Manual.txt.py;276;9707;22. Control Parameters;Specific;;;$CONTROL_PAR_WAVE_CURSOR_COLOR;;;Sets or returns the color of the playback cursor in ui_waveform.;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9712;22. Control Parameters;Specific;;;$CONTROL_PAR_SLICEMARKERS_COLOR;;;Sets or returns the color of the slice markers in ui_waveform.;BUILT-IN
+KSP_Reference_Manual.txt.py;276;9717;22. Control Parameters;Specific;;;$CONTROL_PAR_BG_ALPHA;;;"Sets or returns the alpha channel (opacity) of the background of ui_waveform.
+Range: 0 (fully transparent) to 255 (fully opaque).
+
+Wavetable";BUILT-IN
+KSP_Reference_Manual.txt.py;277;9725;22. Control Parameters;Specific;;;$CONTROL_PAR_WT_ZONE;;;Attaches a zone to ui_wavetable, taking the zone ID as the argument.;BUILT-IN
+KSP_Reference_Manual.txt.py;277;9730;22. Control Parameters;Specific;;;$CONTROL_PAR_WT_VIS_MODE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;277;9733;22. Control Parameters;Specific;;Sets or returns the mode of ui_wavetable. Can be set to the following values;$NI_WT_VIS_2D;;(2D, oscilloscope-style visualization, only showing the current wavetable position);"$NI_WT_VIS_3D (3D visualization displaying the whole wavetable as well as the the current
+position)";BUILT-IN
+KSP_Reference_Manual.txt.py;277;9738;22. Control Parameters;Specific;;;$CONTROL_PAR_PARALLAX_X;;;"Sets or returns the X-axis parallax of ui_wavetable (only applicable to 3D mode).
+Range: -1000000... 1000000";BUILT-IN
+KSP_Reference_Manual.txt.py;277;9744;22. Control Parameters;Specific;;;$CONTROL_PAR_PARALLAX_Y;;;"Sets or returns the Y-axis parallax of ui_wavetable (only applicable to 3D mode).
+Range: -1000000... 1000000";BUILT-IN
+KSP_Reference_Manual.txt.py;277;9750;22. Control Parameters;Specific;;;$CONTROL_PAR_WAVETABLE_COLOR;;;Sets or returns the color of the whole wavetable.;BUILT-IN
+KSP_Reference_Manual.txt.py;277;9755;22. Control Parameters;Specific;;;$CONTROL_PAR_WAVETABLE_ALPHA;;;"Sets or returns the alpha channel (opacity) of the whole wavetable.
+Range: 0 (fully transparent) to 255 (fully opaque).";BUILT-IN
+KSP_Reference_Manual.txt.py;278;9790;22. Control Parameters;Specific;"Sets or returns the background color of ui_wavetable.
+Sets or returns the alpha channel (opacity) of ui_wavetable.
+Range: 0 (fully transparent) to 255 (fully opaque).
+Additional Color and Alpha Parameters
+To be paired with the above control parameters in order to create gradient effects. If not explicitly
+set, they inherit the value of their match from above, resulting in no gradient.
+$CONTROL_PAR_WAVE_END_Sets or returns the color for the end of the gradient applied to the
+COLORwaveform.
+$CONTROL_PAR_WAVE_END_Sets or returns the alpha channel (opacity) for the end of the
+ALPHAgradient applied to the waveform.
+Additional Color and Alpha Parameters
+$CONTROL_PAR_WAVETABLESets or returns the color for the end of the gradient applied to the
+_END_COLORwavetable.
+$CONTROL_PAR_WAVETABLESets or returns the alpha channel (opacity) for the end of the
+_END_ALPHAgradient applied to the wavetable.
+Slider";;$CONTROL_PAR_MOUSE_BEHAVIOUR;;;"A value from -5000 to 5000, setting the move direction of ui_slider and its sensitivity.
+Settings are relative to the size of the slider picture.
+Negative values give a vertical slider behavior, positive values give a horizontal behavior.
+
+XY Pad";BUILT-IN
+KSP_Reference_Manual.txt.py;278;9798;22. Control Parameters;Specific;"Sets or returns the background color of ui_wavetable.
+Sets or returns the alpha channel (opacity) of ui_wavetable.
+Range: 0 (fully transparent) to 255 (fully opaque).
+Additional Color and Alpha Parameters
+To be paired with the above control parameters in order to create gradient effects. If not explicitly
+set, they inherit the value of their match from above, resulting in no gradient.
+$CONTROL_PAR_WAVE_END_Sets or returns the color for the end of the gradient applied to the
+COLORwaveform.
+$CONTROL_PAR_WAVE_END_Sets or returns the alpha channel (opacity) for the end of the
+ALPHAgradient applied to the waveform.
+Additional Color and Alpha Parameters
+$CONTROL_PAR_WAVETABLESets or returns the color for the end of the gradient applied to the
+_END_COLORwavetable.
+$CONTROL_PAR_WAVETABLESets or returns the alpha channel (opacity) for the end of the
+_END_ALPHAgradient applied to the wavetable.
+Slider";;$CONTROL_PAR_MOUSE_BEHAVIOUR_X;;;Mouse behavior, i.e. the drag scale, of the X axis of all ui_xy cursors.;BUILT-IN
+KSP_Reference_Manual.txt.py;278;9803;22. Control Parameters;Specific;;;$CONTROL_PAR_MOUSE_BEHAVIOUR_Y;;;Mouse behavior, i.e. the drag scale, of the Y axis of all ui_xy cursors.;BUILT-IN
+KSP_Reference_Manual.txt.py;278;9808;22. Control Parameters;Specific;;;$CONTROL_PAR_MOUSE_MODE;;;"Sets the way ui_xy responds to mouse clicks and drags.
+0: Clicks anywhere other than on a cursor are ignored. Clicking on a cursor and dragging, sets new
+values respecting the usual $CONTROL_PAR_MOUSE_BEHAVIOUR settings.
+1: Clicks anywhere on the XY pad are registered but don't change the values. Clicking anywhere
+and dragging, sets new values; the cursor moves parallel to the mouse cursor with distances scaled
+based on the $CONTROL_PAR_MOUSE_BEHAVIOUR settings.
+2: Clicks anywhere on the XY pad are registered and immediately change the values, with the cursor
+immediately matching the mouse cursor. Clicking anywhere and dragging has a similar effect; the
+$CONTROL_PAR_MOUSE_BEHAVIOUR settings are ignored; cursor always follows mouse cursor
+one-to-one.";BUILT-IN
+KSP_Reference_Manual.txt.py;279;9823;22. Control Parameters;Specific;;;$CONTROL_PAR_ACTIVE_INDEX;;;"Sets and gets the index of the active ui_xy cursor. Only relevant in multi-cursor setups. The
+0 and 1: The active cursor can only be changed manually by setting this control parameter. Inactive
+cursors don't receive any clicks.
+2: Active cursor is set automatically based on the last clicked cursor. Setting it manually within on
+ui_control callback of ui_xy can result in unexpected results, but using it in other callbacks is
+fully encouraged and makes sense in many scenarios. The value is -1 when not clicking on any
+cursor.
+The index can only be an even number (with the exception of the -1 value) that matches the index
+of the X axis of the cursor in the main array representing the XY control, e.g. the first cursor has an
+index of 0, the second one has an index of 2, etc.";BUILT-IN
+KSP_Reference_Manual.txt.py;279;9838;22. Control Parameters;Specific;;;$CONTROL_PAR_CURSOR_PICTURE;;;"Sets the cursor image. Each cursor can have its own image set using the
+set_control_par_str_arr() command.
+Using $CONTROL_PAR_PICTURE on ui_xy UI ID itself will set the background image of the control.
+The cursor images can have up to 6 frames, corresponding to the following states. Frame selection
+is automatic, exactly like with ui_button and ui_switch.
+1: Inactive
+2: Active
+3: Inactive pressed
+4: Active pressed
+5: Inactive mouse over
+6: Active mouse over";BUILT-IN
+KSP_Reference_Manual.txt.py;280;9875;22. Control Parameters;Specific;"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors.
+if ($hide = 1)
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_CURSOR, $index)
+else
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING, $index)
+end if
+The index should be an even number that matches the index of the X axis of the cursor in the main
+array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
+and so on.
+Returns the index of the cursor that triggered the on ui_control callback of an ui_xy widget.
+Note that indices are always even numbers starting from 0, so the first cursor has an index of 0, the
+second has an index of 2, and so on.";;$NI_MOUSE_EVENT_TYPE;;;"Returns the type of mouse event that triggered the on ui_control callback of an ui_xy widget.
+Can only be used within the on ui_control callback.";BUILT-IN
+KSP_Reference_Manual.txt.py;280;9880;22. Control Parameters;Specific;"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors.
+if ($hide = 1)
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_CURSOR, $index)
+else
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING, $index)
+end if
+The index should be an even number that matches the index of the X axis of the cursor in the main
+array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
+and so on.
+Returns the index of the cursor that triggered the on ui_control callback of an ui_xy widget.
+Note that indices are always even numbers starting from 0, so the first cursor has an index of 0, the
+second has an index of 2, and so on.";The following mouse event types are available;$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;280;9881;22. Control Parameters;Specific;"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors.
+if ($hide = 1)
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_CURSOR, $index)
+else
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING, $index)
+end if
+The index should be an even number that matches the index of the X axis of the cursor in the main
+array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
+and so on.
+Returns the index of the cursor that triggered the on ui_control callback of an ui_xy widget.
+Note that indices are always even numbers starting from 0, so the first cursor has an index of 0, the
+second has an index of 2, and so on.";The following mouse event types are available;$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;280;9882;22. Control Parameters;Specific;"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors.
+if ($hide = 1)
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_CURSOR, $index)
+else
+    set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING, $index)
+end if
+The index should be an even number that matches the index of the X axis of the cursor in the main
+array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
+and so on.
+Returns the index of the cursor that triggered the on ui_control callback of an ui_xy widget.
+Note that indices are always even numbers starting from 0, so the first cursor has an index of 0, the
+second has an index of 2, and so on.";The following mouse event types are available;$NI_MOUSE_EVENT_TYPE_DRAG;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;281;9888;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_VOLUME;;;Instrument, group or bus volume.;BUILT-IN
+KSP_Reference_Manual.txt.py;281;9893;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_PAN;;;Instrument, group or bus panorama.;BUILT-IN
+KSP_Reference_Manual.txt.py;281;9898;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_PHASE_INVERT;;;Group or instrument bus phase invert.;BUILT-IN
+KSP_Reference_Manual.txt.py;281;9903;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_LR_SWAP;;;Group or instrument bus left-right channel swap.;BUILT-IN
+KSP_Reference_Manual.txt.py;281;9908;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_TUNE;;;Instrument or group tuning.;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9915;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_SOURCE_MODE;;(only works with get_engine_par()!);"$NI_SOURCE_MODE_SAMPLER
+  $NI_SOURCE_MODE_DFD
+  $NI_SOURCE_MODE_TONE_MACHINE
+  $NI_SOURCE_MODE_TIME_MACHINE_1
+  $NI_SOURCE_MODE_TIME_MACHINE_2
+  $NI_SOURCE_MODE_TIME_MACHINE_PRO
+  $NI_SOURCE_MODE_BEAT_MACHINE
+  $NI_SOURCE_MODE_MP60_MACHINE
+  $NI_SOURCE_MODE_S1200_MACHINE
+  $NI_SOURCE_MODE_WAVETABLE";BUILT-IN
+KSP_Reference_Manual.txt.py;282;9926;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_TRACKING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9927;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_HQI_MODE;;;"$NI_HQI_MODE_STANDARD
+  $NI_HQI_MODE_HIGH
+  $NI_HQI_MODE_PERFECT";BUILT-IN
+KSP_Reference_Manual.txt.py;282;9931;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_SMOOTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9932;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_FORMANT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9933;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_SPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9934;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_GRAIN_LENGTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9935;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_SLICE_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9936;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_SLICE_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9937;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_TRANSIENT_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9938;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_ENVELOPE_ORDER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9939;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_FORMANT_SHIFT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9940;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_SPEED_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9941;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_TM_LEGATO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9942;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_TMPRO_KEEP_FORMANTS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9943;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_WT_POSITION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9944;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_WT_FORM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9945;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_WT_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9946;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_WT_PHASE_RAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;282;9947;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_WT_QUALITY;;;"$NI_WT_QUALITY_LOFI
+  $NI_WT_QUALITY_MEDIUM
+  $NI_WT_QUALITY_HIGH
+  $NI_WT_QUALITY_BEST";BUILT-IN
+KSP_Reference_Manual.txt.py;282;9952;23. Engine Parameters;Instrument, Source and Amplifier Module;Source Module;;$ENGINE_PAR_WT_FORM_MODE;;;"$NI_WT_FORM_LINEAR
+  $NI_WT_FORM_SYNC1
+  $NI_WT_FORM_SYNC2
+  $NI_WT_FORM_SYNC3";BUILT-IN
+KSP_Reference_Manual.txt.py;283;9991;23. Engine Parameters;Instrument, Source and Amplifier Module;"Source Module
+    $NI_WT_FORM_SYNC4
+    $NI_WT_FORM_SYNC5
+    $NI_WT_FORM_SYNC6
+    $NI_WT_FORM_BENDP
+    $NI_WT_FORM_BENDM
+    $NI_WT_FORM_BENDMP
+    $NI_WT_FORM_BEND2P
+    $NI_WT_FORM_BEND2M
+    $NI_WT_FORM_BEND2MP
+    $NI_WT_FORM_EXP
+    $NI_WT_FORM_LOG
+    $NI_WT_FORM_LOGEXP
+    $NI_WT_FORM_PWM
+    $NI_WT_FORM_ASYMP
+    $NI_WT_FORM_ASYMM
+    $NI_WT_FORM_ASYMMP
+    $NI_WT_FORM_ASYM2P
+    $NI_WT_FORM_ASYM2M
+    $NI_WT_FORM_ASYM2MP
+    $NI_WT_FORM_2BLINDS
+    $NI_WT_FORM_4BLINDS
+    $NI_WT_FORM_6BLINDS
+    $NI_WT_FORM_8BLINDS
+    $NI_WT_FORM_FLIP
+    $NI_WT_FORM_FOLD
+    $NI_WT_FORM_MIRROR
+    $NI_WT_FORM_SATURATE
+    $NI_WT_FORM_SEESAW
+    $NI_WT_FORM_QUANTIZE
+    $NI_WT_FORM_WRAP";;$ENGINE_PAR_WT_INHARMONIC_MODE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;283;9992;23. Engine Parameters;Instrument, Source and Amplifier Module;"Source Module
+    $NI_WT_FORM_SYNC4
+    $NI_WT_FORM_SYNC5
+    $NI_WT_FORM_SYNC6
+    $NI_WT_FORM_BENDP
+    $NI_WT_FORM_BENDM
+    $NI_WT_FORM_BENDMP
+    $NI_WT_FORM_BEND2P
+    $NI_WT_FORM_BEND2M
+    $NI_WT_FORM_BEND2MP
+    $NI_WT_FORM_EXP
+    $NI_WT_FORM_LOG
+    $NI_WT_FORM_LOGEXP
+    $NI_WT_FORM_PWM
+    $NI_WT_FORM_ASYMP
+    $NI_WT_FORM_ASYMM
+    $NI_WT_FORM_ASYMMP
+    $NI_WT_FORM_ASYM2P
+    $NI_WT_FORM_ASYM2M
+    $NI_WT_FORM_ASYM2MP
+    $NI_WT_FORM_2BLINDS
+    $NI_WT_FORM_4BLINDS
+    $NI_WT_FORM_6BLINDS
+    $NI_WT_FORM_8BLINDS
+    $NI_WT_FORM_FLIP
+    $NI_WT_FORM_FOLD
+    $NI_WT_FORM_MIRROR
+    $NI_WT_FORM_SATURATE
+    $NI_WT_FORM_SEESAW
+    $NI_WT_FORM_QUANTIZE
+    $NI_WT_FORM_WRAP";;$ENGINE_PAR_WT_INHARMONIC;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;283;9993;23. Engine Parameters;Instrument, Source and Amplifier Module;"Source Module
+    $NI_WT_FORM_SYNC4
+    $NI_WT_FORM_SYNC5
+    $NI_WT_FORM_SYNC6
+    $NI_WT_FORM_BENDP
+    $NI_WT_FORM_BENDM
+    $NI_WT_FORM_BENDMP
+    $NI_WT_FORM_BEND2P
+    $NI_WT_FORM_BEND2M
+    $NI_WT_FORM_BEND2MP
+    $NI_WT_FORM_EXP
+    $NI_WT_FORM_LOG
+    $NI_WT_FORM_LOGEXP
+    $NI_WT_FORM_PWM
+    $NI_WT_FORM_ASYMP
+    $NI_WT_FORM_ASYMM
+    $NI_WT_FORM_ASYMMP
+    $NI_WT_FORM_ASYM2P
+    $NI_WT_FORM_ASYM2M
+    $NI_WT_FORM_ASYM2MP
+    $NI_WT_FORM_2BLINDS
+    $NI_WT_FORM_4BLINDS
+    $NI_WT_FORM_6BLINDS
+    $NI_WT_FORM_8BLINDS
+    $NI_WT_FORM_FLIP
+    $NI_WT_FORM_FOLD
+    $NI_WT_FORM_MIRROR
+    $NI_WT_FORM_SATURATE
+    $NI_WT_FORM_SEESAW
+    $NI_WT_FORM_QUANTIZE
+    $NI_WT_FORM_WRAP";;$ENGINE_PAR_S1200_FILTER_MODE;;;"$NI_S1200_FILTER_NONE
+  $NI_S1200_FILTER_HIGH
+  $NI_S1200_FILTER_HIGH_MID
+  $NI_S1200_FILTER_LOW_MID
+  $NI_S1200_FILTER_LOW";BUILT-IN
+KSP_Reference_Manual.txt.py;283;10001;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_POST_FX_SLOT;;;Sets the number of Post Amp group effects.;BUILT-IN
+KSP_Reference_Manual.txt.py;284;10007;23. Engine Parameters;Instrument, Source and Amplifier Module;;;$ENGINE_PAR_OUTPUT_CHANNEL;;;"Designates the output for the group or bus.
+0... 63: Routes to one of KONTAKT’s available outputs. This bypasses the instrument insert effects.
+-1: Routes to the instrument output (default).
+-2: Routes to the instrument output with the instrument insert effects bypassed.
+$NI_BUS_OFFSET + 0... 15: Routes to one of the buses. Buses cannot be routed to other
+buses.";BUILT-IN
+KSP_Reference_Manual.txt.py;285;10018;23. Engine Parameters;Insert Effects;;;$ENGINE_PAR_EFFECT_BYPASS;;;Bypass button of all insert effects.;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10023;23. Engine Parameters;Insert Effects;;;$ENGINE_PAR_INSERT_EFFECT_OUTPUT_GAIN;;;"Output gain of all insert effects.
+Note: This engine parameter will affect the output gain of all filters  and EQs, even if they don't have
+the Output parameter visible on their module panels!";BUILT-IN
+KSP_Reference_Manual.txt.py;285;10031;23. Engine Parameters;Insert Effects;Compressor;;$ENGINE_PAR_THRESHOLD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10032;23. Engine Parameters;Insert Effects;Compressor;;$ENGINE_PAR_RATIO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10033;23. Engine Parameters;Insert Effects;Compressor;;$ENGINE_PAR_COMP_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10034;23. Engine Parameters;Insert Effects;Compressor;;$ENGINE_PAR_COMP_DECAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10035;23. Engine Parameters;Insert Effects;Compressor;;$ENGINE_PAR_COMP_LINK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10036;23. Engine Parameters;Insert Effects;Compressor;;$ENGINE_PAR_COMP_TYPE;;;"$NI_COMP_TYPE_CLASSIC
+  $NI_COMP_TYPE_ENHANCED
+  $NI_COMP_TYPE_PRO";BUILT-IN
+KSP_Reference_Manual.txt.py;285;10043;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_INPUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10044;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_RATIO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10045;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10046;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10047;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_MAKEUP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10048;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10049;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_HQ_MODE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10050;23. Engine Parameters;Insert Effects;Feedback Compressor;;$ENGINE_PAR_FCOMP_LINK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10054;23. Engine Parameters;Insert Effects;Limiter;;$ENGINE_PAR_LIM_IN_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;285;10055;23. Engine Parameters;Insert Effects;Limiter;;$ENGINE_PAR_LIM_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10060;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_THRESHOLD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10061;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_RATIO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10062;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10063;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10064;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_MAKEUP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10065;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10066;23. Engine Parameters;Insert Effects;Solid Bus Comp;;$ENGINE_PAR_SCOMP_LINK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10070;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_TRIM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10071;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_HPF_MODE;;;"$NI_SUPERGT_HPF_MODE_OFF
+  $NI_SUPERGT_HPF_MODE_100
+  $NI_SUPERGT_HPF_MODE_300";BUILT-IN
+KSP_Reference_Manual.txt.py;286;10075;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_SATURATION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10076;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_SAT_MODE;;;"$NI_SUPERGT_SAT_MODE_MILD
+  $NI_SUPERGT_SAT_MODE_MODERATE
+  $NI_SUPERGT_SAT_MODE_HOT";BUILT-IN
+KSP_Reference_Manual.txt.py;286;10080;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_COMPRESS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10081;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10082;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10083;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_CHARACTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10084;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_CHAR_MODE;;;"$NI_SUPERGT_CHAR_MODE_FAT
+  $NI_SUPERGT_CHAR_MODE_WARM
+  $NI_SUPERGT_CHAR_MODE_BRIGHT";BUILT-IN
+KSP_Reference_Manual.txt.py;286;10088;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10089;23. Engine Parameters;Insert Effects;Supercharger GT;;$ENGINE_PAR_SUPERGT_CHANNEL_LINK_MODE;;;"$NI_SUPERGT_CHANNEL_LINK_MODE_STEREO
+  $NI_SUPERGT_CHANNEL_LINK_MODE_DUAL_MONO
+  $NI_SUPERGT_CHANNEL_LINK_MODE_MS";BUILT-IN
+KSP_Reference_Manual.txt.py;286;10096;23. Engine Parameters;Insert Effects;Transient Master;;$ENGINE_PAR_TR_INPUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10097;23. Engine Parameters;Insert Effects;Transient Master;;$ENGINE_PAR_TR_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10098;23. Engine Parameters;Insert Effects;Transient Master;;$ENGINE_PAR_TR_SUSTAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;286;10099;23. Engine Parameters;Insert Effects;Transient Master;;$ENGINE_PAR_TR_SMOOTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10104;23. Engine Parameters;Insert Effects;Transparent Limiter;;$ENGINE_PAR_TRANSLIM_THRESHOLD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10105;23. Engine Parameters;Insert Effects;Transparent Limiter;;$ENGINE_PAR_TRANSLIM_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10106;23. Engine Parameters;Insert Effects;Transparent Limiter;;$ENGINE_PAR_TRANSLIM_CEILING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10110;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_NORMALVOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10111;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_BRILLIANTVOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10112;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10113;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10114;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_TONECUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10115;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_TREMOLOSPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10116;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_TREMOLODEPTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10117;23. Engine Parameters;Insert Effects;ACBox;;$ENGINE_PAR_AC_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10121;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10122;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10123;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_HI_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10124;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_LO_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10125;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10126;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_BOOST;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10127;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_MASTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10128;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_LO_CUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10129;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_MID_CONTOUR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;287;10130;23. Engine Parameters;Insert Effects;Bass Invader;;$ENGINE_PAR_BASSINVADER_HI_BOOST;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10135;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10136;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10137;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10138;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_MIDFREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10139;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10140;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_DRIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10141;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_MASTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10142;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_40;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10143;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_90;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10144;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_180;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10145;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_300;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10146;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_500;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10147;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_1K;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10148;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_2K;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10149;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_4K;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10150;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_10K;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10151;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10152;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_ULTRALO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10153;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_ULTRAHI;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10154;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_BRIGHT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10155;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_GEQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10156;23. Engine Parameters;Insert Effects;Bass Pro;;$ENGINE_PAR_BASSPRO_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10160;23. Engine Parameters;Insert Effects;Cabinet;;$ENGINE_PAR_CB_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10161;23. Engine Parameters;Insert Effects;Cabinet;;$ENGINE_PAR_CB_AIR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10162;23. Engine Parameters;Insert Effects;Cabinet;;$ENGINE_PAR_CB_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10163;23. Engine Parameters;Insert Effects;Cabinet;;$ENGINE_PAR_CB_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10164;23. Engine Parameters;Insert Effects;Cabinet;;$ENGINE_PAR_CABINET_TYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10168;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_PRENORMAL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10169;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_PREOVERDRIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10170;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10171;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10172;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10173;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_MASTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10174;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_PRESENCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10175;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_DEPTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10176;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_OVERDRIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;288;10177;23. Engine Parameters;Insert Effects;HotSolo;;$ENGINE_PAR_HS_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10182;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_PREAMP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10183;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10184;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10185;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10186;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_MASTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10187;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_PRESENCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10188;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_HIGAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10189;23. Engine Parameters;Insert Effects;Jump;;$ENGINE_PAR_JMP_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10193;23. Engine Parameters;Insert Effects;Twang;;$ENGINE_PAR_TW_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10194;23. Engine Parameters;Insert Effects;Twang;;$ENGINE_PAR_TW_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10195;23. Engine Parameters;Insert Effects;Twang;;$ENGINE_PAR_TW_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10196;23. Engine Parameters;Insert Effects;Twang;;$ENGINE_PAR_TW_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10197;23. Engine Parameters;Insert Effects;Twang;;$ENGINE_PAR_TW_BRIGHT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10198;23. Engine Parameters;Insert Effects;Twang;;$ENGINE_PAR_TW_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10202;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_PREGAINRHYTHM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10203;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_PREGAINLEAD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10204;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10205;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10206;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10207;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_POSTGAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10208;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_RESONANCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10209;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_PRESENCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10210;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_LEADCHANNEL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10211;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_HIGAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10212;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_BRIGHT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10213;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_CRUNCH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;289;10214;23. Engine Parameters;Insert Effects;Van51;;$ENGINE_PAR_V5_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10219;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_FREQUENCY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10220;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_BITS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10221;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_JITTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10222;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_CRUNCH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10223;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_DITHER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10224;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_EXPAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10225;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_SATURATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10226;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_PREFILTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10227;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_POSTFILTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10228;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_DC_QUANT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10229;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_HPF;;;"$NI_BITE_HPF_MODE_5
+  $NI_BITE_HPF_MODE_100
+  $NI_BITE_HPF_MODE_200";BUILT-IN
+KSP_Reference_Manual.txt.py;290;10233;23. Engine Parameters;Insert Effects;Bite;;$ENGINE_PAR_BITE_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10237;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10238;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_DISTORTION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10239;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_FILTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10240;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10241;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_BALLS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10242;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10243;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_TONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10244;23. Engine Parameters;Insert Effects;Cat;;$ENGINE_PAR_CT_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10248;23. Engine Parameters;Insert Effects;Cry Wah;;$ENGINE_PAR_CW_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;290;10249;23. Engine Parameters;Insert Effects;Cry Wah;;$ENGINE_PAR_CW_PEDAL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10254;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_DRIVEA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10255;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_AMOUNTA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10256;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_BIASA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10257;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_TILTA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10258;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_MODEA;;;"$NI_DIRT_MODE_I
+  $NI_DIRT_MODE_II
+  $NI_DIRT_MODE_III";BUILT-IN
+KSP_Reference_Manual.txt.py;291;10262;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_SAFETYA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10263;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_DRIVEB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10264;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_AMOUNTB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10265;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_BIASB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10266;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_TILTB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10267;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_MODEB;;;"$NI_DIRT_MODE_I
+  $NI_DIRT_MODE_II
+  $NI_DIRT_MODE_III";BUILT-IN
+KSP_Reference_Manual.txt.py;291;10271;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_SAFETYB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10272;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_ROUTING;;;"$NI_DIRT_ROUTING_ATOB
+  $NI_DIRT_ROUTING_BTOA
+  $NI_DIRT_ROUTING_PARALLEL";BUILT-IN
+KSP_Reference_Manual.txt.py;291;10276;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10277;23. Engine Parameters;Insert Effects;Dirt;;$ENGINE_PAR_DIRT_BLEND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10281;23. Engine Parameters;Insert Effects;Distortion;;$ENGINE_PAR_DRIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10282;23. Engine Parameters;Insert Effects;Distortion;;$ENGINE_PAR_DAMPING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10283;23. Engine Parameters;Insert Effects;Distortion;;$ENGINE_PAR_DISTORTION_TYPE;;;"$NI_DISTORTION_TYPE_TUBE
+  $NI_DISTORTION_TYPE_TRANS";BUILT-IN
+KSP_Reference_Manual.txt.py;291;10289;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10290;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_TONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10291;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_DRIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10292;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10293;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_MID;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10294;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_TREBLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;291;10295;23. Engine Parameters;Insert Effects;DStortion;;$ENGINE_PAR_DS_MONO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10300;23. Engine Parameters;Insert Effects;Lo-Fi;;$ENGINE_PAR_BITS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10301;23. Engine Parameters;Insert Effects;Lo-Fi;;$ENGINE_PAR_FREQUENCY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10302;23. Engine Parameters;Insert Effects;Lo-Fi;;$ENGINE_PAR_NOISELEVEL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10303;23. Engine Parameters;Insert Effects;Lo-Fi;;$ENGINE_PAR_NOISECOLOR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10307;23. Engine Parameters;Insert Effects;Saturation;;$ENGINE_PAR_SHAPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10308;23. Engine Parameters;Insert Effects;Saturation;;$ENGINE_PAR_SHAPE_TYPE;;;"$NI_SHAPE_TYPE_CLASSIC
+  $NI_SHAPE_TYPE_ENHANCED
+  $NI_SHAPE_TYPE_DRUMS";BUILT-IN
+KSP_Reference_Manual.txt.py;292;10315;23. Engine Parameters;Insert Effects;Skreamer;;$ENGINE_PAR_SK_TONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10316;23. Engine Parameters;Insert Effects;Skreamer;;$ENGINE_PAR_SK_DRIVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10317;23. Engine Parameters;Insert Effects;Skreamer;;$ENGINE_PAR_SK_BASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10318;23. Engine Parameters;Insert Effects;Skreamer;;$ENGINE_PAR_SK_BRIGHT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10319;23. Engine Parameters;Insert Effects;Skreamer;;$ENGINE_PAR_SK_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10323;23. Engine Parameters;Insert Effects;Tape Saturator;;$ENGINE_PAR_TP_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10324;23. Engine Parameters;Insert Effects;Tape Saturator;;$ENGINE_PAR_TP_WARMTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10325;23. Engine Parameters;Insert Effects;Tape Saturator;;$ENGINE_PAR_TP_HF_ROLLOFF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10326;23. Engine Parameters;Insert Effects;Tape Saturator;;$ENGINE_PAR_TP_QUALITY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10330;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10331;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_MODE;;;"$NI_CHORAL_MODE_SYNTH
+  $NI_CHORAL_MODE_ENSEMBLE
+  $NI_CHORAL_MODE_DIMENSION
+  $NI_CHORAL_MODE_UNIVERSAL";BUILT-IN
+KSP_Reference_Manual.txt.py;292;10336;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_AMOUNT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10337;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_VOICES;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10338;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_DELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10339;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_WIDTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10340;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10341;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_SCATTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10342;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_INVERT_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;292;10343;23. Engine Parameters;Insert Effects;Choral;;$ENGINE_PAR_CHORAL_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10348;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_MODE;;;"$NI_FLAIR_MODE_STANDARD
+  $NI_FLAIR_MODE_THRU_ZERO
+  $NI_FLAIR_MODE_SCAN";BUILT-IN
+KSP_Reference_Manual.txt.py;293;10352;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_CHORD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10353;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_INVERT_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10354;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10355;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_RATE_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10356;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10357;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_AMOUNT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10358;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_WIDTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10359;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_PITCH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10360;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_DAMPING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10361;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_VOICES;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10362;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_DETUNE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10363;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10364;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_OFFSET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;293;10365;23. Engine Parameters;Insert Effects;Flair;;$ENGINE_PAR_FLAIR_SCANMODE;;;"$NI_FLAIR_SCANMODE_TRIANGLE
+  $NI_FLAIR_SCANMODE_SAW_UP
+  $NI_FLAIR_SCANMODE_SAW_DOWN";BUILT-IN
+KSP_Reference_Manual.txt.py;294;10373;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_MODE;;;"$NI_FREAK_MODE_RADIO
+  $NI_FREAK_MODE_OSCILLATOR
+  $NI_FREAK_MODE_SIDECHAIN";BUILT-IN
+KSP_Reference_Manual.txt.py;294;10377;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_TYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10378;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_HARMONICS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10379;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10380;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10381;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_CARRIER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10382;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_TUNING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10383;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_WIDTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10384;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_DEMOD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10385;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_GATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10386;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_FREQUENCY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10387;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_ANTIFOLD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10388;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10389;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_WIDE_RANGE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10390;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_CONTOUR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10391;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10392;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_BP_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10393;23. Engine Parameters;Insert Effects;Freak;;$ENGINE_PAR_FREAK_BP_FILTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10397;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10398;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_RATE_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10399;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_ULTRA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10400;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_AMOUNT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10401;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_CENTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10402;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10403;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_SPREAD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10404;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10405;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_MOD_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10406;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_NOTCHES;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10407;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_INVERT_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10408;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_INVERT_MOD_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;294;10409;23. Engine Parameters;Insert Effects;Phasis;;$ENGINE_PAR_PHASIS_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10414;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_RING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10415;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_FM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10416;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_FREQUENCY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10417;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_EDGE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10418;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_LFO_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10419;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_LFO_AMOUNT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10420;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_LFO_WAVE;;;"$NI_RINGMOD_LFO_WAVE_SINE
+  $NI_RINGMOD_LFO_WAVE_SQUARE";BUILT-IN
+KSP_Reference_Manual.txt.py;295;10423;23. Engine Parameters;Insert Effects;Ring Modulator;;$ENGINE_PAR_RINGMOD_FAST_MODE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10427;23. Engine Parameters;Insert Effects;Rotator;;$ENGINE_PAR_RT_SPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10428;23. Engine Parameters;Insert Effects;Rotator;;$ENGINE_PAR_RT_BALANCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10429;23. Engine Parameters;Insert Effects;Rotator;;$ENGINE_PAR_RT_ACCEL_HI;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10430;23. Engine Parameters;Insert Effects;Rotator;;$ENGINE_PAR_RT_ACCEL_LO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10431;23. Engine Parameters;Insert Effects;Rotator;;$ENGINE_PAR_RT_DISTANCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10432;23. Engine Parameters;Insert Effects;Rotator;;$ENGINE_PAR_RT_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10436;23. Engine Parameters;Insert Effects;Vibrato/Chorus;;$ENGINE_PAR_VC_BLEND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10437;23. Engine Parameters;Insert Effects;Vibrato/Chorus;;$ENGINE_PAR_VC_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10438;23. Engine Parameters;Insert Effects;Vibrato/Chorus;;$ENGINE_PAR_VC_WIDTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10439;23. Engine Parameters;Insert Effects;Vibrato/Chorus;;$ENGINE_PAR_VC_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;295;10440;23. Engine Parameters;Insert Effects;Vibrato/Chorus;;$ENGINE_PAR_VC_DEPTH;;;"$NI_VC_DEPTH_1
+  $NI_VC_DEPTH_2
+  $NI_VC_DEPTH_3
+  $NI_VC_DEPTH_4
+  $NI_VC_DEPTH_5
+  $NI_VC_DEPTH_6";BUILT-IN
+KSP_Reference_Manual.txt.py;295;10447;23. Engine Parameters;Insert Effects;Vibrato/Chorus;;$ENGINE_PAR_VC_COLOR;;;"$NI_VC_COLOR_TYPE_A
+  $NI_VC_COLOR_TYPE_B
+  $NI_VC_COLOR_TYPE_C";BUILT-IN
+KSP_Reference_Manual.txt.py;296;10455;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_WOW;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10456;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_FLUTTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10457;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_SCRAPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10458;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_SPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10459;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10460;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_AGE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10461;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_SATURATION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10462;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10463;23. Engine Parameters;Insert Effects;Wow/Flutter;;$ENGINE_PAR_WOWFLUTTER_GATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10467;23. Engine Parameters;Insert Effects;AET Filter;;$ENGINE_PAR_EXP_FILTER_MORPH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10468;23. Engine Parameters;Insert Effects;AET Filter;;$ENGINE_PAR_EXP_FILTER_AMOUNT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10477;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_0;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10478;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10479;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10480;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10481;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10482;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_5;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10483;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_6;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10484;23. Engine Parameters;Insert Effects;"Inverter
+Send Levels";;$ENGINE_PAR_SENDLEVEL_7;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10488;23. Engine Parameters;Insert Effects;Stereo Modeller;;$ENGINE_PAR_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10489;23. Engine Parameters;Insert Effects;Stereo Modeller;;$ENGINE_PAR_STEREO_PAN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10493;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_OFFSET_DISTANCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10494;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_OFFSET_AZIMUTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10495;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_OFFSET_X;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10496;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_OFFSET_Y;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10497;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_LFE_VOLUME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10498;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;296;10499;23. Engine Parameters;Insert Effects;Surround Panner;;$ENGINE_PAR_SP_DIVERGENCE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10503;23. Engine Parameters;Filter and EQ;;;$ENGINE_PAR_CUTOFF;;;Cutoff frequency of all filters.;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10508;23. Engine Parameters;Filter and EQ;;;$ENGINE_PAR_RESONANCE;;;Resonance of all filters.;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10518;23. Engine Parameters;Filter and EQ;Bypass button of all filters and EQs.;;$ENGINE_PAR_GAIN;;;Gain control for the Ladder and Daft filter types.;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10523;23. Engine Parameters;Filter and EQ;;;$ENGINE_PAR_FILTER_LADDER_HQ;;;High Quality mode for the Ladder filter types.;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10528;23. Engine Parameters;Filter and EQ;;;$ENGINE_PAR_BANDWIDTH;;;Bandwidth control, found on the following filter types: SV Par. LP/HP, SV Par. BP/BP, SV Ser. LP/HP.;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10534;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_SHIFTB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10535;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_SHIFTC;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10536;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_RESB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10537;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_RESC;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10538;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_TYPEA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10539;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_TYPEB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10540;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_TYPEC;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10541;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_BYPA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10542;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_BYPB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10543;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_BYPC;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10544;23. Engine Parameters;Filter and EQ;3x2 Versatile;;$ENGINE_PAR_FILTER_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10548;23. Engine Parameters;Filter and EQ;Formant Filters;;$ENGINE_PAR_FORMANT_TALK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10549;23. Engine Parameters;Filter and EQ;Formant Filters;;$ENGINE_PAR_FORMANT_SHARP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10550;23. Engine Parameters;Filter and EQ;Formant Filters;;$ENGINE_PAR_FORMANT_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10554;23. Engine Parameters;Filter and EQ;Simple Filter;;$ENGINE_PAR_LP_CUTOFF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;297;10555;23. Engine Parameters;Filter and EQ;Simple Filter;;$ENGINE_PAR_HP_CUTOFF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10560;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_FREQ1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10561;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_BW1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10562;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_GAIN1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10563;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_FREQ2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10564;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_BW2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10565;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_GAIN2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10566;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_FREQ3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10567;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_BW3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10568;23. Engine Parameters;Filter and EQ;EQ;;$ENGINE_PAR_GAIN3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10572;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10573;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HP_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10574;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LF_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10575;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LF_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10576;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LF_BELL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10577;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LMF_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10578;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LMF_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10579;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LMF_Q;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10580;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HMF_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10581;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HMF_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10582;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HMF_Q;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10583;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HF_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10584;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HF_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10585;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_HF_BELL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10586;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;298;10587;23. Engine Parameters;Filter and EQ;Solid G-EQ;;$ENGINE_PAR_SEQ_LP_FREQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10591;23. Engine Parameters;Send Effects;;;$ENGINE_PAR_SEND_EFFECT_BYPASS;;;Bypass button of all send effects.;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10596;23. Engine Parameters;Send Effects;;;$ENGINE_PAR_SEND_EFFECT_DRY_LEVEL;;;Dry amount of send effects when used in an Insert FX chain.;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10601;23. Engine Parameters;Send Effects;;;$ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN;;;"•   Wet amount of send effects when used in an Insert FX chain
+•   Return amount of send effects when used in a Send FX chain";BUILT-IN
+KSP_Reference_Manual.txt.py;299;10609;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_TIME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10610;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_TIME_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10611;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10612;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_CROSS_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10613;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_LR_OFFSET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10614;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_PITCH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10615;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_DETUNE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10616;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_REVERSE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10617;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_REVERSE_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;299;10618;23. Engine Parameters;Send Effects;PsycheDelay;;$ENGINE_PAR_PSYDL_DETUNE_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10623;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_TYPE;;;"$NI_REPLIKA_TYPE_MODERN
+  $NI_REPLIKA_TYPE_TAPE
+  $NI_REPLIKA_TYPE_VINTAGE
+  $NI_REPLIKA_TYPE_DIFFUSION
+  $NI_REPLIKA_TYPE_ANALOGUE";BUILT-IN
+KSP_Reference_Manual.txt.py;300;10629;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_TIME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10630;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_TIME_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10631;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10632;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_LOWCUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10633;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_HIGHCUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10634;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_SATURATION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10635;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_TAPEAGE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10636;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_FLUTTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10637;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_QUALITY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10638;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_DEPTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10639;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10641;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10642;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_NOISE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10643;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_PINGPONG;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10644;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_AMOUNT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10645;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10646;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_DENSE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10647;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_MODULATION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10648;23. Engine Parameters;Send Effects;Replika Delay;;$ENGINE_PAR_RDL_BBDTYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10652;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_PREDELAY_L;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10653;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_PREDELAY_L_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10654;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_TIME_L;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10655;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_TIME_L_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10656;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_FEEDBACK_L;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10657;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_LEVEL_L;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10658;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_PREDELAY_R;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10659;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_PREDELAY_R_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10660;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_TIME_R;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10661;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_TIME_R_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10662;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_FEEDBACK_R;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10663;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_LEVEL_R;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10664;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_CROSS_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;300;10665;23. Engine Parameters;Send Effects;Twin Delay;;$ENGINE_PAR_TDL_WIDTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10670;23. Engine Parameters;Send Effects;Legacy Delay;;$ENGINE_PAR_DL_TIME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10671;23. Engine Parameters;Send Effects;Legacy Delay;;$ENGINE_PAR_DL_TIME_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10672;23. Engine Parameters;Send Effects;Legacy Delay;;$ENGINE_PAR_DL_DAMPING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10673;23. Engine Parameters;Send Effects;Legacy Delay;;$ENGINE_PAR_DL_PAN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10674;23. Engine Parameters;Send Effects;Legacy Delay;;$ENGINE_PAR_DL_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10678;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_PREDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10679;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_LENGTH_RATIO_ER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10680;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_FREQ_LOWPASS_ER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10681;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_FREQ_HIGHPASS_ER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10682;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_LENGTH_RATIO_LR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10683;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_FREQ_LOWPASS_LR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10684;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_FREQ_HIGHPASS_LR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10685;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_ER_LR_BOUNDARY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10686;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_AUTO_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10687;23. Engine Parameters;Send Effects;Convolution;;$ENGINE_PAR_IRC_REVERSE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10691;23. Engine Parameters;Send Effects;Plate Reverb;;$ENGINE_PAR_PR_DECAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10692;23. Engine Parameters;Send Effects;Plate Reverb;;$ENGINE_PAR_PR_LOWSHELF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10693;23. Engine Parameters;Send Effects;Plate Reverb;;$ENGINE_PAR_PR_HIDAMP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10694;23. Engine Parameters;Send Effects;Plate Reverb;;$ENGINE_PAR_PR_PREDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;301;10695;23. Engine Parameters;Send Effects;Plate Reverb;;$ENGINE_PAR_PR_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10700;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_TYPE;;;"$NI_RAUM_TYPE_GROUNDED
+  $NI_RAUM_TYPE_AIRY
+  $NI_RAUM_TYPE_COSMIC";BUILT-IN
+KSP_Reference_Manual.txt.py;302;10704;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_PREDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10705;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_PREDELAY_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10706;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10707;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_LOWSHELF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10708;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_HIGHCUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10709;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_DECAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10710;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_MOD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10711;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_DIFFUSION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10712;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10713;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_MIX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10714;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_DAMPING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10715;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_RATE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10716;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_FREEZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10717;23. Engine Parameters;Send Effects;Raum;;$ENGINE_PAR_RAUM_SPARSE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10721;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_TYPE;;;"$NI_REVERB2_TYPE_ROOM
+  $NI_REVERB2_TYPE_HALL";BUILT-IN
+KSP_Reference_Manual.txt.py;302;10724;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_TIME;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10725;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10726;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_DAMPING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10727;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_MOD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10728;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_DIFF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10729;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_PREDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10730;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_HIGHCUT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10731;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_LOWSHELF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10732;23. Engine Parameters;Send Effects;Reverb;;$ENGINE_PAR_RV2_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10737;23. Engine Parameters;Send Effects;"Reverb
+Legacy Reverb";;$ENGINE_PAR_RV_PREDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10738;23. Engine Parameters;Send Effects;"Reverb
+Legacy Reverb";;$ENGINE_PAR_RV_SIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10739;23. Engine Parameters;Send Effects;"Reverb
+Legacy Reverb";;$ENGINE_PAR_RV_COLOUR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10740;23. Engine Parameters;Send Effects;"Reverb
+Legacy Reverb";;$ENGINE_PAR_RV_STEREO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;302;10741;23. Engine Parameters;Send Effects;"Reverb
+Legacy Reverb";;$ENGINE_PAR_RV_DAMPING;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10746;23. Engine Parameters;Send Effects;Legacy Chorus;;$ENGINE_PAR_CH_DEPTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10747;23. Engine Parameters;Send Effects;Legacy Chorus;;$ENGINE_PAR_CH_SPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10748;23. Engine Parameters;Send Effects;Legacy Chorus;;$ENGINE_PAR_CH_SPEED_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10749;23. Engine Parameters;Send Effects;Legacy Chorus;;$ENGINE_PAR_CH_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10753;23. Engine Parameters;Send Effects;Legacy Flanger;;$ENGINE_PAR_FL_DEPTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10754;23. Engine Parameters;Send Effects;Legacy Flanger;;$ENGINE_PAR_FL_SPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10755;23. Engine Parameters;Send Effects;Legacy Flanger;;$ENGINE_PAR_FL_SPEED_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10756;23. Engine Parameters;Send Effects;Legacy Flanger;;$ENGINE_PAR_FL_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10757;23. Engine Parameters;Send Effects;Legacy Flanger;;$ENGINE_PAR_FL_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10758;23. Engine Parameters;Send Effects;Legacy Flanger;;$ENGINE_PAR_FL_COLOR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10762;23. Engine Parameters;Send Effects;Legacy Phaser;;$ENGINE_PAR_PH_DEPTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10763;23. Engine Parameters;Send Effects;Legacy Phaser;;$ENGINE_PAR_PH_SPEED;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10764;23. Engine Parameters;Send Effects;Legacy Phaser;;$ENGINE_PAR_PH_SPEED_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10765;23. Engine Parameters;Send Effects;Legacy Phaser;;$ENGINE_PAR_PH_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10766;23. Engine Parameters;Send Effects;Legacy Phaser;;$ENGINE_PAR_PH_FEEDBACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;303;10770;23. Engine Parameters;Send Effects;Gainer;;$ENGINE_PAR_GN_GAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10774;23. Engine Parameters;Modulation;;;$ENGINE_PAR_MOD_TARGET_INTENSITY;;;"The intensity slider of a modulation assignment. This controls the modulation amount in the positive
+range only. In order to apply a negative modulation amount, Invert button needs to be toggled (see
+below).";BUILT-IN
+KSP_Reference_Manual.txt.py;304;10781;23. Engine Parameters;Modulation;;;$ENGINE_PAR_MOD_TARGET_MP_INTENSITY;;;"The intensity slider of a modulation assignment, including both negative and positive ranges
+(bipolar) - no modulation is at engine parameter value of 500000, maximum modulation amount
+is at value 1000000, maximum inverted modulation amount is at value 0.";BUILT-IN
+KSP_Reference_Manual.txt.py;304;10788;23. Engine Parameters;Modulation;;;$MOD_TARGET_INVERT_SOURCE;;;The Invert button of a modulation assignment.;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10793;23. Engine Parameters;Modulation;;;$ENGINE_PAR_INTMOD_BYPASS;;;The bypass button of an internal modulator, e.g. AHDSR envelope, LFO, Step Modulator...;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10798;23. Engine Parameters;Modulation;;;$ENGINE_PAR_INTMOD_RETRIGGER;;;"The Retrigger button of an internal modulator. This restarts the envelope or the phase of an LFO or
+the Step Modulator every time a note is received.";BUILT-IN
+KSP_Reference_Manual.txt.py;304;10805;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_ATK_CURVE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10806;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10807;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_ATTACK_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10808;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_HOLD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10809;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_HOLD_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10810;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_DECAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10811;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_DECAY_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10812;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_SUSTAIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10813;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10814;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_RELEASE_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10815;23. Engine Parameters;Modulation;AHDSR;;$ENGINE_PAR_ENV_AHD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10819;23. Engine Parameters;Modulation;DBD;;$ENGINE_PAR_DECAY1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10820;23. Engine Parameters;Modulation;DBD;;$ENGINE_PAR_DECAY1_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10821;23. Engine Parameters;Modulation;DBD;;$ENGINE_PAR_BREAK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10822;23. Engine Parameters;Modulation;DBD;;$ENGINE_PAR_DECAY2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10823;23. Engine Parameters;Modulation;DBD;;$ENGINE_PAR_DECAY2_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;304;10824;23. Engine Parameters;Modulation;DBD;;$ENGINE_PAR_ENV_DBD_EASY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10829;23. Engine Parameters;Modulation;Flexible Envelope;;$ENGINE_PAR_FLEXENV_LOOP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10830;23. Engine Parameters;Modulation;Flexible Envelope;;$ENGINE_PAR_FLEXENV_ONESHOT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10834;23. Engine Parameters;Modulation;Envelope Follower;;$ENGINE_PAR_ENVF_ATTACK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10835;23. Engine Parameters;Modulation;Envelope Follower;;$ENGINE_PAR_ENVF_RELEASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10836;23. Engine Parameters;Modulation;Envelope Follower;;$ENGINE_PAR_ENVF_GAIN_BOOST;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10837;23. Engine Parameters;Modulation;Envelope Follower;;$ENGINE_PAR_ENVF_ADAPTION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10842;23. Engine Parameters;Modulation;LFO;For all LFOs;$ENGINE_PAR_INTMOD_FREQUENCY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10843;23. Engine Parameters;Modulation;LFO;For all LFOs;$ENGINE_PAR_INTMOD_FREQUENCY_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10844;23. Engine Parameters;Modulation;LFO;For all LFOs;$ENGINE_PAR_LFO_DELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10845;23. Engine Parameters;Modulation;LFO;For all LFOs;$ENGINE_PAR_LFO_DELAY_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10846;23. Engine Parameters;Modulation;LFO;For all LFOs;$ENGINE_PAR_LFO_PHASE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10848;23. Engine Parameters;Modulation;LFO;For Rectangle and Multi LFOs;$ENGINE_PAR_INTMOD_PULSEWIDTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10850;23. Engine Parameters;Modulation;LFO;For Multi LFOs;$ENGINE_PAR_LFO_SINE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10851;23. Engine Parameters;Modulation;LFO;For Multi LFOs;$ENGINE_PAR_LFO_RECT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10852;23. Engine Parameters;Modulation;LFO;For Multi LFOs;$ENGINE_PAR_LFO_TRI;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10853;23. Engine Parameters;Modulation;LFO;For Multi LFOs;$ENGINE_PAR_LFO_SAW;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10854;23. Engine Parameters;Modulation;LFO;For Multi LFOs;$ENGINE_PAR_LFO_RAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10855;23. Engine Parameters;Modulation;LFO;For Multi LFOs;$ENGINE_PAR_LFO_NORMALIZE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10861;23. Engine Parameters;Modulation;Step Modulator;;$ENGINE_PAR_STEPSEQ_STEPS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10862;23. Engine Parameters;Modulation;Step Modulator;;$ENGINE_PAR_STEPSEQ_ONESHOT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10863;23. Engine Parameters;Modulation;Step Modulator;;$ENGINE_PAR_STEPSEQ_STEP_VALUE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10867;23. Engine Parameters;Modulation;Glide;;$ENGINE_PAR_GLIDE_COEF;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;305;10868;23. Engine Parameters;Modulation;Glide;;$ENGINE_PAR_GLIDE_COEF_UNIT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10872;23. Engine Parameters;Module Types and Subtypes;;;$ENGINE_PAR_EFFECT_TYPE;;;Used to query the type of an effect loaded in Group FX, Instrument Bus FX, Insert FX or Main FX;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10876;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_NONE;;(Empty slot);;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10877;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_FILTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10878;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_SOLID_GEQ;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10879;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_COMPRESSOR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10880;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_FB_COMP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10881;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_LIMITER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10882;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_BUS_COMP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10883;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_SUPERGT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10884;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_TRANS_MASTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10885;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_TRANSLIM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10886;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_ACBOX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10887;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_BASSINVADER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10888;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_BASSPRO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10889;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_CABINET;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10890;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_HOTSOLO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10891;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_JUMP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10892;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_TWANG;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10893;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_VAN51;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10894;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_BITE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10895;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_CAT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10896;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_CRYWAH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10897;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_DIRT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10898;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_DISTORTION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10899;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_DSTORTION;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10900;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_LOFI;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10901;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_SHAPER;;(Saturation);;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10902;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_SKREAMER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10903;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_TAPE_SAT;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10904;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_PSYCHEDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10905;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_REPLIKA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10906;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_TWINDELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10907;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_DELAY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10908;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_IRC;;(Convolution);;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10909;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_PLATEREVERB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10910;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_RAUM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10911;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_REVERB2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10912;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_REVERB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10913;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_CHORAL;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10914;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_FLAIR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;306;10915;23. Engine Parameters;Module Types and Subtypes;;chains. Can be any of the following;$EFFECT_TYPE_FREAK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10920;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_PHASIS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10921;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_RINGMOD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10922;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_ROTATOR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10923;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_VIBRATO_CHORUS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10924;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_WOWFLUTTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10925;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_CHORUS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10926;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_FLANGER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10927;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_PHASER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10928;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_AET_FILTER;;(Group FX chain only!);;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10929;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_GAINER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10930;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_INVERTER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10931;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_SEND_LEVELS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10932;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_STEREO;;(Stereo Modeller);;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10933;23. Engine Parameters;Module Types and Subtypes;;;$EFFECT_TYPE_SURROUND_PANNER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;307;10936;23. Engine Parameters;Module Types and Subtypes;;;$ENGINE_PAR_SEND_EFFECT_TYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10956;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an effect loaded in Send FX chain. Can be any of the following;$ENGINE_PAR_EFFECT_SUBTYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10959;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LP1POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10960;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_HP1POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10961;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_BP2POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10962;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LP2POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10963;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_HP2POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10964;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LP4POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10965;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_HP4POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10966;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_BP4POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10967;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_BR4POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10968;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LP6POLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10969;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_PHASER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10970;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_VOWELA;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10971;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_VOWELB;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10972;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_PRO52;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10973;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LADDER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10974;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_VERSATILE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10975;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_EQ1BAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10976;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_EQ2BAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10977;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_EQ3BAND;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10978;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_DAFT_LP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10979;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_LP1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10980;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_LP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10981;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_LP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10982;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_LP6;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10983;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_LP1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10984;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_LP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10985;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_LP3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10986;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_LP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10987;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_AR_LP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10988;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_AR_LP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10989;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_AR_LP24;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10990;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_HP1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10991;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_HP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10992;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_HP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10993;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_SV_HP6;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10994;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_HP1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10995;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_HP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10996;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_HP3;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10997;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_LDR_HP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10998;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_AR_HP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;10999;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_AR_HP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;11000;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_AR_HP24;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;308;11001;23. Engine Parameters;Module Types and Subtypes;;Used to query the filter or EQ subtype. Can be any of the following;$FILTER_TYPE_DAFT_HP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11006;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_BP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11007;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_BP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11008;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_BP6;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11009;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_LDR_BP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11010;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_LDR_BP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11011;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_AR_BP2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11012;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_AR_BP4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11013;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_AR_BP24;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11014;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_NOTCH4;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11015;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_NOTCH6;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11016;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_LDR_PEAK;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11017;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_LDR_NOTCH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11018;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_PAR_LPHP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11019;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_PAR_BPBP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11020;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SV_SER_LPHP;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11021;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_FORMANT_1;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11022;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_FORMANT_2;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11023;23. Engine Parameters;Module Types and Subtypes;;;$FILTER_TYPE_SIMPLE_LPHP;;;Note that the Solid G-EQ is not treated as a filter/EQ subtype, but as an effect.;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11027;23. Engine Parameters;Module Types and Subtypes;;;$ENGINE_PAR_INTMOD_TYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11030;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an internal modulator, can be any of the following;$INTMOD_TYPE_NONE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11031;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an internal modulator, can be any of the following;$INTMOD_TYPE_LFO;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11032;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an internal modulator, can be any of the following;$INTMOD_TYPE_ENVELOPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11033;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an internal modulator, can be any of the following;$INTMOD_TYPE_STEPMOD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11034;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an internal modulator, can be any of the following;$INTMOD_TYPE_ENV_FOLLOW;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11035;23. Engine Parameters;Module Types and Subtypes;;Used to query the type of an internal modulator, can be any of the following;$INTMOD_TYPE_GLIDE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11038;23. Engine Parameters;Module Types and Subtypes;;;$ENGINE_PAR_INTMOD_SUBTYPE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11041;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$ENV_TYPE_AHDSR;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11042;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$ENV_TYPE_FLEX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11043;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$ENV_TYPE_DBD;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11044;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$LFO_TYPE_SINE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11045;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$LFO_TYPE_RECTANGLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11046;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$LFO_TYPE_TRIANGLE;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11047;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$LFO_TYPE_SAWTOOTH;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11048;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$LFO_TYPE_RANDOM;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;309;11049;23. Engine Parameters;Module Types and Subtypes;;Used to query the subtype of envelopes and LFOs. Can be any of the following;$LFO_TYPE_MULTI;;;Group Start Options Constants;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11054;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_MODE;;;"$START_CRITERIA_NONE
+  $START_CRITERIA_ON_KEY
+  $START_CRITERIA_ON_CONTROLLER
+  $START_CRITERIA_CYCLE_ROUND_ROBIN
+  $START_CRITERIA_CYCLE_RANDOM
+  $START_CRITERIA_SLICE_TRIGGER";BUILT-IN
+KSP_Reference_Manual.txt.py;310;11061;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_KEY_MIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11062;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_KEY_MAX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11063;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_CONTROLLER;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11064;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_CC_MIN;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11065;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_CC_MAX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11066;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_CYCLE_CLASS;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11067;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_ZONE_IDX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11068;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_SLICE_IDX;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11069;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_SEQ_ONLY;;;;BUILT-IN
+KSP_Reference_Manual.txt.py;310;11070;23. Engine Parameters;Group Start Options Query;;;$ENGINE_PAR_START_CRITERIA_NEXT_CRIT;;;"$START_CRITERIA_AND_NEXT
+  $START_CRITERIA_AND_NOT_NEXT
+  $START_CRITERIA_OR_NEXT";BUILT-IN
+KSP_Reference_Manual.txt.py;311;11085;24. Zone Parameters;Zone Parameters;"These set the parameters for the user zones via KSP in the same manner and ranges as
+available on the mapping editor. They can be set with set_zone_par() and retrieved with
+get_zone_par() commands. When the user zones are declared, all these parameters are set to
+0 by default.";;$ZONE_PAR_HIGH_KEY;;;Sets the high key for the zone. Range: 0... 127.;BUILT-IN
+KSP_Reference_Manual.txt.py;311;11090;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_LOW_KEY;;;Sets the low key of the zone. Range: 0... 127.;BUILT-IN
+KSP_Reference_Manual.txt.py;311;11095;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_HIGH_VELO;;;Sets the maximum velocity response of the zone. Range: 1... 127.;BUILT-IN
+KSP_Reference_Manual.txt.py;311;11100;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_LOW_VELO;;;Sets the minimum velocity response of the zone. Range: 1... 127.;BUILT-IN
+KSP_Reference_Manual.txt.py;311;11105;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_ROOT_KEY;;;Sets the root key of the zone. Range: 0... 127.;BUILT-IN
+KSP_Reference_Manual.txt.py;311;11110;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_FADE_LOW_KEY;;;"Optionally use this parameter to create zone crossfades. The value is set in the form of a distance to
+the $ZONE_PAR_LOW_KEY.
+Range: $ZONE_PAR_HIGH_KEY - $ZONE_PAR_LOW_KEY + 1";BUILT-IN
+KSP_Reference_Manual.txt.py;311;11117;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_FADE_HIGH_KEY;;;"Optionally use this parameter to create zone crossfades. The value is set in the form of a distance to
+the $ZONE_PAR_HIGH_KEY.
+Range: $ZONE_PAR_HIGH_KEY - $ZONE_PAR_LOW_KEY + 1";BUILT-IN
+KSP_Reference_Manual.txt.py;311;11124;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_FADE_LOW_VELO;;;"Optionally use this parameter to create zone crossfades. The value is set in the form of a distance to
+the $$ZONE_PAR_LOW_VELO.
+Range: $ZONE_PAR_HIGH_VELO - $ZONE_PAR_LOW_VELO + 1";BUILT-IN
+KSP_Reference_Manual.txt.py;312;11132;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_FADE_HIGH_VELO;;;"Optionally use this parameter to create zone crossfades. The value is set in the form of a distance to
+the $ZONE_PAR_HIGH_VELO.
+Range: $ZONE_PAR_HIGH_VELO - $ZONE_PAR_LOW_VELO + 1";BUILT-IN
+KSP_Reference_Manual.txt.py;312;11139;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_VOLUME;;;Sets the volume of the zone. Range: -3600... 3600.;BUILT-IN
+KSP_Reference_Manual.txt.py;312;11144;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_PAN;;;Sets the panning of the zone. Range: -1000... 1000.;BUILT-IN
+KSP_Reference_Manual.txt.py;312;11149;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_TUNE;;;Sets the tuning of the zone. Range: -3600... 3600.;BUILT-IN
+KSP_Reference_Manual.txt.py;312;11154;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_GROUP;;;Sets the group of the user zone. By default a user zone is placed in group 0.;BUILT-IN
+KSP_Reference_Manual.txt.py;312;11159;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_SAMPLE_START;;;Sets the sample start value of the sample attached to the zone.;BUILT-IN
+KSP_Reference_Manual.txt.py;312;11164;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_SAMPLE_END;;;Sets the sample end value of the sample attached to the zone.;BUILT-IN
+KSP_Reference_Manual.txt.py;312;11169;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_SAMPLE_MOD_RANGE;;;"Sets the sample start modulation range of the sample attached to the zone. This is the S.Mod
+parameter in KONTAKT's Wave Editor.";BUILT-IN
+KSP_Reference_Manual.txt.py;312;11175;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_SAMPLE_RATE;;;"Gets the sample rate of the sample attached to the zone. This zone parameter cannot be used with
+set_zone_par().";BUILT-IN
+KSP_Reference_Manual.txt.py;312;11181;24. Zone Parameters;Zone Parameters;;;$ZONE_PAR_SELECTED;;;"Returns 1 if the zone is selected in KONTAKT's Mapping Editor, or 0 if it's not selected. This zone
+parameter cannot be used with set_zone_par().
+
+Examples
+on init
+  message("""")
+
+  set_num_user_zones(4)
+
+  set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 0)";BUILT-IN
+KSP_Reference_Manual.txt.py;314;11206;24. Zone Parameters;Loop Parameters;;;$LOOP_PAR_MODE;;;"The loop playback mode of the selected loop within the zone.
+0: Loop off
+1: Loop until end
+2: Loop until end, bidirectional
+3: Loop until release
+4: Loop until release, bidirectional";BUILT-IN
+KSP_Reference_Manual.txt.py;314;11216;24. Zone Parameters;Loop Parameters;;;$LOOP_PAR_START;;;"The starting point in samples of the selected loop within the zone. If this parameter is not set, the
+loop will start at the beginning of the sample.";BUILT-IN
+KSP_Reference_Manual.txt.py;314;11222;24. Zone Parameters;Loop Parameters;;;$LOOP_PAR_LENGTH;;;"The loop length in samples of the selected loop within the zone. If this parameter is not set, the loop
+length will correspond to the entire sample.";BUILT-IN
+KSP_Reference_Manual.txt.py;314;11228;24. Zone Parameters;Loop Parameters;;;$LOOP_PAR_XFADE;;;The crossfade duration in microseconds for the selected loop within the zone.;BUILT-IN
+KSP_Reference_Manual.txt.py;314;11233;24. Zone Parameters;Loop Parameters;;;$LOOP_PAR_COUNT;;;"The number of times the selected loop within the zone will repeat. If this parameter is not set (or is
+set to 0), the loop will play indefinitely.";BUILT-IN
+KSP_Reference_Manual.txt.py;314;11239;24. Zone Parameters;Loop Parameters;;;$LOOP_PAR_TUNING;;;"Sets the tuning offset inside the loop area for the selected loop within the zone. This offset
+is applied on the first repeat of the loop, and for all successive repeats (as defined by
+$LOOP_PAR_COUNT).
+
+Examples
+
+on init
+  message("""")
+
+  set_num_user_zones(1)
+
+  set_sample(%NI_USER_ZONE_IDS[0], ""path/to/sample.wav"")
+end on
+
+on ui_control ($SampleLoopOn)
+  wait_async(set_loop_par(%NI_USER_ZONE_IDS[0], 0, $LOOP_PAR_MODE, $SampleLoopOn))
+end on
+Enable or disable the loop of a sample loaded into a user zone.";BUILT-IN
+KSP_Reference_Manual.txt.py;315;11262;24. Zone Parameters;Sample Parameters;;;$NI_FILE_NAME;;;The file name of a zone’s sample (corresponds to the zone name).;BUILT-IN
+KSP_Reference_Manual.txt.py;315;11267;24. Zone Parameters;Sample Parameters;;;$NI_FILE_FULL_PATH;;;The full path of a zone’s sample (same result as without the parameter).;BUILT-IN
+KSP_Reference_Manual.txt.py;315;11272;24. Zone Parameters;Sample Parameters;;;$NI_FILE_FULL_PATH_OS;;;The full OS path of a zone’s sample (uses backslashes on Windows).;BUILT-IN
+KSP_Reference_Manual.txt.py;315;11277;24. Zone Parameters;Sample Parameters;;;$NI_FILE_EXTENSION;;;The file extension of a zone’s sample (without the dot).;BUILT-IN
