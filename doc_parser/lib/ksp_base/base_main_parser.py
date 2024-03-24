@@ -150,7 +150,7 @@ class BaseMainParser:
             page_cnt = 0
             for page in reader.pages:
                 f.write(f"{'<' * 20} {toc}Page {page_cnt + 1} {'>' * 20}\n")
-                f.write(self.get_body(page, toc))
+                f.write(self.get_body(page, page_cnt + 1, toc))
                 if page_cnt and page_cnt % 80 == 0:
                     print("")
                 page_cnt += 1
@@ -173,36 +173,25 @@ class BaseMainParser:
             self.variables.parse()
             self.variables.export()
 
-    def get_body(self, page: PageObject, toc: str) -> str:
+    @staticmethod
+    def get_body(page: PageObject, page_no: int, toc: str) -> str:
         """
         Get the page body without header and footer.
 
         :param page: Page to scan read from PdfReader
+        :param page_no: Page number in the PDF file
         :param toc: If this contains a string then the page is in the table of contents
         :return: Page body
         """
-        # BaseMainParser._parts = []
-        # page.extract_text(visitor_text=self.visitor_body)
-        # content = "".join(self._parts) + "\n"
         content = page.extract_text(extraction_mode="layout") + "\n"
         if not toc:
-            # Remove the first line which represents the footer
-            content = content.split("\n", 3)[3]
+            try:
+                # Remove the first line which represents the footer
+                extract = content.split("\n", 3)[3]
+                content = extract
+            except IndexError:
+                log.error(f"Page {page_no}: Page does not have 3 elements (check page_offset):\n{content}")
         return content
-
-    @staticmethod
-    def visitor_body(text: str, user_matrix, tm_matrix, font_dict, font_size):
-        """
-        Callback function for PdfReader.extract_text().
-        It will ignore header and footer.
-
-        :param text: Current text (as long as possible, can be up to a full line)
-        :param user_matrix: Current matrix to move from user coordinate space (also known as CTM)
-        :param tm_matrix: Current matrix from text coordinate space
-        :param font_dict: Full font dictionary
-        :param font_size: The size (in text coordinate space)
-        """
-        BaseMainParser._parts.append(text)
 
 
 if __name__ == "__main__":
@@ -210,9 +199,9 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     root = Path(__file__).parent.parent.parent
     out_dir = root / "out"
-    version = "7.7"
-    pdf_file = root / "in" / "KSP_Reference_7_6_Manual_en.pdf"
+    version = "7.8"
+    pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
     reader = PdfReader(pdf_file)
     parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ";")
-    # parser.convert_to_text()
+    parser.convert_to_text()
     parser.parse()

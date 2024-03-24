@@ -16,13 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-from pathlib import Path
-
-from ksp_base.base_main_parser import BaseMainParser
+from ksp_base.base_variable_parser import BaseVariableParser
 
 
-class KspMainParser(BaseMainParser):
-    """Page ksp_parser for Kontakt 7.6 KSP reference manual"""
-
-    def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str):
-        super().__init__(version, pdf_file, out_dir, delimiter, page_offset=8)
+class KspVariableParser(BaseVariableParser):
+    pass

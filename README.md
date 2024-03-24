@@ -23,7 +23,7 @@ As IDE for the Python script development it's recommended to use PyCharm Communi
 * Create configuration settings for the KSP compiler (open)
 * Call the compiler and copy the result into the clipboard (open)
 * The generated code shall be copied to the clipboard so that it can be applied in the KONTAKT
-  editor
+  editor (open)
 
 # References
 This project
