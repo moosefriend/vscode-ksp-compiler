@@ -54,7 +54,7 @@ class BaseMainParser:
     # Internally used to get the body of a page
     _parts: list[str] = []
 
-    def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str, page_offset: int = 0):
+    def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str, page_offset: int = 0, skip_lines: int = 2):
         """
         Extract the text of a PDF file.
 
@@ -64,6 +64,8 @@ class BaseMainParser:
         :param delimiter: CSV delimiter
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
+        :param skip_lines: Number of lines to skip from the beginning of each page (only for non table of content pages).
+            This is useful to skip the footer which is in the exported text in the beginning of the page.
         """
         self.version: str = version
         self.ksp_name: str = f"ksp_{version.replace('.', '_')}"
@@ -71,6 +73,7 @@ class BaseMainParser:
         self.out_dir: Path = out_dir
         self.delimiter: str = delimiter
         self.page_offset: int = page_offset
+        self.skip_lines: int = skip_lines
         self.out_version_dir: Path = self.out_dir / self.ksp_name
         self.out_version_dir.mkdir(parents=True, exist_ok=True)
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
@@ -173,8 +176,7 @@ class BaseMainParser:
             self.variables.parse()
             self.variables.export()
 
-    @staticmethod
-    def get_body(page: PageObject, page_no: int, toc: str) -> str:
+    def get_body(self, page: PageObject, page_no: int, toc: str) -> str:
         """
         Get the page body without header and footer.
 
@@ -186,8 +188,8 @@ class BaseMainParser:
         content = page.extract_text(extraction_mode="layout") + "\n"
         if not toc:
             try:
-                # Remove the first line which represents the footer
-                extract = content.split("\n", 3)[3]
+                # Remove the first lines from the exported text which represents the footer
+                extract = content.split("\n", self.skip_lines + 1)[self.skip_lines + 1]
                 content = extract
             except IndexError:
                 log.error(f"Page {page_no}: Page does not have 3 elements (check page_offset):\n{content}")
