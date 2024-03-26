@@ -144,6 +144,15 @@ class BaseVariableParser:
         self.header_description = ""
         self.item_list_headline = ""
         for line in self.reader:
+            # TODO: Multiple variables in the table header sharing the same documentation, e.g. line 9645.
+            #    The documentation should be added to all those variables.
+            # TODO: Variable in the table header. In the table body description follows with and item list of constants,
+            #    e.g. line 9753
+            #    The constants should have a reference to the variable incl. its description.
+            # TODO: Table header with a description in the table body followed by a list of variables, e.g. line 8995.
+            #    The Table header should only by the first line, and the description should be assigned to all variables
+            #    in the list.
+
             # Check if this is the end of the content search
             if self.CONTENT_STOP_PATTERN.match(line):
                 self.reader.rewind()

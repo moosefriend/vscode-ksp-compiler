@@ -26,7 +26,8 @@ class KspVariableParser(BaseVariableParser):
         9074: " ",
         9075: " ",
         9076: " ",
-        9078: " "
+        9078: " ",
+        9533: " "
     }
     """List of lines to be merged, because they are wrapped and therefore not correctly identified"""
     # TODO: WRAPPED_VARIABLES are tables with 2 columns. Maybe for such complex use cases it would be easier to have
