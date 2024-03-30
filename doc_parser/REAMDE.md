@@ -10,17 +10,18 @@
 - The PyPI package [pypdf](https://pypi.org/project/pypdf) is used to extract the text from the PDF file
 - Therefore, the method `extract_text(extraction_mode="layout")` is used
 - To avoid a ZeroDivion error for the new "layout" mode a special hack was necessary, see `fixed_char_width_hack(a, b)`
+  which overwrites the internal `pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width`
 - The converted file will be stored in `out/ksp_<major>_<minor>/KSP_Reference_Manual.txt.py`
-- Note: The \*.py extension for the converted file is used to be able within PyCharm to navigate via links directly to that line
-  where a certain item is found while parsing. For other file types the navigation by clicking on the link would not work.
-  Therefore, in PyCharm after converting a file select the converted file and choose "Override File Type" and set it to
-  "Plain text". This will avoid that the syntax check for Python files is done for this file.
+- Note: The \*.py extension for the converted file is necessary to be able within PyCharm to navigate via links directly
+  to that line where a certain item is found while parsing. For other file types the navigation by clicking on the link
+  would not work. Therefore, in PyCharm after converting a file select the converted file and choose "Override File
+  Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
 
 ## Parsing Use Cases
 ### General
 #### Page Header Lines
 - The header of the PDF pages should be skipped by default. In the exported text the header is located at the end of the
-  page. Therefore, set `header_lines` in `KspMainParser` accordingly (start with 0 and increase it until the line
+  page. Therefore, set `page_header_lines` in `KspMainParser` accordingly (start with 0 and increase it until the line
   disappears)
 
 #### End of Documentation for Item (implemented)
@@ -33,11 +34,11 @@
 - Sometimes lines are wrapped into the next line. Therefore, merging of such explicitly specified lines is provided
   before the lines are merged, see `MERGE_LINES` in e.g. `KspVariableParser`
 
-#### Wrapped Pages
+#### Wrapped Pages (not implemented yet)
 - Sometimes documentation is going beyond one page. Then there might be empty lines or repeated headers to be ignored.
 - See `SKIP_LINES` in e.g. `KspVariableParser`
 
-#### Multi-Column Table with Wrapped Lines
+#### Multi-Column Table with Wrapped Lines (not implemented yet)
 - Example:
   ```
   get_target_idx(<group-index>, <mod-index>, <target-name>)
@@ -52,7 +53,7 @@
 - Such cases must be explicitly specified. So the first part (here: `<group-`) and the second part (here: `index>`)
   and the corresponding line number, see `WRAPPED_CELLS` in e.g. `KspFunctionParser`
 
-### Page Number in PDF
+### Page Number in PDF (implemented)
 #### Table of Content Page Number (implemented)
 - Example:
   ```
@@ -69,7 +70,7 @@
   ```
 - It starts with "Page"
 
-### Table of Contents
+### Table of Contents (implemented)
 - Table of contents is needed to identify the headlines in the scanned chapters
 
 #### Headline (implemented)
@@ -87,11 +88,11 @@
 - Categories are in the table of content, but don't have a chapter number
 - Categories are handled only for the chapter they are located
 
-### Types (not implemented yet)
-- Types are used with `declare`
-
 ### Callbacks (not implemented yet)
 - Callback start with `on <callback>`
+
+### Types (not implemented yet)
+- Types are used with `declare`
 
 ### Functions (not implemented yet)
 - Functions are search starting and ending with a specified chapter

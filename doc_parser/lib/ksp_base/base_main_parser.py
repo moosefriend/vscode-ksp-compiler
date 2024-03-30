@@ -54,7 +54,7 @@ class BaseMainParser:
     # Internally used to get the body of a page
     _parts: list[str] = []
 
-    def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str, page_offset: int = 0, header_lines: int = 2):
+    def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str, page_offset: int = 0, page_header_lines: int = 2):
         """
         Extract the text of a PDF file.
 
@@ -64,7 +64,7 @@ class BaseMainParser:
         :param delimiter: CSV delimiter
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
-        :param header_lines: Number of lines to skip from the beginning of each page (only for non table of content pages).
+        :param page_header_lines: Number of lines to skip from the beginning of each page (only for non table of content pages).
             This is needed to skip the header which is in the exported text in the beginning of the page.
         """
         self.version: str = version
@@ -73,7 +73,7 @@ class BaseMainParser:
         self.out_dir: Path = out_dir
         self.delimiter: str = delimiter
         self.page_offset: int = page_offset
-        self.header_lines: int = header_lines
+        self.page_header_lines: int = page_header_lines
         self.out_version_dir: Path = self.out_dir / self.ksp_name
         self.out_version_dir.mkdir(parents=True, exist_ok=True)
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
@@ -188,7 +188,7 @@ class BaseMainParser:
         content = page.extract_text(extraction_mode="layout") + "\n"
         if not toc:
             # Remove the first lines from the exported text which represents the footer
-            extract = content.split("\n", self.header_lines)[self.header_lines]
+            extract = content.split("\n", self.page_header_lines)[self.page_header_lines]
             content = extract
         return content
 

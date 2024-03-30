@@ -34,14 +34,6 @@ class BaseVariableParser:
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
-    TOC_START_PATTERN = re.compile(r"^(\d+\.\s+)?Table of Contents")
-    """Pattern to find the headline of the table of contents"""
-    TOC_END_PATTERN = re.compile(r"^(\d+\.\s+)?Disclaimer$")
-    """Pattern to find the first string after the table of contents"""
-    TOC_HEADLINE_PATTERN = re.compile(r"^(\d+\.\s+.+) \.+\s+\d+$")
-    """Pattern to find a headline in the table of contents """
-    TOC_CATEGORY_PATTERN = re.compile(r"^(.+) \.+\s+\d+$")
-    """Pattern to find a headline in the table of contents """
     CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
     """Pattern to find the start headline for scanning the content"""
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
@@ -219,7 +211,7 @@ class BaseVariableParser:
             self.last_line = line
         # Fix all descriptions, e.g. remove newlines at begin and end
         for cur_variable in self.all_variables.values():
-            cur_variable.fix_description()
+            cur_variable.fix_documentation()
         log.info(f"{self.variable_cnt} variables found")
         log.info(f"{self.duplicate_cnt} duplicate variables")
 

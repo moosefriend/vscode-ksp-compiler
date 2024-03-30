@@ -21,9 +21,9 @@ from pathlib import Path
 from doc_item.doc_item import DocItem
 
 
-class VariableItem(DocItem):
-    def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, header_description: str,
-                 item_list_headline: str, name: str, parameter: str, comment: str, description: str, source: str = None):
+class CallbackItem(DocItem):
+    def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
+                 description: str, remarks: str, examples: str, see_also: str, source: str = None):
         """
         Container for variable documentation.
 
@@ -32,41 +32,38 @@ class VariableItem(DocItem):
         :param line_no: Line number in the file where the variable has been found
         :param headline: Main headline where the item has been found
         :param category: Category (= Sub-headline in the table of contents) where the item has been found
-        :param header_description: Headline of a table e.g. containing constants (if any)
-        :param item_list_headline: Headline for an item list e.g. for constants (if any)
         :param name: Variable name
-        :param parameter: Parameter for variable e.g. for an array
-        :param comment: Comment found behind the variable in brackets
         :param description: Item documentation
+        :param remarks: Remarks for the callback
+        :param examples: Examples for the callback
+        :param see_also: See also references
         :param source: Where the item has been parsed, e.g. build-in
         """
-        super().__init__(file, page_no, line_no, headline, category, name, description)
-        self.header_description: str = header_description
-        self.item_list_headline: str = item_list_headline
-        self.name: str = name
-        self.parameter: str = parameter
-        self.comment: str = comment
-        self.description: str = description
-        self.source: str = source
+        super().__init__(file, page_no, line_no, headline, category, name, description, source)
+        self.remarks: str = remarks
+        self.examples: str = examples
+        self.see_also: str = see_also
 
     def fix_documentation(self):
         """
         Remove newlines at the end and some spaces.
         """
-        super().fix_description()
-        self.header_description = self.header_description.strip()
+        self.description = self.description.strip()
+        self.remarks = self.remarks.strip()
+        self.examples = self.examples.strip()
+        self.see_also = self.see_also.strip()
 
     @staticmethod
     def header():
         """
         :return: Tuple of headline for the *.csv file
         """
-        return ("File", "Page No", "Line No", "Headline", "Category", "Table Headline", "Item List Headline", "Name",
-                "Parameter", "Comment", "Description", "Source")
+        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Description", "Remarks", "Examples",
+                "See Also", "Source")
 
-    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
+    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str]:
         """
         :return: Tuple of the data
         """
-        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.header_description,
-                self.item_list_headline,  self.name, self.parameter, self.comment, self.description, self.source)
+        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.description,
+                self.remarks, self.examples, self.see_also, self.source)
