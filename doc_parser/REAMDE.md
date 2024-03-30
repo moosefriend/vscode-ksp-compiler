@@ -18,18 +18,42 @@
 
 ## Parsing Use Cases
 ### General
+#### Page Header Lines
 - The header of the PDF pages should be skipped by default. In the exported text the header is located at the end of the
-  page. Therefore, set `skip_lines` in `KspMainParser` accordingly (start with 0 and increase it until the line
+  page. Therefore, set `header_lines` in `KspMainParser` accordingly (start with 0 and increase it until the line
   disappears)
+
+#### End of Documentation for Item (implemented)
 - If there are 2 empy lines then stop scanning for documentation and look for the next variable
 - If there is a headline or a category then there might be only 1 empty line. Therefore, headlines and categories have
   to be identified in the content of the document (otherwise it would be seen as documentation for the previous
   variable).
+
+#### Wrapped Lines (implemented)
 - Sometimes lines are wrapped into the next line. Therefore, merging of such explicitly specified lines is provided
   before the lines are merged, see `MERGE_LINES` in e.g. `KspVariableParser`
 
+#### Wrapped Pages
+- Sometimes documentation is going beyond one page. Then there might be empty lines or repeated headers to be ignored.
+- See `SKIP_LINES` in e.g. `KspVariableParser`
+
+#### Multi-Column Table with Wrapped Lines
+- Example:
+  ```
+  get_target_idx(<group-index>, <mod-index>, <target-name>)
+  Returns the modulation target slot index of an internal modulator
+  <group-The index of the group (see Index column in Monitor -> Groups pane in
+  index>Kontakt).
+  <mod-index>The slot index of an internal modulator (LFO, envelope, step modulator...). Can
+  be retrieved with get_mod_idx().
+  <target-The name of the modulation target slot.
+  name>
+  ```
+- Such cases must be explicitly specified. So the first part (here: `<group-`) and the second part (here: `index>`)
+  and the corresponding line number, see `WRAPPED_CELLS` in e.g. `KspFunctionParser`
+
 ### Page Number in PDF
-#### Table of Content Page Number
+#### Table of Content Page Number (implemented)
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Table of Contents Page 2 >>>>>>>>>>>>>>>>>>>>
@@ -38,7 +62,7 @@
 - Since after the table of contents start again with 1 it's important to tell the parser how many pages are used for the
   table of contents, see `page_offset` in `BaseMainParser`
 
-#### Normal Content Page Number
+#### Normal Content Page Number (implemented)
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Page 321 >>>>>>>>>>>>>>>>>>>>
@@ -48,14 +72,14 @@
 ### Table of Contents
 - Table of contents is needed to identify the headlines in the scanned chapters
 
-#### Headline
+#### Headline (implemented)
 - Example:
   ```
   21. Built-in Variables and Constants      ............................................................................       259
   ```
 - A headline starts with a chapter number
 
-#### Category
+#### Category (implemented)
 - Example:
   ```
   General ................................................................................................................                             259
@@ -63,10 +87,19 @@
 - Categories are in the table of content, but don't have a chapter number
 - Categories are handled only for the chapter they are located
 
-### Variables and Constants
+### Types (not implemented yet)
+- Types are used with `declare`
+
+### Callbacks (not implemented yet)
+- Callback start with `on <callback>`
+
+### Functions (not implemented yet)
+- Functions are search starting and ending with a specified chapter
+
+### Variables and Constants (mostly implemented)
 - Variables and Constants are search starting and ending with a specified chapter
 
-#### Normal Variable in Header
+#### Normal Variable in Header (implemented)
 - Example:
   ```
   $NI_BUS_OFFSET
@@ -77,7 +110,7 @@
 - The variable is in the first line
 - The documentation follows in the next lines
 
-#### Multiple Variables in Header
+#### Multiple Variables in Header (not implemented yet)
 - Example:
   ```
   $NI_SIGNAL_TIMER_BEAT
@@ -90,7 +123,7 @@
 - The variables are in the first lines
 - The documentation is valid for all those variables
 
-#### Array in Header
+#### Array in Header (implemented)
 - Example:
   ```
   %GROUPS_SELECTED[<group-idx>]
@@ -99,7 +132,7 @@
   ```
 - The parameter of the variable is parsed separately in the square brackets
 
-#### Variable Range in Header
+#### Variable Range in Header (implemented)
 - Example:
   ```
   $MARK_1 ... $MARK_28
@@ -109,7 +142,7 @@
   ```
 - The documentation is meant for the variables 1 ... n, so the variables in that range must be created
 
-#### Variable Comments
+#### Variable Comments (implemented)
 - Example:
   ```
   •  $EVENT_PAR_PLAY_POS (Returns the absolute position of the play cursor within a zone in
@@ -117,7 +150,7 @@
   ```
 - Comments for variables are directly after the variable in brackets
 
-#### Table Headline in Header
+#### Table Headline in Header (implemented)
 - Example:
   ```
   Path Variables
@@ -134,7 +167,7 @@
 - The headline is meant for all variables in the table
 - The description is variable specific
 
-#### Documentation in Table Header
+#### Documentation in Table Header (not implemented yet)
 - Example:
   ```
   Time Machine Pro Variables
@@ -145,7 +178,7 @@
   ```
 - The headline and the following documentation is meant for all the variables in the table
 
-#### Item List
+#### Item List (implemented)
 - Example:
   ```
   Event Parameter Constants
@@ -184,7 +217,7 @@
 - Item list headlines end with a colon
 - Variables might be prepended with a item symbol ("•")
 
-#### Variable with List of other Constants/Variables
+#### Variable with List of other Constants/Variables (not implemented yet)
 - Example 1:
   ```
   $DURATION_QUARTER
@@ -227,7 +260,7 @@
 - The constants should have a link to the variable
 - Unfortunately, this cannot be distinguished from the Item List
 
-#### Multi-Column Tables
+#### Multi-Column Tables (not implemented yet)
 - Example 1:
   ```
   $CONTROL_PAR_RECEIVE_DRAG_EVENTS
@@ -270,7 +303,7 @@
 - Therefore, it's required to manually override those entries and exclude such lines from the parsing
   process
 
-#### Indented Constant List
+#### Indented Constant List (not implemented yet)
 - Example:
   ```
   Source Module
@@ -296,7 +329,7 @@
 - The constants should be linked to the variable
 - The documentation of the variable should contain the list of constants
 
-#### Page Wrapped Constant List
+#### Page Wrapped Constant List (not implemented yet)
 - Example:
   ```
   $ENGINE_PAR_WT_PHASE_RAND

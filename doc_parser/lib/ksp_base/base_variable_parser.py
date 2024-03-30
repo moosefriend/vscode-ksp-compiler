@@ -46,19 +46,6 @@ class BaseVariableParser:
     """Pattern to find the start headline for scanning the content"""
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
     """Pattern to find the end headline for scanning the content"""
-    IGNORE_WORD_LIST = [
-        # "$MARK_1",
-        # "$MARK_2",
-        # "$MARK_28",
-        # "$KEY_COLOR_FUCHSI",
-        # # in Sample Code
-        # "$HEADER_SIZE",
-        # "$NUM_SLIDES",
-        # "$SIZE",
-        # "$VE",
-        # "$ARRAY_SIZE",
-    ]
-    """List of variables to be ignored"""
     MERGE_LINES = {
         # <start line>: <character used to merge with the next line>
         8880: " ",
@@ -69,11 +56,12 @@ class BaseVariableParser:
 
     }
     """List of lines to be merged, because they are wrapped and therefore not correctly identified"""
-    WRAPPED_VARIABLES = {
-        # <line no in the text file>: (<variable part in the first line>, <variable part in the second line>)
+    WRAPPED_CELLS = {
+        # <line no in the text file>: (<left cell part in the first line>, <left cell part in the second line>)
         9783: ("$CONTROL_PAR_WAVETABLE", "_END_COLOR"),
         9785: ("$CONTROL_PAR_WAVETABLE", "_END_ALPHA")
     }
+    """List of wrapped table cells to be merged"""
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str, page_offset: int = 0):
         """
@@ -97,7 +85,6 @@ class BaseVariableParser:
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
         self.all_variables: dict[str, VariableItem] = {}
         self.duplicate_cnt: int = 0
-        self.ignored_cnt: int = 0
         self.variable_cnt: int = 0
         self.variable_list: list[VariableItem] = []
         self.headline: str = ""
@@ -137,7 +124,6 @@ class BaseVariableParser:
         self.headline: str = ""
         self.chapter_categories = {}
         self.category: str = ""
-        self.ignored_cnt = 0
         self.duplicate_cnt = 0
         self.variable_cnt = 0
         self.last_line = None
@@ -235,7 +221,6 @@ class BaseVariableParser:
         for cur_variable in self.all_variables.values():
             cur_variable.fix_description()
         log.info(f"{self.variable_cnt} variables found")
-        log.info(f"{self.ignored_cnt} ignored variables")
         log.info(f"{self.duplicate_cnt} duplicate variables")
 
     def add_variable(self, name: str, parameter) -> VariableItem:
@@ -250,9 +235,6 @@ class BaseVariableParser:
         if name in self.all_variables:
             log.info(f"      - Duplicate {name} ({self.reader.location()})")
             self.duplicate_cnt += 1
-        elif name in self.IGNORE_WORD_LIST:
-            log.info(f"      - Ignored {name} ({self.reader.location()})")
-            self.ignored_cnt += 1
         else:
             log.info(f"      - Found {name} ({self.reader.location()})")
             self.variable_cnt += 1

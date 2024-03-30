@@ -25,4 +25,4 @@ class KspMainParser(BaseMainParser):
     """Page ksp_parser for Kontakt 7.6 KSP reference manual"""
 
     def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str):
-        super().__init__(version, pdf_file, out_dir, delimiter, page_offset=8, skip_lines=2)
+        super().__init__(version, pdf_file, out_dir, delimiter, page_offset=8, header_lines=3)
