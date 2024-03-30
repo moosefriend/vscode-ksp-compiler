@@ -3,13 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\doc_parser\cfg\ksp_7_8\built_in_variables.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=";" />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\doc_parser\out\ksp_7_6\built_in_variables.csv">
           <value>
             <Attribute>
