@@ -29,9 +29,9 @@ import pypdf._text_extraction._layout_mode._fixed_width_page
 from pypdf import PageObject, PdfReader
 
 from ksp_base.base_callback_parser import BaseCallbackParser
-from ksp_base.base_function_parser import BaseFunctionParser
+from ksp_base.base_command_parser import BaseCommandParser
 from ksp_base.base_toc_parser import BaseTocParser
-from ksp_base.base_type_parser import BaseTypeParser
+from ksp_base.base_widget_parser import BaseWidgetParser
 from ksp_base.base_variable_parser import BaseVariableParser
 from util.rewind_reader import RewindReader
 
@@ -45,8 +45,8 @@ class ParserType(Enum):
     MAIN = "Main"
     TOC = "Toc"
     CALLBACK = "Callback"
-    TYPE = "Type"
-    FUNCTION = "Function"
+    WIDGET = "Widget"
+    COMMAND = "Command"
     VARIABLE = "Variable"
 
 
@@ -85,14 +85,14 @@ class BaseMainParser:
         # Note: As extension here *.py is used, so that file links in the output will open in PyCharm in the internal editor
         self.txt_file: Path = self.out_version_dir / "KSP_Reference_Manual.txt.py"
         self.callbacks_csv: Path = self.out_version_dir / "built_in_callbacks.csv"
-        self.types_csv: Path = self.out_version_dir / "built_in_types.csv"
-        self.functions_csv: Path = self.out_version_dir / "built_in_functions.csv"
+        self.widgets_csv: Path = self.out_version_dir / "built_in_widgets.csv"
+        self.commands_csv: Path = self.out_version_dir / "built_in_commands.csv"
         self.variables_csv: Path = self.out_version_dir / "built_in_variables.csv"
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[BaseTocParser] = None
         self.callbacks: Optional[BaseCallbackParser] = None
-        self.types: Optional[BaseTypeParser] = None
-        self.functions: Optional[BaseFunctionParser] = None
+        self.widgets: Optional[BaseWidgetParser] = None
+        self.commands: Optional[BaseCommandParser] = None
         self.variables: Optional[BaseVariableParser] = None
 
     @staticmethod
@@ -195,29 +195,29 @@ class BaseMainParser:
             self.callbacks.parse()
             self.callbacks.export()
             # log.info("-" * 80)
-            # self.types: BaseTypeParser = BaseMainParser.get_parser(
-            #     ParserType.TYPE,
+            # self.widgets: BaseWidgetParser = BaseMainParser.get_parser(
+            #     ParserType.WIDGET,
             #     self.version,
             #     self.toc,
             #     self.reader,
-            #     self.types_csv,
+            #     self.widgets_csv,
             #     self.delimiter,
             #     self.page_offset
             # )
-            # self.types.parse()
-            # self.types.export()
+            # self.widgets.parse()
+            # self.widgets.export()
             # log.info("-" * 80)
-            # self.functions: BaseFunctionParser = BaseMainParser.get_parser(
-            #     ParserType.FUNCTION,
+            # self.commands: BaseCommandParser = BaseMainParser.get_parser(
+            #     ParserType.COMMAND,
             #     self.version,
             #     self.toc,
             #     self.reader,
-            #     self.functions_csv,
+            #     self.commands_csv,
             #     self.delimiter,
             #     self.page_offset
             # )
-            # self.functions.parse()
-            # self.functions.export()
+            # self.commands.parse()
+            # self.commands.export()
             log.info("-" * 80)
             self.variables: BaseVariableParser = BaseMainParser.get_parser(
                 ParserType.VARIABLE,

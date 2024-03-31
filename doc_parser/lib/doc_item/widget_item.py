@@ -21,16 +21,16 @@ from pathlib import Path
 from doc_item.doc_item import DocItem
 
 
-class FunctionItem(DocItem):
-    # TODO: Implement FunctionItem
+class WidgetItem(DocItem):
+    # TODO: Implement WidgetItem
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
                  description: str, remarks: str, examples: str, see_also: str, source: str = None):
         """
-        Container for function documentation.
+        Container for type documentation.
 
-        :param file: File where the function has been found
-        :param page_no: Page number in the PDF where the function has been found
-        :param line_no: Line number in the file where the function has been found
+        :param file: File where the widget has been found
+        :param page_no: Page number in the PDF where the widget has been found
+        :param line_no: Line number in the file where the widget has been found
         :param headline: Main headline where the item has been found
         :param category: Category (= Sub-headline in the table of contents) where the item has been found
         :param name: Variable name
