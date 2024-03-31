@@ -16,13 +16,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-from pathlib import Path
-
-from ksp_base.base_main_parser import BaseMainParser
+from ksp_base.base_function_parser import BaseFunctionParser
 
 
-class KspMainParser(BaseMainParser):
-    """Page ksp_parser for Kontakt 7.6 KSP reference manual"""
-
-    def __init__(self, version: str, pdf_file: Path, out_dir: Path, delimiter: str):
-        super().__init__(version, pdf_file, out_dir, delimiter, page_offset=8, page_header_lines=3)
+class KspFunctionParser(BaseFunctionParser):
+    MERGE_LINES = {
+        # <line number in the text file>
+    }
+    """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
+    # TODO: WRAPPED_FUNCTIONS are tables with 2 columns. Maybe for such complex use cases it would be easier to have
+    #    an overwrite mechanism, so to ignore lines and manually configure the values.
+    WRAPPED_CELLS = {
+        # <line number in the text file>: (<function part in the first line>, <function part in the second line>)
+    }
+    """Dictionary of wrapped table cells to be merged"""

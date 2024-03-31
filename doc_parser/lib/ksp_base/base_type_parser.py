@@ -23,7 +23,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Optional
 
-from doc_item.callback_item import CallbackItem
+from doc_item.type_item import TypeItem
 from ksp_base.base_toc_parser import BaseTocParser
 from util.rewind_reader import RewindReader
 
@@ -32,22 +32,22 @@ log = logging.getLogger(__name__)
 
 class DocState(Enum):
     NONE = ""
-    CATEGORY = "category"
     DESCRIPTION = "description"
     REMARKS = "remarks"
     EXAMPLES = "examples"
     SEE_ALSO = "see_also"
 
 
-class BaseCallbackParser:
-    CALLBACK_PATTERN = re.compile(r"^on\s+([a-z_]+)(?:/([a-z_]+))?(?:\s+\(<([a-z-]+)>\))?$")
-    """Pattern to find a callback, e.g. on init"""
+class BaseTypeParser:
+    # TODO: Implement BaseTypeParser
+    TYPE_PATTERN = re.compile(r"^on\s+([a-z_]+)(?:/([a-z_]+))?$")
+    """Pattern to find a type, e.g. on init"""
     REMARKS_PATTERN = re.compile(r"^Remarks$")
-    """Pattern to find the remarks for the callback"""
-    EXAMPLES_PATTERN = re.compile(r"^\s*Examples$")
-    """Pattern to find the examples for the callback"""
+    """Pattern to find the remarks for the type"""
+    EXAMPLES_PATTERN = re.compile(r"^Examples$")
+    """Pattern to find the examples for the type"""
     SEE_ALSO_PATTERN = re.compile(r"^See Also$")
-    """Pattern to find the see also for the callback"""
+    """Pattern to find the see also for the type"""
     CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Callbacks$", re.IGNORECASE)
     """Pattern to find the start headline for scanning the content"""
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Variables$", re.IGNORECASE)
@@ -67,7 +67,7 @@ class BaseCallbackParser:
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str, page_offset: int = 0):
         """
-        Parse callbacks in the Kontakt KSP text manual.
+        Parse types in the Kontakt KSP text manual.
 
         :param version: Kontakt manual version needed to select the right parser
         :param toc: Table of content parser containing the headlines and categories
@@ -85,10 +85,10 @@ class BaseCallbackParser:
         self.delimiter: str = delimiter
         self.page_offset: int = page_offset
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
-        self.all_callbacks: dict[str, CallbackItem] = {}
+        self.all_types: dict[str, TypeItem] = {}
         self.duplicate_cnt: int = 0
-        self.callback_cnt: int = 0
-        self.callback_list: list[CallbackItem] = []
+        self.type_cnt: int = 0
+        self.type_list: list[TypeItem] = []
         self.headline: str = ""
         self.chapter_categories: dict[str, int] = {}
         self.category: str = ""
@@ -101,11 +101,11 @@ class BaseCallbackParser:
 
     def parse(self):
         """
-        Parse the text file for callbacks.
+        Parse the text file for types.
         """
-        log.info(f"Parse {self.reader.file} for callbacks")
+        log.info(f"Parse {self.reader.file} for types")
         self.search_content_start()
-        self.scan_callbacks()
+        self.scan_types()
 
     def search_content_start(self):
         """
@@ -118,17 +118,17 @@ class BaseCallbackParser:
                 self.reader.rewind()
                 break
 
-    def scan_callbacks(self):
+    def scan_types(self):
         """
-        Scan callbacks.
+        Scan types.
         """
         self.reader.skip_lines = self.SKIP_LINES
         self.reader.merge_lines = self.MERGE_LINES
-        self.callback_list = []
+        self.type_list = []
         self.headline: str = ""
         self.chapter_categories = {}
         self.category: str = ""
-        self.callback_cnt = 0
+        self.type_cnt = 0
         self.last_line = None
         self.doc_state = DocState.NONE
         for line in self.reader:
@@ -146,97 +146,89 @@ class BaseCallbackParser:
                 self.category = ""
                 log.info(f"- Headline: {self.headline} ({self.reader.location()})")
             # Check for categories
-            # A new callback start with the callback name, an empty line and again the callback
-            elif self.doc_state == DocState.NONE and line in self.chapter_categories:
+            # Be aware that the type itself is identical to the category (the line appears twice)
+            elif line != self.category and line in self.chapter_categories:
                 self.category = line
-                self.doc_state = DocState.CATEGORY
                 log.info(f"   - Category: {self.category} ({self.reader.location()})")
-            # Search for the actual callback
-            elif self.doc_state == DocState.CATEGORY:
-                if line:
-                    if line.startswith(self.category) and (m := self.CALLBACK_PATTERN.match(line)):
-                        name_list = [m.group(1)]
-                        # Check if there is a list of callbacks e.g. rpn/nrpn
-                        if m.group(2):
-                            name_list.append(m.group(2))
-                        # Check if there is a parameter
-                        parameter = m.group(3)
-                        self.callback_list = []
-                        for name in name_list:
-                            callback = self.add_callback(name, parameter)
-                            self.callback_list.append(callback)
-                        self.doc_state = DocState.DESCRIPTION
-                    else:
-                        log.error(f"Can't find the expected callback {self.category}, but got {line}")
+            # Check if the line contains a type
+            elif m := self.TYPE_PATTERN.match(line):
+                name_list = [m.group(1)]
+                if len(m.groups()) > 1:
+                    name_list.append(m.group(2))
+                self.type_list = []
+                for name in name_list:
+                    type = self.add_type(name)
+                    if type:
+                        self.type_list.append(type)
+                if self.type_list:
+                    self.doc_state = DocState.DESCRIPTION
             # Check for remarks
-            elif self.doc_state and self.REMARKS_PATTERN.match(line):
+            elif self.REMARKS_PATTERN.match(line):
                 self.doc_state = DocState.REMARKS
             # Check for examples
-            elif self.doc_state and self.EXAMPLES_PATTERN.match(line):
+            elif self.EXAMPLES_PATTERN.match(line):
                 self.doc_state = DocState.EXAMPLES
             # Check for see also
-            elif self.doc_state and self.SEE_ALSO_PATTERN.match(line):
+            elif self.SEE_ALSO_PATTERN.match(line):
                 self.doc_state = DocState.SEE_ALSO
-            # Add the corresponding documentation for the last callback
+            # Add the corresponding documentation for the last type
             elif self.doc_state:
-                for callback in self.callback_list:
+                for type in self.type_list:
                     # Add the line to the corresponding attribute
-                    text = getattr(callback, self.doc_state.value)
-                    setattr(callback, self.doc_state.value, f"{text}{line}\n")
-                # 1 empty lines in the See Also section is a signal for the end of the description
-                if self.doc_state == DocState.SEE_ALSO and line == "":
-                    self.callback_list = []
+                    text = getattr(type, self.doc_state.value)
+                    setattr(type, self.doc_state.value, f"{text}{line}\n")
+                # 2 empty lines are a signal for the end of the description
+                if line == "" and self.last_line == "":
+                    self.type_list = []
                     self.doc_state = DocState.NONE
             self.last_line = line
         # Fix all descriptions, e.g. remove newlines at begin and end
-        for cur_callback in self.all_callbacks.values():
-            cur_callback.fix_documentation()
-        log.info(f"{self.callback_cnt} callbacks found")
-        log.info(f"{self.duplicate_cnt} duplicate callbacks")
+        for cur_type in self.all_types.values():
+            cur_type.fix_documentation()
+        log.info(f"{self.type_cnt} types found")
+        log.info(f"{self.duplicate_cnt} duplicate types")
 
-    def add_callback(self, name: str, parameter: str) -> CallbackItem:
+    def add_type(self, name: str) -> TypeItem:
         """
-        Add a callback if it does not exist.
+        Add a type if it does not exist.
 
-        :param name: Name of the callback
-        :param parameter: Optional parameter for the callback
-        :return: CallbackItem of the just created callback or None if duplicate
+        :param name: Name of the type
+        :return: TypeItem of the just created type or None if duplicate
         """
-        callback: Optional[CallbackItem] = None
-        if name in self.all_callbacks:
+        type: Optional[TypeItem] = None
+        if name in self.all_types:
             log.info(f"      - Duplicate {name} ({self.reader.location()})")
             self.duplicate_cnt += 1
         else:
             log.info(f"      - Found {name} ({self.reader.location()})")
-            self.callback_cnt += 1
-            callback = CallbackItem(
+            self.type_cnt += 1
+            type = TypeItem(
                 file=self.reader.file,
                 page_no=self.reader.page_no,
                 line_no=self.reader.line_no,
                 headline=self.headline,
                 category=self.category,
                 name=name,
-                parameter=parameter,
                 description="",
                 remarks="",
                 examples="",
                 see_also="",
                 source="BUILT-IN"
             )
-            self.all_callbacks[name] = callback
-        return callback
+            self.all_types[name] = type
+        return type
 
     def export(self):
         """
-        Export the internal parsed callbacks to the *.csv file.
+        Export the internal parsed types to the *.csv file.
         """
-        log.info(f"Export callbacks to {self.csv_file}")
+        log.info(f"Export types to {self.csv_file}")
         with open(self.csv_file, 'w', newline='', encoding='utf-8') as f:
             csv_writer = csv.writer(f, delimiter=self.delimiter, quoting=csv.QUOTE_MINIMAL)
             # Write the headline
-            csv_writer.writerow(CallbackItem.header())
+            csv_writer.writerow(TypeItem.header())
             # Sort the list for identifier rules
-            # for name in natsorted(self.all_callbacks.keys()):
-            for name in self.all_callbacks.keys():
-                cur_callback = self.all_callbacks[name]
-                csv_writer.writerow(cur_callback.as_list())
+            # for name in natsorted(self.all_types.keys()):
+            for name in self.all_types.keys():
+                cur_type = self.all_types[name]
+                csv_writer.writerow(cur_type.as_list())

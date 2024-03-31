@@ -1,7 +1,7 @@
 #############################################################################
 # This file is part of the vscode-ksp-compiler distribution
 # (https://github.com/moosefriend/vscode-ksp-compiler).
-
+#
 # Copyright (c) 2024 MooseFriend (https://github.com/moosefriend)
 #
 # This program is free software: you can redistribute it and/or modify

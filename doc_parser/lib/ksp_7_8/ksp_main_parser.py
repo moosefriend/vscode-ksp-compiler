@@ -1,7 +1,7 @@
 #############################################################################
 # This file is part of the vscode-ksp-compiler distribution
 # (https://github.com/moosefriend/vscode-ksp-compiler).
-import logging
+#
 # Copyright (c) 2024 MooseFriend (https://github.com/moosefriend)
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@ import logging
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
+import logging
 from pathlib import Path
 
 from ksp_base.base_main_parser import BaseMainParser

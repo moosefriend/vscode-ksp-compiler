@@ -21,27 +21,26 @@ from pathlib import Path
 from doc_item.doc_item import DocItem
 
 
-class CallbackItem(DocItem):
-    def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str, parameter: str,
+class FunctionItem(DocItem):
+    # TODO: Implement FunctionItem
+    def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
                  description: str, remarks: str, examples: str, see_also: str, source: str = None):
         """
-        Container for callback documentation.
+        Container for function documentation.
 
-        :param file: File where the callback has been found
-        :param page_no: Page number in the PDF where the callback has been found
-        :param line_no: Line number in the file where the callback has been found
+        :param file: File where the function has been found
+        :param page_no: Page number in the PDF where the function has been found
+        :param line_no: Line number in the file where the function has been found
         :param headline: Main headline where the item has been found
         :param category: Category (= Sub-headline in the table of contents) where the item has been found
-        :param name: Callback name
-        :param parameter: Optional parameter
-        :param description: Callback documentation
+        :param name: Variable name
+        :param description: Item documentation
         :param remarks: Remarks for the callback
         :param examples: Examples for the callback
         :param see_also: See also references
         :param source: Where the item has been parsed, e.g. build-in
         """
         super().__init__(file, page_no, line_no, headline, category, name, description, source)
-        self.parameter: str = parameter
         self.remarks: str = remarks
         self.examples: str = examples
         self.see_also: str = see_also
@@ -54,20 +53,18 @@ class CallbackItem(DocItem):
         self.remarks = self.remarks.strip()
         self.examples = self.examples.strip()
         self.see_also = self.see_also.strip()
-        self.remarks = self.remarks.replace("•     ", "- ")
-
 
     @staticmethod
     def header():
         """
         :return: Tuple of headline for the *.csv file
         """
-        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Parameter", "Description", "Remarks",
-                "Examples", "See Also", "Source")
+        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Description", "Remarks", "Examples",
+                "See Also", "Source")
 
-    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
+    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str]:
         """
         :return: Tuple of the data
         """
-        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.parameter,
-                self.description, self.remarks, self.examples, self.see_also, self.source)
+        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.description,
+                self.remarks, self.examples, self.see_also, self.source)

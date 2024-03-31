@@ -1,7 +1,7 @@
 #############################################################################
 # This file is part of the vscode-ksp-compiler distribution
 # (https://github.com/moosefriend/vscode-ksp-compiler).
-
+#
 # Copyright (c) 2024 MooseFriend (https://github.com/moosefriend)
 #
 # This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ from typing import Optional, TextIO, Pattern
 
 class RewindReader:
     def __init__(self, file: Path, encoding: str = 'utf-8', right_strip: str = "\n", page_no_pattern: Pattern = None,
-                 merge_lines: dict[int, str] = None):
+                 skip_lines: dict[int, int] = None, merge_lines: set[int] = None):
         """
         File reader which provides methods to rewind the file pointer to the beginning of the just read line.
 
@@ -32,15 +32,17 @@ class RewindReader:
         :param right_strip: If set then from the read line all characters at the end matching right_strip will be removed
         :param page_no_pattern: If specified then each line matching this pattern is ignored and the group(1) is extracted
             as the page number
-        :param merge_lines: Dictionary where the key is the start line number to be merged with the next line and the
-            value is the string used between the merged lines. This might be necessary when a line is not properly
-            identified, because the content is wrapped.
+        :param skip_lines: Dictionary where the key is the start line number and the value is the end line number of
+            lines to be skipped
+        :param merge_lines: Set of line numbers to be merged with the next line. This might be necessary when a line is
+            not properly identified, because the content is wrapped.
         """
         self.file: Path = file
         self.encoding: str = encoding
         self.right_strip: str = right_strip
         self.page_no_pattern: Pattern = page_no_pattern
-        self.merge_lines: dict[int, str] = merge_lines
+        self.skip_lines: dict[int, int] = skip_lines
+        self.merge_lines: set[int] = merge_lines
         self.handle: Optional[TextIO] = None
         self.pos_last_line: int = 0
         self.line_no: int = 0
@@ -86,18 +88,28 @@ class RewindReader:
         line = self._read_line()
         self.line_no += self.line_inc
         self.line_inc = 1
-        # Check if two lines shall be merged to properly identify the content
-        if self.merge_lines:
-            cur_line_no = self.line_no
-            while cur_line_no in self.merge_lines:
-                next_line = self._read_line()
-                line += self.merge_lines[cur_line_no] + next_line
-                self.line_inc += 1
-                cur_line_no += 1
         # Check for lines like "<<<<<<<<<<<<<<<<<<<< Page 259 >>>>>>>>>>>>>>>>>>>>"
         if self.page_no_pattern and (m := self.page_no_pattern.match(line)):
             self.page_no = int(m.group(1))
             line = self.__next__()
+        # Check if lines shall be skipped
+        if self.skip_lines:
+            cur_line_no = self.line_no
+            if cur_line_no in self.skip_lines:
+                end_line_no = self.skip_lines[cur_line_no]
+                while cur_line_no <= end_line_no:
+                    line = self._read_line()
+                    self.line_inc += 1
+                    cur_line_no += 1
+        # Check if two lines shall be merged to properly identify the content
+        if self.merge_lines:
+            # The line number might have increased by the skipped lines
+            cur_line_no = self.line_no + self.line_inc - 1
+            while cur_line_no in self.merge_lines:
+                next_line = self._read_line()
+                line += " " + next_line
+                self.line_inc += 1
+                cur_line_no += 1
         self.rewind_enabled = True
         return line
 

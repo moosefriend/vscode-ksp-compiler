@@ -1,7 +1,7 @@
 #############################################################################
 # This file is part of the vscode-ksp-compiler distribution
 # (https://github.com/moosefriend/vscode-ksp-compiler).
-
+#
 # Copyright (c) 2024 MooseFriend (https://github.com/moosefriend)
 #
 # This program is free software: you can redistribute it and/or modify
@@ -38,22 +38,18 @@ class BaseVariableParser:
     """Pattern to find the start headline for scanning the content"""
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
     """Pattern to find the end headline for scanning the content"""
+    SKIP_LINES = {
+        # <start line number in the text file>: <end line number in the text file>
+    }
+    """Dictionary of lines to be skipped"""
     MERGE_LINES = {
-        # <start line>: <character used to merge with the next line>
-        8880: " ",
-        8882: " ",
-        8883: " ",
-        8884: " ",
-        8887: " "
-
+        # <line number in the text file>
     }
-    """List of lines to be merged, because they are wrapped and therefore not correctly identified"""
+    """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
     WRAPPED_CELLS = {
-        # <line no in the text file>: (<left cell part in the first line>, <left cell part in the second line>)
-        9783: ("$CONTROL_PAR_WAVETABLE", "_END_COLOR"),
-        9785: ("$CONTROL_PAR_WAVETABLE", "_END_ALPHA")
+        # <line number in the text file>: (<left cell part in the first line>, <left cell part in the second line>)
     }
-    """List of wrapped table cells to be merged"""
+    """Dictionary of wrapped table cells to be merged"""
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str, page_offset: int = 0):
         """
@@ -111,6 +107,7 @@ class BaseVariableParser:
         """
         Scan variables and constants.
         """
+        self.reader.skip_lines = self.SKIP_LINES
         self.reader.merge_lines = self.MERGE_LINES
         self.variable_list = []
         self.headline: str = ""

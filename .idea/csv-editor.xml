@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\doc_parser\out\ksp_7_8\built_in_callbacks.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\doc_parser\out\ksp_7_8\built_in_variables.csv">
           <value>
             <Attribute>

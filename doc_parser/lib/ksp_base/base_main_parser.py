@@ -1,7 +1,7 @@
 #############################################################################
 # This file is part of the vscode-ksp-compiler distribution
 # (https://github.com/moosefriend/vscode-ksp-compiler).
-
+#
 # Copyright (c) 2024 MooseFriend (https://github.com/moosefriend)
 #
 # This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,10 @@ from typing import Optional, Any
 import pypdf._text_extraction._layout_mode._fixed_width_page
 from pypdf import PageObject, PdfReader
 
+from ksp_base.base_callback_parser import BaseCallbackParser
+from ksp_base.base_function_parser import BaseFunctionParser
 from ksp_base.base_toc_parser import BaseTocParser
+from ksp_base.base_type_parser import BaseTypeParser
 from ksp_base.base_variable_parser import BaseVariableParser
 from util.rewind_reader import RewindReader
 
@@ -41,8 +44,10 @@ class ParserType(Enum):
     """
     MAIN = "Main"
     TOC = "Toc"
-    VARIABLE = "Variable"
     CALLBACK = "Callback"
+    TYPE = "Type"
+    FUNCTION = "Function"
+    VARIABLE = "Variable"
 
 
 class BaseMainParser:
@@ -79,9 +84,15 @@ class BaseMainParser:
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
         # Note: As extension here *.py is used, so that file links in the output will open in PyCharm in the internal editor
         self.txt_file: Path = self.out_version_dir / "KSP_Reference_Manual.txt.py"
+        self.callbacks_csv: Path = self.out_version_dir / "built_in_callbacks.csv"
+        self.types_csv: Path = self.out_version_dir / "built_in_types.csv"
+        self.functions_csv: Path = self.out_version_dir / "built_in_functions.csv"
         self.variables_csv: Path = self.out_version_dir / "built_in_variables.csv"
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[BaseTocParser] = None
+        self.callbacks: Optional[BaseCallbackParser] = None
+        self.types: Optional[BaseTypeParser] = None
+        self.functions: Optional[BaseFunctionParser] = None
         self.variables: Optional[BaseVariableParser] = None
 
     @staticmethod
@@ -153,7 +164,7 @@ class BaseMainParser:
             page_cnt = 0
             for page in reader.pages:
                 f.write(f"{'<' * 20} {toc}Page {page_cnt + 1} {'>' * 20}\n")
-                f.write(self.get_body(page, page_cnt + 1, toc))
+                f.write(self.get_body(page, toc))
                 if page_cnt and page_cnt % 80 == 0:
                     print("")
                 page_cnt += 1
@@ -171,17 +182,60 @@ class BaseMainParser:
         with RewindReader(self.txt_file, page_no_pattern=BaseMainParser.PAGE_PATTERN) as self.reader:
             self.toc = BaseMainParser.get_parser(ParserType.TOC, self.version, self.reader)
             self.toc.parse()
-            self.variables = BaseMainParser.get_parser(ParserType.VARIABLE, self.version, self.toc, self.reader,
-                                                       self.variables_csv, self.delimiter, self.page_offset)
+            log.info("-" * 80)
+            self.callbacks: BaseCallbackParser = BaseMainParser.get_parser(
+                ParserType.CALLBACK,
+                self.version,
+                self.toc,
+                self.reader,
+                self.callbacks_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.callbacks.parse()
+            self.callbacks.export()
+            # log.info("-" * 80)
+            # self.types: BaseTypeParser = BaseMainParser.get_parser(
+            #     ParserType.TYPE,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.types_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.types.parse()
+            # self.types.export()
+            # log.info("-" * 80)
+            # self.functions: BaseFunctionParser = BaseMainParser.get_parser(
+            #     ParserType.FUNCTION,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.functions_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.functions.parse()
+            # self.functions.export()
+            log.info("-" * 80)
+            self.variables: BaseVariableParser = BaseMainParser.get_parser(
+                ParserType.VARIABLE,
+                self.version,
+                self.toc,
+                self.reader,
+                self.variables_csv,
+                self.delimiter,
+                self.page_offset
+            )
             self.variables.parse()
             self.variables.export()
 
-    def get_body(self, page: PageObject, page_no: int, toc: str) -> str:
+    def get_body(self, page: PageObject, toc: str) -> str:
         """
         Get the page body without header and footer.
 
         :param page: Page to scan read from PdfReader
-        :param page_no: Page number in the PDF file
         :param toc: If this contains a string then the page is in the table of contents
         :return: Page body
         """
@@ -202,5 +256,5 @@ if __name__ == "__main__":
     pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
     reader = PdfReader(pdf_file)
     parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ";")
-    parser.convert_to_text()
+    # parser.convert_to_text()
     parser.parse()
