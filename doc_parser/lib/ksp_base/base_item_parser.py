@@ -126,6 +126,10 @@ class BaseItemParser:
         """Valid categories for the last found headline"""
         self.category: str = ""
         """Last found category"""
+        self.header_description: str = ""
+        """Table header description"""
+        self.item_list_headline: str = ""
+        """Item list headline"""
         self.last_line: Optional[str] = ""
         """Previous line content"""
         self.remarks: str = ""
@@ -162,9 +166,11 @@ class BaseItemParser:
         """
         self.reader.skip_lines = self.SKIP_LINES
         self.reader.merge_lines = self.MERGE_LINES
-        self.headline: str = ""
+        self.headline = ""
         self.chapter_categories = {}
-        self.category: str = ""
+        self.category = ""
+        self.header_description = ""
+        self.item_list_headline = ""
         self.item_cnt = 0
         self.last_line = None
         self.doc_state = DocState.NONE
@@ -181,18 +187,22 @@ class BaseItemParser:
                 else:
                     self.chapter_categories = {}
                 self.category = ""
+                self.header_description = ""
+                self.item_list_headline = ""
                 log.info(f"- Headline: {self.headline} ({self.reader.location()})")
             # Check for categories
             elif self.doc_state == DocState.NONE and line in self.chapter_categories:
                 self.category = line
-                log.info(f"   - Category: {self.category} ({self.reader.location()})")
+                self.header_description = ""
+                self.item_list_headline = ""
                 self.doc_state = DocState.CATEGORY
+                log.info(f"   - Category: {self.category} ({self.reader.location()})")
             elif self.doc_state != DocState.NONE:
                 # Check for items
                 if self.check_item(line):
                     self.doc_state = DocState.DESCRIPTION
                 # Check for remarks
-                if self.REMARKS_PATTERN.match(line):
+                elif self.REMARKS_PATTERN.match(line):
                     self.doc_state = DocState.REMARKS
                 # Check for examples
                 elif self.EXAMPLES_PATTERN.match(line):
@@ -203,12 +213,13 @@ class BaseItemParser:
                 # Add line to corresponding item documentation
                 else:
                     self.add_item_documentation(line)
-                # 1 empty lines in the See Also section is a signal for the end of the description
-                if self.doc_state == DocState.SEE_ALSO and line == "":
-                    self.doc_state = DocState.NONE
+                # 1 empty lines in the See Also section is a signal for the end of the description ot
                 # 2 empty lines are a signal for the end of the description
-                elif line == "" and self.last_line == "":
-                    self.doc_state = DocState.NONE
+                if line == "" and (self.doc_state == DocState.SEE_ALSO or self.last_line == ""):
+                    self.item_list = []
+                    self.header_description = ""
+                    self.item_list_headline = ""
+                    self.doc_state = DocState.CATEGORY
             self.last_line = line
         # Fix all descriptions, e.g. remove newlines at begin and end
         for cur_item in self.all_items.values():

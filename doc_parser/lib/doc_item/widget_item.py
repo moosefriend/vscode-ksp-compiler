@@ -62,17 +62,11 @@ class WidgetItem(DocItem):
         self.see_also = self.see_also.strip()
 
     @staticmethod
-    def header():
-        """
-        :return: Tuple of headline for the *.csv file
-        """
+    def csv_header():
         return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Variable Name", "Index Name",
                 "Parameter List", "Description", "Remarks", "Examples", "See Also", "Source")
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str, str]:
-        """
-        :return: Tuple of the data
-        """
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.var_name,
                 self.index_name, ",".join(self.par_list), self.description,  self.remarks, self.examples, self.see_also,
                 self.source)

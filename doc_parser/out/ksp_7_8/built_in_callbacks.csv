@@ -1,7 +1,6 @@
 File;Page No;Line No;Headline;Category;Name;Parameter;Description;Remarks;Examples;See Also;Source
 KSP_Reference_Manual.txt.py;3;438;3. Callbacks;"on async_complete
-";async_complete;;"on async_complete
-Async complete callback, triggered after the execution of any command that is executed
+";async_complete;;"Async complete callback, triggered after the execution of any command that is executed
 asynchronously, for example various loading or saving related commands.";"- To resolve synchronization issues, the commands listed in the ""See Also"" section below return
 unique IDs when being used.
 - Upon completion of the command’s action, the on async_complete callback gets triggered
@@ -43,8 +42,7 @@ Music Information Retrieval: MIR Commands
 Built-in Variables and Constants: $NI_ASYNC_EXIT_STATUS, $NI_ASYNC_ID
 Module Types and Subtypes: $ENGINE_PAR_EFFECT_TYPE, $ENGINE_PAR_EFFECT_SUBTYPE";BUILT-IN
 KSP_Reference_Manual.txt.py;6;499;3. Callbacks;"on controller
-";controller;;"on controller
-MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is
+";controller;;"MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is
 received.";;"on controller
     if (in_range($CC_NUM, 0, 127))
         message(""CC Number: "" & $CC_NUM & "" - Value: "" & %CC[$CC_NUM])
@@ -62,8 +60,7 @@ Query MIDI CC, Pitch Bend and Channel Pressure data.";"set_controller()
 ignore_controller
 Events and MIDI: %CC[], $CC_NUM, $VCC_PITCH_BEND, $VCC_MONO_AT";BUILT-IN
 KSP_Reference_Manual.txt.py;7;528;3. Callbacks;"on init
-";init;;"on init
-Initialization callback, executed when the script was successfully compiled without warnings or
+";init;;"Initialization callback, executed when the script was successfully compiled without warnings or
 errors.";"The on init callback will be executed when:
 - The ""Apply"" button is clicked in Script Editor.
 - Script preset or an instrument are loaded.
@@ -133,8 +130,7 @@ to use, especially when utilizing snapshots!";"make_persistent()
 read_persistent_var()
 on persistence_changed";BUILT-IN
 KSP_Reference_Manual.txt.py;9;621;3. Callbacks;"on listener
-";listener;;"on listener
-Listener callback, executed at definable time intervals or whenever a transport command is
+";listener;;"Listener callback, executed at definable time intervals or whenever a transport command is
 received.";"- The listener callback is executed at time intervals defined with the set_listener()
 command. It can also react to the host's transport start and stop commands. This makes
 it the ideal callback for anything tempo-synced, like sequencers, arpeggiators, MIDI file players
@@ -170,8 +166,7 @@ Not useful as such, but nice to look at.";"set_listener()
 change_listener_par()
 Callbacks and UI: $NI_SIGNAL_TYPE, $NI_SONG_POSITION";BUILT-IN
 KSP_Reference_Manual.txt.py;10;671;3. Callbacks;"on note
-";note;;"on note
-Note callback, executed whenever a MIDI Note On message is received.";;"on note
+";note;;Note callback, executed whenever a MIDI Note On message is received.;;"on note
     message(""Note Number: "" & $EVENT_NOTE & "" - Velocity: "" & $EVENT_VELOCITY)
 end on
 Query note properties.";"on release
@@ -180,8 +175,7 @@ set_event_par()
 get_event_par()
 Events and MIDI: $EVENT_NOTE, $EVENT_VELOCITY, $EVENT_ID";BUILT-IN
 KSP_Reference_Manual.txt.py;11;691;3. Callbacks;"on persistence_changed
-";persistence_changed;;"on persistence_changed
-Executed after the on init callback, or whenever a snapshot has been loaded.";"- This callback is called whenever the persistent variables change in an instrument, i.e. it is
+";persistence_changed;;Executed after the on init callback, or whenever a snapshot has been loaded.;"- This callback is called whenever the persistent variables change in an instrument, i.e. it is
 always executed after the on init callback, and/or upon loading a snapshot.";"on init
     set_snapshot_type(1)    { init callback not executed upon snapshot loading }
     reset_ksp_timer
@@ -211,8 +205,7 @@ functions upon initialization, i.e. the persistence callback acts as an extensio
 read_persistent_var()
 set_snapshot_type()";BUILT-IN
 KSP_Reference_Manual.txt.py;12;735;3. Callbacks;"on pgs_changed
-";pgs_changed;;"on pgs_changed
-Executed whenever any pgs_set_key_val() command is executed in any script slot.";"- PGS stands for Program Global Storage and is a means of communication between script
+";pgs_changed;;Executed whenever any pgs_set_key_val() command is executed in any script slot.;"- PGS stands for Program Global Storage and is a means of communication between script
 slots. See the chapter on PGS for more details.";"on init
     pgs_create_key(FIRST_KEY, 1)    { defines a key with 1 element }
     pgs_create_key(NEXT_KEY, 128)   { defines a key with 128 elements }
@@ -242,8 +235,7 @@ on pgs_changed
 end on
 …will change the controls in this example, regardless of the script slot order.";PGS: pgs_create_key(), pgs_set_key_val(), pgs_get_key_val();BUILT-IN
 KSP_Reference_Manual.txt.py;13;779;3. Callbacks;"on poly_at
-";poly_at;;"on poly_at
-Polyphonic aftertouch callback, executed whenever a MIDI Polyphonic Aftertouch message is
+";poly_at;;"Polyphonic aftertouch callback, executed whenever a MIDI Polyphonic Aftertouch message is
 received.";;"on init
     declare %note_id[128]
 end on
@@ -257,8 +249,7 @@ on poly_at
 end on
 A simple poly aftertouch to pitch implementation.";Events and MIDI: %POLY_AT[], $POLY_AT_NUM, $VCC_MONO_AT;BUILT-IN
 KSP_Reference_Manual.txt.py;14;804;3. Callbacks;"on release
-";release;;"on release
-Release callback, executed whenever a MIDI Note Off message is received.";;"on init
+";release;;Release callback, executed whenever a MIDI Note Off message is received.;;"on init
     declare polyphonic $new_id
 end on
 
@@ -271,8 +262,7 @@ Creating an artificial release triggered noise.";"on note
 ignore_event()
 get_event_par(): $EVENT_PAR_REL_VELOCITY";BUILT-IN
 KSP_Reference_Manual.txt.py;15;828;3. Callbacks;"on rpn/nrpn
-";rpn;;"on rpn/nrpn
-RPN and NRPN callbacks, executed whenever a MIDI RPN or NRPN (registered/non-registered
+";rpn;;"RPN and NRPN callbacks, executed whenever a MIDI RPN or NRPN (registered/non-registered
 parameter number) message is received.";;"on rpn
     select ($RPN_ADDRESS)
         case 0
@@ -289,8 +279,7 @@ msb()
 lsb()
 Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
 KSP_Reference_Manual.txt.py;15;828;3. Callbacks;"on rpn/nrpn
-";nrpn;;"on rpn/nrpn
-RPN and NRPN callbacks, executed whenever a MIDI RPN or NRPN (registered/non-registered
+";nrpn;;"RPN and NRPN callbacks, executed whenever a MIDI RPN or NRPN (registered/non-registered
 parameter number) message is received.";;"on rpn
     select ($RPN_ADDRESS)
         case 0
@@ -307,8 +296,7 @@ msb()
 lsb()
 Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
 KSP_Reference_Manual.txt.py;16;856;3. Callbacks;"on ui_control
-";ui_control;ui-widget-name;"on ui_control (<ui-widget-name>)
-UI callback, executed whenever the user interacts with a particular UI widget.";;"on init
+";ui_control;ui-widget-name;UI callback, executed whenever the user interacts with a particular UI widget.;;"on init
     declare ui_knob $Knob (0, 100, 1)
     declare ui_button $Button
     declare ui_switch $Switch
@@ -353,8 +341,7 @@ on ui_update
 Callbacks And UI : $NI_UI_ID
 Control Parameters: $CONTROL_PAR_CUSTOM_ID, $CONTROL_PAR_TYPE";BUILT-IN
 KSP_Reference_Manual.txt.py;17;912;3. Callbacks;"on ui_controls
-";ui_controls;;"on ui_controls
-Global UI callback, executed whenever the user interacts with any particular UI widget.";"- When interacting with a particular UI widget, this callback will always be executed first, then the
+";ui_controls;;Global UI callback, executed whenever the user interacts with any particular UI widget.;"- When interacting with a particular UI widget, this callback will always be executed first, then the
 individually declared on ui_control callback (if it exists).
 - Intended use of this callback type is to provide a more general approach of dealing with UI
 widgets, and also allowing for a sort of separation between the UI widgets (the Controller)
@@ -468,8 +455,7 @@ A small showcase of benefits provided by the on ui_controlscallback.";"on ui_con
 User-defined Functions
 Callbacks And UI : $NI_UI_ID
 Control Parameters: $CONTROL_PAR_CUSTOM_ID, $CONTROL_PAR_TYPE";BUILT-IN
-KSP_Reference_Manual.txt.py;20;1061;3. Callbacks;on ui_update;ui_update;;"on ui_update
-UI update callback, executed with every GUI change in Kontakt.";- This callback can be executed very often in Kontakt, so use it with caution!;"on init
+KSP_Reference_Manual.txt.py;20;1061;3. Callbacks;on ui_update;ui_update;;UI update callback, executed with every GUI change in Kontakt.;- This callback can be executed very often in Kontakt, so use it with caution!;"on init
     declare ui_knob $Volume (0, 1000000, 1)
 
     set_knob_unit($Volume, $KNOB_UNIT_DB)

@@ -20,6 +20,17 @@ from ksp_base.base_variable_parser import BaseVariableParser
 
 
 class KspVariableParser(BaseVariableParser):
+    SKIP_LINES = {
+        # <start line number in the text file>: <end line number in the text file>
+        9514: 9532,
+        9799: 9802,
+        9901: 9904,
+        10075: 10078,
+        11133: 11136,
+        11223: 11226,
+        11399: 11402
+    }
+    """Dictionary of lines to be skipped"""
     MERGE_LINES = {
         # <line number in the text file>
         9072,
@@ -27,7 +38,10 @@ class KspVariableParser(BaseVariableParser):
         9075,
         9076,
         9078,
-        9533
+        9169,
+        9231,
+        9533,
+        11090
     }
     """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
     # TODO: WRAPPED_VARIABLES are tables with 2 columns. Maybe for such complex use cases it would be easier to have
