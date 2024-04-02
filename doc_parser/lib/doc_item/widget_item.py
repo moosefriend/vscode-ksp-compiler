@@ -24,6 +24,7 @@ from doc_item.doc_item import DocItem
 class WidgetItem(DocItem):
     # TODO: Implement WidgetItem
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
+                 var_name: str, index_name: str, par_list: list[str],
                  description: str, remarks: str, examples: str, see_also: str, source: str = None):
         """
         Container for type documentation.
@@ -32,15 +33,21 @@ class WidgetItem(DocItem):
         :param page_no: Page number in the PDF where the widget has been found
         :param line_no: Line number in the file where the widget has been found
         :param headline: Main headline where the item has been found
-        :param category: Category (= Sub-headline in the table of contents) where the item has been found
-        :param name: Variable name
-        :param description: Item documentation
-        :param remarks: Remarks for the callback
-        :param examples: Examples for the callback
+        :param category: Category (= Sub-headline in the table of contents) where the widget has been found
+        :param name: Widget name
+        :param var_name: Name of the variable
+        :param index_name: Name of the index if any
+        :param par_list: List of parameter names
+        :param description: Widget documentation
+        :param remarks: Remarks for the widget
+        :param examples: Examples for the widget
         :param see_also: See also references
-        :param source: Where the item has been parsed, e.g. build-in
+        :param source: Where the widget has been parsed, e.g. build-in
         """
         super().__init__(file, page_no, line_no, headline, category, name, description, source)
+        self.var_name: str = var_name
+        self.index_name: str = index_name
+        self.par_list: list[str] = par_list
         self.remarks: str = remarks
         self.examples: str = examples
         self.see_also: str = see_also
@@ -59,12 +66,13 @@ class WidgetItem(DocItem):
         """
         :return: Tuple of headline for the *.csv file
         """
-        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Description", "Remarks", "Examples",
-                "See Also", "Source")
+        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Variable Name", "Index Name",
+                "Parameter List", "Description", "Remarks", "Examples", "See Also", "Source")
 
-    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str]:
+    def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str, str]:
         """
         :return: Tuple of the data
         """
-        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.description,
-                self.remarks, self.examples, self.see_also, self.source)
+        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.var_name,
+                self.index_name, ",".join(self.par_list), self.description,  self.remarks, self.examples, self.see_also,
+                self.source)

@@ -231,4 +231,4 @@ class BaseCommandParser:
             # for name in natsorted(self.all_commands.keys()):
             for name in self.all_commands.keys():
                 cur_command = self.all_commands[name]
-                csv_writer.writerow(cur_command.as_list())
+                csv_writer.writerow(cur_command.as_csv_list())

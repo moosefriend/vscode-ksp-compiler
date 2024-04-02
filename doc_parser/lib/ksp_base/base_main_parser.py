@@ -20,7 +20,6 @@ import logging
 import pkgutil
 import re
 import sys
-from enum import Enum
 from importlib import import_module
 from pathlib import Path
 from typing import Optional, Any
@@ -33,21 +32,10 @@ from ksp_base.base_command_parser import BaseCommandParser
 from ksp_base.base_toc_parser import BaseTocParser
 from ksp_base.base_widget_parser import BaseWidgetParser
 from ksp_base.base_variable_parser import BaseVariableParser
+from ksp_base.constants import ParserType
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
-
-
-class ParserType(Enum):
-    """
-    Parser types used for dynamic loading.
-    """
-    MAIN = "Main"
-    TOC = "Toc"
-    CALLBACK = "Callback"
-    WIDGET = "Widget"
-    COMMAND = "Command"
-    VARIABLE = "Variable"
 
 
 class BaseMainParser:
@@ -218,18 +206,18 @@ class BaseMainParser:
             # )
             # self.commands.parse()
             # self.commands.export()
-            log.info("-" * 80)
-            self.variables: BaseVariableParser = BaseMainParser.get_parser(
-                ParserType.VARIABLE,
-                self.version,
-                self.toc,
-                self.reader,
-                self.variables_csv,
-                self.delimiter,
-                self.page_offset
-            )
-            self.variables.parse()
-            self.variables.export()
+            # log.info("-" * 80)
+            # self.variables: BaseVariableParser = BaseMainParser.get_parser(
+            #     ParserType.VARIABLE,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.variables_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.variables.parse()
+            # self.variables.export()
 
     def get_body(self, page: PageObject, toc: str) -> str:
         """

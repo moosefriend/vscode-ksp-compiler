@@ -23,7 +23,10 @@ class KspCallbackParser(BaseCallbackParser):
     SKIP_LINES = {
         # <start line number in the text file>: <end line number in the text file>
         399: 433,
-        488: 489
+        488: 489,
+        582: 585,
+        968: 972,
+        1035: 1038
     }
     """Dictionary of lines to be skipped"""
     MERGE_LINES = {

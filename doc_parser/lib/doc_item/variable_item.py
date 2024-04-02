@@ -64,7 +64,7 @@ class VariableItem(DocItem):
         return ("File", "Page No", "Line No", "Headline", "Category", "Table Headline", "Item List Headline", "Name",
                 "Parameter", "Comment", "Description", "Source")
 
-    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
+    def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
         """
         :return: Tuple of the data
         """

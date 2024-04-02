@@ -30,7 +30,7 @@ log = logging.getLogger(__name__)
 
 
 class BaseVariableParser:
-    VAR_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>]+)?(?:\s+(\(.+\)))?$")
+    VAR_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+(\(.+\)))?$")
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
@@ -257,4 +257,4 @@ class BaseVariableParser:
             # for name in natsorted(self.all_variables.keys()):
             for name in self.all_variables.keys():
                 cur_var = self.all_variables[name]
-                csv_writer.writerow(cur_var.as_list())
+                csv_writer.writerow(cur_var.as_csv_list())

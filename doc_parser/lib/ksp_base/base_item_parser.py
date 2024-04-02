@@ -19,40 +19,19 @@
 import csv
 import logging
 import re
-from enum import Enum
+from abc import abstractmethod
 from pathlib import Path
 from typing import Optional
 
-from doc_item.widget_item import WidgetItem
+from doc_item.doc_item import DocItem
 from ksp_base.base_toc_parser import BaseTocParser
+from ksp_base.constants import DocState
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
 
 
-class DocState(Enum):
-    NONE = ""
-    CATEGORY = "category"
-    DESCRIPTION = "description"
-    REMARKS = "remarks"
-    EXAMPLES = "examples"
-    SEE_ALSO = "see_also"
-
-
-class BaseWidgetParser:
-    # Example: declare ui_table %<array-name>[num-elements] (<grid-width>, <grid-height>, <range>)
-    WIDGET_PATTERN = re.compile(r"^declare\s+([a-z_]+)\s+([$%]<[a-z-]+>)(?:\[(.+)])?(?:\s+\((?:<([a-z-]+)>(?:,\s+)?)+\))?$")
-    """Pattern to find a widget, e.g. on init"""
-    REMARKS_PATTERN = re.compile(r"^Remarks$")
-    """Pattern to find the remarks for the widget"""
-    EXAMPLES_PATTERN = re.compile(r"^Examples$")
-    """Pattern to find the examples for the widget"""
-    SEE_ALSO_PATTERN = re.compile(r"^See Also$")
-    """Pattern to find the see also for the widget"""
-    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?User Interface Widgets$", re.IGNORECASE)
-    """Pattern to find the start headline for scanning the content"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?User-defined Functions$", re.IGNORECASE)
-    """Pattern to find the end headline for scanning the content"""
+class BaseItemParser:
     SKIP_LINES = {
         # <start line number in the text file>: <end line number in the text file>
     }
@@ -65,13 +44,50 @@ class BaseWidgetParser:
         # <line number in the text file>: (<left cell part in the first line>, <left cell part in the second line>)
     }
     """Dictionary of wrapped table cells to be merged"""
+    REMARKS_PATTERN = re.compile(r"^Remarks$")
+    """Pattern to find the remarks section"""
+    EXAMPLES_PATTERN = re.compile(r"^\s*Examples$")
+    """Pattern to find the examples section"""
+    SEE_ALSO_PATTERN = re.compile(r"^See Also$")
+    """Pattern to find the see also section"""
 
-    def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str, page_offset: int = 0):
+    @staticmethod
+    @abstractmethod
+    def content_start_pattern() -> re.Pattern:
+        """
+        :return: Pattern to find the start headline for scanning the content
+        """
+
+    @staticmethod
+    @abstractmethod
+    def content_stop_pattern() -> re.Pattern:
+        """
+        :return: Pattern to find the stop headline for scanning the content
+        """
+
+    @abstractmethod
+    def check_item(self, line) -> bool:
+        """
+        Check if the line contains an item. If so then the item will be parsed and added to self.all_items.
+        :param line: Line to check
+        :return: True if the line contains an item, False otherwise.
+        """
+
+    @abstractmethod
+    def add_item_documentation(self, line):
+        """
+        Add the line to the corresponding item documentation.
+        :param line: Line to add to the documentation
+        """
+
+    def __init__(self, version: str, toc: BaseTocParser, doc_item_class: type[DocItem], reader: RewindReader, csv_file: Path,
+                 delimiter: str, page_offset: int = 0):
         """
         Parse widgets in the Kontakt KSP text manual.
 
         :param version: Kontakt manual version needed to select the right parser
         :param toc: Table of content parser containing the headlines and categories
+        :param doc_item_class: Class of the items to be parsed, e.g. CallbackItem
         :param reader: Reader for the already open Kontakt KSP text manual
         :param csv_file: Comma separated file to export the parsed data
         :param delimiter: CSV delimiter for the export file
@@ -79,34 +95,55 @@ class BaseWidgetParser:
             after the table of contents
         """
         self.version: str = version
+        """Kontakt version"""
         self.ksp_name: str = f"ksp_{version.replace('.', '_')}"
+        """Directory name to be used for finding the parser"""
         self.toc: BaseTocParser = toc
+        """Parsed table of contents"""
+        self.doc_item_class: type[DocItem] = doc_item_class
+        """Class of the items to be parsed, e.g. CallbackItem"""
         self.reader: RewindReader = reader
+        """File reader to be used for reading lines from the converted text file"""
         self.csv_file: Path = csv_file
+        """Export *.csv file"""
         self.delimiter: str = delimiter
+        """CSV delimiter, e.g. ';'"""
         self.page_offset: int = page_offset
+        """Page offset when the content starts in order to skip the table of contents"""
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
-        self.all_widgets: dict[str, WidgetItem] = {}
+        """Directory containing the configuration data"""
         self.duplicate_cnt: int = 0
-        self.widget_cnt: int = 0
-        self.widget: Optional[WidgetItem] = None
+        """Number of duplicate items"""
+        self.item_cnt: int = 0
+        """Number of found items"""
+        self.item_list: list[DocItem] = []
+        """Current list of found items"""
+        self.all_items: dict[str, DocItem] = {}
+        """Dictionary where the key is the item name and the value it the corresponding item"""
         self.headline: str = ""
+        """Last found headline in the content"""
         self.chapter_categories: dict[str, int] = {}
+        """Valid categories for the last found headline"""
         self.category: str = ""
-        self.sub_category: str = ""
+        """Last found category"""
         self.last_line: Optional[str] = ""
+        """Previous line content"""
         self.remarks: str = ""
+        """Remarks found for the current item"""
         self.examples: str = ""
+        """Examples found for the current item"""
         self.see_also: str = ""
+        """See also lines found for the current item"""
         self.doc_state: DocState = DocState.NONE
+        """Internal parser state for current item"""
 
     def parse(self):
         """
         Parse the text file for widgets.
         """
-        log.info(f"Parse {self.reader.file} for widgets")
+        log.info(f"Parse {self.reader.file} for {self.doc_item_class.plural()}")
         self.search_content_start()
-        self.scan_widgets()
+        self.scan_items()
 
     def search_content_start(self):
         """
@@ -114,27 +151,26 @@ class BaseWidgetParser:
         """
         for line in self.reader:
             # Search for the content
-            if self.CONTENT_START_PATTERN.match(line):
+            if self.content_start_pattern().match(line):
                 log.info(f"Found Content Start ({self.reader.location()})")
                 self.reader.rewind()
                 break
 
-    def scan_widgets(self):
+    def scan_items(self):
         """
-        Scan widgets.
+        Scan items.
         """
         self.reader.skip_lines = self.SKIP_LINES
         self.reader.merge_lines = self.MERGE_LINES
-        self.widget = None
         self.headline: str = ""
         self.chapter_categories = {}
         self.category: str = ""
-        self.widget_cnt = 0
+        self.item_cnt = 0
         self.last_line = None
         self.doc_state = DocState.NONE
         for line in self.reader:
             # Check if this is the end of the content search
-            if self.CONTENT_STOP_PATTERN.match(line):
+            if self.content_stop_pattern().match(line):
                 self.reader.rewind()
                 break
             # Check for headlines
@@ -151,90 +187,46 @@ class BaseWidgetParser:
                 self.category = line
                 log.info(f"   - Category: {self.category} ({self.reader.location()})")
                 self.doc_state = DocState.CATEGORY
-            # Check if the line contains a widget
-            elif m := self.WIDGET_PATTERN.match(line):
-                name = m.group(1)
-                var_name = m.group(2)
-                index_name = m.group(3)
-                par_list: list[str] = []
-                n = 4
-                while m.group(n):
-                    par_list.append(m.group(n))
-                self.widget = self.add_widget(name, var_name, index_name, par_list)
-                if self.widget:
-                    self.doc_state = DocState.DESCRIPTION
-            # Check for remarks
-            elif self.REMARKS_PATTERN.match(line):
-                self.doc_state = DocState.REMARKS
-            # Check for examples
-            elif self.EXAMPLES_PATTERN.match(line):
-                self.doc_state = DocState.EXAMPLES
-            # Check for see also
-            elif self.SEE_ALSO_PATTERN.match(line):
-                self.doc_state = DocState.SEE_ALSO
-            # Add the corresponding documentation for the last widget
             elif self.doc_state != DocState.NONE:
-                # Add the line to the corresponding attribute
-                text = getattr(self.widget, self.doc_state.value)
-                setattr(self.widget, self.doc_state.value, f"{text}{line}\n")
+                # Check for items
+                if self.check_item(line):
+                    self.doc_state = DocState.DESCRIPTION
+                # Check for remarks
+                if self.REMARKS_PATTERN.match(line):
+                    self.doc_state = DocState.REMARKS
+                # Check for examples
+                elif self.EXAMPLES_PATTERN.match(line):
+                    self.doc_state = DocState.EXAMPLES
+                # Check for see also
+                elif self.SEE_ALSO_PATTERN.match(line):
+                    self.doc_state = DocState.SEE_ALSO
+                # Add line to corresponding item documentation
+                else:
+                    self.add_item_documentation(line)
                 # 1 empty lines in the See Also section is a signal for the end of the description
                 if self.doc_state == DocState.SEE_ALSO and line == "":
-                    self.widget = None
+                    self.doc_state = DocState.NONE
+                # 2 empty lines are a signal for the end of the description
+                elif line == "" and self.last_line == "":
                     self.doc_state = DocState.NONE
             self.last_line = line
         # Fix all descriptions, e.g. remove newlines at begin and end
-        for cur_widget in self.all_widgets.values():
-            cur_widget.fix_documentation()
-        log.info(f"{self.widget_cnt} widgets found")
-        log.info(f"{self.duplicate_cnt} duplicate widgets")
-
-    def add_widget(self, name: str, var_name: str, index_name: str, par_list: list[str]) -> WidgetItem:
-        """
-        Add a widget if it does not exist.
-
-        :param name: Name of the widget
-        :param var_name: Name of the variable
-        :param index_name: Name of the index_name if any
-        :param par_list: List of parameter names
-        :return: WidgetItem of the just created widget or None if duplicate
-        """
-        widget: Optional[WidgetItem] = None
-        if name in self.all_widgets:
-            log.info(f"      - Duplicate {name} ({self.reader.location()})")
-            self.duplicate_cnt += 1
-        else:
-            log.info(f"      - Found {name} ({self.reader.location()})")
-            self.widget_cnt += 1
-            widget = WidgetItem(
-                file=self.reader.file,
-                page_no=self.reader.page_no,
-                line_no=self.reader.line_no,
-                headline=self.headline,
-                category=self.category,
-                name=name,
-                var_name=var_name,
-                index_name=index_name,
-                par_list=par_list,
-                description="",
-                remarks="",
-                examples="",
-                see_also="",
-                source="BUILT-IN"
-            )
-            self.all_widgets[name] = widget
-        return widget
+        for cur_item in self.all_items.values():
+            cur_item.fix_documentation()
+        log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")
+        log.info(f"{self.duplicate_cnt} duplicate {self.doc_item_class.plural()}")
 
     def export(self):
         """
-        Export the internal parsed widgets to the *.csv file.
+        Export the internal parsed items to the *.csv file.
         """
-        log.info(f"Export widgets to {self.csv_file}")
+        log.info(f"Export {self.doc_item_class.plural()} to {self.csv_file}")
         with open(self.csv_file, 'w', newline='', encoding='utf-8') as f:
             csv_writer = csv.writer(f, delimiter=self.delimiter, quoting=csv.QUOTE_MINIMAL)
             # Write the headline
-            csv_writer.writerow(WidgetItem.header())
+            csv_writer.writerow(self.doc_item_class.csv_header())
             # Sort the list for identifier rules
-            # for name in natsorted(self.all_widgets.keys()):
-            for name in self.all_widgets.keys():
-                cur_widget = self.all_widgets[name]
-                csv_writer.writerow(cur_widget.as_csv_list())
+            # for name in natsorted(self.all_items.keys()):
+            for name in self.all_items.keys():
+                cur_item = self.all_items[name]
+                csv_writer.writerow(cur_item.as_csv_list())

@@ -56,18 +56,14 @@ class CallbackItem(DocItem):
         self.see_also = self.see_also.strip()
         self.remarks = self.remarks.replace("•     ", "- ")
 
-
     @staticmethod
-    def header():
+    def csv_header():
         """
         :return: Tuple of headline for the *.csv file
         """
         return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Parameter", "Description", "Remarks",
                 "Examples", "See Also", "Source")
 
-    def as_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
-        """
-        :return: Tuple of the data
-        """
+    def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.parameter,
                 self.description, self.remarks, self.examples, self.see_also, self.source)

@@ -16,7 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
+from abc import abstractmethod
 from pathlib import Path
+from typing import Any
 
 
 class DocItem:
@@ -42,6 +44,32 @@ class DocItem:
         self.name: str = name
         self.description: str = description
         self.source: str = source
+
+    @classmethod
+    def plural(cls):
+        """
+        :return: Plural string of the item, e.g. "callbacks"
+        """
+        return cls.__name__.replace("Item", "") + "s"
+
+    @abstractmethod
+    def fix_documentation(self):
+        """
+        Correct any strange characters or newlines in the documentation.
+        """
+
+    @staticmethod
+    @abstractmethod
+    def csv_header() -> list[str]:
+        """
+        :return: List of the headers to be written to the *.csv file
+        """
+
+    @abstractmethod
+    def as_csv_list(self) -> list[Any]:
+        """
+        :return: List of the internal values to be written to the *.csv file
+        """
 
     def fix_description(self):
         """
