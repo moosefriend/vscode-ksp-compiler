@@ -80,6 +80,8 @@ class BaseVariableParser(BaseItemParser):
                 self.item_list = [variable]
             else:
                 self.item_list = []
+            if self.doc_state == DocState.DESCRIPTION:
+                self.add_item_documentation(line)
             line_processed = True
         # Check if the line contains a variable range, e.g. $MARK1 ... $MARK28
         elif m := self.VAR_RANGE_PATTERN.match(line):
@@ -92,6 +94,8 @@ class BaseVariableParser(BaseItemParser):
                 variable = self.add_variable(name, "")
                 if variable:
                     self.item_list.append(variable)
+            if self.doc_state == DocState.DESCRIPTION:
+                self.add_item_documentation(line)
             line_processed = True
         # Check for item list headlines
         elif line.endswith(":"):
@@ -109,9 +113,9 @@ class BaseVariableParser(BaseItemParser):
         return line_processed
 
     def add_item_documentation(self, line):
-        # Add the documentation for the last variable or constant
-        for variable in self.item_list:
-            variable.description += line + "\n"
+        # Add the documentation to first found variable or constant
+        if self.item_list:
+            self.item_list[0].description += line + "\n"
 
     def add_variable(self, name: str, parameter) -> VariableItem:
         """
@@ -144,3 +148,15 @@ class BaseVariableParser(BaseItemParser):
             )
             self.all_items[name] = variable
         return variable
+
+    def finalize_item_list(self):
+        """
+        Copy the description for all variables.
+        """
+        if self.item_list:
+            first_variable = self.item_list[0]
+            for i, variable in enumerate(self.item_list):
+                if i == 0:
+                    continue
+                else:
+                    variable.description = first_variable.description

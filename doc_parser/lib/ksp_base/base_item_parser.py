@@ -166,6 +166,7 @@ class BaseItemParser:
         """
         self.reader.skip_lines = self.SKIP_LINES
         self.reader.merge_lines = self.MERGE_LINES
+        self.item_list = []
         self.headline = ""
         self.chapter_categories = {}
         self.category = ""
@@ -177,6 +178,7 @@ class BaseItemParser:
         for line in self.reader:
             # Check if this is the end of the content search
             if self.content_stop_pattern().match(line):
+                self.finalize_item_list()
                 self.reader.rewind()
                 break
             # Check for headlines
@@ -216,6 +218,7 @@ class BaseItemParser:
                 # 1 empty lines in the See Also section is a signal for the end of the description ot
                 # 2 empty lines are a signal for the end of the description
                 if line == "" and (self.doc_state == DocState.SEE_ALSO or self.last_line == ""):
+                    self.finalize_item_list()
                     self.item_list = []
                     self.header_description = ""
                     self.item_list_headline = ""
@@ -241,3 +244,10 @@ class BaseItemParser:
             for name in self.all_items.keys():
                 cur_item = self.all_items[name]
                 csv_writer.writerow(cur_item.as_csv_list())
+
+    def finalize_item_list(self):
+        """
+        Once 2 empty lines or a new category is found then this method is called.
+        It can be overridden in subclasses.
+        """
+        pass
