@@ -24,6 +24,7 @@ from typing import Optional
 from doc_item.command_item import CommandItem
 from ksp_base.base_item_parser import BaseItemParser
 from ksp_base.base_toc_parser import BaseTocParser
+from ksp_base.constants import DocState
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -53,14 +54,14 @@ class BaseCommandParser(BaseItemParser):
         super().__init__(version, toc, CommandItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
                          csv_file, delimiter, page_offset)
 
-    def check_item(self, line) -> bool:
-        line_processed: bool = False
+    def check_item(self, line) -> Optional[DocState]:
+        doc_state: Optional[DocState] = None
         if m := self.COMMAND_PATTERN.match(line):
             name = m.group(1)
             self.add_command(name)
             # TODO: Implement BaseCommandParser.check_item
-            pass
-        return line_processed
+            doc_state = DocState.DESCRIPTION
+        return doc_state
 
     def add_command(self, name: str) -> CommandItem:
         """

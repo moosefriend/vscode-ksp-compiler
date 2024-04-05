@@ -67,12 +67,13 @@ class BaseVariableParser(BaseItemParser):
             on_category=self.reset_descriptions,
             finalize_item_list=self.finalize_item_list
         )
-        self.header_description: str = ""
+        self.table_headline: str = ""
+        self.table_description: str = ""
         self.item_list_headline: str = ""
         self.comment: str = ""
 
-    def check_item(self, line) -> bool:
-        line_processed: bool = False
+    def check_item(self, line) -> Optional[DocState]:
+        doc_state: Optional[DocState] = None
         # TODO: Multiple variables in the table header sharing the same documentation, e.g. line 9645.
         #    The documentation should be added to all those variables.
         # TODO: Variable in the table header. In the table body description follows with and item list of constants,
@@ -91,9 +92,9 @@ class BaseVariableParser(BaseItemParser):
                 self.item_list = [variable]
             else:
                 self.item_list = []
-            if self.doc_state == DocState.DESCRIPTION:
-                self.add_item_documentation(line)
-            line_processed = True
+            # if self.doc_state == DocState.DESCRIPTION:
+            #     self.add_item_documentation(line)
+            doc_state = DocState.DESCRIPTION
         # Check if the line contains a variable range, e.g. $MARK1 ... $MARK28
         elif m := self.VAR_RANGE_PATTERN.match(line):
             base_name = m.group(1)
@@ -107,7 +108,7 @@ class BaseVariableParser(BaseItemParser):
                     self.item_list.append(variable)
             if self.doc_state == DocState.DESCRIPTION:
                 self.add_item_documentation(line)
-            line_processed = True
+            doc_state = DocState.DESCRIPTION
         # Check for item list headlines
         elif line.endswith(":"):
             # TODO: When the line also contains a "." then the item list headline shall only be after the "."
@@ -115,13 +116,19 @@ class BaseVariableParser(BaseItemParser):
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
             log.info(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
-            line_processed = True
+            # Don't change the documentation state
+            doc_state = self.doc_state
         # Check for table headline or description block before the variable(s)
         elif self.doc_state == DocState.CATEGORY and line != "":
-            self.header_description += line + "\n"
-            log.info(f"   - Header Description: {line} ({self.reader.location()})")
-            line_processed = True
-        return line_processed
+            if not self.table_headline:
+                self.table_headline = line
+                log.info(f"   - Table Header: {line} ({self.reader.location()})")
+            else:
+                self.table_description += line + "\n"
+                log.info(f"   - Table Description: {line} ({self.reader.location()})")
+            # Don't change the documentation state
+            doc_state = self.doc_state
+        return doc_state
 
     def add_variable(self, name: str, parameter) -> VariableItem:
         """
@@ -146,8 +153,8 @@ class BaseVariableParser(BaseItemParser):
                 category=self.category,
                 name=name,
                 parameter=parameter,
-                description="",
-                header_description=self.header_description,
+                description=self.table_description,
+                header_description=self.table_headline,
                 item_list_headline=self.item_list_headline,
                 comment=self.comment,
                 source="BUILT-IN"
@@ -161,7 +168,8 @@ class BaseVariableParser(BaseItemParser):
             self.item_list[0].description += line + "\n"
 
     def reset_descriptions(self, _: str):
-        self.header_description = ""
+        self.table_headline = ""
+        self.table_description = ""
         self.item_list_headline = ""
 
     def finalize_item_list(self):
@@ -175,5 +183,5 @@ class BaseVariableParser(BaseItemParser):
                     continue
                 else:
                     variable.description = first_variable.description
-        self.header_description = ""
+        self.table_headline = ""
         self.item_list_headline = ""

@@ -24,6 +24,7 @@ from typing import Optional
 from doc_item.widget_item import WidgetItem
 from ksp_base.base_item_parser import BaseItemParser
 from ksp_base.base_toc_parser import BaseTocParser
+from ksp_base.constants import DocState
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -53,7 +54,8 @@ class BaseWidgetParser(BaseItemParser):
         super().__init__(version, toc, WidgetItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
                          csv_file, delimiter, page_offset)
 
-    def check_item(self, line) -> bool:
+    def check_item(self, line) -> Optional[DocState]:
+        doc_state: Optional[DocState] = None
         # Check if the line contains a widget
         if m := self.WIDGET_PATTERN.match(line):
             name = m.group(1)
@@ -66,6 +68,8 @@ class BaseWidgetParser(BaseItemParser):
             widget = self.add_widget(name, var_name, index_name, par_list)
             if widget:
                 self.item_list.append(widget)
+            doc_state = DocState.DESCRIPTION
+        return doc_state
 
     def add_widget(self, name: str, var_name: str, index_name: str, par_list: list[str]) -> WidgetItem:
         """

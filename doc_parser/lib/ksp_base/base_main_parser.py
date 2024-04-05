@@ -252,5 +252,5 @@ if __name__ == "__main__":
     pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
     reader = PdfReader(pdf_file)
     parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ";")
-    parser.convert_to_text()
+    # parser.convert_to_text()
     parser.parse()

@@ -54,8 +54,8 @@ class BaseCallbackParser(BaseItemParser):
         super().__init__(version, toc, CallbackItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
                          csv_file, delimiter, page_offset)
 
-    def check_item(self, line) -> bool:
-        line_processed: bool = False
+    def check_item(self, line) -> Optional[DocState]:
+        doc_state: Optional[DocState] = None
         if self.doc_state == DocState.CATEGORY:
             if line:
                 if line.startswith(self.category) and (m := self.CALLBACK_PATTERN.match(line)):
@@ -69,11 +69,10 @@ class BaseCallbackParser(BaseItemParser):
                     for name in name_list:
                         callback = self.add_callback(name, parameter)
                         self.item_list.append(callback)
-                    self.doc_state = DocState.DESCRIPTION
-                    line_processed = True
+                    doc_state = DocState.DESCRIPTION
                 else:
                     log.error(f"Can't find the expected callback {self.category}, but got {line}")
-        return line_processed
+        return doc_state
 
     def add_callback(self, name: str, parameter: str) -> CallbackItem:
         """
