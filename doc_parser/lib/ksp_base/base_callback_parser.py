@@ -33,14 +33,10 @@ log = logging.getLogger(__name__)
 class BaseCallbackParser(BaseItemParser):
     CALLBACK_PATTERN = re.compile(r"^on\s+([a-z_]+)(?:/([a-z_]+))?(?:\s+\(<([a-z-]+)>\))?$")
     """Pattern to find a callback, e.g. on init"""
-
-    @staticmethod
-    def content_start_pattern():
-        return re.compile(r"^(\d+\.\s+)?Callbacks$", re.IGNORECASE)
-
-    @staticmethod
-    def content_stop_pattern():
-        return re.compile(r"^(\d+\.\s+)?Variables$", re.IGNORECASE)
+    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Callbacks$", re.IGNORECASE)
+    """Pattern to find the headline for the content start"""
+    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Variables$", re.IGNORECASE)
+    """Pattern to find the headline for the content end"""
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str,
                  page_offset: int = 0):
@@ -55,10 +51,11 @@ class BaseCallbackParser(BaseItemParser):
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
         """
-        super().__init__(version, toc, CallbackItem, reader, csv_file, delimiter, page_offset)
+        super().__init__(version, toc, CallbackItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
+                         csv_file, delimiter, page_offset)
 
     def check_item(self, line) -> bool:
-        callback_found: bool = False
+        line_processed: bool = False
         if self.doc_state == DocState.CATEGORY:
             if line:
                 if line.startswith(self.category) and (m := self.CALLBACK_PATTERN.match(line)):
@@ -73,16 +70,10 @@ class BaseCallbackParser(BaseItemParser):
                         callback = self.add_callback(name, parameter)
                         self.item_list.append(callback)
                     self.doc_state = DocState.DESCRIPTION
-                    callback_found = True
+                    line_processed = True
                 else:
                     log.error(f"Can't find the expected callback {self.category}, but got {line}")
-        return callback_found
-
-    def add_item_documentation(self, line):
-        for callback in self.item_list:
-            # Add the line to the corresponding attribute
-            text = getattr(callback, self.doc_state.value)
-            setattr(callback, self.doc_state.value, f"{text}{line}\n")
+        return line_processed
 
     def add_callback(self, name: str, parameter: str) -> CallbackItem:
         """

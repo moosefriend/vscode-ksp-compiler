@@ -35,14 +35,10 @@ class BaseVariableParser(BaseItemParser):
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
-
-    @staticmethod
-    def content_start_pattern():
-        return re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
-
-    @staticmethod
-    def content_stop_pattern():
-        return re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
+    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
+    """Pattern to find the headline for the content start"""
+    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
+    """Pattern to find the headline for the content end"""
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str,
                  page_offset: int = 0):
@@ -57,7 +53,22 @@ class BaseVariableParser(BaseItemParser):
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
         """
-        super().__init__(version, toc, VariableItem, reader, csv_file, delimiter, page_offset)
+        super().__init__(
+            version,
+            toc,
+            VariableItem,
+            reader,
+            self.CONTENT_START_PATTERN,
+            self.CONTENT_STOP_PATTERN,
+            csv_file,
+            delimiter,
+            page_offset,
+            on_headline=self.reset_descriptions,
+            on_category=self.reset_descriptions,
+            finalize_item_list=self.finalize_item_list
+        )
+        self.header_description: str = ""
+        self.item_list_headline: str = ""
         self.comment: str = ""
 
     def check_item(self, line) -> bool:
@@ -112,11 +123,6 @@ class BaseVariableParser(BaseItemParser):
             line_processed = True
         return line_processed
 
-    def add_item_documentation(self, line):
-        # Add the documentation to first found variable or constant
-        if self.item_list:
-            self.item_list[0].description += line + "\n"
-
     def add_variable(self, name: str, parameter) -> VariableItem:
         """
         Add a variable if it is not in the ignore list or already exists.
@@ -149,6 +155,15 @@ class BaseVariableParser(BaseItemParser):
             self.all_items[name] = variable
         return variable
 
+    def add_item_documentation(self, line):
+        # Add the documentation to first found variable or constant
+        if self.item_list:
+            self.item_list[0].description += line + "\n"
+
+    def reset_descriptions(self, _: str):
+        self.header_description = ""
+        self.item_list_headline = ""
+
     def finalize_item_list(self):
         """
         Copy the description for all variables.
@@ -160,3 +175,5 @@ class BaseVariableParser(BaseItemParser):
                     continue
                 else:
                     variable.description = first_variable.description
+        self.header_description = ""
+        self.item_list_headline = ""
