@@ -19,6 +19,7 @@
 import logging
 import pkgutil
 import re
+import shutil
 import sys
 from importlib import import_module
 from pathlib import Path
@@ -71,7 +72,8 @@ class BaseMainParser:
         self.out_version_dir.mkdir(parents=True, exist_ok=True)
         self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
         # Note: As extension here *.py is used, so that file links in the output will open in PyCharm in the internal editor
-        self.txt_file: Path = self.out_version_dir / "KSP_Reference_Manual.txt.py"
+        self.txt_file_original: Path = self.cfg_version_dir / "KSP_Reference_Manual_Original.txt.py"
+        self.txt_file_fixed: Path = self.cfg_version_dir / "KSP_Reference_Manual_Fixed.txt.py"
         self.callbacks_csv: Path = self.out_version_dir / "built_in_callbacks.csv"
         self.widgets_csv: Path = self.out_version_dir / "built_in_widgets.csv"
         self.commands_csv: Path = self.out_version_dir / "built_in_commands.csv"
@@ -147,8 +149,8 @@ class BaseMainParser:
             toc = "Table of Contents "
         else:
             toc = ""
-        with open(self.txt_file, "w", encoding='utf-8') as f:
-            log.info(f"Convert PDF to TEXT: {self.pdf_file} -> {self.txt_file}")
+        with open(self.txt_file_original, "w", encoding='utf-8') as f:
+            log.info(f"Convert PDF to TEXT: {self.pdf_file} -> {self.txt_file_original}")
             page_cnt = 0
             for page in reader.pages:
                 f.write(f"{'<' * 20} {toc}Page {page_cnt + 1} {'>' * 20}\n")
@@ -162,12 +164,18 @@ class BaseMainParser:
                 print(".", end="")
             print("")
             log.info(f"{page_cnt} pages converted")
+        if not self.txt_file_fixed.is_file():
+            log.info(f"Copy {self.txt_file_original.as_posix()} -> {self.txt_file_fixed.as_posix()}")
+            shutil.copyfile(self.txt_file_original, self.txt_file_fixed)
+            log.info(f"TODO: Manually fix the content of {self.txt_file_fixed}")
+        else:
+            log.info(f"TODO: Update the content of {self.txt_file_fixed}")
 
     def parse(self):
         """
         Parse the content of the text file.
         """
-        with RewindReader(self.txt_file, page_no_pattern=BaseMainParser.PAGE_PATTERN) as self.reader:
+        with RewindReader(self.txt_file_fixed, page_no_pattern=BaseMainParser.PAGE_PATTERN) as self.reader:
             self.toc = BaseMainParser.get_parser(ParserType.TOC, self.version, self.reader)
             self.toc.parse()
             # log.info("-" * 80)
@@ -244,5 +252,5 @@ if __name__ == "__main__":
     pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
     reader = PdfReader(pdf_file)
     parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ";")
-    # parser.convert_to_text()
+    parser.convert_to_text()
     parser.parse()

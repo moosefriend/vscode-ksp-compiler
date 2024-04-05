@@ -32,18 +32,6 @@ log = logging.getLogger(__name__)
 
 
 class BaseItemParser:
-    SKIP_LINES = {
-        # <start line number in the text file>: <end line number in the text file>
-    }
-    """Dictionary of lines to be skipped"""
-    MERGE_LINES = {
-        # <line number in the text file>
-    }
-    """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
-    WRAPPED_CELLS = {
-        # <line number in the text file>: (<left cell part in the first line>, <left cell part in the second line>)
-    }
-    """Dictionary of wrapped table cells to be merged"""
     REMARKS_PATTERN = re.compile(r"^Remarks$")
     """Pattern to find the remarks section"""
     EXAMPLES_PATTERN = re.compile(r"^\s*Examples$")
@@ -164,8 +152,6 @@ class BaseItemParser:
         """
         Scan items.
         """
-        self.reader.skip_lines = self.SKIP_LINES
-        self.reader.merge_lines = self.MERGE_LINES
         self.item_list = []
         self.headline = ""
         self.chapter_categories = {}

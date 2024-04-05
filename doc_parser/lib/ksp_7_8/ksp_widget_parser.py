@@ -20,11 +20,4 @@ from ksp_base.base_widget_parser import BaseWidgetParser
 
 
 class KspWidgetParser(BaseWidgetParser):
-    MERGE_LINES = {
-        # <line number in the text file>
-    }
-    """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
-    WRAPPED_CELLS = {
-        # <line number in the text file>: (<widget part in the first line>, <widget part in the second line>)
-    }
-    """Dictionary of wrapped table cells to be merged"""
+    pass

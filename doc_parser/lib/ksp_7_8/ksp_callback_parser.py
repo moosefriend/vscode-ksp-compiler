@@ -20,22 +20,4 @@ from ksp_base.base_callback_parser import BaseCallbackParser
 
 
 class KspCallbackParser(BaseCallbackParser):
-    SKIP_LINES = {
-        # <start line number in the text file>: <end line number in the text file>
-        399: 433,
-        488: 489,
-        582: 585,
-        968: 972,
-        1035: 1038
-    }
-    """Dictionary of lines to be skipped"""
-    MERGE_LINES = {
-        # <line number in the text file>
-    }
-    """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
-    # TODO: WRAPPED_CALLBACKS are tables with 2 columns. Maybe for such complex use cases it would be easier to have
-    #    an overwrite mechanism, so to ignore lines and manually configure the values.
-    WRAPPED_CELLS = {
-        # <line number in the text file>: (<callback part in the first line>, <callback part in the second line>)
-    }
-    """Dictionary of wrapped table cells to be merged"""
+    pass

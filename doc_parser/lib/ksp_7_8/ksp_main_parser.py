@@ -16,12 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-import logging
 from pathlib import Path
 
 from ksp_base.base_main_parser import BaseMainParser
-
-log = logging.getLogger(__name__)
 
 
 class KspMainParser(BaseMainParser):

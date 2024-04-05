@@ -1,5 +1,5 @@
 # Kontakt Script (KSP) Manual Parser
-## Convert KSP PDF manual to text document
+## Convert KSP PDF Manual to Text Document
 - Download the PDF to the `doc_parser/in`folder and rename it to "KSP_Reference_\<major>_\<minor>_Manual_en.pdf"
 - The KSP manuals as PDF can be downloaded from
   - v7.8: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP-7-8-reference-manual-english.pdf
@@ -17,28 +17,32 @@
   would not work. Therefore, in PyCharm after converting a file select the converted file and choose "Override File
   Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
 
-## Parsing Use Cases
-### General
-#### Page Header Lines
-- The header of the PDF pages should be skipped by default. In the exported text the header is located at the end of the
-  page. Therefore, set `page_header_lines` in `KspMainParser` accordingly (start with 0 and increase it until the line
-  disappears)
+## Fix the converted KSP Text Manual
+### Preparation
+- Copy the converted KSP text manual
+  - from `out/ksp_<major>_<minor>/KSP_Reference_Manual.txt.py`
+  - to `cfg/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
+- Note: The \*.py extension for the converted file is necessary to be able within PyCharm to navigate via links directly
+  to that line where a certain item is found while parsing. For other file types the navigation by clicking on the link
+  would not work. Therefore, in PyCharm after converting a file select the converted file and choose "Override File
+  Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
+- In PyCharm select the copied file and select "Override File Type" from the context menu
+- In the upcoming dialog choose "Plain Text" to avoid that the file is interpreted as a Python file
+- Open `cfg/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
 
-#### End of Documentation for Item (implemented)
-- If there are 2 empy lines then stop scanning for documentation and look for the next variable
-- If there is a headline or a category then there might be only 1 empty line. Therefore, headlines and categories have
-  to be identified in the content of the document (otherwise it would be seen as documentation for the previous
-  variable).
+### Insert Colon for Command Parameters
+- In Pycharm for parameters (= `<parameter-name>`) insert a colon and a space (=> `<parameter-name>: `) . Therefore
+  - search for the regex:
+    ```
+    ^(<[a-z-]+>)
+    ```
+  - and replace it with (there is a space behind the colon!):
+    ```
+    $1: 
+    ```
 
-#### Wrapped Lines (implemented)
-- Sometimes lines are wrapped into the next line. Therefore, merging of such explicitly specified lines is provided
-  before the lines are merged, see `MERGE_LINES` in e.g. `KspVariableParser`
-
-#### Wrapped Pages (not implemented yet)
-- Sometimes documentation is going beyond one page. Then there might be empty lines or repeated headers to be ignored.
-- See `SKIP_LINES` in e.g. `KspVariableParser`
-
-#### Multi-Column Table with Wrapped Lines (not implemented yet)
+### Wrapped Command Parameters
+- In the PDF there are tables with 2 columns, where inside the cell wrapping is done
 - Example:
   ```
   get_target_idx(<group-index>, <mod-index>, <target-name>)
@@ -50,11 +54,121 @@
   <target-The name of the modulation target slot.
   name>
   ```
-- Such cases must be explicitly specified. So the first part (here: `<group-`) and the second part (here: `index>`)
-  and the corresponding line number, see `WRAPPED_CELLS` in e.g. `KspFunctionParser`
+- Search for the regex (Note that this contains a newline!):
+  ```
+  ^(<[a-z-]+-)(.*)
+  ^([a-z-]+>)
+  ```
+ - And replace it with:
+   ```
+   $1$3: $2
+   ```
+ 
+### Wrapped Variable Parameters
+- In the PDF there are tables with 2 columns, where inside the cell wrapping is done
+- Example:
+  ```
+  Additional Color and Alpha Parameters
+  To be paired with the above control parameters in order to create gradient effects. If not explicitly
+  set, they inherit the value of their match from above, resulting in no gradient.
+  <<<<<<<<<<<<<<<<<<<< Page 281 >>>>>>>>>>>>>>>>>>>>
+  $CONTROL_PAR_WAVE_END_Sets or returns the color for the end of the gradient applied to the
+  COLOR waveform (2D) or current waveform (3D).
+  $CONTROL_PAR_WAVE_END_Sets or returns the alpha channel (opacity) for the end of the
+  ALPHA gradient applied to the waveform (2D) or current waveform (3D).
+  $CONTROL_PAR_WAVETABLESets or returns the color for the end of the gradient applied to the
+  _END_COLOR background waveforms (3D).
+  $CONTROL_PAR_WAVETABLESets or returns the alpha channel (opacity) for the end of the
+  _END_ALPHA gradient applied to the background waveforms (3D).
+  ```
+- There is no easy regex to find such tables
+- Best is to search in the original PDF for such tables and note down the page number
+- Then in the fixed text KSP manual fix the documentation manually
 
-### Page Number in PDF (implemented)
-#### Table of Content Page Number (implemented)
+### Wrapped Parsed Lines
+- Sometimes lines are not properly identified, because they are wrapped into the next line
+- Example:
+  ```
+  declare ui_value_edit $<variable-name> (<min>, <max>, <$display-
+  ratio>)  
+  ```
+- To properly parse such lines, remove the newline before the wrapped line
+
+### Wrapped Code Examples
+- Example:
+  ```
+  function SetLabel()
+    select ($param_id)
+        case $FILT_CUT
+            @str := get_engine_par_disp($ENGINE_PAR_CUTOFF, 0, $FILT_SLOT, -1) & "
+  Hz"
+        case $FILT_RES
+            @str := get_engine_par_disp($ENGINE_PAR_RESONANCE, 0, $FILT_SLOT, -1) &
+  " %"
+        case $OUT_VOL
+            @str := get_engine_par_disp($ENGINE_PAR_VOLUME, 0, -1, -1) & " dB"
+        case $OUT_PAN
+            @str := get_engine_par_disp($ENGINE_PAR_PAN, 0, -1, -1)
+    end select
+  end function
+  ```
+- To make the examples better readable, remove the newline before the wrapped line
+
+### Wrapped Pages
+- Sometimes documentation is going beyond one page
+- Then there might be empty lines or repeated headers to be ignored
+- Example:
+  ```
+  Waveform Property Constants
+  To be used with get_ui_wf_property() and set_ui_wf_property().
+  <<<<<<<<<<<<<<<<<<<< Page 279 >>>>>>>>>>>>>>>>>>>>
+  
+  
+  
+  Waveform Property Constants
+  ```
+- Delete those lines incl. the repeated header (if any) manually
+
+### Wrapped Variable Comment
+- Sometimes variable comments (= text in brackets after a variable) are not properly identified, because they are wrapped into the next line
+- Example:
+  ```
+  
+  ```
+- To properly parse such lines, remove the newline before the wrapped line
+
+### Indented Constants
+- Some constants belong only to a certain variable
+- Example:
+  ```
+  Dirt
+  $ENGINE_PAR_DIRT_DRIVEA
+  $ENGINE_PAR_DIRT_AMOUNTA
+  $ENGINE_PAR_DIRT_BIASA
+  $ENGINE_PAR_DIRT_TILTA
+  $ENGINE_PAR_DIRT_MODEA
+  $NI_DIRT_MODE_I
+  $NI_DIRT_MODE_II
+  $NI_DIRT_MODE_III
+  $ENGINE_PAR_DIRT_SAFETYA
+  ```
+- Indent such lines with 4 spaces, e.g.
+  ```
+  Dirt
+  $ENGINE_PAR_DIRT_DRIVEA
+  $ENGINE_PAR_DIRT_AMOUNTA
+  $ENGINE_PAR_DIRT_BIASA
+  $ENGINE_PAR_DIRT_TILTA
+  $ENGINE_PAR_DIRT_MODEA
+      $NI_DIRT_MODE_I
+      $NI_DIRT_MODE_II
+      $NI_DIRT_MODE_III
+  $ENGINE_PAR_DIRT_SAFETYA
+  ```
+  
+## Automatically Parsed Elements
+### Page Number in PDF
+#### Table of Content Page Number
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Table of Contents Page 2 >>>>>>>>>>>>>>>>>>>>
@@ -63,24 +177,24 @@
 - Since after the table of contents start again with 1 it's important to tell the parser how many pages are used for the
   table of contents, see `page_offset` in `BaseMainParser`
 
-#### Normal Content Page Number (implemented)
+#### Normal Content Page Number
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Page 321 >>>>>>>>>>>>>>>>>>>>
   ```
 - It starts with "Page"
 
-### Table of Contents (implemented)
+### Table of Contents
 - Table of contents is needed to identify the headlines in the scanned chapters
 
-#### Headline (implemented)
+#### Headline
 - Example:
   ```
   21. Built-in Variables and Constants      ............................................................................       259
   ```
 - A headline starts with a chapter number
 
-#### Category (implemented)
+#### Category
 - Example:
   ```
   General ................................................................................................................                             259
@@ -88,19 +202,19 @@
 - Categories are in the table of content, but don't have a chapter number
 - Categories are handled only for the chapter they are located
 
-### Callbacks (not implemented yet)
+### Callbacks
 - Callback start with `on <callback>`
 
-### Types (not implemented yet)
-- Types are used with `declare`
+### Widgets
+- UI Widgets are used with `declare`
 
-### Functions (not implemented yet)
-- Functions are search starting and ending with a specified chapter
+### Commands
+- Commands are search starting and ending with a specified chapter
 
-### Variables and Constants (mostly implemented)
+### Variables and Constants
 - Variables and Constants are search starting and ending with a specified chapter
 
-#### Normal Variable in Header (implemented)
+#### Normal Variable in Header
 - Example:
   ```
   $NI_BUS_OFFSET
@@ -111,7 +225,7 @@
 - The variable is in the first line
 - The documentation follows in the next lines
 
-#### Multiple Variables in Header (not implemented yet)
+#### Multiple Variables in Header
 - Example:
   ```
   $NI_SIGNAL_TIMER_BEAT
@@ -124,7 +238,7 @@
 - The variables are in the first lines
 - The documentation is valid for all those variables
 
-#### Array in Header (implemented)
+#### Array in Header
 - Example:
   ```
   %GROUPS_SELECTED[<group-idx>]
@@ -133,7 +247,7 @@
   ```
 - The parameter of the variable is parsed separately in the square brackets
 
-#### Variable Range in Header (implemented)
+#### Variable Range in Header
 - Example:
   ```
   $MARK_1 ... $MARK_28
@@ -143,7 +257,7 @@
   ```
 - The documentation is meant for the variables 1 ... n, so the variables in that range must be created
 
-#### Variable Comments (implemented)
+#### Variable Comments
 - Example:
   ```
   •  $EVENT_PAR_PLAY_POS (Returns the absolute position of the play cursor within a zone in
@@ -368,3 +482,4 @@
   ```
   - The constant list shall be merged
   - The repetition of the table header shall be skipped
+  - This is done manually in `cfg/ksp<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`

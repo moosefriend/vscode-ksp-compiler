@@ -20,13 +20,4 @@ from ksp_base.base_command_parser import BaseCommandParser
 
 
 class KspCommandParser(BaseCommandParser):
-    MERGE_LINES = {
-        # <line number in the text file>
-    }
-    """Set of lines to be merged, because they are wrapped and therefore not correctly identified"""
-    # TODO: WRAPPED_COMMANDS are tables with 2 columns. Maybe for such complex use cases it would be easier to have
-    #    an overwrite mechanism, so to ignore lines and manually configure the values.
-    WRAPPED_CELLS = {
-        # <line number in the text file>: (<command part in the first line>, <command part in the second line>)
-    }
-    """Dictionary of wrapped table cells to be merged"""
+    pass
