@@ -8917,10 +8917,8 @@ Event parameters to be used with set_event_par_arr() and get_event_par_arr():
 Event parameters to be used with get_event_par() only:
 •  $EVENT_PAR_SOURCE (-1 if event originates from outside, otherwise slot number 0 ... 4)
 •  $EVENT_PAR_PLAY_POS (Returns the absolute position of the play cursor within a zone in microseconds)
-•  $EVENT_PAR_ZONE_ID (Returns the zone ID of the event- Can only be used with active events.
-Returns -1 if no zone is triggered. Returns the highest zone ID if more than one zone is triggered by the event. Make sure the voice is running by writing e.g. wait (1) before retrieving the zone ID!)
-Event parameters to be used with set_event_par() and get_event_par() in multi scripts
-only:
+•  $EVENT_PAR_ZONE_ID (Returns the zone ID of the event- Can only be used with active events. Returns -1 if no zone is triggered. Returns the highest zone ID if more than one zone is triggered by the event. Make sure the voice is running by writing e.g. wait (1) before retrieving the zone ID!)
+Event parameters to be used with set_event_par() and get_event_par() in multi scripts only:
 •  $EVENT_PAR_MIDI_COMMAND
 •  $EVENT_PAR_MIDI_BYTE_1
 •  $EVENT_PAR_MIDI_BYTE_2
@@ -8940,8 +8938,7 @@ Event Status Constants
 These are values returned by event_status() command:
 $EVENT_STATUS_INACTIVE
 $EVENT_STATUS_NOTE_QUEUE
-Multi script only:
-$EVENT_STATUS_MIDI_QUEUE
+$EVENT_STATUS_MIDI_QUEUE (Multi script only)
 <<<<<<<<<<<<<<<<<<<< Page 263 >>>>>>>>>>>>>>>>>>>>
 
 
@@ -9009,9 +9006,10 @@ You can also retrieve the duration of one bar by using $SIGNATURE_NUM and $SIGNA
 in combination with various $DURATION_ constants.
 
 
+Note Duration
+These variables return the duration of a note in microseconds, with respect to the current
+tempo.
 $DURATION_QUARTER
-This variable returns the duration of a quarter note in microseconds, with respect to the current
-tempo. Also available:
 $DURATION_EIGHTH
 $DURATION_SIXTEENTH
 $DURATION_QUARTER_TRIPLET
@@ -9110,8 +9108,7 @@ $NI_CB_TYPE_RPN
 $NI_CB_TYPE_UI_CONTROL
 $NI_CB_TYPE_UI_CONTROLS
 $NI_CB_TYPE_UI_UPDATE
-Multi script only:
-$NI_CB_TYPE_MIDI_IN
+$NI_CB_TYPE_MIDI_IN (Multi script only)
 
 
 Knob Unit Mark Constants
@@ -9176,7 +9173,7 @@ Nothing will be applied to the widget.
 $CONTROL_PAR_CUSTOM_ID
 Sets or returns a custom value bound to a specific UI widget. This allows custom tagging of UI
 widgets, for instance to bind them to a specific parameter in the script.
-
+[JoKr]
 
 $CONTROL_PAR_TYPE
 Returns the type of the UI widget.

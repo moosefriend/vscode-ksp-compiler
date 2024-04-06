@@ -31,7 +31,7 @@ log = logging.getLogger(__name__)
 
 
 class BaseVariableParser(BaseItemParser):
-    VAR_PATTERN = re.compile(r"^(?:•?\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+(\(.+\)))?$")
+    VAR_PATTERN = re.compile(r"^(?:•?\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+\((.+\)))?$")
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
@@ -89,9 +89,7 @@ class BaseVariableParser(BaseItemParser):
             self.comment = m.group(4)
             variable = self.add_variable(name, parameter)
             if variable:
-                self.item_list = [variable]
-            else:
-                self.item_list = []
+                self.item_list.append(variable)
             # if self.doc_state == DocState.DESCRIPTION:
             #     self.add_item_documentation(line)
             doc_state = DocState.DESCRIPTION
@@ -100,7 +98,6 @@ class BaseVariableParser(BaseItemParser):
             base_name = m.group(1)
             start_index = int(m.group(2))
             end_index = int(m.group(4))
-            self.item_list = []
             for i in range(start_index, end_index + 1):
                 name = f"{base_name}{i}"
                 variable = self.add_variable(name, "")
@@ -157,6 +154,7 @@ class BaseVariableParser(BaseItemParser):
                 header_description=self.block_headline,
                 item_list_headline=self.item_list_headline,
                 comment=self.comment,
+                references=[],
                 source="BUILT-IN"
             )
             self.all_items[name] = variable
@@ -178,7 +176,11 @@ class BaseVariableParser(BaseItemParser):
         """
         if self.item_list:
             first_variable = self.item_list[0]
+            references = [x.name for x in self.item_list]
             for i, variable in enumerate(self.item_list):
+                variable.references = references.copy()
+                # Remove the self reference
+                variable.references.remove(variable.name)
                 if i == 0:
                     continue
                 else:
