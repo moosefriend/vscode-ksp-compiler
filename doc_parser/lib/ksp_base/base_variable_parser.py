@@ -31,7 +31,7 @@ log = logging.getLogger(__name__)
 
 
 class BaseVariableParser(BaseItemParser):
-    VAR_PATTERN = re.compile(r"^(?:•?\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+\((.+\)))?$")
+    VAR_PATTERN = re.compile(r"^(?:•?\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+\((.+)\))?$")
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
@@ -108,8 +108,14 @@ class BaseVariableParser(BaseItemParser):
             doc_state = DocState.DESCRIPTION
         # Check for item list headlines
         elif line.endswith(":"):
-            # TODO: When the line also contains a "." then the item list headline shall only be after the "."
-            #    The text before the "." should be added to the description of the previous variable.
+            # When the line also contains a "." then the item list headline shall only be after the "."
+            # The text before the "." should be added to the description of the previous variable.
+            if "." in line:
+                description, line = line.split(".", 2)
+                if self.doc_state == DocState.DESCRIPTION:
+                    self.add_item_documentation(description)
+                else:
+                    self.block_description += description
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
             log.info(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
@@ -154,7 +160,7 @@ class BaseVariableParser(BaseItemParser):
                 header_description=self.block_headline,
                 item_list_headline=self.item_list_headline,
                 comment=self.comment,
-                references=[],
+                see_also=[],
                 source="BUILT-IN"
             )
             self.all_items[name] = variable
@@ -176,11 +182,11 @@ class BaseVariableParser(BaseItemParser):
         """
         if self.item_list:
             first_variable = self.item_list[0]
-            references = [x.name for x in self.item_list]
+            see_also = [x.name for x in self.item_list]
             for i, variable in enumerate(self.item_list):
-                variable.references = references.copy()
+                variable.see_also = see_also.copy()
                 # Remove the self reference
-                variable.references.remove(variable.name)
+                variable.see_also.remove(variable.name)
                 if i == 0:
                     continue
                 else:

@@ -171,6 +171,7 @@ class BaseItemParser:
                 self.category = ""
                 if self.on_headline:
                     self.on_headline(line)
+                self.item_list = []
                 log.info(f"- Headline: {self.headline} ({self.reader.location()})")
             # Check for categories
             # Special case for callbacks: The category, e.g. on init appears twice
@@ -180,6 +181,7 @@ class BaseItemParser:
                 if self.on_category:
                     self.on_category(line)
                 self.doc_state = DocState.CATEGORY
+                self.item_list = []
                 log.info(f"   - Category: {self.category} ({self.reader.location()})")
             elif self.doc_state != DocState.NONE:
                 # Check for items

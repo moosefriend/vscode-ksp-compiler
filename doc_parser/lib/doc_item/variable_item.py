@@ -24,7 +24,7 @@ from doc_item.doc_item import DocItem
 class VariableItem(DocItem):
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, header_description: str,
                  item_list_headline: str, name: str, parameter: str, comment: str, description: str,
-                 references: list[str] = None, source: str = None):
+                 see_also: list[str] = None, source: str = None):
         """
         Container for variable documentation.
 
@@ -39,7 +39,7 @@ class VariableItem(DocItem):
         :param parameter: Parameter for variable e.g. for an array
         :param comment: Comment found behind the variable in brackets
         :param description: Item documentation
-        :param references: List of other variable names in the same block
+        :param see_also: List of other variable names in the same block
         :param source: Where the item has been parsed, e.g. build-in
         """
         super().__init__(file, page_no, line_no, headline, category, name, description)
@@ -49,7 +49,7 @@ class VariableItem(DocItem):
         self.parameter: str = parameter
         self.comment: str = comment
         self.description: str = description
-        self.references: list[str] = references
+        self.see_also: list[str] = see_also
         self.source: str = source
 
     def fix_documentation(self):
@@ -62,8 +62,8 @@ class VariableItem(DocItem):
     @staticmethod
     def csv_header():
         return ("File", "Page No", "Line No", "Headline", "Category", "Block Headline", "Item List Headline", "Name",
-                "Parameter", "Comment", "Description", "References", "Source")
+                "Parameter", "Comment", "Description", "See Also", "Source")
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.header_description,
-                self.item_list_headline,  self.name, self.parameter, self.comment, self.description, ",".join(self.references), self.source)
+                self.item_list_headline,  self.name, self.parameter, self.comment, self.description, ",".join(self.see_also), self.source)
