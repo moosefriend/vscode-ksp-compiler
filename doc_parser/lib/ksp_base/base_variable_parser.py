@@ -67,20 +67,20 @@ class BaseVariableParser(BaseItemParser):
             on_category=self.reset_descriptions,
             finalize_item_list=self.finalize_item_list
         )
-        self.table_headline: str = ""
-        self.table_description: str = ""
+        self.block_headline: str = ""
+        self.block_description: str = ""
         self.item_list_headline: str = ""
         self.comment: str = ""
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
-        # TODO: Multiple variables in the table header sharing the same documentation, e.g. line 9645.
+        # TODO: Multiple variables in the block header sharing the same documentation, e.g. line 9645.
         #    The documentation should be added to all those variables.
-        # TODO: Variable in the table header. In the table body description follows with and item list of constants,
+        # TODO: Variable in the block header. In the block body description follows with and item list of constants,
         #    e.g. line 9753
         #    The constants should have a reference to the variable incl. its description.
-        # TODO: Table header with a description in the table body followed by a list of variables, e.g. line 8995.
-        #    The Table header should only by the first line, and the description should be assigned to all variables
+        # TODO: Block header with a description in the block body followed by a list of variables, e.g. line 8995.
+        #    The Block header should only by the first line, and the description should be assigned to all variables
         #    in the list.
         # Check if the line contains a variable or constant
         if m := self.VAR_PATTERN.match(line):
@@ -118,14 +118,14 @@ class BaseVariableParser(BaseItemParser):
             log.info(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
-        # Check for table headline or description block before the variable(s)
+        # Check for block headline or description block before the variable(s)
         elif self.doc_state == DocState.CATEGORY and line != "":
-            if not self.table_headline:
-                self.table_headline = line
-                log.info(f"   - Table Header: {line} ({self.reader.location()})")
+            if not self.block_headline:
+                self.block_headline = line
+                log.info(f"   - Block Header: {line} ({self.reader.location()})")
             else:
-                self.table_description += line + "\n"
-                log.info(f"   - Table Description: {line} ({self.reader.location()})")
+                self.block_description += line + "\n"
+                log.info(f"   - Block Description: {line} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
         return doc_state
@@ -153,8 +153,8 @@ class BaseVariableParser(BaseItemParser):
                 category=self.category,
                 name=name,
                 parameter=parameter,
-                description=self.table_description,
-                header_description=self.table_headline,
+                description=self.block_description,
+                header_description=self.block_headline,
                 item_list_headline=self.item_list_headline,
                 comment=self.comment,
                 source="BUILT-IN"
@@ -168,8 +168,8 @@ class BaseVariableParser(BaseItemParser):
             self.item_list[0].description += line + "\n"
 
     def reset_descriptions(self, _: str):
-        self.table_headline = ""
-        self.table_description = ""
+        self.block_headline = ""
+        self.block_description = ""
         self.item_list_headline = ""
 
     def finalize_item_list(self):
@@ -183,5 +183,5 @@ class BaseVariableParser(BaseItemParser):
                     continue
                 else:
                     variable.description = first_variable.description
-        self.table_headline = ""
+        self.block_headline = ""
         self.item_list_headline = ""

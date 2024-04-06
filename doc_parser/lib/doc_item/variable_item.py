@@ -58,7 +58,7 @@ class VariableItem(DocItem):
 
     @staticmethod
     def csv_header():
-        return ("File", "Page No", "Line No", "Headline", "Category", "Table Headline", "Item List Headline", "Name",
+        return ("File", "Page No", "Line No", "Headline", "Category", "Block Headline", "Item List Headline", "Name",
                 "Parameter", "Comment", "Description", "Source")
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
