@@ -113,9 +113,9 @@ class BaseVariableParser(BaseItemParser):
             if "." in line:
                 description, line = line.split(".", 2)
                 if self.doc_state == DocState.DESCRIPTION:
-                    self.add_item_documentation(description)
+                    self.add_item_documentation(description + ".")
                 else:
-                    self.block_description += description
+                    self.block_description += description + "."
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
             log.info(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
