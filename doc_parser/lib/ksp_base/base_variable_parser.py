@@ -141,29 +141,29 @@ class BaseVariableParser(BaseItemParser):
         :param parameter: Parameter name if it is e.g. an array
         :return: VariableItem of the just created variable or None if duplicate or ignored
         """
-        variable: Optional[VariableItem] = None
+        variable = VariableItem(
+            file=self.reader.file,
+            page_no=self.reader.page_no,
+            line_no=self.reader.line_no,
+            headline=self.headline,
+            category=self.category,
+            name=name,
+            parameter=parameter,
+            description=self.block_description,
+            block_headline=self.block_headline,
+            item_list_headline=self.item_list_headline,
+            comment=self.comment,
+            see_also=[],
+            source="BUILT-IN"
+        )
         if name in self.all_items:
             log.info(f"      - Duplicate {name} ({self.reader.location()})")
             self.duplicate_cnt += 1
         else:
             log.info(f"      - Found {name} ({self.reader.location()})")
             self.item_cnt += 1
-            variable = VariableItem(
-                file=self.reader.file,
-                page_no=self.reader.page_no,
-                line_no=self.reader.line_no,
-                headline=self.headline,
-                category=self.category,
-                name=name,
-                parameter=parameter,
-                description=self.block_description,
-                header_description=self.block_headline,
-                item_list_headline=self.item_list_headline,
-                comment=self.comment,
-                see_also=[],
-                source="BUILT-IN"
-            )
-            self.all_items[name] = variable
+            self.all_items[name] = []
+        self.all_items[name].append(variable)
         return variable
 
     def add_item_documentation(self, line):
@@ -191,5 +191,4 @@ class BaseVariableParser(BaseItemParser):
                     continue
                 else:
                     variable.description = first_variable.description
-        self.block_headline = ""
-        self.item_list_headline = ""
+        self.reset_descriptions("")

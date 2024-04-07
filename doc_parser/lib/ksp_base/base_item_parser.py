@@ -105,8 +105,8 @@ class BaseItemParser:
         """Number of found items"""
         self.item_list: list[DocItem] = []
         """Current list of found items"""
-        self.all_items: dict[str, DocItem] = {}
-        """Dictionary where the key is the item name and the value it the corresponding item"""
+        self.all_items: dict[str, list[DocItem]] = {}
+        """Dictionary where the key is the item name and the value is a list of the items inclusive duplicates"""
         self.headline: str = ""
         """Last found headline in the content"""
         self.chapter_categories: dict[str, int] = {}
@@ -174,9 +174,12 @@ class BaseItemParser:
                 self.item_list = []
                 log.info(f"- Headline: {self.headline} ({self.reader.location()})")
             # Check for categories
+            # Some categories are not mentioned in the table of contents => Those are marked with "[C]"
             # Special case for callbacks: The category, e.g. on init appears twice
             # So check if the category is already set
-            elif line in self.chapter_categories and line != self.category:
+            elif line.startswith("[C]") or (line in self.chapter_categories and line != self.category):
+                if line.startswith("[C]"):
+                    line = line[3:]
                 self.category = line
                 if self.on_category:
                     self.on_category(line)
@@ -208,8 +211,9 @@ class BaseItemParser:
                     self.doc_state = DocState.CATEGORY
             self.last_line = line
         # Fix all descriptions, e.g. remove newlines at begin and end
-        for cur_item in self.all_items.values():
-            cur_item.fix_documentation()
+        for cur_item_list in self.all_items.values():
+            for cur_item in cur_item_list:
+                cur_item.fix_documentation()
         log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")
         log.info(f"{self.duplicate_cnt} duplicate {self.doc_item_class.plural()}")
 
@@ -246,5 +250,6 @@ class BaseItemParser:
             # Sort the list for identifier rules
             # for name in natsorted(self.all_items.keys()):
             for name in self.all_items.keys():
-                cur_item = self.all_items[name]
-                csv_writer.writerow(cur_item.as_csv_list())
+                cur_item_list = self.all_items[name]
+                for cur_item in cur_item_list:
+                    csv_writer.writerow(cur_item.as_csv_list())

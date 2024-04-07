@@ -17,6 +17,26 @@
   would not work. Therefore, in PyCharm after converting a file select the converted file and choose "Override File
   Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
 
+## Definitions
+### Table of Contents
+- The table of contents is parsed to get the chapter headlines and the categories valid in each chapter
+
+### Headline
+- A headline starts with a chapter number e.g. "21. Built-in Variables and Constants"
+
+### Category
+- Categories are inside a chapter which are some kind of sub headline without a chapter number
+- Most of the categories are mentioned in the table of contents
+- But some categories are only in the content (manually marked with `[C]`)
+
+### Block Headline
+- For variables there are blocks starting with a block headline followed by a description
+- Then the variables are listed
+
+### Item List Headline
+- For variables inside a block there are item list headlines which end with a colon (":")
+- Then the variables are listed
+
 ## Fix the converted KSP Text Manual
 ### Preparation
 - Copy the converted KSP text manual
@@ -29,6 +49,14 @@
 - In PyCharm select the copied file and select "Override File Type" from the context menu
 - In the upcoming dialog choose "Plain Text" to avoid that the file is interpreted as a Python file
 - Open `cfg/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
+
+### Categories not found in Table of Content
+- Some categories in the text are not found in the table of content
+- Such categories must be prefixed with "[C]" so that the parser identifies it as a category
+- Example:
+  ```
+  [C]Size, Position, and Look
+  ```
 
 ### Insert Colon for Command Parameters
 - In Pycharm for parameters (= `<parameter-name>`) insert a colon and a space (=> `<parameter-name>: `) . Therefore
@@ -126,6 +154,7 @@
   
   
   Waveform Property Constants
+  ...
   ```
 - Delete those lines incl. the repeated header (if any) manually
 
@@ -133,7 +162,8 @@
 - Sometimes variable comments (= text in brackets after a variable) are not properly identified, because they are wrapped into the next line
 - Example:
   ```
-  
+  $NI_SYNC_UNIT_ZONE (only applies to the Speed parameter in certain Source module sampler
+  modes)
   ```
 - To properly parse such lines, remove the newline before the wrapped line
 

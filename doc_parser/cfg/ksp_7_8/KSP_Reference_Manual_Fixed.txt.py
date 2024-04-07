@@ -282,7 +282,7 @@ General ........................................................................
 Specific ................................................................................................................                             275
 
 23. Engine Parameters   ................................................................................................         284
-Instrument, Source and Amplifier  Module ................................................................                 284
+Instrument, Source and Amplifier Module ................................................................                 284
 Filter and EQ .........................................................................................................                           288
 Insert Effects ........................................................................................................                           290
 Send Effects .........................................................................................................                           304
@@ -9173,7 +9173,7 @@ Nothing will be applied to the widget.
 $CONTROL_PAR_CUSTOM_ID
 Sets or returns a custom value bound to a specific UI widget. This allows custom tagging of UI
 widgets, for instance to bind them to a specific parameter in the script.
-[JoKr]
+
 
 $CONTROL_PAR_TYPE
 Returns the type of the UI widget.
@@ -9197,7 +9197,7 @@ $NI_CONTROL_TYPE_LEVEL_METER
 $NI_CONTROL_TYPE_MOUSE_AREA
 $NI_CONTROL_TYPE_PANEL
 
-Size, Position, and Look
+[C]Size, Position, and Look
 
 $CONTROL_PAR_POS_X
 Sets or returns the horizontal position in pixels.
@@ -9287,7 +9287,7 @@ Z layer order by widget type (from top to bottom):
 14. Waveform
 15. File Selector
 
-Values
+[C]Values
 
 $CONTROL_PAR_MIN_VALUE
 Returns the minimum declared value of the widget. This control parameter only makes sense for
@@ -9311,7 +9311,7 @@ Sets or returns the default value of the widget. A widget is set to the default 
 it with [Ctrl] (Windows) or [Cmd] (macOS) key held. This is only applicable to ui_knob and
 ui_slider.
 
-Text
+[C]Text
 
 $CONTROL_PAR_TEXT
 Sets or returns the widget text, similar to set_text().
@@ -9351,8 +9351,7 @@ Sets or returns the knob unit, similar to set_knob_unit().
 $CONTROL_PAR_FONT_TYPE
 Sets or returns the font type. Numbers 0 ... 25 are used to select any of the 26 factory fonts, as
 shown below. Combine with get_font_id() to use custom fonts.
-For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set
-separately for each of the states via the following control parameters:
+For responsive widgets (ui_button, ui_switch and ui_menu), the font can also be set separately for each of the states via the following control parameters:
 $CONTROL_PAR_FONT_TYPE_ON
 $CONTROL_PAR_FONT_TYPE_OFF_PRESSED
 $CONTROL_PAR_FONT_TYPE_ON_PRESSED
@@ -9408,7 +9407,7 @@ ui_xy cursors).
 When assigning automation IDs to ui_xy cursors, use set_control_par_arr() command
 instead of set_control_par().
 
-Key Modifiers
+[C]Key Modifiers
 
 $CONTROL_PAR_KEY_SHIFT
 Returns 1 when the shift key was pressed (0 otherwise) while clicking the UI widget.
@@ -9436,7 +9435,7 @@ Tables
 $NI_CONTROL_PAR_IDX
 Returns the index of the ui_table column or ui_xy cursor that triggered the on ui_control callback.
 
-Tables and Waveforms
+[C]Tables and Waveforms
 
 $CONTROL_PAR_BAR_COLOR
 Sets or returns the color of the step bar in ui_table and ui_value_edit.
@@ -9449,7 +9448,7 @@ indicate that it is a hexadecimal value.
 $CONTROL_PAR_ZERO_LINE_COLOR
 Sets or returns the color of the middle line in ui_table.
 
-Menus
+[C]Menus
 
 $CONTROL_PAR_NUM_ITEMS
 Returns the number of menu entries in a specific ui_menu.
@@ -9461,7 +9460,7 @@ $CONTROL_PAR_SELECTED_ITEM_IDX
 Returns the index of the currently selected menu entry.
 Only works with get_control_par().
 
-Mouse Area
+[C]Mouse Area
 
 $CONTROL_PAR_DND_ACCEPT_AUDIO
 $CONTROL_PAR_DND_ACCEPT_MIDI
@@ -9498,7 +9497,7 @@ on ui_control ($aMouseArea)
     end if
 end on
 
-Labels
+[C]Labels
 
 $CONTROL_PAR_DND_BEHAVIOUR
 Sets or returns the drag and drop behavior for ui_label. Using a value of 1 sets the label as a drag
@@ -9510,14 +9509,14 @@ $CONTROL_PAR_MIDI_EXPORT_AREA_IDX
 Assigns one of 512 available MIDI object export areas to be drag and drop exported via a particular
 ui_label. For more information on MIDI handling in KSP, refer to MIDI Object Commands.
 
-Value Edit
+[C]Value Edit
 
 $CONTROL_PAR_SHOW_ARROWS
 Hides the arrows of ui_value_edit.
 0: Arrows are hidden
 1: Arrows are shown
 
-Level Meters
+[C]Level Meters
 
 $CONTROL_PAR_BG_COLOR
 Sets or returns the background color of ui_level_meter.
@@ -9550,7 +9549,7 @@ $CONTROL_PAR_RANGE_MAX
 Sets the minimum and maximum display range of ui_level_meter, with default range 0 ... 1000000.
 If the minimum values is smaller than the maximum value, the display is inverted.
 
-File Selector
+[C]File Selector
 
 $CONTROL_PAR_BASEPATH
 Sets or returns the basepath of ui_file_selector. This control parameter can be used in any callback.
@@ -9578,7 +9577,7 @@ $NI_FILE_TYPE_MIDI
 $NI_FILE_TYPE_AUDIO
 $NI_FILE_TYPE_ARRAY
 
-Instrument Icon and Wallpaper
+[C]Instrument Icon and Wallpaper
 
 $INST_ICON_ID
 
@@ -9600,32 +9599,27 @@ This command only supports wallpapers that are located within the resource conta
 If you use it in different script slots, then the last script slot in which wallpaper was set will be the
 one that is loaded.
 
-Waveform
+[C]Waveform
 
 Waveform Flag Constants
 To be used with attach_zone(). You can combine flag constants using the bitwise .or..
-$UI_WAVEFORM_USE_SLICEDisplay the zone’s slice markers.
-S
-$UI_WAVEFORM_USE_TABLE Display a per-slice table.
+$UI_WAVEFORM_USE_SLICES: Display the zone’s slice markers.
+$UI_WAVEFORM_USE_TABLE: Display a per-slice table.
 Note: this only works if the slice markers are also active.
-$UI_WAVEFORM_TABLE_IS_Make the table bipolar.
-BIPOLAR
-$UI_WAVEFORM_USE_MIDI_Display a MIDI drag and drop icon.
-DRAG Note: this only works if the slice markers are also active.
+$UI_WAVEFORM_TABLE_IS_BIPOLAR: Make the table bipolar.
+$UI_WAVEFORM_USE_MIDI_DRAG: Display a MIDI drag and drop icon.
+Note: this only works if the slice markers are also active.
 
 
 Waveform Property Constants
 To be used with get_ui_wf_property() and set_ui_wf_property().
 <<<<<<<<<<<<<<<<<<<< Page 279 >>>>>>>>>>>>>>>>>>>>
-$UI_WF_PROP_PLAY_CURSOSets or returns the play cursor position, in microseconds.
-R
-$UI_WF_PROP_FLAGS Used to set new flag constants after the attach_zone()
+$UI_WF_PROP_PLAY_CURSOR: Sets or returns the play cursor position, in microseconds.
+$UI_WF_PROP_FLAGS: Used to set new flag constants after the attach_zone()
 command is used.
-$UI_WF_PROP_TABLE_VAL Sets or returns the value of the indexed slice’s table.
-$UI_WF_PROP_TABLE_IDX_Highlights the indexed slice within the ui_waveform widget.
-HIGHLIGHT
-$UI_WF_PROP_MIDI_DRAG_Defines the start note for the MIDI drag and drop function.
-START_NOTE
+$UI_WF_PROP_TABLE_VAL: Sets or returns the value of the indexed slice’s table.
+$UI_WF_PROP_TABLE_IDX_HIGHLIGHT: Highlights the indexed slice within the ui_waveform widget.
+$UI_WF_PROP_MIDI_DRAG_START_NOTE: Defines the start note for the MIDI drag and drop function.
 
 
 $CONTROL_PAR_WF_VIS_MODE
@@ -9656,7 +9650,7 @@ $CONTROL_PAR_BG_ALPHA
 Sets or returns the alpha channel (opacity) of the background of ui_waveform.
 Range: 0 (fully transparent) to 255 (fully opaque).
 
-Wavetable
+[C]Wavetable
 
 $CONTROL_PAR_WT_ZONE
 Attaches a zone to ui_wavetable, taking the zone ID as the argument.
@@ -9723,14 +9717,14 @@ background waveforms (3D).
 $CONTROL_PAR_WAVETABLE_END_ALPHA: Sets or returns the alpha channel (opacity) for the end of the
 gradient applied to the background waveforms (3D).
 
-Slider
+[C]Slider
 
 $CONTROL_PAR_MOUSE_BEHAVIOUR
 A value from -5000 to 5000, setting the move direction of ui_slider and its sensitivity.
 Settings are relative to the size of the slider picture.
 Negative values give a vertical slider behavior, positive values give a horizontal behavior.
 
-XY Pad
+[C]XY Pad
 
 $CONTROL_PAR_MOUSE_BEHAVIOUR_X
 Mouse behavior, i.e. the drag scale, of the X axis of all ui_xy cursors.
@@ -9815,7 +9809,7 @@ $NI_MOUSE_EVENT_TYPE_DRAG
 <<<<<<<<<<<<<<<<<<<< Page 284 >>>>>>>>>>>>>>>>>>>>
 23. Engine Parameters
 
-Instrument, Source and  Amplifier Module
+Instrument, Source and Amplifier Module
 
 $ENGINE_PAR_VOLUME
 Instrument, group or bus volume.
@@ -10033,7 +10027,7 @@ Output gain of all insert effects.
 Note: This engine parameter will affect the output gain of all filters and EQs , even if they don't have
 the Output parameter visible on their module panels!
 
-Dynamics
+[C]Dynamics
 
 Compressor
 
@@ -10118,7 +10112,7 @@ $ENGINE_PAR_TRANSLIM_THRESHOLD
 $ENGINE_PAR_TRANSLIM_RELEASE
 $ENGINE_PAR_TRANSLIM_CEILING
 
-Amps
+[C]Amps
 
 ACBox
 $ENGINE_PAR_AC_NORMALVOLUME
@@ -10271,7 +10265,7 @@ $ENGINE_PAR_V5_BRIGHT
 $ENGINE_PAR_V5_CRUNCH
 $ENGINE_PAR_V5_MONO
 
-Stomps
+[C]Stomps
 
 Big Fuzz
 $ENGINE_PAR_BIGFUZZ_SUSTAIN
@@ -10373,7 +10367,7 @@ $ENGINE_PAR_SK_MIX
 <<<<<<<<<<<<<<<<<<<< Page 299 >>>>>>>>>>>>>>>>>>>>
 
 
-Lo-Fi
+[C]Lo-Fi
 
 Bite
 $ENGINE_PAR_BITE_FREQUENCY
@@ -10400,7 +10394,7 @@ $ENGINE_PAR_FREQUENCY
 $ENGINE_PAR_NOISELEVEL
 $ENGINE_PAR_NOISECOLOR
 
-Tape
+[C]Tape
 
 Tape Saturator
 
@@ -10423,7 +10417,7 @@ $ENGINE_PAR_WOWFLUTTER_GATE
 <<<<<<<<<<<<<<<<<<<< Page 300 >>>>>>>>>>>>>>>>>>>>
 
 
-Modulation
+[C]Modulation
 
 Choral
 $ENGINE_PAR_CHORAL_RATE
@@ -10551,7 +10545,7 @@ $ENGINE_PAR_VC_COLOR
     $NI_VC_COLOR_TYPE_B
     $NI_VC_COLOR_TYPE_C
 
-Spatial
+[C]Spatial
 
 Stereo Modeller
 $ENGINE_PAR_STEREO
@@ -10578,7 +10572,7 @@ $ENGINE_PAR_SP_LFE_VOLUME
 $ENGINE_PAR_SP_SIZE
 $ENGINE_PAR_SP_DIVERGENCE
 
-Utilities
+[C]Utilities
 
 AET Filter
 
@@ -10619,7 +10613,7 @@ When used with send effects, this controls either:
 •     Wet amount of send effects when used in an Insert FX chain
 •     Return amount of send effects when used in a Send FX chain
 
-Delay
+[C]Delay
 
 PsycheDelay
 $ENGINE_PAR_PSYDL_TIME
@@ -10692,7 +10686,7 @@ $ENGINE_PAR_DL_DAMPING
 $ENGINE_PAR_DL_PAN
 $ENGINE_PAR_DL_FEEDBACK
 
-Reverb
+[C]Reverb
 
 Convolution
 
@@ -10764,7 +10758,7 @@ $ENGINE_PAR_RV_DAMPING
 <<<<<<<<<<<<<<<<<<<< Page 308 >>>>>>>>>>>>>>>>>>>>
 
 
-Modulation
+[C]Modulation
 
 Legacy Chorus
 $ENGINE_PAR_CH_DEPTH
@@ -10791,7 +10785,7 @@ $ENGINE_PAR_PH_SPEED_UNIT
 $ENGINE_PAR_PH_PHASE
 $ENGINE_PAR_PH_FEEDBACK
 
-Utilities
+[C]Utilities
 
 Gainer
 $ENGINE_PAR_GN_GAIN

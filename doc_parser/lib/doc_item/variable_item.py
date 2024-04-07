@@ -22,7 +22,7 @@ from doc_item.doc_item import DocItem
 
 
 class VariableItem(DocItem):
-    def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, header_description: str,
+    def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, block_headline: str,
                  item_list_headline: str, name: str, parameter: str, comment: str, description: str,
                  see_also: list[str] = None, source: str = None):
         """
@@ -33,7 +33,7 @@ class VariableItem(DocItem):
         :param line_no: Line number in the file where the variable has been found
         :param headline: Main headline where the item has been found
         :param category: Category (= Sub-headline in the table of contents) where the item has been found
-        :param header_description: Headline of a table e.g. containing constants (if any)
+        :param block_headline: Headline of a block e.g. containing constants (if any)
         :param item_list_headline: Headline for an item list e.g. for constants (if any)
         :param name: Variable name
         :param parameter: Parameter for variable e.g. for an array
@@ -43,7 +43,7 @@ class VariableItem(DocItem):
         :param source: Where the item has been parsed, e.g. build-in
         """
         super().__init__(file, page_no, line_no, headline, category, name, description)
-        self.header_description: str = header_description
+        self.block_headline: str = block_headline
         self.item_list_headline: str = item_list_headline
         self.name: str = name
         self.parameter: str = parameter
@@ -57,7 +57,7 @@ class VariableItem(DocItem):
         Remove newlines at the end and some spaces.
         """
         super().fix_description()
-        self.header_description = self.header_description.strip()
+        self.block_headline = self.block_headline.strip()
 
     @staticmethod
     def csv_header():
@@ -65,5 +65,5 @@ class VariableItem(DocItem):
                 "Parameter", "Comment", "Description", "See Also", "Source")
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str]:
-        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.header_description,
+        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.block_headline,
                 self.item_list_headline,  self.name, self.parameter, self.comment, self.description, ",".join(self.see_also), self.source)
