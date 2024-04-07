@@ -295,7 +295,7 @@
   ```
 - Comments for variables are directly after the variable in brackets
 
-#### Table Headline in Header (implemented)
+#### Block Headline in Header
 - Example:
   ```
   Path Variables
@@ -309,10 +309,10 @@
   The directory in which the patch was saved.
   If the patch was not saved before, an empty string is returned.
   ```
-- The headline is meant for all variables in the table
+- The headline is meant for all variables in the block
 - The description is variable specific
 
-#### Documentation in Table Header (not implemented yet)
+#### Block Description
 - Example:
   ```
   Time Machine Pro Variables
@@ -321,9 +321,9 @@
   $NI_VL_TMPRO_STANDARD
   $NI_VL_TMRPO_HQ
   ```
-- The headline and the following documentation is meant for all the variables in the table
+- The headline and the following description is meant for all the variables in the block
 
-#### Item List (implemented)
+#### Item List
 - Example:
   ```
   Event Parameter Constants
@@ -360,21 +360,10 @@
   •  $EVENT_PAR_TRACK_NR
   ```
 - Item list headlines end with a colon
-- Variables might be prepended with a item symbol ("•")
+- Variables might be prepended with an item symbol ("•")
 
-#### Variable with List of other Constants/Variables (not implemented yet)
-- Example 1:
-  ```
-  $DURATION_QUARTER
-  This variable returns the duration of a quarter note in microseconds, with respect to the current
-  tempo. Also available:
-  $DURATION_EIGHTH
-  $DURATION_SIXTEENTH
-  $DURATION_QUARTER_TRIPLET
-  $DURATION_EIGHTH_TRIPLET
-  $DURATION_SIXTEENTH_TRIPLET
-  ```
-- Example 2:
+#### Variable with List of other Constants/Variables
+- Example:
   ```
   $CONTROL_PAR_TYPE
   Returns the type of the UI widget.
@@ -401,115 +390,5 @@
 - The header contains the main variable
 - For the other variables/constants a link to the main variable would be helpful
 - The documentation of the main variable should contain also the entire item list
-
 - The constants should have a link to the variable
 - Unfortunately, this cannot be distinguished from the Item List
-
-#### Multi-Column Tables (not implemented yet)
-- Example 1:
-  ```
-  $CONTROL_PAR_RECEIVE_DRAG_EVENTS
-  Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
-  event (when set to 0) or also for drag events (when set to 1).
-  The UI callback has two built-in variables:
-  $NI_MOUSE_EVENT_TYPE Specifies the event type that triggered the callback and can have
-  one of the following values:
-  $NI_MOUSE_EVENT_TYPE_DND_DROP
-  $NI_MOUSE_EVENT_TYPE_DND_DRAG
-  $NI_MOUSE_OVER_CONTROL 1: The mouse has entered ui_mouse_area on a drag event
-  0: The mouse has left ui_mouse_area on a drag event
-  Example
-  
-  on ui_control ($aMouseArea)
-      if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
-          message(num_elements(!NI_DND_ITEMS_AUDIO))
-      end if
-  
-      if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DRAG)
-          message(num_elements(!NI_DND_ITEMS_AUDIO))
-          message($MOUSE_OVER_CONTROL)
-      end if
-  end on
-  ```
-- Example 2:
-  ```
-  Waveform Flag Constants
-  To be used with attach_zone(). You can combine flag constants using the bitwise .or..
-  $UI_WAVEFORM_USE_SLICEDisplay the zone’s slice markers.
-  S
-  $UI_WAVEFORM_USE_TABLE Display a per-slice table.
-  Note: this only works if the slice markers are also active.
-  $UI_WAVEFORM_TABLE_IS_Make the table bipolar.
-  BIPOLAR
-  $UI_WAVEFORM_USE_MIDI_Display a MIDI drag and drop icon.
-  DRAG Note: this only works if the slice markers are also active.
-  ```
-- Multi-Column tables can't be parsed in a reasonable manner
-- Therefore, it's required to manually override those entries and exclude such lines from the parsing
-  process
-
-#### Indented Constant List (not implemented yet)
-- Example:
-  ```
-  Source Module
-  $ENGINE_PAR_SOURCE_MODE (only works with get_engine_par()!)
-      $NI_SOURCE_MODE_SAMPLER
-      $NI_SOURCE_MODE_DFD
-      $NI_SOURCE_MODE_TONE_MACHINE
-      $NI_SOURCE_MODE_TIME_MACHINE_1
-      $NI_SOURCE_MODE_TIME_MACHINE_2
-      $NI_SOURCE_MODE_TIME_MACHINE_PRO
-      $NI_SOURCE_MODE_BEAT_MACHINE
-      $NI_SOURCE_MODE_MP60_MACHINE
-      $NI_SOURCE_MODE_S1200_MACHINE
-      $NI_SOURCE_MODE_WAVETABLE
-  $ENGINE_PAR_TRACKING
-  $ENGINE_PAR_HQI_MODE
-      $NI_HQI_MODE_STANDARD
-      $NI_HQI_MODE_HIGH
-      $NI_HQI_MODE_PERFECT
-  $ENGINE_PAR_SMOOTH
-  ...
-  ```
-- The constants should be linked to the variable
-- The documentation of the variable should contain the list of constants
-
-#### Page Wrapped Constant List (not implemented yet)
-- Example:
-  ```
-  $ENGINE_PAR_WT_PHASE_RAND
-  $ENGINE_PAR_WT_QUALITY
-      $NI_WT_QUALITY_LOFI
-      $NI_WT_QUALITY_MEDIUM
-      $NI_WT_QUALITY_HIGH
-      $NI_WT_QUALITY_BEST
-  $ENGINE_PAR_WT_FORM_MODE
-      $NI_WT_FORM_LINEAR
-      $NI_WT_FORM_SYNC1
-      $NI_WT_FORM_SYNC2
-      $NI_WT_FORM_SYNC3
-      $NI_WT_FORM_SYNC4
-  <<<<<<<<<<<<<<<<<<<< Page 286 >>>>>>>>>>>>>>>>>>>>
-  
-  
-  
-  Source Module
-      $NI_WT_FORM_SYNC5
-      $NI_WT_FORM_SYNC6
-      $NI_WT_FORM_BENDP
-      $NI_WT_FORM_BENDM
-      $NI_WT_FORM_BENDMP
-      $NI_WT_FORM_BEND2P
-      $NI_WT_FORM_BEND2M
-      $NI_WT_FORM_BEND2MP
-      ...
-  $ENGINE_PAR_S1200_FILTER_MODE
-      $NI_S1200_FILTER_NONE
-      $NI_S1200_FILTER_HIGH
-      $NI_S1200_FILTER_HIGH_MID
-      $NI_S1200_FILTER_LOW_MID
-      $NI_S1200_FILTER_LOW
-  ```
-  - The constant list shall be merged
-  - The repetition of the table header shall be skipped
-  - This is done manually in `cfg/ksp<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`

@@ -74,14 +74,9 @@ class BaseVariableParser(BaseItemParser):
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
-        # TODO: Multiple variables in the block header sharing the same documentation, e.g. line 9645.
-        #    The documentation should be added to all those variables.
-        # TODO: Variable in the block header. In the block body description follows with and item list of constants,
-        #    e.g. line 9753
-        #    The constants should have a reference to the variable incl. its description.
-        # TODO: Block header with a description in the block body followed by a list of variables, e.g. line 8995.
-        #    The Block header should only by the first line, and the description should be assigned to all variables
-        #    in the list.
+        # TODO: Main variable in the block header followed by description, then the constants
+        #    The constants should be also listed in the main variable
+        # TODO: Tables cells liked "variable: Description" are not identified
         # Check if the line contains a variable or constant
         if m := self.VAR_PATTERN.match(line):
             name = m.group(1)

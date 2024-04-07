@@ -9478,12 +9478,11 @@ $CONTROL_PAR_RECEIVE_DRAG_EVENTS
 Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
 event (when set to 0) or also for drag events (when set to 1).
 The UI callback has two built-in variables:
-$NI_MOUSE_EVENT_TYPE Specifies the event type that triggered the callback and can have
-one of the following values:
-$NI_MOUSE_EVENT_TYPE_DND_DROP
-$NI_MOUSE_EVENT_TYPE_DND_DRAG
-$NI_MOUSE_OVER_CONTROL 1: The mouse has entered ui_mouse_area on a drag event
-0: The mouse has left ui_mouse_area on a drag event
+$NI_MOUSE_EVENT_TYPE (Specifies the event type that triggered the callback)
+It can have one of the following values:
+    $NI_MOUSE_EVENT_TYPE_DND_DROP
+    $NI_MOUSE_EVENT_TYPE_DND_DRAG
+$NI_MOUSE_OVER_CONTROL (1: The mouse has entered ui_mouse_area on a drag event, 0: The mouse has left ui_mouse_area on a drag event)
 Example
 
 on ui_control ($aMouseArea)

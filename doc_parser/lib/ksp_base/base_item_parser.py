@@ -163,6 +163,8 @@ class BaseItemParser:
                 break
             # Check for headlines
             elif line in self.toc.all_headlines:
+                if self.finalize_item_list:
+                    self.finalize_item_list()
                 self.headline = line
                 if self.headline in self.toc.all_categories:
                     self.chapter_categories = self.toc.all_categories[self.headline]
@@ -178,6 +180,8 @@ class BaseItemParser:
             # Special case for callbacks: The category, e.g. on init appears twice
             # So check if the category is already set
             elif line.startswith("[C]") or (line in self.chapter_categories and line != self.category):
+                if self.finalize_item_list:
+                    self.finalize_item_list()
                 if line.startswith("[C]"):
                     line = line[3:]
                 self.category = line
