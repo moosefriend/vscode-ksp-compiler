@@ -507,8 +507,8 @@ KSP_Reference_Manual_Fixed.txt.py,275,9471,22. Control Parameters,Mouse Area,,Th
 KSP_Reference_Manual_Fixed.txt.py,275,9472,22. Control Parameters,Mouse Area,,These can be set to one of the following values,$NI_DND_ACCEPT_MULTIPLE,,,"Enables ui_mouse_area to accept audio, MIDI or NKA array files.","$CONTROL_PAR_DND_ACCEPT_AUDIO,$CONTROL_PAR_DND_ACCEPT_MIDI,$CONTROL_PAR_DND_ACCEPT_ARRAY,$NI_DND_ACCEPT_NONE,$NI_DND_ACCEPT_ONE",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,276,9477,22. Control Parameters,Mouse Area,,,$CONTROL_PAR_RECEIVE_DRAG_EVENTS,,,"Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
 event (when set to 0) or also for drag events (when set to 1).
-$NI_MOUSE_EVENT_TYPE Specifies the event type that triggered the callback and can have
-$NI_MOUSE_OVER_CONTROL 1: The mouse has entered ui_mouse_area on a drag event
+Specifies the event type that triggered the callback and can have
+1: The mouse has entered ui_mouse_area on a drag event
 0: The mouse has left ui_mouse_area on a drag event
 Example
 
@@ -521,11 +521,30 @@ on ui_control ($aMouseArea)
     message(num_elements(!NI_DND_ITEMS_AUDIO))
     message($MOUSE_OVER_CONTROL)
   end if
-end on","$NI_MOUSE_EVENT_TYPE_DND_DROP,$NI_MOUSE_EVENT_TYPE_DND_DRAG",BUILT-IN
+end on","$NI_MOUSE_EVENT_TYPE,$NI_MOUSE_EVENT_TYPE_DND_DROP,$NI_MOUSE_EVENT_TYPE_DND_DRAG,$NI_MOUSE_OVER_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,276,9481,22. Control Parameters,Mouse Area,,The UI callback has two built-in variables,$NI_MOUSE_EVENT_TYPE,,,"Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
+event (when set to 0) or also for drag events (when set to 1).
+Specifies the event type that triggered the callback and can have
+1: The mouse has entered ui_mouse_area on a drag event
+0: The mouse has left ui_mouse_area on a drag event
+Example
+
+on ui_control ($aMouseArea)
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+    message(num_elements(!NI_DND_ITEMS_AUDIO))
+  end if
+
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DRAG)
+    message(num_elements(!NI_DND_ITEMS_AUDIO))
+    message($MOUSE_OVER_CONTROL)
+  end if
+end on","$CONTROL_PAR_RECEIVE_DRAG_EVENTS,$NI_MOUSE_EVENT_TYPE_DND_DROP,$NI_MOUSE_EVENT_TYPE_DND_DRAG,$NI_MOUSE_OVER_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,283,9802,22. Control Parameters,XY Pad,,,$NI_MOUSE_EVENT_TYPE,,,"Returns the type of mouse event that triggered the on ui_controlcallback of a ui_xy widget. Can only
+be used within the on ui_control callback.","$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN,$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP,$NI_MOUSE_EVENT_TYPE_DRAG",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,276,9483,22. Control Parameters,Mouse Area,,one of the following values,$NI_MOUSE_EVENT_TYPE_DND_DROP,,,"Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
 event (when set to 0) or also for drag events (when set to 1).
-$NI_MOUSE_EVENT_TYPE Specifies the event type that triggered the callback and can have
-$NI_MOUSE_OVER_CONTROL 1: The mouse has entered ui_mouse_area on a drag event
+Specifies the event type that triggered the callback and can have
+1: The mouse has entered ui_mouse_area on a drag event
 0: The mouse has left ui_mouse_area on a drag event
 Example
 
@@ -538,11 +557,11 @@ on ui_control ($aMouseArea)
     message(num_elements(!NI_DND_ITEMS_AUDIO))
     message($MOUSE_OVER_CONTROL)
   end if
-end on","$CONTROL_PAR_RECEIVE_DRAG_EVENTS,$NI_MOUSE_EVENT_TYPE_DND_DRAG",BUILT-IN
+end on","$CONTROL_PAR_RECEIVE_DRAG_EVENTS,$NI_MOUSE_EVENT_TYPE,$NI_MOUSE_EVENT_TYPE_DND_DRAG,$NI_MOUSE_OVER_CONTROL",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,276,9484,22. Control Parameters,Mouse Area,,one of the following values,$NI_MOUSE_EVENT_TYPE_DND_DRAG,,,"Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
 event (when set to 0) or also for drag events (when set to 1).
-$NI_MOUSE_EVENT_TYPE Specifies the event type that triggered the callback and can have
-$NI_MOUSE_OVER_CONTROL 1: The mouse has entered ui_mouse_area on a drag event
+Specifies the event type that triggered the callback and can have
+1: The mouse has entered ui_mouse_area on a drag event
 0: The mouse has left ui_mouse_area on a drag event
 Example
 
@@ -555,7 +574,24 @@ on ui_control ($aMouseArea)
     message(num_elements(!NI_DND_ITEMS_AUDIO))
     message($MOUSE_OVER_CONTROL)
   end if
-end on","$CONTROL_PAR_RECEIVE_DRAG_EVENTS,$NI_MOUSE_EVENT_TYPE_DND_DROP",BUILT-IN
+end on","$CONTROL_PAR_RECEIVE_DRAG_EVENTS,$NI_MOUSE_EVENT_TYPE,$NI_MOUSE_EVENT_TYPE_DND_DROP,$NI_MOUSE_OVER_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,276,9485,22. Control Parameters,Mouse Area,,one of the following values,$NI_MOUSE_OVER_CONTROL,,,"Configures whether on ui_control callback of ui_mouse_area gets triggered just for the drop
+event (when set to 0) or also for drag events (when set to 1).
+Specifies the event type that triggered the callback and can have
+1: The mouse has entered ui_mouse_area on a drag event
+0: The mouse has left ui_mouse_area on a drag event
+Example
+
+on ui_control ($aMouseArea)
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+    message(num_elements(!NI_DND_ITEMS_AUDIO))
+  end if
+
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DRAG)
+    message(num_elements(!NI_DND_ITEMS_AUDIO))
+    message($MOUSE_OVER_CONTROL)
+  end if
+end on","$CONTROL_PAR_RECEIVE_DRAG_EVENTS,$NI_MOUSE_EVENT_TYPE,$NI_MOUSE_EVENT_TYPE_DND_DROP,$NI_MOUSE_EVENT_TYPE_DND_DRAG",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,276,9502,22. Control Parameters,Labels,,,$CONTROL_PAR_DND_BEHAVIOUR,,,"Sets or returns the drag and drop behavior for ui_label. Using a value of 1 sets the label as a drag
 and drop area, allowing the user to export the MIDI object currently held in memory by a simple drag
 and drop action. For more information on MIDI handling in KSP, refer to MIDI Object Commands.",,BUILT-IN
@@ -600,6 +636,69 @@ when loading the wallpaper from the resource container.
 This command only supports wallpapers that are located within the resource container.
 If you use it in different script slots, then the last script slot in which wallpaper was set will be the
 one that is loaded.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,278,9606,22. Control Parameters,Waveform,Waveform Flag Constants,,$UI_WAVEFORM_USE_SLICES,,,"To be used with attach_zone(). You can combine flag constants using the bitwise.or..
+Display the zone’s slice markers.
+Display a per-slice table.
+Note: this only works if the slice markers are also active.
+Make the table bipolar.
+Display a MIDI drag and drop icon.
+Note: this only works if the slice markers are also active.","$UI_WAVEFORM_USE_TABLE,$UI_WAVEFORM_TABLE_IS_BIPOLAR,$UI_WAVEFORM_USE_MIDI_DRAG",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,278,9607,22. Control Parameters,Waveform,Waveform Flag Constants,,$UI_WAVEFORM_USE_TABLE,,,"To be used with attach_zone(). You can combine flag constants using the bitwise.or..
+Display the zone’s slice markers.
+Display a per-slice table.
+Note: this only works if the slice markers are also active.
+Make the table bipolar.
+Display a MIDI drag and drop icon.
+Note: this only works if the slice markers are also active.","$UI_WAVEFORM_USE_SLICES,$UI_WAVEFORM_TABLE_IS_BIPOLAR,$UI_WAVEFORM_USE_MIDI_DRAG",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,278,9609,22. Control Parameters,Waveform,Waveform Flag Constants,,$UI_WAVEFORM_TABLE_IS_BIPOLAR,,,"To be used with attach_zone(). You can combine flag constants using the bitwise.or..
+Display the zone’s slice markers.
+Display a per-slice table.
+Note: this only works if the slice markers are also active.
+Make the table bipolar.
+Display a MIDI drag and drop icon.
+Note: this only works if the slice markers are also active.","$UI_WAVEFORM_USE_SLICES,$UI_WAVEFORM_USE_TABLE,$UI_WAVEFORM_USE_MIDI_DRAG",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,278,9610,22. Control Parameters,Waveform,Waveform Flag Constants,,$UI_WAVEFORM_USE_MIDI_DRAG,,,"To be used with attach_zone(). You can combine flag constants using the bitwise.or..
+Display the zone’s slice markers.
+Display a per-slice table.
+Note: this only works if the slice markers are also active.
+Make the table bipolar.
+Display a MIDI drag and drop icon.
+Note: this only works if the slice markers are also active.","$UI_WAVEFORM_USE_SLICES,$UI_WAVEFORM_USE_TABLE,$UI_WAVEFORM_TABLE_IS_BIPOLAR",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,279,9617,22. Control Parameters,Waveform,Waveform Property Constants,,$UI_WF_PROP_PLAY_CURSOR,,,"To be used with get_ui_wf_property() and set_ui_wf_property().
+Sets or returns the play cursor position, in microseconds.
+Used to set new flag constants after the attach_zone()
+command is used.
+Sets or returns the value of the indexed slice’s table.
+Highlights the indexed slice within the ui_waveform widget.
+Defines the start note for the MIDI drag and drop function.","$UI_WF_PROP_FLAGS,$UI_WF_PROP_TABLE_VAL,$UI_WF_PROP_TABLE_IDX_HIGHLIGHT,$UI_WF_PROP_MIDI_DRAG_START_NOTE",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,279,9618,22. Control Parameters,Waveform,Waveform Property Constants,,$UI_WF_PROP_FLAGS,,,"To be used with get_ui_wf_property() and set_ui_wf_property().
+Sets or returns the play cursor position, in microseconds.
+Used to set new flag constants after the attach_zone()
+command is used.
+Sets or returns the value of the indexed slice’s table.
+Highlights the indexed slice within the ui_waveform widget.
+Defines the start note for the MIDI drag and drop function.","$UI_WF_PROP_PLAY_CURSOR,$UI_WF_PROP_TABLE_VAL,$UI_WF_PROP_TABLE_IDX_HIGHLIGHT,$UI_WF_PROP_MIDI_DRAG_START_NOTE",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,279,9620,22. Control Parameters,Waveform,Waveform Property Constants,,$UI_WF_PROP_TABLE_VAL,,,"To be used with get_ui_wf_property() and set_ui_wf_property().
+Sets or returns the play cursor position, in microseconds.
+Used to set new flag constants after the attach_zone()
+command is used.
+Sets or returns the value of the indexed slice’s table.
+Highlights the indexed slice within the ui_waveform widget.
+Defines the start note for the MIDI drag and drop function.","$UI_WF_PROP_PLAY_CURSOR,$UI_WF_PROP_FLAGS,$UI_WF_PROP_TABLE_IDX_HIGHLIGHT,$UI_WF_PROP_MIDI_DRAG_START_NOTE",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,279,9621,22. Control Parameters,Waveform,Waveform Property Constants,,$UI_WF_PROP_TABLE_IDX_HIGHLIGHT,,,"To be used with get_ui_wf_property() and set_ui_wf_property().
+Sets or returns the play cursor position, in microseconds.
+Used to set new flag constants after the attach_zone()
+command is used.
+Sets or returns the value of the indexed slice’s table.
+Highlights the indexed slice within the ui_waveform widget.
+Defines the start note for the MIDI drag and drop function.","$UI_WF_PROP_PLAY_CURSOR,$UI_WF_PROP_FLAGS,$UI_WF_PROP_TABLE_VAL,$UI_WF_PROP_MIDI_DRAG_START_NOTE",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,279,9622,22. Control Parameters,Waveform,Waveform Property Constants,,$UI_WF_PROP_MIDI_DRAG_START_NOTE,,,"To be used with get_ui_wf_property() and set_ui_wf_property().
+Sets or returns the play cursor position, in microseconds.
+Used to set new flag constants after the attach_zone()
+command is used.
+Sets or returns the value of the indexed slice’s table.
+Highlights the indexed slice within the ui_waveform widget.
+Defines the start note for the MIDI drag and drop function.","$UI_WF_PROP_PLAY_CURSOR,$UI_WF_PROP_FLAGS,$UI_WF_PROP_TABLE_VAL,$UI_WF_PROP_TABLE_IDX_HIGHLIGHT",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,279,9625,22. Control Parameters,Waveform,,,$CONTROL_PAR_WF_VIS_MODE,,,Changes the way the waveform is drawn.,"$NI_WF_VIS_MODE_1,$NI_WF_VIS_MODE_2,$NI_WF_VIS_MODE_3",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,279,9627,22. Control Parameters,Waveform,, Valid values,$NI_WF_VIS_MODE_1,,Default,Changes the way the waveform is drawn.,"$CONTROL_PAR_WF_VIS_MODE,$NI_WF_VIS_MODE_2,$NI_WF_VIS_MODE_3",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,279,9628,22. Control Parameters,Waveform,, Valid values,$NI_WF_VIS_MODE_2,,X-ray,Changes the way the waveform is drawn.,"$CONTROL_PAR_WF_VIS_MODE,$NI_WF_VIS_MODE_1,$NI_WF_VIS_MODE_3",BUILT-IN
@@ -628,6 +727,46 @@ KSP_Reference_Manual_Fixed.txt.py,280,9688,22. Control Parameters,Wavetable,,,$C
 KSP_Reference_Manual_Fixed.txt.py,280,9692,22. Control Parameters,Wavetable,,,$CONTROL_PAR_WAVETABLE_ALPHA,,,"Sets or returns the alpha channel (opacity) of the background waveforms in 3D visualization mode
 of ui_wavetable.
 Range: 0 (fully transparent) to 255 (fully opaque).",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,281,9711,22. Control Parameters,Wavetable,Additional Color and Alpha Parameters,,$CONTROL_PAR_WAVE_END_COLOR,,,"To be paired with the above control parameters in order to create gradient effects. If not explicitly
+set, they inherit the value of their match from above, resulting in no gradient.
+Sets or returns the color for the end of the gradient applied to the
+waveform (2D) or current waveform (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the waveform (2D) or current waveform (3D).
+Sets or returns the color for the end of the gradient applied to the
+background waveforms (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the background waveforms (3D).","$CONTROL_PAR_WAVE_END_ALPHA,$CONTROL_PAR_WAVETABLE_END_COLOR,$CONTROL_PAR_WAVETABLE_END_ALPHA",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,281,9713,22. Control Parameters,Wavetable,Additional Color and Alpha Parameters,,$CONTROL_PAR_WAVE_END_ALPHA,,,"To be paired with the above control parameters in order to create gradient effects. If not explicitly
+set, they inherit the value of their match from above, resulting in no gradient.
+Sets or returns the color for the end of the gradient applied to the
+waveform (2D) or current waveform (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the waveform (2D) or current waveform (3D).
+Sets or returns the color for the end of the gradient applied to the
+background waveforms (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the background waveforms (3D).","$CONTROL_PAR_WAVE_END_COLOR,$CONTROL_PAR_WAVETABLE_END_COLOR,$CONTROL_PAR_WAVETABLE_END_ALPHA",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,281,9715,22. Control Parameters,Wavetable,Additional Color and Alpha Parameters,,$CONTROL_PAR_WAVETABLE_END_COLOR,,,"To be paired with the above control parameters in order to create gradient effects. If not explicitly
+set, they inherit the value of their match from above, resulting in no gradient.
+Sets or returns the color for the end of the gradient applied to the
+waveform (2D) or current waveform (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the waveform (2D) or current waveform (3D).
+Sets or returns the color for the end of the gradient applied to the
+background waveforms (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the background waveforms (3D).","$CONTROL_PAR_WAVE_END_COLOR,$CONTROL_PAR_WAVE_END_ALPHA,$CONTROL_PAR_WAVETABLE_END_ALPHA",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,281,9717,22. Control Parameters,Wavetable,Additional Color and Alpha Parameters,,$CONTROL_PAR_WAVETABLE_END_ALPHA,,,"To be paired with the above control parameters in order to create gradient effects. If not explicitly
+set, they inherit the value of their match from above, resulting in no gradient.
+Sets or returns the color for the end of the gradient applied to the
+waveform (2D) or current waveform (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the waveform (2D) or current waveform (3D).
+Sets or returns the color for the end of the gradient applied to the
+background waveforms (3D).
+Sets or returns the alpha channel (opacity) for the end of the
+gradient applied to the background waveforms (3D).","$CONTROL_PAR_WAVE_END_COLOR,$CONTROL_PAR_WAVE_END_ALPHA,$CONTROL_PAR_WAVETABLE_END_COLOR",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9722,22. Control Parameters,Slider,,,$CONTROL_PAR_MOUSE_BEHAVIOUR,,,"A value from -5000 to 5000, setting the move direction of ui_slider and its sensitivity.
 Settings are relative to the size of the slider picture.
 Negative values give a vertical slider behavior, positive values give a horizontal behavior.",,BUILT-IN
@@ -664,8 +803,6 @@ is automatic, exactly like with ui_button and ui_switch.
 4: Active pressed
 5: Inactive mouse over
 6: Active mouse over",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,283,9802,22. Control Parameters,XY Pad,,,$NI_MOUSE_EVENT_TYPE,,,"Returns the type of mouse event that triggered the on ui_controlcallback of a ui_xy widget. Can only
-be used within the on ui_control callback.","$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN,$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP,$NI_MOUSE_EVENT_TYPE_DRAG",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,283,9806,22. Control Parameters,XY Pad,,The following mouse event types are available,$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN,,,"Returns the type of mouse event that triggered the on ui_controlcallback of a ui_xy widget. Can only
 be used within the on ui_control callback.","$NI_MOUSE_EVENT_TYPE,$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP,$NI_MOUSE_EVENT_TYPE_DRAG",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,283,9807,22. Control Parameters,XY Pad,,The following mouse event types are available,$NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP,,,"Returns the type of mouse event that triggered the on ui_controlcallback of a ui_xy widget. Can only

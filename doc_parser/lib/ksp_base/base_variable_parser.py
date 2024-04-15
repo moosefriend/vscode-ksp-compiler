@@ -33,6 +33,8 @@ log = logging.getLogger(__name__)
 class BaseVariableParser(BaseItemParser):
     VAR_PATTERN = re.compile(r"^(?:•?\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+\((.+)\))?$")
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
+    VAR_TABLE_PATTERN = re.compile(r"^([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?:\s+(.+)$")
+    """Pattern to find a variable or constant in a table, e.g. $VAR1: Description"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
     CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
@@ -77,7 +79,7 @@ class BaseVariableParser(BaseItemParser):
         # TODO: Main variable in the block header followed by description, then the constants
         #    The constants should be also listed in the main variable
         # TODO: Tables cells liked "variable: Description" are not identified
-        # Check if the line contains a variable or constant
+        # Check for normal variable
         if m := self.VAR_PATTERN.match(line):
             name = m.group(1)
             parameter = m.group(3)
@@ -88,7 +90,17 @@ class BaseVariableParser(BaseItemParser):
             # if self.doc_state == DocState.DESCRIPTION:
             #     self.add_item_documentation(line)
             doc_state = DocState.DESCRIPTION
-        # Check if the line contains a variable range, e.g. $MARK1 ... $MARK28
+        # Check variable in a table, e.g. $VAR: Description
+        elif m := self.VAR_TABLE_PATTERN.match(line):
+            name = m.group(1)
+            parameter = m.group(3)
+            description = m.group(4)
+            variable = self.add_variable(name, parameter)
+            if variable:
+                self.item_list.append(variable)
+                self.add_item_documentation(description)
+            doc_state = DocState.DESCRIPTION
+        # Check for variable ranges, e.g. $MARK1 ... $MARK28
         elif m := self.VAR_RANGE_PATTERN.match(line):
             base_name = m.group(1)
             start_index = int(m.group(2))
