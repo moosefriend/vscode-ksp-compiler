@@ -78,7 +78,7 @@ class RewindReader:
         """
         # Remember the current position
         self.pos_last_line = self.handle.tell()
-        line = self._read_line()
+        line = self.readline()
         self.line_no += self.line_inc
         self.line_inc = 1
         # Check for lines like "<<<<<<<<<<<<<<<<<<<< Page 259 >>>>>>>>>>>>>>>>>>>>"
@@ -88,9 +88,10 @@ class RewindReader:
         self.rewind_enabled = True
         return line
 
-    def _read_line(self) -> str:
+    def readline(self) -> str:
         """
         Read the next line. If the line is None then a StopIteration is raised.
+        This will not update any internal line counters!
 
         :return: Next line
         """

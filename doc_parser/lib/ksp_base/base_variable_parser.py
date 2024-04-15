@@ -78,7 +78,6 @@ class BaseVariableParser(BaseItemParser):
         doc_state: Optional[DocState] = None
         # TODO: Main variable in the block header followed by description, then the constants
         #    The constants should be also listed in the main variable
-        # TODO: Tables cells liked "variable: Description" are not identified
         # Check for normal variable
         if m := self.VAR_PATTERN.match(line):
             name = m.group(1)

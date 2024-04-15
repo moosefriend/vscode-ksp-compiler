@@ -51,8 +51,44 @@ class BaseCallbackParser(BaseItemParser):
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
         """
-        super().__init__(version, toc, CallbackItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
-                         csv_file, delimiter, page_offset)
+        super().__init__(
+            version,
+            toc,
+            CallbackItem,
+            reader,
+            self.CONTENT_START_PATTERN,
+            self.CONTENT_STOP_PATTERN,
+            csv_file,
+            delimiter,
+            page_offset
+        )
+
+    def check_category(self, line) -> bool:
+        """
+        Special handling for categories for callbacks.
+
+        For callbacks the category is repeated (at least the beginning).
+        And it must be avoided to see examples (e.g. "on init") as callback.
+        So check if the line is repeated (after an empty line).
+
+        :param line: Line to check
+        :return: True if the line contains a category
+        """
+        is_category = False
+        if line.startswith("[C]"):
+            is_category = True
+        elif line in self.chapter_categories:
+            # Check if the next line (after an empty line) starts with the same category
+            # Remember the current position
+            cur_pos = self.reader.handle.tell()
+            # Read the next line which should be empty
+            self.reader.readline()
+            # Read the next line which should start with the category
+            next_line = self.reader.readline()
+            if next_line.startswith(line):
+                is_category = True
+            self.reader.handle.seek(cur_pos)
+        return is_category
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
@@ -82,26 +118,26 @@ class BaseCallbackParser(BaseItemParser):
         :param parameter: Optional parameter for the callback
         :return: CallbackItem of the just created callback or None if duplicate
         """
-        callback: Optional[CallbackItem] = None
         if name in self.all_items:
             log.info(f"      - Duplicate {name} ({self.reader.location()})")
             self.duplicate_cnt += 1
         else:
             log.info(f"      - Found {name} ({self.reader.location()})")
             self.item_cnt += 1
-            callback = CallbackItem(
-                file=self.reader.file,
-                page_no=self.reader.page_no,
-                line_no=self.reader.line_no,
-                headline=self.headline,
-                category=self.category,
-                name=name,
-                parameter=parameter,
-                description="",
-                remarks="",
-                examples="",
-                see_also="",
-                source="BUILT-IN"
-            )
-            self.all_items[name] = callback
+            self.all_items[name] = []
+        callback = CallbackItem(
+            file=self.reader.file,
+            page_no=self.reader.page_no,
+            line_no=self.reader.line_no,
+            headline=self.headline,
+            category=self.category,
+            name=name,
+            parameter=parameter,
+            description="",
+            remarks="",
+            examples="",
+            see_also="",
+            source="BUILT-IN"
+        )
+        self.all_items[name].append(callback)
         return callback

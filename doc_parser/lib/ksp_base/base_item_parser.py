@@ -63,13 +63,13 @@ class BaseItemParser:
         :param reader: Reader for the already open Kontakt KSP text manual
         :param content_start_pattern: Pattern to find the content start headline
         :param content_stop_pattern: Pattern to find the content end headline
-        :param on_headline: Callback for each new headline e.g. for initialization
-        :param on_category: Callback for each new category e.g. for initialization
-        :param finalize_item_list: Callback after the item list has been processed
         :param csv_file: Comma separated file to export the parsed data
         :param delimiter: CSV delimiter for the export file
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
+        :param on_headline: Callback for each new headline e.g. for initialization
+        :param on_category: Callback for each new category e.g. for initialization
+        :param finalize_item_list: Callback after the item list has been processed
         """
         self.version: str = version
         """Kontakt version"""
@@ -131,6 +131,8 @@ class BaseItemParser:
         log.info(f"Parse {self.reader.file} for {self.doc_item_class.plural()}")
         self.search_content_start()
         self.scan_items()
+        log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")
+        log.info(f"{self.duplicate_cnt} duplicate {self.doc_item_class.plural()}")
 
     def search_content_start(self):
         """
@@ -179,7 +181,7 @@ class BaseItemParser:
             # Some categories are not mentioned in the table of contents => Those are marked with "[C]"
             # Special case for callbacks: The category, e.g. on init appears twice
             # So check if the category is already set
-            elif line.startswith("[C]") or (line in self.chapter_categories and line != self.category):
+            elif self.check_category(line):
                 if self.finalize_item_list:
                     self.finalize_item_list()
                 if line.startswith("[C]"):
@@ -218,13 +220,21 @@ class BaseItemParser:
         for cur_item_list in self.all_items.values():
             for cur_item in cur_item_list:
                 cur_item.fix_documentation()
-        log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")
-        log.info(f"{self.duplicate_cnt} duplicate {self.doc_item_class.plural()}")
+
+    def check_category(self, line) -> bool:
+        """
+        Check if the line contains a category.
+
+        :param line: Line to check
+        :return: True if the line contains a category
+        """
+        is_category = line.startswith("[C]") or line in self.chapter_categories
+        return is_category
 
     @abstractmethod
     def check_item(self, line) -> Optional[DocState]:
         """
-        Check if the line contains an item. If so then the item will be parsed and added to self.all_items.
+        Check if the line contains an item. If so then the item will be parsed and added to ``self.all_items``.
 
         :param line: Line to check
         :return: The new documentation state or None if the line has not been processed, e.g. no item found in this line
