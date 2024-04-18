@@ -240,6 +240,23 @@ class BaseItemParser:
         :return: The new documentation state or None if the line has not been processed, e.g. no item found in this line
         """
 
+    def add_item(self, doc_item: DocItem):
+        """
+        Add the item to the list of items.
+
+        :param doc_item: Item to add
+        """
+        name = doc_item.name
+        if name in self.all_items:
+            log.debug(f"      - Duplicate {name} ({self.reader.location()})")
+            self.duplicate_cnt += 1
+        else:
+            log.debug(f"      - Found {name} ({self.reader.location()})")
+            self.item_cnt += 1
+            self.item_list = []
+            self.all_items[name] = self.item_list
+        self.item_list.append(doc_item)
+
     def add_item_documentation(self, line):
         """
         Add the line to the corresponding documentation.

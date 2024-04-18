@@ -83,21 +83,15 @@ class BaseVariableParser(BaseItemParser):
             name = m.group(1)
             parameter = m.group(3)
             self.comment = m.group(4)
-            variable = self.add_variable(name, parameter)
-            if variable:
-                self.item_list.append(variable)
-            # if self.doc_state == DocState.DESCRIPTION:
-            #     self.add_item_documentation(line)
+            self.add_variable(name, parameter)
             doc_state = DocState.DESCRIPTION
         # Check variable in a table, e.g. $VAR: Description
         elif m := self.VAR_TABLE_PATTERN.match(line):
             name = m.group(1)
             parameter = m.group(3)
             description = m.group(4)
-            variable = self.add_variable(name, parameter)
-            if variable:
-                self.item_list.append(variable)
-                self.add_item_documentation(description)
+            self.add_variable(name, parameter)
+            self.add_item_documentation(description)
             doc_state = DocState.DESCRIPTION
         # Check for variable ranges, e.g. $MARK1 ... $MARK28
         elif m := self.VAR_RANGE_PATTERN.match(line):
@@ -106,9 +100,7 @@ class BaseVariableParser(BaseItemParser):
             end_index = int(m.group(4))
             for i in range(start_index, end_index + 1):
                 name = f"{base_name}{i}"
-                variable = self.add_variable(name, "")
-                if variable:
-                    self.item_list.append(variable)
+                self.add_variable(name, "")
             if self.doc_state == DocState.DESCRIPTION:
                 self.add_item_documentation(line)
             doc_state = DocState.DESCRIPTION
@@ -139,13 +131,12 @@ class BaseVariableParser(BaseItemParser):
             doc_state = self.doc_state
         return doc_state
 
-    def add_variable(self, name: str, parameter) -> VariableItem:
+    def add_variable(self, name: str, parameter):
         """
         Add a variable if it is not in the ignore list or already exists.
 
         :param name: Name of the variable
         :param parameter: Parameter name if it is e.g. an array
-        :return: VariableItem of the just created variable or None if duplicate or ignored
         """
         variable = VariableItem(
             file=self.reader.file,
@@ -162,15 +153,7 @@ class BaseVariableParser(BaseItemParser):
             see_also=[],
             source="BUILT-IN"
         )
-        if name in self.all_items:
-            log.info(f"      - Duplicate {name} ({self.reader.location()})")
-            self.duplicate_cnt += 1
-        else:
-            log.info(f"      - Found {name} ({self.reader.location()})")
-            self.item_cnt += 1
-            self.all_items[name] = []
-        self.all_items[name].append(variable)
-        return variable
+        self.add_item(variable)
 
     def add_item_documentation(self, line):
         # Add the documentation to first found variable or constant

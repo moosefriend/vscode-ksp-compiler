@@ -31,11 +31,13 @@ log = logging.getLogger(__name__)
 
 
 class BaseCommandParser(BaseItemParser):
-    COMMAND_PATTERN = re.compile(r"^on\s+([a-z_]+)(?:/([a-z_]+))?$")
+    COMMAND_PATTERN = re.compile(r"^([a-z_]+)(?:\((.*)\))?$")
     """Pattern to find a command, e.g. on init"""
-    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Callbacks$", re.IGNORECASE)
+    MATH_COMMAND_PATTERN = re.compile(r"^([a-z]+)\((x(?:, y)?)\)$")
+    """Pattern to find a command, e.g. on init"""
+    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE)
     """Pattern to find the start headline for scanning the content"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Variables$", re.IGNORECASE)
+    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
     """Pattern to find the end headline for scanning the content"""
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str,
@@ -51,44 +53,96 @@ class BaseCommandParser(BaseItemParser):
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
         """
-        super().__init__(version, toc, CommandItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
-                         csv_file, delimiter, page_offset)
+        super().__init__(
+            version,
+            toc,
+            CommandItem,
+            reader,
+            self.CONTENT_START_PATTERN,
+            self.CONTENT_STOP_PATTERN,
+            csv_file,
+            delimiter,
+            page_offset
+        )
+
+    def check_category(self, line) -> bool:
+        """
+        Special handling for categories for callbacks.
+
+        For callbacks the category is repeated (at least the beginning).
+        And it must be avoided to see examples (e.g. "on init") as callback.
+        So check if the line is repeated (after an empty line).
+
+        :param line: Line to check
+        :return: True if the line contains a category
+        """
+        is_category = False
+        if line.startswith("[C]"):
+            is_category = True
+        elif line in self.chapter_categories:
+            # Check if the next line (after an empty line) starts with the same category
+            # Remember the current position
+            cur_pos = self.reader.handle.tell()
+            # Read the next line which should be empty
+            self.reader.readline()
+            # Read the next line which should start with the category
+            next_line = self.reader.readline()
+            # Special handling for set_rpn()/set_nrpn()
+            if line == "set_rpn()/set_nrpn()":
+                is_category = True
+            elif line.endswith(")"):
+                line = line[:-1]
+            if next_line.startswith(line):
+                is_category = True
+            self.reader.handle.seek(cur_pos)
+        return is_category
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
-        if m := self.COMMAND_PATTERN.match(line):
+        if m := self.MATH_COMMAND_PATTERN.match(line):
             name = m.group(1)
-            self.add_command(name)
-            # TODO: Implement BaseCommandParser.check_item
+            arguments = m.group(2)
+            parameter_list = []
+            if arguments:
+                for parameter in arguments.split(","):
+                    parameter = parameter.strip()
+                    parameter_list.append(parameter)
+            self.add_command(name, parameter_list)
             doc_state = DocState.DESCRIPTION
+        elif self.doc_state == DocState.CATEGORY and line and (m := self.COMMAND_PATTERN.match(line)):
+            name = m.group(1)
+            arguments = m.group(2)
+            parameter_list = []
+            if arguments:
+                for parameter in arguments.split(","):
+                    parameter = parameter.strip().replace("<", "").replace(">", "")
+                    parameter_list.append(parameter)
+            self.add_command(name, parameter_list)
+            # Special handling for set_rpn()/set_nrpn(), because there are 2 commands
+            # => The doc state should not be changed for the first command
+            if name != "set_rpn":
+                doc_state = DocState.DESCRIPTION
         return doc_state
 
-    def add_command(self, name: str) -> CommandItem:
+    def add_command(self, name: str, parameter_list: list[str]):
         """
         Add a command if it does not exist.
 
         :param name: Name of the command
-        :return: CommandItem of the just created command or None if duplicate
+        :param parameter_list: List or parameter names
         """
-        command: Optional[CommandItem] = None
-        if name in self.all_items:
-            log.info(f"      - Duplicate {name} ({self.reader.location()})")
-            self.duplicate_cnt += 1
-        else:
-            log.info(f"      - Found {name} ({self.reader.location()})")
-            self.item_cnt += 1
-            command = CommandItem(
-                file=self.reader.file,
-                page_no=self.reader.page_no,
-                line_no=self.reader.line_no,
-                headline=self.headline,
-                category=self.category,
-                name=name,
-                description="",
-                remarks="",
-                examples="",
-                see_also="",
-                source="BUILT-IN"
-            )
-            self.all_items[name] = command
-        return command
+        command = CommandItem(
+            file=self.reader.file,
+            page_no=self.reader.page_no,
+            line_no=self.reader.line_no,
+            headline=self.headline,
+            category=self.category,
+            name=name,
+            parameter_list=parameter_list,
+            description="",
+            remarks="",
+            examples="",
+            see_also="",
+            source="BUILT-IN"
+        )
+        self.add_item(command)

@@ -19,7 +19,6 @@
 import logging
 import pkgutil
 import re
-import shutil
 import sys
 from importlib import import_module
 from pathlib import Path
@@ -178,18 +177,18 @@ class BaseMainParser:
         with RewindReader(self.txt_file_fixed, page_no_pattern=BaseMainParser.PAGE_PATTERN) as self.reader:
             self.toc = BaseMainParser.get_parser(ParserType.TOC, self.version, self.reader)
             self.toc.parse()
-            log.info("-" * 80)
-            self.callbacks: BaseCallbackParser = BaseMainParser.get_parser(
-                ParserType.CALLBACK,
-                self.version,
-                self.toc,
-                self.reader,
-                self.callbacks_csv,
-                self.delimiter,
-                self.page_offset
-            )
-            self.callbacks.parse()
-            self.callbacks.export()
+            # log.info("-" * 80)
+            # self.callbacks: BaseCallbackParser = BaseMainParser.get_parser(
+            #     ParserType.CALLBACK,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.callbacks_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.callbacks.parse()
+            # self.callbacks.export()
             # log.info("-" * 80)
             # self.widgets: BaseWidgetParser = BaseMainParser.get_parser(
             #     ParserType.WIDGET,
@@ -202,18 +201,18 @@ class BaseMainParser:
             # )
             # self.widgets.parse()
             # self.widgets.export()
-            # log.info("-" * 80)
-            # self.commands: BaseCommandParser = BaseMainParser.get_parser(
-            #     ParserType.COMMAND,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.commands_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.commands.parse()
-            # self.commands.export()
+            log.info("-" * 80)
+            self.commands: BaseCommandParser = BaseMainParser.get_parser(
+                ParserType.COMMAND,
+                self.version,
+                self.toc,
+                self.reader,
+                self.commands_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.commands.parse()
+            self.commands.export()
             # log.info("-" * 80)
             # self.variables: BaseVariableParser = BaseMainParser.get_parser(
             #     ParserType.VARIABLE,
@@ -245,11 +244,11 @@ class BaseMainParser:
 
 if __name__ == "__main__":
     # For testing only
-    logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+    logging.basicConfig(level=logging.DEBUG, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     root = Path(__file__).parent.parent.parent
     out_dir = root / "out"
     version = "7.8"
     pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
-    parser = BaseMainParser(version, pdf_file, out_dir, ",", page_offset=8, page_header_lines=2)
+    parser = BaseMainParser(version, pdf_file, out_dir, ";", page_offset=8, page_header_lines=2)
     # parser.convert_to_text()
     parser.parse()

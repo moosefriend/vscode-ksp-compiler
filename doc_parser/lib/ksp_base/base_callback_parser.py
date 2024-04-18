@@ -92,39 +92,29 @@ class BaseCallbackParser(BaseItemParser):
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
-        if self.doc_state == DocState.CATEGORY:
-            if line:
-                if line.startswith(self.category) and (m := self.CALLBACK_PATTERN.match(line)):
-                    name_list = [m.group(1)]
-                    # Check if there is a list of callbacks e.g. rpn/nrpn
-                    if m.group(2):
-                        name_list.append(m.group(2))
-                    # Check if there is a parameter
-                    parameter = m.group(3)
-                    self.item_list = []
-                    for name in name_list:
-                        callback = self.add_callback(name, parameter)
-                        self.item_list.append(callback)
-                    doc_state = DocState.DESCRIPTION
-                else:
-                    log.error(f"Can't find the expected callback {self.category}, but got {line}")
+        if self.doc_state == DocState.CATEGORY and line:
+            if line.startswith(self.category) and (m := self.CALLBACK_PATTERN.match(line)):
+                name_list = [m.group(1)]
+                # Check if there is a list of callbacks e.g. rpn/nrpn
+                if m.group(2):
+                    name_list.append(m.group(2))
+                # Check if there is a parameter
+                parameter = m.group(3)
+                self.item_list = []
+                for name in name_list:
+                    self.add_callback(name, parameter)
+                doc_state = DocState.DESCRIPTION
+            else:
+                log.error(f"Can't find the expected callback {self.category}, but got {line}")
         return doc_state
 
-    def add_callback(self, name: str, parameter: str) -> CallbackItem:
+    def add_callback(self, name: str, parameter: str):
         """
         Add a callback if it does not exist.
 
         :param name: Name of the callback
         :param parameter: Optional parameter for the callback
-        :return: CallbackItem of the just created callback or None if duplicate
         """
-        if name in self.all_items:
-            log.info(f"      - Duplicate {name} ({self.reader.location()})")
-            self.duplicate_cnt += 1
-        else:
-            log.info(f"      - Found {name} ({self.reader.location()})")
-            self.item_cnt += 1
-            self.all_items[name] = []
         callback = CallbackItem(
             file=self.reader.file,
             page_no=self.reader.page_no,
@@ -139,5 +129,4 @@ class BaseCallbackParser(BaseItemParser):
             see_also="",
             source="BUILT-IN"
         )
-        self.all_items[name].append(callback)
-        return callback
+        self.add_item(callback)

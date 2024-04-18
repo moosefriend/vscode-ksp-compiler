@@ -407,7 +407,7 @@ asynchronously, for example various loading or saving related commands.
 Remarks
 •     To resolve synchronization issues, the commands listed in the "See Also" section below return
 unique IDs when being used.
-•     Upon completion of the command’s action, the on async_complete callback gets triggered
+•     Upon completion of the command's action, the on async_complete callback gets triggered
 and the built-in variable $NI_ASYNC_ID is updated with the ID of the command that triggered
 the callback.
 •     If the command was completed successfully (for example if the file was found and
@@ -727,7 +727,7 @@ on pgs_changed
         %Next[127] := pgs_get_key_val(NEXT_KEY, 127)
     end if
 end on
-…will change the controls in this example, regardless of the script slot order.
+...will change the controls in this example, regardless of the script slot order.
 
 See Also
 PGS: pgs_create_key(), pgs_set_key_val(), pgs_get_key_val()
@@ -2965,7 +2965,6 @@ Events and MIDI: $RPN_ADDRESS, $RPN_VALUE
 
 set_snapshot_type()
 
-
 set_snapshot_type(<type>)
 Configures the behavior of all five slots when a snapshot is saved or recalled.
 <type>: The available types are:
@@ -4401,7 +4400,6 @@ Callbacks and UI: $NI_SIGNAL_TYPE
 
 stop_wait()
 
-
 stop_wait(<callback-id>, <parameter>)
 Stops wait commands in the specified callback.
 <callback-id>: The callback’s ID number in which the wait commands will be stopped.
@@ -4695,7 +4693,6 @@ ui_label
 <<<<<<<<<<<<<<<<<<<< Page 129 >>>>>>>>>>>>>>>>>>>>
 
 attach_level_meter()
-
 
 attach_level_meter(<ui-id>, <group>, <slot>, <channel>, <generic>)
 Attach a ui_level_meter to a certain location within the instrument to read volume data.
@@ -7180,7 +7177,7 @@ Query the status of the first 1001 zone IDs.
 
 set_loop_par()
 
-set_loop_par(<zone-id>, <loop-index>, <parameter>, <value>
+set_loop_par(<zone-id>, <loop-index>, <parameter>, <value>)
 Sets the loop parameters of a user zone.
 <zone-id>: The ID of the zone.
 <loop-index>: The index of the loop (0 ... 7).
@@ -7274,7 +7271,6 @@ wait_async()
 <<<<<<<<<<<<<<<<<<<< Page 205 >>>>>>>>>>>>>>>>>>>>
 
 set_zone_par()
-
 
 set_zone_par(<zone-id>, <parameter>, <value>)
 Sets the user zone parameters.
@@ -8510,7 +8506,6 @@ save_midi_file()
 <<<<<<<<<<<<<<<<<<<< Page 249 >>>>>>>>>>>>>>>>>>>>
 
 mf_insert_file()
-
 
 mf_insert_file(<path>, <track-offset>, <position-offset>, <mode>)
 Inserts a MIDI file into the object.
