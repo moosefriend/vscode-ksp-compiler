@@ -202,30 +202,30 @@ class BaseMainParser:
             # )
             # self.widgets.parse()
             # self.widgets.export()
-            # log.info("-" * 80)
-            # self.commands: BaseCommandParser = BaseMainParser.get_parser(
-            #     ParserType.COMMAND,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.commands_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.commands.parse()
-            # self.commands.export()
             log.info("-" * 80)
-            self.variables: BaseVariableParser = BaseMainParser.get_parser(
-                ParserType.VARIABLE,
+            self.commands: BaseCommandParser = BaseMainParser.get_parser(
+                ParserType.COMMAND,
                 self.version,
                 self.toc,
                 self.reader,
-                self.variables_csv,
+                self.commands_csv,
                 self.delimiter,
                 self.page_offset
             )
-            self.variables.parse()
-            self.variables.export()
+            self.commands.parse()
+            self.commands.export()
+            # log.info("-" * 80)
+            # self.variables: BaseVariableParser = BaseMainParser.get_parser(
+            #     ParserType.VARIABLE,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.variables_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.variables.parse()
+            # self.variables.export()
 
     def get_body(self, page: PageObject, toc: str) -> str:
         """
@@ -245,11 +245,11 @@ class BaseMainParser:
 
 if __name__ == "__main__":
     # For testing only
-    logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+    logging.basicConfig(level=logging.DEBUG, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     root = Path(__file__).parent.parent.parent
     out_dir = root / "out"
     version = "7.8"
     pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
-    parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ",")
+    parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ";")
     # parser.convert_to_text()
     parser.parse()
