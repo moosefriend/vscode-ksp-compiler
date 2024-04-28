@@ -141,7 +141,7 @@ class BaseItemParser:
         for line in self.reader:
             # Search for the content
             if self.content_start_pattern.match(line):
-                log.info(f"Found Content Start ({self.reader.location()})")
+                log.debug(f"Found Content Start ({self.reader.location()})")
                 self.reader.rewind()
                 break
 
@@ -149,7 +149,7 @@ class BaseItemParser:
         """
         Scan items.
         """
-        self.item_list = []
+        self.item_list: list[DocItem] = []
         self.headline = ""
         self.chapter_categories = {}
         self.category = ""
@@ -176,7 +176,7 @@ class BaseItemParser:
                 if self.on_headline:
                     self.on_headline(line)
                 self.item_list = []
-                log.info(f"- Headline: {self.headline} ({self.reader.location()})")
+                log.debug(f"- Headline: {self.headline} ({self.reader.location()})")
                 self.doc_state = DocState.NONE
             # Check for categories
             # Some categories are not mentioned in the table of contents => Those are marked with "[C]"
@@ -192,7 +192,7 @@ class BaseItemParser:
                     self.on_category(line)
                 self.doc_state = DocState.CATEGORY
                 self.item_list = []
-                log.info(f"   - Category: {self.category} ({self.reader.location()})")
+                log.debug(f"   - Category: {self.category} ({self.reader.location()})")
             elif self.doc_state != DocState.NONE:
                 # Check for items
                 if new_doc_state := self.check_item(line):
@@ -209,6 +209,8 @@ class BaseItemParser:
                 # Add line to corresponding item documentation
                 else:
                     self.add_item_documentation(line)
+                if self.item_list:
+                    self.item_list[-1].parsed_text += f"{line}\n"
                 # 1 empty lines in the See Also section is a signal for the end of the description ot
                 # 2 empty lines are a signal for the end of the description
                 if line == "" and (self.doc_state == DocState.SEE_ALSO or self.last_line == ""):
@@ -250,6 +252,7 @@ class BaseItemParser:
         name = doc_item.name
         if name in self.all_items:
             log.debug(f"      - Duplicate {name} ({self.reader.location()})")
+            self.item_list = self.all_items[name]
             self.duplicate_cnt += 1
         else:
             log.debug(f"      - Found {name} ({self.reader.location()})")
@@ -285,3 +288,34 @@ class BaseItemParser:
                 cur_item_list = self.all_items[name]
                 for cur_item in cur_item_list:
                     csv_writer.writerow(cur_item.as_csv_list())
+
+    def dump(self, dump_text: bool = True):
+        """
+        Print the internal parsed data.
+
+        :param dump_text: If True then it prints also the original parsed text
+        """
+        log.info(f"{'=' * 30} {self.doc_item_class.plural().upper()} {'=' * 30}")
+        for name, item_list in self.all_items.items():
+            log.info(f"{'-' * 30} {name} {'-' * 30}")
+            for i, item in enumerate(item_list):
+                if i > 0:
+                    log.info(f"{'-' * 30} {name} (DUPLICATE {i}) {'-' * 30}")
+                log.info(f"Page {item.page_no}, File \"{item.file}\", line {item.line_no}")
+                if dump_text:
+                    log.info(f"{'*' * 10} Parsed Text Start {'*' * 10}")
+                    for line in item.parsed_text.splitlines():
+                        log.info(line)
+                    log.info(f"{'*' * 10} Parsed Text End {'*' * 10}")
+                for title in ("Headline", "Category", "Source", "Name"):
+                    attribute = title.lower()
+                    log.info(f"{title}: {item.__dict__[attribute]}")
+                if "parameter_list" in item.__dict__:
+                    log.info(f"Parameters: {','.join(item.__dict__['parameter_list'])}")
+                for title in ("Description", "Remarks", "Examples", "See Also"):
+                    attribute = title.replace(" ", "_").lower()
+                    value: str = item.__dict__[attribute]
+                    if value:
+                        log.info(f"{'>' * 10} {title} {'<' * 10}")
+                        for line in value.splitlines():
+                            log.info(line)

@@ -23,7 +23,7 @@ from typing import Any
 
 
 class DocItem:
-    BULLET_PATTERN = re.compile(r"^•\s+")
+    BULLET_PATTERN = re.compile(r"^•\s+", re.MULTILINE)
     """Pattern for bullet pattens"""
 
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
@@ -48,13 +48,14 @@ class DocItem:
         self.name: str = name
         self.description: str = description
         self.source: str = source
+        self.parsed_text: str = ""
 
     @classmethod
     def plural(cls):
         """
         :return: Plural string of the item, e.g. "callbacks"
         """
-        return cls.__name__.replace("Item", "") + "s"
+        return cls.__name__.lower().replace("item", "") + "s"
 
     @abstractmethod
     def fix_documentation(self):

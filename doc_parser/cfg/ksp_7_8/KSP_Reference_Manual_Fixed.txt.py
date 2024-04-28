@@ -8721,8 +8721,6 @@ file called "test.mid" into your Kontakt factory data folder.
 See Also
 mf_insert_file()
 <<<<<<<<<<<<<<<<<<<< Page 256 >>>>>>>>>>>>>>>>>>>>
-
-
 save_midi_file()
 Specific: $CONTROL_PAR_DND_BEHAVIOUR
 <<<<<<<<<<<<<<<<<<<< Page 257 >>>>>>>>>>>>>>>>>>>>

@@ -229,6 +229,7 @@ class BaseMainParser:
             )
             self.commands.parse()
             self.commands.export()
+            self.commands.dump()
             # log.info("-" * 80)
             # self.variables: BaseVariableParser = BaseMainParser.get_parser(
             #     ParserType.VARIABLE,
@@ -260,7 +261,7 @@ class BaseMainParser:
 
 if __name__ == "__main__":
     # For testing only
-    logging.basicConfig(level=logging.DEBUG, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+    logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     root = Path(__file__).parent.parent.parent
     out_dir = root / "out"
     version = "7.8"
