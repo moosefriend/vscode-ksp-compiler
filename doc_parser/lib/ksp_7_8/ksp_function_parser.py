@@ -16,33 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-from enum import Enum
+from ksp_base.base_function_parser import BaseFunctionParser
 
 
-class ParserType(Enum):
-    """
-    Parser types used for dynamic loading.
-    """
-    MAIN = "Main"
-    TOC = "Toc"
-    CALLBACK = "Callback"
-    WIDGET = "Widget"
-    COMMAND = "Command"
-    FUNCTION = "Function"
-    VARIABLE = "Variable"
-
-    def plural(self) -> str:
-        """
-        :return: Plural version of the constant, e.g. "callbacks"
-        """
-        return self.value.lower() + "s"
-
-
-class DocState(Enum):
-    NONE = ""
-    CATEGORY = "category"
-    ITEM = "item"
-    DESCRIPTION = "description"
-    REMARKS = "remarks"
-    EXAMPLES = "examples"
-    SEE_ALSO = "see_also"
+class KspFunctionParser(BaseFunctionParser):
+    pass

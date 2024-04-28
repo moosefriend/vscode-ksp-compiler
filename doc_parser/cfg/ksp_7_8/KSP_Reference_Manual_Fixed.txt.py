@@ -1549,16 +1549,15 @@ Make sure you have the KSP Variables or KSP Log panel focused.
 Basic Operators
 
 The following operators work on both integers and real numbers.
-x := yAssignment (the value of y is assigned to x).
-x + yAddition.
-x - ySubtraction.
-x * yMultiplication.
-x / yDivision.
--xNegative value.
-abs(x)Absolute value.
-signbit(x)Sign bit (returns 1 if the number is negative, 0 otherwise).
-sgn(x)Signum function (returns -1 if the number is negative, 0 if it's zero, 1 if it's
-positive).
+x := y: Assignment (the value of y is assigned to x).
+x + y: Addition.
+x - y: Subtraction.
+x * y: Multiplication.
+x / y: Division.
+-x: Negative value.
+abs(x): Absolute value.
+signbit(x): Sign bit (returns 1 if the number is negative, 0 otherwise).
+sgn(x): Signum function (returns -1 if the number is negative, 0 if it's zero, 1 if it's positive).
 <<<<<<<<<<<<<<<<<<<< Page 37 >>>>>>>>>>>>>>>>>>>>
 
 Integer Number Commands
@@ -1588,11 +1587,11 @@ e.g. 4.5 mod 2.0 returns the value 0.5.
 
 
 exp(x)
-Exponential function (returns the value of ex).
+Exponential function (returns the value of e^x).
 
 
 exp2(x)
-Binary exponential function (returns the value of 2x).
+Binary exponential function (returns the value of 2^x).
 
 
 log(x)
@@ -1608,7 +1607,7 @@ Common logarithmic function (base 10).
 
 
 pow(x, y)
-Power function (returns the value of xy).
+Power function (returns the value of x^y).
 
 
 sqrt(x)
@@ -1676,11 +1675,11 @@ x .or. yBitwise OR.
 x .xor. yBitwise XOR.
 .not. xBitwise NOT (negation).
 
-sh_left(<expression>,Shifts the bits in <expression> by the amount of <shift-
-<shift-bits>)bits> to the left. Effectively multiplies the expression by 2.
+sh_left(<expression>, <shift-bits>): Shifts the bits in <expression> by the amount of <shift-
+bits> to the left. Effectively multiplies the expression by 2.
 
-sh_right(<expression>,Shifts the bits in <expression> by the amount of <shift-
-<shift-bits>)bits> to the right. Effectively divides the expression by 2.
+sh_right(<expression>, <shift-bits>): Shifts the bits in <expression> by the amount of <shift-
+bits> to the right. Effectively divides the expression by 2.
 <<<<<<<<<<<<<<<<<<<< Page 42 >>>>>>>>>>>>>>>>>>>>
 
 random()

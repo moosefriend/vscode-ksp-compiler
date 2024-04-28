@@ -177,6 +177,7 @@ class BaseItemParser:
                     self.on_headline(line)
                 self.item_list = []
                 log.info(f"- Headline: {self.headline} ({self.reader.location()})")
+                self.doc_state = DocState.NONE
             # Check for categories
             # Some categories are not mentioned in the table of contents => Those are marked with "[C]"
             # Special case for callbacks: The category, e.g. on init appears twice

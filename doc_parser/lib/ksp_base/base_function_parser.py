@@ -21,7 +21,7 @@ import re
 from pathlib import Path
 from typing import Optional
 
-from doc_item.command_item import CommandItem
+from doc_item.function_item import FunctionItem
 from ksp_base.base_item_parser import BaseItemParser
 from ksp_base.base_toc_parser import BaseTocParser
 from ksp_base.constants import DocState
@@ -30,12 +30,12 @@ from util.rewind_reader import RewindReader
 log = logging.getLogger(__name__)
 
 
-class BaseCommandParser(BaseItemParser):
-    COMMAND_PATTERN = re.compile(r"^([a-z_]+)(?:\((.*)\))?$")
-    """Pattern to find a command, e.g. random(<min>, <max>)"""
+class BaseFunctionParser(BaseItemParser):
+    FUNCTION_PATTERN = re.compile(r"^([a-z_]+)\((x(?:, y)?|<expression>, <shift-bits>)\)(?::\s+(.*))?$")
+    """Pattern to find a function, e.g. inc(x)"""
     CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE)
     """Pattern to find the start headline for scanning the content"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
+    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Control Statements$", re.IGNORECASE)
     """Pattern to find the end headline for scanning the content"""
 
     def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str,
@@ -54,7 +54,7 @@ class BaseCommandParser(BaseItemParser):
         super().__init__(
             version,
             toc,
-            CommandItem,
+            FunctionItem,
             reader,
             self.CONTENT_START_PATTERN,
             self.CONTENT_STOP_PATTERN,
@@ -63,62 +63,32 @@ class BaseCommandParser(BaseItemParser):
             page_offset
         )
 
-    def check_category(self, line) -> bool:
-        """
-        Special handling for categories for commands.
-
-        For commands the category is repeated (at least the beginning).
-        So check if the line is repeated (after an empty line).
-
-        :param line: Line to check
-        :return: True if the line contains a category
-        """
-        is_category = False
-        if line.startswith("[C]"):
-            is_category = True
-        elif line in self.chapter_categories:
-            # Check if the next line (after an empty line) starts with the same category
-            # Remember the current position
-            cur_pos = self.reader.handle.tell()
-            # Read the next line which should be empty
-            self.reader.readline()
-            # Read the next line which should start with the category
-            next_line = self.reader.readline()
-            # Special handling for set_rpn()/set_nrpn()
-            if line == "set_rpn()/set_nrpn()":
-                is_category = True
-            elif line.endswith(")"):
-                line = line[:-1]
-            if next_line.startswith(line):
-                is_category = True
-            self.reader.handle.seek(cur_pos)
-        return is_category
-
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
-        if self.doc_state == DocState.CATEGORY and line and (m := self.COMMAND_PATTERN.match(line)):
+        if m := self.FUNCTION_PATTERN.match(line):
             name = m.group(1)
             arguments = m.group(2)
+            description = m.group(3)
             parameter_list = []
             if arguments:
                 for parameter in arguments.split(","):
-                    parameter = parameter.strip().replace("<", "").replace(">", "")
+                    parameter = parameter.strip()
                     parameter_list.append(parameter)
-            self.add_command(name, parameter_list)
-            # Special handling for set_rpn()/set_nrpn(), because there are 2 commands
-            # => The doc state should not be changed for the first command
-            if name != "set_rpn":
-                doc_state = DocState.DESCRIPTION
+            self.add_function(name, parameter_list, description)
+            doc_state = DocState.DESCRIPTION
         return doc_state
 
-    def add_command(self, name: str, parameter_list: list[str]):
+    def add_function(self, name: str, parameter_list: list[str], description: str):
         """
-        Add a command if it does not exist.
+        Add a function if it does not exist.
 
-        :param name: Name of the command
+        :param name: Name of the function
         :param parameter_list: List or parameter names
+        :param description: Description (if any)
         """
-        command = CommandItem(
+        if description is None:
+            description = ""
+        command = FunctionItem(
             file=self.reader.file,
             page_no=self.reader.page_no,
             line_no=self.reader.line_no,
@@ -126,10 +96,7 @@ class BaseCommandParser(BaseItemParser):
             category=self.category,
             name=name,
             parameter_list=parameter_list,
-            description="",
-            remarks="",
-            examples="",
-            see_also="",
+            description=description,
             source="BUILT-IN"
         )
         self.add_item(command)

@@ -30,6 +30,7 @@ from pypdf import PageObject, PdfReader
 
 from ksp_base.base_callback_parser import BaseCallbackParser
 from ksp_base.base_command_parser import BaseCommandParser
+from ksp_base.base_function_parser import BaseFunctionParser
 from ksp_base.base_toc_parser import BaseTocParser
 from ksp_base.base_widget_parser import BaseWidgetParser
 from ksp_base.base_variable_parser import BaseVariableParser
@@ -76,12 +77,14 @@ class BaseMainParser:
         self.txt_file_fixed: Path = self.cfg_version_dir / "KSP_Reference_Manual_Fixed.txt.py"
         self.callbacks_csv: Path = self.out_version_dir / "built_in_callbacks.csv"
         self.widgets_csv: Path = self.out_version_dir / "built_in_widgets.csv"
+        self.functions_csv: Path = self.out_version_dir / "built_in_functions.csv"
         self.commands_csv: Path = self.out_version_dir / "built_in_commands.csv"
         self.variables_csv: Path = self.out_version_dir / "built_in_variables.csv"
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[BaseTocParser] = None
         self.callbacks: Optional[BaseCallbackParser] = None
         self.widgets: Optional[BaseWidgetParser] = None
+        self.functions: Optional[BaseFunctionParser] = None
         self.commands: Optional[BaseCommandParser] = None
         self.variables: Optional[BaseVariableParser] = None
 
@@ -202,6 +205,18 @@ class BaseMainParser:
             # )
             # self.widgets.parse()
             # self.widgets.export()
+            # log.info("-" * 80)
+            # self.functions: BaseFunctionParser = BaseMainParser.get_parser(
+            #     ParserType.FUNCTION,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.functions_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.functions.parse()
+            # self.functions.export()
             log.info("-" * 80)
             self.commands: BaseCommandParser = BaseMainParser.get_parser(
                 ParserType.COMMAND,
@@ -250,6 +265,6 @@ if __name__ == "__main__":
     out_dir = root / "out"
     version = "7.8"
     pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
-    parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ";")
+    parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ",")
     # parser.convert_to_text()
     parser.parse()
