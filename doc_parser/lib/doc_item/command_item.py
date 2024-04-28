@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
+import re
 from pathlib import Path
 
 from doc_item.doc_item import DocItem
@@ -52,11 +53,11 @@ class CommandItem(DocItem):
         Remove newlines at the end and some spaces.
         """
         self.description = self.description.strip()
-        self.description = self.description.replace("•  ", "- ")
+        self.description = self.fix_bullet_items(self.description)
         self.remarks = self.remarks.strip()
+        self.remarks = self.fix_bullet_items(self.remarks)
         self.examples = self.examples.strip()
         self.see_also = self.see_also.strip()
-        self.remarks = self.remarks.replace("•     ", "- ")
 
     @staticmethod
     def csv_header():

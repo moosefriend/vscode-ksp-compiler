@@ -16,12 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
+import re
 from abc import abstractmethod
 from pathlib import Path
 from typing import Any
 
 
 class DocItem:
+    BULLET_PATTERN = re.compile(r"^•\s+")
+    """Pattern for bullet pattens"""
+
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
                  description: str = None, source: str = None):
         """
@@ -57,6 +61,16 @@ class DocItem:
         """
         Correct any strange characters or newlines in the documentation.
         """
+
+    @staticmethod
+    def fix_bullet_items(text: str) -> str:
+        """
+        Replace bullet items "• " with "- ".
+
+        :param text: Text to replace
+        :return: New text where bullets are replaced
+        """
+        return DocItem.BULLET_PATTERN.sub("- ", text)
 
     @staticmethod
     @abstractmethod

@@ -45,7 +45,7 @@ class FunctionItem(DocItem):
         Remove newlines at the end and some spaces.
         """
         self.description = self.description.strip()
-        self.description = self.description.replace("•  ", "- ")
+        self.description = self.fix_bullet_items(self.description)
 
     @staticmethod
     def csv_header():

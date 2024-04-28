@@ -52,9 +52,9 @@ class CallbackItem(DocItem):
         """
         self.description = self.description.strip()
         self.remarks = self.remarks.strip()
+        self.remarks = self.fix_bullet_items(self.remarks)
         self.examples = self.examples.strip()
         self.see_also = self.see_also.strip()
-        self.remarks = self.remarks.replace("•     ", "- ")
 
     @staticmethod
     def csv_header():
