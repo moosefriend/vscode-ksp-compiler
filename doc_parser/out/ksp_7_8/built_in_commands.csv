@@ -383,11 +383,7 @@ The different implications between absolute and relative adjustments are more
 apparent with more than one change_vol() statement applied to the same
 event.","- change_vol() works on the note event level and does not change any tune settings in the
 instrument itself. It is also not related to any MIDI modulations regarding volume (e.g. MIDI CC
-#7).
-
-Example
-
-on init
+#7).","on init
     declare $vol_amount
 end on
 
@@ -395,7 +391,7 @@ on note
     $vol_amount := (($EVENT_VELOCITY - 1) * 12000 / 126) - 6000
     change_vol ($EVENT_ID, $vol_amount, 1)
 end on
-A simple dynamic expander: lightly played notes will be softer, harder played notes will be louder.",,"change_tune()
+A simple dynamic expander: lightly played notes will be softer, harder played notes will be louder.","change_tune()
 change_pan()
 fade_in()
 fade_out()",BUILT-IN
@@ -2209,11 +2205,7 @@ $KEY_COLOR_INACTIVE Resets the key to standard black and white
 $KEY_COLOR_NONE Resets the key to its normal Kontakt color, e.g. red for
 internal keyswitches","- The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to
 changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all
-keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.
-
-Example
-
-on init
+keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.","on init
     message("""")
 
     declare ui_button $Color
@@ -2224,7 +2216,7 @@ on init
     declare %white_keys[7] := (0, 2, 4, 5, 7, 9, 11)
     declare %colors[16] := ( ...
         $KEY_COLOR_RED, ...
-        $KEY_COLOR_ORANGE, ...",,,BUILT-IN
+        $KEY_COLOR_ORANGE, ...",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,175,6217,15. Keyboard Commands,set_key_name(),set_key_name,"note-number,name","Assigns a text string to the specified note number.
 <note-number>: MIDI note number of the key (0 ... 127).
 <name>: Text string to assign.","- Key names are instrument parameters and reside outside of KSP, i.e. changing the key name
@@ -2850,14 +2842,10 @@ The factory data folder of Kontakt, mainly used for loading factory IR samples.
 Note: this is not the Kontakt Factory Library folder!
 $GET_FOLDER_PATCH_DIR
 The folder in which the patch was saved.
-If the patch was not saved before, an empty string is returned.
-
-Example
-
-on init
+If the patch was not saved before, an empty string is returned.",,"on init
     message(get_folder($GET_FOLDER_FACTORY_DIR))
 end on
-Displaying the path of Kontakt's factory data folder.",,,"load_ir_sample()
+Displaying the path of Kontakt's factory data folder.","load_ir_sample()
 General: $GET_FOLDER_LIBRARY_DIR, $GET_FOLDER_FACTORY_DIR,
 $GET_FOLDER_PATCH_DIR",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,209,7394,18. Load/Save Commands,load_array(),load_array,"array-variable,mode","Loads an array from an external .nka file.
@@ -2891,17 +2879,13 @@ to avoid this problem.
 the end of the file. If this last newline is missing, Kontakt cannot know the file has ended
 and will continue to try and load other data from the resource container. Files generated
 by the save_array() command have this automatically, but if you are creating NKA files via
-different means, this is something to be aware of.
-
-Example
-
-on init
+different means, this is something to be aware of.","on init
     declare $count
     declare $load_arr_id := -1
     declare $save_arr_id := -1
     declare %preset[8]
 
-    declare ui_button $Load",,,BUILT-IN
+    declare ui_button $Load",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,211,7498,18. Load/Save Commands,load_array_str(),load_array_str,"array-variable,path","Loads an array from an external .nka file, using an absolute path to the file.
 <array-variable>: The name of the array variable, this must be present as the first line of the .nka file.
 <path>:  The absolute path of the .nka file.","- The behaviour is similar to load_array() with mode set to 0, but instead of manually choosing
@@ -2911,11 +2895,7 @@ persistence_changed, on ui_control and on pgs_changed callbacks.
 - When loading an array within the on init callback, please note that the array will implicitly be
 made persistent (as if make_persistent()  command was used) , which results in loaded data
 being overwritten at the end of the callback. Use read_persistent_var() before loading the array
-to avoid this problem.
-
-Example
-
-on init
+to avoid this problem.","on init
     message("""")
     set_ui_height(2)
 
@@ -2950,7 +2930,7 @@ on async_complete
     if ($NI_ASYNC_ID = $load_arr_id)
         $load_arr_id := -1
 
-        if ($NI_ASYNC_EXIT_STATUS = 0)",,,BUILT-IN
+        if ($NI_ASYNC_EXIT_STATUS = 0)",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,213,7580,18. Load/Save Commands,load_ir_sample(),load_ir_sample,"path-or-filename,slot,generic","Loads an impulse response sample into Kontakt's convolution effect.
 <path-or-filename>: The absolute file path of the IR sample.If no path is specified, the command will look for the specified sample within
 the ir_samples folder of the resource container.
@@ -2970,11 +2950,7 @@ For buses, this parameter specifies the actual bus:
 $NI_BUS_OFFSET + [0 ... 15]: One of the 16 buses","- Please note that any subfolders inside the ir_samples folder of the resource container will
 not be scanned, and it is not recommended to add them manually via text strings. Doing so
 could lead to problems, because subfolders will be ignored during the creation of a resource
-container monolith.
-
-Example
-
-on init
+container monolith.","on init
     declare $load_ir_id := -1
     declare ui_button $Load
 end on
@@ -2995,7 +2971,7 @@ on async_complete
         end if
     end if
 end on
-Load an IR sample into a convolution reverb, placed in the first slot of send effect chain.",,,BUILT-IN
+Load an IR sample into a convolution reverb, placed in the first slot of send effect chain.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,215,7640,18. Load/Save Commands,save_array(),save_array,"array-variable,mode","Saves an array to an external .nka file
 <array-variable>: The name of the array variable to be saved.
 <mode>: 0: A dialog window pops up, allowing you to save the .nka file. This mode
@@ -3020,11 +2996,7 @@ KSP_Reference_Manual_Fixed.txt.py,216,7669,18. Load/Save Commands,save_array_str
 you can directly save the file to the specified location.
 - If the file does not exist, but the folder does, a new .nka file will be created.
 - This command can be used synchronously in on init, and asynchronously in on
-persistence_changed, on ui_control and on pgs_changed callbacks.
-
-Example
-
-on init
+persistence_changed, on ui_control and on pgs_changed callbacks.","on init
     message("""")
     set_ui_height(2)
 
@@ -3062,13 +3034,9 @@ on ui_control (%table)
 end on
 
 on ui_control ($Save)
-    $save_arr_id := save_array_str(%preset, @path & @preset_name & "".nka"")",,,BUILT-IN
+    $save_arr_id := save_array_str(%preset, @path & @preset_name & "".nka"")",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,218,7744,18. Load/Save Commands,save_midi_file(),save_midi_file,path,"Saves a MIDI file with the range specified by the mf_set_export_area() command.
-<path>: The absolute path of the MIDI file to be saved.
-
-Example
-
-on init
+<path>: The absolute path of the MIDI file to be saved.",,"on init
     message("""")
 
     declare $save_mf_id := -1
@@ -3102,7 +3070,7 @@ on async_complete
         $Save := 0
     end if
 end on
-Saving a MIDI file.",,,"mf_insert_file()
+Saving a MIDI file.","mf_insert_file()
 mf_set_export_area()",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,220,7804,19. Music Information Retrieval,detect_pitch(),detect_pitch,"zone-id,pitch-result","Returns a real value representing the fundamental frequency of an audio sample, in semitones and
 cents. If detection fails, the function will return ~NI_DETECT_PITCH_INVALID.
@@ -3234,11 +3202,7 @@ mf_set_mark()
 mf_get_mark()
 mf_get_id()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,234,8131,20. MIDI Object Commands,mf_copy_export_area(),mf_copy_export_area,index,"Copies the contents of MIDI export area 0 to the export area with the specified <index>.
-
-Example
-
-on init
+KSP_Reference_Manual_Fixed.txt.py,234,8131,20. MIDI Object Commands,mf_copy_export_area(),mf_copy_export_area,index,Copies the contents of MIDI export area 0 to the export area with the specified <index>.,,"on init
     message("""")
     make_perfview
 
@@ -3277,7 +3241,7 @@ on init
     end while
 end on
 Loads a MIDI file and distributes the content found in the first four MIDI channels to four separate
-MIDI areas.",,,"mf_set_export_area()
+MIDI areas.","mf_set_export_area()
 mf_set_num_export_areas()",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,235,8184,20. MIDI Object Commands,mf_get_buffer_size(),mf_get_buffer_size,,Returns the size of the MIDI object's event buffer.,"- The maximum buffer size is 1000000 events, including both active and inactive events.
 - Inserting a MIDI event will decrease the buffer size by one. Removing an event will increase it
@@ -3339,11 +3303,7 @@ mf_get_prev_at()
 save_midi_file()",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,240,8294,20. MIDI Object Commands,mf_get_last_filename(),mf_get_last_filename,,"Returns the filename (not the full path!) of the last MIDI file that was inserted into Kontakt, either via
 mf_insert_file(), or via drag and drop operation on ui_mouse_area.","- This command will pair Note On and Note Off events to a single Note On with a Note Length
-parameter. The Note Off events will be discarded.
-
-Example
-
-on init
+parameter. The Note Off events will be discarded.","on init
     message("""")
     make_perfview
 
@@ -3384,7 +3344,7 @@ on init
     end while
 end on
 MIDI file loader which allows exporting first four tracks as individual MIDI files. Utilizes
-mf_get_last_filename() to show the exact name of the MIDI file that was loaded.",,,BUILT-IN
+mf_get_last_filename() to show the exact name of the MIDI file that was loaded.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,242,8355,20. MIDI Object Commands,mf_get_mark(),mf_get_mark,"event-id,mark","Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
 <event-id>: The ID of the event to be edited
 <mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
@@ -3479,11 +3439,7 @@ KSP_Reference_Manual_Fixed.txt.py,249,8509,20. MIDI Object Commands,mf_insert_fi
 callbacks, so it is advised to use the on async_complete callback to verify the loading
 status.
 - This command will pair Note On and Note Off events to a single Note On with a length
-parameter. The Note Off events will be discarded.
-
-Example
-
-on init
+parameter. The Note Off events will be discarded.","on init
     declare $load_mf_id := -1
     declare @file_name
     declare @filepath
@@ -3511,7 +3467,7 @@ on async_complete
 end on
 Loading a MIDI file with a button. In order for this to work, you will need to put a MIDI file
 called ""test.mid"" into your Kontakt factory data folder. Otherwise, the defined error message will
-be displayed.",,,BUILT-IN
+be displayed.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,251,8570,20. MIDI Object Commands,mf_remove_event(),mf_remove_event,event-id,"Deactivates an event in the MIDI object, effectively removing it.
 <event-id>: The ID of the event to be deactivated.",- Using this command will decrease the MIDI event buffer size by one.,,"mf_insert_file()
 mf_set_buffer_size()

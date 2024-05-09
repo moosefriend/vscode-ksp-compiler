@@ -34,7 +34,7 @@ log = logging.getLogger(__name__)
 class BaseItemParser:
     REMARKS_PATTERN = compile(r"^Remarks$")
     """Pattern to find the remarks section"""
-    EXAMPLES_PATTERN = compile(r"^\s*Examples$")
+    EXAMPLES_PATTERN = compile(r"^\s*Examples?$")
     """Pattern to find the examples section"""
     SEE_ALSO_PATTERN = compile(r"^See Also$")
     """Pattern to find the see also section"""
