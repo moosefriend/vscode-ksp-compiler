@@ -197,8 +197,8 @@
   ```
   
 ## Automatically Parsed Elements
-### Page Number in PDF
-#### Table of Content Page Number
+### Page Number in PDF (Done)
+#### Table of Content Page Number (Done)
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Table of Contents Page 2 >>>>>>>>>>>>>>>>>>>>
@@ -207,24 +207,24 @@
 - Since after the table of contents start again with 1 it's important to tell the parser how many pages are used for the
   table of contents, see `page_offset` in `BaseMainParser`
 
-#### Normal Content Page Number
+#### Normal Content Page Number (Done)
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Page 321 >>>>>>>>>>>>>>>>>>>>
   ```
 - It starts with "Page"
 
-### Table of Contents
+### Table of Contents (Done)
 - Table of contents is needed to identify the headlines in the scanned chapters
 
-#### Headline
+#### Headline (Done)
 - Example:
   ```
   21. Built-in Variables and Constants      ............................................................................       259
   ```
 - A headline starts with a chapter number
 
-#### Category
+#### Category (Done)
 - Example:
   ```
   General ................................................................................................................                             259
@@ -232,19 +232,19 @@
 - Categories are in the table of content, but don't have a chapter number
 - Categories are handled only for the chapter they are located
 
-### Callbacks
+### Callbacks (Done)
 - Callback start with `on <callback>`
 
 ### Widgets
 - UI Widgets are used with `declare`
 
-### Commands
+### Commands and Functions (Done)
 - Commands are search starting and ending with a specified chapter
 
-### Variables and Constants
+### Variables and Constants (Nearly Done)
 - Variables and Constants are search starting and ending with a specified chapter
 
-#### Normal Variable in Header
+#### Normal Variable in Header (Done)
 - Example:
   ```
   $NI_BUS_OFFSET
@@ -255,7 +255,7 @@
 - The variable is in the first line
 - The documentation follows in the next lines
 
-#### Multiple Variables in Header
+#### Multiple Variables in Header (Done)
 - Example:
   ```
   $NI_SIGNAL_TIMER_BEAT
@@ -268,7 +268,7 @@
 - The variables are in the first lines
 - The documentation is valid for all those variables
 
-#### Array in Header
+#### Array in Header (Done)
 - Example:
   ```
   %GROUPS_SELECTED[<group-idx>]
@@ -277,7 +277,7 @@
   ```
 - The parameter of the variable is parsed separately in the square brackets
 
-#### Variable Range in Header
+#### Variable Range in Header (Done)
 - Example:
   ```
   $MARK_1 ... $MARK_28
@@ -287,7 +287,7 @@
   ```
 - The documentation is meant for the variables 1 ... n, so the variables in that range must be created
 
-#### Variable Comments
+#### Variable Comments (Done)
 - Example:
   ```
   •  $EVENT_PAR_PLAY_POS (Returns the absolute position of the play cursor within a zone in
@@ -295,7 +295,7 @@
   ```
 - Comments for variables are directly after the variable in brackets
 
-#### Block Headline in Header
+#### Block Headline in Header (Done)
 - Example:
   ```
   Path Variables
@@ -312,7 +312,7 @@
 - The headline is meant for all variables in the block
 - The description is variable specific
 
-#### Block Description
+#### Block Description (Done)
 - Example:
   ```
   Time Machine Pro Variables
@@ -323,7 +323,7 @@
   ```
 - The headline and the following description is meant for all the variables in the block
 
-#### Item List
+#### Item List (Done)
 - Example:
   ```
   Event Parameter Constants
