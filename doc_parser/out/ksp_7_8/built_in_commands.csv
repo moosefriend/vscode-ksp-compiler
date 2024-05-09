@@ -1304,10 +1304,7 @@ while($i < num_elements(%asyncid))
 
     inc($i)
 end while
-Performing multiple async operations.
-
-See also
-General: $NI_ASYNC_EXIT_STATUS, $NI_ASYNC_ID",,BUILT-IN
+Performing multiple async operations.","General: $NI_ASYNC_EXIT_STATUS, $NI_ASYNC_ID",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,126,4607,13. Time-Related Commands,wait_ticks(),wait_ticks,ticks,Pauses the callback for the specified time in MIDI ticks.,"- Same as wait() but with MIDI ticks as the wait time parameter.
 - 960 MIDI ticks equals one quarter note.",,"stop_wait()
 wait()",BUILT-IN

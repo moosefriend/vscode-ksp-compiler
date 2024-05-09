@@ -18,6 +18,7 @@
 ##############################################################################
 import csv
 import logging
+import re
 from re import compile, Pattern
 from abc import abstractmethod
 from pathlib import Path
@@ -36,7 +37,7 @@ class BaseItemParser:
     """Pattern to find the remarks section"""
     EXAMPLES_PATTERN = compile(r"^\s*Examples?$")
     """Pattern to find the examples section"""
-    SEE_ALSO_PATTERN = compile(r"^See Also$")
+    SEE_ALSO_PATTERN = compile(r"^See Also$", re.IGNORECASE)
     """Pattern to find the see also section"""
 
     def __init__(
