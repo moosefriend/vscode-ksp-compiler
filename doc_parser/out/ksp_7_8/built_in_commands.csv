@@ -204,8 +204,14 @@ on release
 end on
 If you have a keyboard with no aftertouch, press C1 instead.",,"ignore_controller
 Events and MIDI: $VCC_PITCH_BEND, $VCC_MONO_AT",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,80,2947,9. General Commands,"set_rpn()/set_nrpn()set_rpn(<address>, <value>)
-",set_rpn,"address,value",,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,80,2948,9. General Commands,set_rpn()/set_nrpn(),set_rpn,"address,value","Sends a MIDI RPN or NRPN message.
+<address>: The RPN or NRPN address (0 ... 16383).
+<value>: The value of the RPN or NRPN message (0 ... 16383).","- Kontakt cannot handle RPN or NRPN messages as external modulation sources. You can
+however use these messages for simple inter-script communication.",,"on rpn/nrpn
+set_controller()
+msb()
+lsb()
+Events and MIDI: $RPN_ADDRESS, $RPN_VALUE",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,80,2948,9. General Commands,set_rpn()/set_nrpn(),set_nrpn,"address,value","Sends a MIDI RPN or NRPN message.
 <address>: The RPN or NRPN address (0 ... 16383).
 <value>: The value of the RPN or NRPN message (0 ... 16383).","- Kontakt cannot handle RPN or NRPN messages as external modulation sources. You can

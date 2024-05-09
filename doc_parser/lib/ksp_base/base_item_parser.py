@@ -55,7 +55,7 @@ class BaseItemParser:
         finalize_item_list: Callable[[], None] = None
     ):
         """
-        Parse widgets in the Kontakt KSP text manual.
+        Base parser for documentation items in the Kontakt KSP text manual.
 
         :param version: Kontakt manual version needed to select the right parser
         :param toc: Table of content parser containing the headlines and categories
@@ -207,7 +207,7 @@ class BaseItemParser:
                 elif self.SEE_ALSO_PATTERN.match(line):
                     self.doc_state = DocState.SEE_ALSO
                 # Add line to corresponding item documentation
-                else:
+                elif self.doc_state != DocState.CATEGORY:
                     self.add_item_documentation(line)
                 if self.item_list:
                     self.item_list[-1].parsed_text += f"{line}\n"

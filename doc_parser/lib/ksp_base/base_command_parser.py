@@ -18,6 +18,7 @@
 ##############################################################################
 import logging
 import re
+from copy import deepcopy
 from pathlib import Path
 from typing import Optional
 
@@ -62,6 +63,15 @@ class BaseCommandParser(BaseItemParser):
             delimiter,
             page_offset
         )
+
+    def scan_items(self):
+        super().scan_items()
+        # Special handling for set_rpn()/set_nrpn()
+        # Copy the documentation from set_nrpn() to set_rpn()
+        set_nrpn_doc_item = self.all_items["set_nrpn"][0]
+        set_rpn_doc_item = deepcopy(set_nrpn_doc_item)
+        set_rpn_doc_item.name = "set_rpn"
+        self.all_items["set_rpn"][0] = set_rpn_doc_item
 
     def check_category(self, line) -> bool:
         """
