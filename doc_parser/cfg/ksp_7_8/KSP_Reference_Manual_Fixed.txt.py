@@ -6482,10 +6482,6 @@ on init
         $VelAmt := get_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY, 0, $mod_idx, -1)
     end if
 <<<<<<<<<<<<<<<<<<<< Page 182 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     make_persistent($VelAmt)
 end on
 
@@ -6495,8 +6491,7 @@ on ui_control ($VelAmt)
         $mod_idx := get_mod_idx($count, "VEL_VOLUME")
 
         if ($mod_idx # $NI_NOT_FOUND)
-            set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY, $VelAmt, $count,
-$mod_idx, -1)
+            set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY, $VelAmt, $count, $mod_idx, -1)
         end if
 
         inc($count)
@@ -6542,8 +6537,7 @@ end on
 
 on ui_control ($FilterEnv)
     if ($mod_idx # $NI_NOT_FOUND and $target_idx # $NI_NOT_FOUND)
-        set_engine_par($ENGINE_PAR_MOD_TARGET_MP_INTENSITY, 500000 + ($FilterEnv *
-500), 0, $mod_idx, $target_idx)
+        set_engine_par($ENGINE_PAR_MOD_TARGET_MP_INTENSITY, 500000 + ($FilterEnv * 500), 0, $mod_idx, $target_idx)
     end if
 end on
 Controlling the envelope to filter cutoff modulation amount in the first group. Note: the filter envelope
@@ -6606,11 +6600,6 @@ on init
     declare ui_label $label (2, 6)
     declare ui_button $Refresh
 <<<<<<<<<<<<<<<<<<<< Page 185 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
-
     declare $i
     declare !effect_name[128]
     !effect_name[$EFFECT_TYPE_NONE] := "None"
@@ -6624,8 +6613,7 @@ on init
 
     while ($i < 8)
         add_text_line($label, "Slot: " & $i + 1 & ": " & ...
-                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1,
-$i, -1)])
+                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1, $i, -1)])
 
         inc($i)
     end while
@@ -6636,8 +6624,7 @@ on ui_control ($Refresh)
 
     while ($i < 8)
         add_text_line($label, "Slot: " & $i + 1 & ": " & ...
-                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1,
-$i, -1)])
+                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1, $i, -1)])
 
         inc($i)
     end while
@@ -6711,8 +6698,7 @@ Examples
 on init
     declare ui_label $label (3, 2)
 
-    add_text_line($label, "Standard Voice Limit: " &
-get_voice_limit($NI_VL_TMPRO_STANDARD))
+    add_text_line($label, "Standard Voice Limit: " & get_voice_limit($NI_VL_TMPRO_STANDARD))
     add_text_line($label,"HQ Voice Limit: " & get_voice_limit($NI_VL_TMPRO_HQ))
 end on
 Displaying TM Pro voice limits.
@@ -6805,10 +6791,6 @@ end on
 
 on ui_control ($Freq)
 <<<<<<<<<<<<<<<<<<<< Page 190 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     set_engine_par($ENGINE_PAR_CUTOFF, $Freq, 0, 0, -1)
 end on
 
@@ -6828,8 +6810,7 @@ on init
 end on
 
 on ui_control ($Knob)
-    set_engine_par($ENGINE_PAR_MOD_TARGET_MP_INTENSITY, $Knob * 1000, 0, $mod_idx,
-$target_idx)
+    set_engine_par($ENGINE_PAR_MOD_TARGET_MP_INTENSITY, $Knob * 1000, 0, $mod_idx, $target_idx)
 end on
 Controlling the filter envelope amount of an envelope to filter cutoff modulation in the first group.
 Note: the filter envelope has been manually renamed to "FILTER_ENV".
@@ -7021,26 +7002,22 @@ Examples
 on init
     message("")
 
-    set_snapshot_type(3) { Must be 2 or 3 or else set_zone_par works only on user
-zones }
+    set_snapshot_type(3) { Must be 2 or 3 or else set_zone_par works only on user zones }
 
     declare $a
     declare $i
     declare %sel_zones[1000]
-    declare %zone_par[4] := ($ZONE_PAR_VOLUME, $ZONE_PAR_VOLUME, $ZONE_PAR_TUNE,
-$ZONE_PAR_TUNE)
+    declare %zone_par[4] := ($ZONE_PAR_VOLUME, $ZONE_PAR_VOLUME, $ZONE_PAR_TUNE, $ZONE_PAR_TUNE)
     declare %offset[4] := (-1, 1, -1, 1)
 end on
 
 on note
-    { pressing the lowest A on an 88-key MIDI controler will gather all selected
-zones }
+    { pressing the lowest A on an 88-key MIDI controler will gather all selected zones }
     if ($EVENT_NOTE = 21)
         get_sel_zones_idx(%sel_zones)
     end if
 
-    { pressing the following 4 keys will adjust volume down and up 0.01 dB, then
-tuning down and up 1 cent }
+    { pressing the following 4 keys will adjust volume down and up 0.01 dB, then tuning down and up 1 cent }
     if (in_range($EVENT_NOTE, 22, 25))
         ignore_event($EVENT_ID)
 
@@ -7050,8 +7027,7 @@ tuning down and up 1 cent }
             if (%sel_zones[$i] > -1)
                 set_zone_par(%sel_zones[$i], ...
                              %zone_par[$a], ...
-                             get_zone_par(%sel_zones[$i], %zone_par[$a]) +
-%offset[$a])
+                             get_zone_par(%sel_zones[$i], %zone_par[$a]) + %offset[$a])
             end if
 
             inc($i)
@@ -7059,10 +7035,6 @@ tuning down and up 1 cent }
 
         exit
 <<<<<<<<<<<<<<<<<<<< Page 198 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     end if
 end on
 Using the lowest keys of an 88 key MIDI controller to finely adjust zone volume and tuning in 0.01
@@ -7078,8 +7050,7 @@ Returns the ID of the zone with the specified zone index.
 Examples
 
 on init
-    set_snapshot_type(3) { Must be 2 or 3 or else set_zone_par works only on user
-zones }
+    set_snapshot_type(3) { Must be 2 or 3 or else set_zone_par works only on user zones }
 
     declare ui_slider $slider (0, 127)
     declare ui_label $label (1, 1)
@@ -7438,10 +7409,6 @@ on init
 
     declare ui_button $Load
 <<<<<<<<<<<<<<<<<<<< Page 210 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     declare ui_button $Save
     declare ui_table %table[8] (2,2,100)
 
@@ -7549,10 +7516,6 @@ on async_complete
 
         if ($NI_ASYNC_EXIT_STATUS = 0)
 <<<<<<<<<<<<<<<<<<<< Page 212 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
             message("Array not found!")
         else
             message("")
@@ -7627,7 +7590,6 @@ on async_complete
 end on
 Load an IR sample into a convolution reverb, placed in the first slot of send effect chain.
 <<<<<<<<<<<<<<<<<<<< Page 214 >>>>>>>>>>>>>>>>>>>>
-
 
 See Also
 get_folder()
@@ -7720,10 +7682,6 @@ end on
 on ui_control ($Save)
     $save_arr_id := save_array_str(%preset, @path & @preset_name & ".nka")
 <<<<<<<<<<<<<<<<<<<< Page 217 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
 end on
 
 on async_complete
@@ -7912,8 +7870,7 @@ on init
     move_control_px($Drop, 66, 2)
     move_control_px($Info, 66, 2)
 
-    set_control_par(get_ui_id($Drop), $CONTROL_PAR_DND_ACCEPT_AUDIO,
-$NI_DND_ACCEPT_ONE)
+    set_control_par(get_ui_id($Drop), $CONTROL_PAR_DND_ACCEPT_AUDIO, $NI_DND_ACCEPT_ONE)
     set_control_par(get_ui_id($Drop), $CONTROL_PAR_WIDTH, 150)
     set_control_par(get_ui_id($Info), $CONTROL_PAR_WIDTH, 150)
 
@@ -7958,10 +7915,6 @@ on init
     !drum_types[$NI_DETECT_DRUM_TYPE_TOM]        := "Tomr"
     !drum_types[$NI_DETECT_DRUM_TYPE_CYMBAL]     := "Cymbal"
 <<<<<<<<<<<<<<<<<<<< Page 228 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     !drum_types[$NI_DETECT_DRUM_TYPE_CLAP]       := "Clap"
     !drum_types[$NI_DETECT_DRUM_TYPE_SHAKER]     := "Shaker"
     !drum_types[$NI_DETECT_DRUM_TYPE_PERC_DRUM]  := "Drum Percussion"
@@ -7985,8 +7938,7 @@ on init
     move_control_px($Drop, 66, 2)
     move_control_px($Info, 66, 2)
 
-    set_control_par(get_ui_id($Drop), $CONTROL_PAR_DND_ACCEPT_AUDIO,
-$NI_DND_ACCEPT_ONE)
+    set_control_par(get_ui_id($Drop), $CONTROL_PAR_DND_ACCEPT_AUDIO, $NI_DND_ACCEPT_ONE)
     set_control_par(get_ui_id($Drop), $CONTROL_PAR_WIDTH, 150)
     set_control_par(get_ui_id($Info), $CONTROL_PAR_WIDTH, 150)
 
@@ -8003,8 +7955,7 @@ on ui_control ($Drop)
 
         select ($sample_type)
             case $NI_DETECT_SAMPLE_TYPE_INSTRUMENT
-                wait_async(detect_instrument_type(%NI_USER_ZONE_IDS[0],
-$instrument_type))
+                wait_async(detect_instrument_type(%NI_USER_ZONE_IDS[0], $instrument_type))
             case $NI_DETECT_SAMPLE_TYPE_DRUM
                 wait_async(detect_drum_type(%NI_USER_ZONE_IDS[0], $drum_type))
             case $NI_DETECT_SAMPLE_TYPE_INVALID
@@ -8015,8 +7966,7 @@ $instrument_type))
             if ($instrument_type = $NI_DETECT_INSTRUMENT_TYPE_INVALID)
                 set_text($Info, "Cannot recognize instrument type!")
             else
-                set_text($Info, "Instrument: " & !
-instrument_types[$instrument_type])
+                set_text($Info, "Instrument: " & !instrument_types[$instrument_type])
             end if
         else
             if ($drum_type = $NI_DETECT_DRUM_TYPE_INVALID)
@@ -8025,10 +7975,6 @@ instrument_types[$instrument_type])
                 set_text($Info, "Instrument: " & !drum_types[$drum_type])
             end if
 <<<<<<<<<<<<<<<<<<<< Page 229 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
         end if
     end if
 end on
@@ -8332,8 +8278,7 @@ on init
     while ($i < $DND_AREAS)
         set_control_par(%ID[$i], $CONTROL_PAR_DND_BEHAVIOUR, 1)
         set_control_par(%ID[$i], $CONTROL_PAR_MIDI_EXPORT_AREA_IDX, $i + 1)
-        set_control_par_str(%ID[$i], $CONTROL_PAR_TEXT, mf_get_last_filename & " "
-& !track_names[$i])
+        set_control_par_str(%ID[$i], $CONTROL_PAR_TEXT, mf_get_last_filename & " " & !track_names[$i])
 
         mf_set_export_area(!track_names[$i], -1, -1, $i, $i)
         mf_copy_export_area($i + 1)
@@ -8344,7 +8289,6 @@ end on
 MIDI file loader which allows exporting first four tracks as individual MIDI files. Utilizes
 mf_get_last_filename() to show the exact name of the MIDI file that was loaded.
 <<<<<<<<<<<<<<<<<<<< Page 241 >>>>>>>>>>>>>>>>>>>>
-
 
 See Also
 mf_insert_file()
@@ -8555,7 +8499,6 @@ Loading a MIDI file with a button. In order for this to work, you will need to p
 called "test.mid" into your Kontakt factory data folder. Otherwise, the defined error message will
 be displayed.
 <<<<<<<<<<<<<<<<<<<< Page 250 >>>>>>>>>>>>>>>>>>>>
-
 
 See Also
 on async_complete
