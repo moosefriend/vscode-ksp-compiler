@@ -105,9 +105,6 @@ class BaseCommandParser(BaseItemParser):
         return is_category
 
     def check_item(self, line) -> Optional[DocState]:
-        # TODO: The first by_marks() contains in the description also the one from the duplicate. The description of
-        #    the duplicate is OK.
-        # TODO: set_rpn (line 2947) is not properly parsed, because set_rpn() is together with set_nrpn()
         doc_state: Optional[DocState] = None
         if self.doc_state == DocState.CATEGORY and line and (m := self.COMMAND_PATTERN.match(line)):
             name = m.group(1)

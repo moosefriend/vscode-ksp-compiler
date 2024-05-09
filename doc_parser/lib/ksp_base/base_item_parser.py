@@ -268,7 +268,8 @@ class BaseItemParser:
 
         :param line: Line to add
         """
-        for item in self.item_list:
+        if self.item_list:
+            item = self.item_list[-1]
             # Add the line to the corresponding attribute
             text = getattr(item, self.doc_state.value)
             setattr(item, self.doc_state.value, f"{text}{line}\n")

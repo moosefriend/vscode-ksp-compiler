@@ -263,10 +263,7 @@ KSP_Reference_Manual_Fixed.txt.py,82,3022,10. Event Commands,by_marks(),by_marks
 
 <mark>: One of 28 marks, $MARK_1 ... $MARK_28, which was assigned to the event.
 You can also select more than one event group by using the bitwise .or.
-operator, or by simply summing the event marks.
-
-Used to access a user-defined group of MIDI object events.
-<mark>: The event mark number, $MARK_1 ... $MARK_10 .","- by_marks() is a user-defined group of events which can be set with set_event_mark().
+operator, or by simply summing the event marks.","- by_marks() is a user-defined group of events which can be set with set_event_mark().
 It can be used with all commands which take event ID as an argument, like note_off(),
 change_tune() etc.","on note
     if ($EVENT_NOTE mod 12 = 0) { if played note is a C }
@@ -281,17 +278,7 @@ on controller
     end if
 end on
 Moving the modwheel changes the tuning of all C notes (C-2, C-1…C8).","set_event_mark()
-Events and MIDI: $EVENT_ID, $ALL_EVENTS, $MARK_1 … $MARK_28
-
-mf_insert_file()
-mf_insert_event()
-mf_remove_event()
-Events and MIDI: $ALL_EVENTS, $CURRENT_EVENT
-by_track()
-mf_set_mark()
-mf_get_mark()
-mf_get_id()
-save_midi_file()",BUILT-IN
+Events and MIDI: $EVENT_ID, $ALL_EVENTS, $MARK_1 … $MARK_28",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,232,8092,20. MIDI Object Commands,by_marks(),by_marks,mark,"Used to access a user-defined group of MIDI object events.
 <mark>: The event mark number, $MARK_1 ... $MARK_10 .",,,"mf_insert_file()
 mf_insert_event()
