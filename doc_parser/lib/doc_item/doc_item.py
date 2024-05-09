@@ -24,7 +24,7 @@ from typing import Any
 
 class DocItem:
     BULLET_PATTERN = re.compile(r"^•\s+", re.MULTILINE)
-    """Pattern for bullet pattens"""
+    """Pattern for bullet list item"""
 
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
                  description: str = None, source: str = None):
