@@ -30,33 +30,87 @@ KSP_Reference_Manual_Fixed.txt.py,261,8786,21. Built-in Variables and Constants,
 allow_group() or set_event_par_arr() functions.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,261,8791,21. Built-in Variables and Constants,Events and MIDI,,,$ALL_EVENTS,,,"This constant addresses all events in functions which deal with an event ID number.
 It also works with MIDI object commands that require a MIDI event ID.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_1,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_2,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_3,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_4,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_5,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_6,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_7,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_8,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_9,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_10,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_11,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_12,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_13,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_14,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_15,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_16,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_17,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_18,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_19,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_20,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_21,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_22,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_23,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_24,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_25,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_26,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_27,,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_1,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_2,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_3,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_4,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_5,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_6,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_7,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_8,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_9,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_10,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_11,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_12,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_13,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_14,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_15,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_16,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_17,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_18,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_19,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_20,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_21,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_22,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_23,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_24,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_25,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_26,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_27,,,"These constants can be used to create a bitmask that is used to group events at will.
+It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
+delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,261,8796,21. Built-in Variables and Constants,Events and MIDI,,,$MARK_28,,,"These constants can be used to create a bitmask that is used to group events at will.
 It is intended to be used with by_marks() , set_event_mark(), get_event_mark(),
 delete_event_mark(), mf_set_mark() and mf_get_mark() commands.",,BUILT-IN

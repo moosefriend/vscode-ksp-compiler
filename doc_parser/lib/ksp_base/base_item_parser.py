@@ -309,7 +309,7 @@ class BaseItemParser:
                     for line in item.parsed_text.splitlines():
                         log.info(line)
                     log.info(f"{'*' * 10} Parsed Text End {'*' * 10}")
-                for title in ("Headline", "Category", "Block Headline", "Item List Headline", "Source", "Name", "Comment"):
+                for title in ("Headline", "Category", "Block Headline", "Item List Headline", "Source", "Name", "Parameter", "Comment"):
                     attribute = title.replace(" ", "_").lower()
                     if attribute in item.__dict__ and (value := item.__dict__[attribute]):
                         log.info(f"{title}: {value}")

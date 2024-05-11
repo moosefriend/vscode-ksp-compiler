@@ -77,17 +77,18 @@ class BaseVariableParser(BaseItemParser):
     def scan_items(self):
         super().scan_items()
         # Special handling for variable ranges, e.g. $MARK_1 ... $MARK_28
-        # Copy the parsed text from the last variable in range to the other
+        # Copy some attributes from the last variable in range to the other
         for item_list in self.all_items.values():
             variable = item_list[0]
             if isinstance(variable, VariableItem) and variable.range_end:
                 # Get the base variable name
                 base_name = re.sub(r"_\d+$", "_", variable.name)
                 last_name = f"{base_name}{variable.range_end}"
-                parsed_text = self.all_items[last_name][0].parsed_text
                 for i in range(variable.range_start, variable.range_end + 1):
                     cur_name = f"{base_name}{i}"
-                    self.all_items[cur_name][0].parsed_text = parsed_text
+                    for attribute in ("description", "parsed_text"):
+                        value = self.all_items[last_name][0].__dict__[attribute]
+                        self.all_items[cur_name][0].__dict__[attribute] = value
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
@@ -129,6 +130,12 @@ class BaseVariableParser(BaseItemParser):
                     self.add_item_documentation(description + ".")
                 else:
                     self.block_description += description + "."
+
+            # TODO: In the dump of variables also the next item list header is printed:
+            #   ********** Parsed Text Start **********
+            #   •  $EVENT_PAR_MIDI_CHANNEL
+            #   Event parameters to be used with set_event_par_arr() and get_event_par_arr():
+            #   ********** Parsed Text End **********
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
             log.debug(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
