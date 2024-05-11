@@ -74,6 +74,21 @@ class BaseVariableParser(BaseItemParser):
         self.item_list_headline: str = ""
         self.comment: str = ""
 
+    def scan_items(self):
+        super().scan_items()
+        # Special handling for variable ranges, e.g. $MARK_1 ... $MARK_28
+        # Copy the parsed text from the last variable in range to the other
+        for item_list in self.all_items.values():
+            variable = item_list[0]
+            if isinstance(variable, VariableItem) and variable.range_end:
+                # Get the base variable name
+                base_name = re.sub(r"_\d+$", "_", variable.name)
+                last_name = f"{base_name}{variable.range_end}"
+                parsed_text = self.all_items[last_name][0].parsed_text
+                for i in range(variable.range_start, variable.range_end + 1):
+                    cur_name = f"{base_name}{i}"
+                    self.all_items[cur_name][0].parsed_text = parsed_text
+
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
         # TODO: Main variable in the block header followed by description, then the constants
@@ -93,14 +108,14 @@ class BaseVariableParser(BaseItemParser):
             self.add_variable(name, parameter)
             self.add_item_documentation(description)
             doc_state = DocState.DESCRIPTION
-        # Check for variable ranges, e.g. $MARK1 ... $MARK28
+        # Check for variable ranges, e.g. $MARK_1 ... $MARK_28
         elif m := self.VAR_RANGE_PATTERN.match(line):
             base_name = m.group(1)
-            start_index = int(m.group(2))
-            end_index = int(m.group(4))
-            for i in range(start_index, end_index + 1):
+            range_start = int(m.group(2))
+            range_end = int(m.group(4))
+            for i in range(range_start, range_end + 1):
                 name = f"{base_name}{i}"
-                self.add_variable(name, "")
+                self.add_variable(name, "", range_start, range_end)
             if self.doc_state == DocState.DESCRIPTION:
                 self.add_item_documentation(line)
             doc_state = DocState.DESCRIPTION
@@ -116,27 +131,29 @@ class BaseVariableParser(BaseItemParser):
                     self.block_description += description + "."
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
-            log.info(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
+            log.debug(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
         # Check for block headline or description block before the variable(s)
         elif self.doc_state == DocState.CATEGORY and line != "":
             if not self.block_headline:
                 self.block_headline = line
-                log.info(f"   - Block Header: {line} ({self.reader.location()})")
+                log.debug(f"   - Block Header: {line} ({self.reader.location()})")
             else:
                 self.block_description += line + "\n"
-                log.info(f"   - Block Description: {line} ({self.reader.location()})")
+                log.debug(f"   - Block Description: {line} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
         return doc_state
 
-    def add_variable(self, name: str, parameter):
+    def add_variable(self, name: str, parameter: str, range_start: int = 0, range_end: int = 0):
         """
         Add a variable if it is not in the ignore list or already exists.
 
         :param name: Name of the variable
         :param parameter: Parameter name if it is e.g. an array
+        :param range_start: Start index for variable ranges (e.g. $MARK_0 ... $MARK_28)
+        :param range_end: End index for variable ranges (e.g. $MARK_0 ... $MARK_28)
         """
         variable = VariableItem(
             file=self.reader.file,
@@ -145,12 +162,14 @@ class BaseVariableParser(BaseItemParser):
             headline=self.headline,
             category=self.category,
             name=name,
+            range_start=range_start,
+            range_end=range_end,
             parameter=parameter,
             description=self.block_description,
             block_headline=self.block_headline,
             item_list_headline=self.item_list_headline,
             comment=self.comment,
-            see_also=[],
+            see_also="",
             source="BUILT-IN"
         )
         self.add_item(variable)
@@ -173,9 +192,10 @@ class BaseVariableParser(BaseItemParser):
             first_variable = self.item_list[0]
             see_also = [x.name for x in self.item_list]
             for i, variable in enumerate(self.item_list):
-                variable.see_also = see_also.copy()
+                cur_see_also = see_also.copy()
                 # Remove the self reference
-                variable.see_also.remove(variable.name)
+                cur_see_also.remove(variable.name)
+                variable.see_also = "\n".join(cur_see_also)
                 if i == 0:
                     continue
                 else:

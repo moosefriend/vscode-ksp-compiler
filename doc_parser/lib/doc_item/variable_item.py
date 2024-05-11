@@ -23,8 +23,8 @@ from doc_item.doc_item import DocItem
 
 class VariableItem(DocItem):
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, block_headline: str,
-                 item_list_headline: str, name: str, parameter: str, comment: str, description: str,
-                 see_also: list[str] = None, source: str = None):
+                 item_list_headline: str, name: str, range_start: int, range_end: int, parameter: str, comment: str,
+                 description: str, see_also: str = None, source: str = None):
         """
         Container for variable documentation.
 
@@ -36,20 +36,24 @@ class VariableItem(DocItem):
         :param block_headline: Headline of a block e.g. containing constants (if any)
         :param item_list_headline: Headline for an item list e.g. for constants (if any)
         :param name: Variable name
+        :param range_start: Start index for variable ranges (e.g. $MARK_0 ... $MARK_28)
+        :param range_end: End index for variable ranges (e.g. $MARK_0 ... $MARK_28)
         :param parameter: Parameter for variable e.g. for an array
         :param comment: Comment found behind the variable in brackets
         :param description: Item documentation
-        :param see_also: List of other variable names in the same block
+        :param see_also: Other variable names in the same block
         :param source: Where the item has been parsed, e.g. build-in
         """
         super().__init__(file, page_no, line_no, headline, category, name, description)
         self.block_headline: str = block_headline
         self.item_list_headline: str = item_list_headline
         self.name: str = name
+        self.range_start: int = range_start
+        self.range_end: int = range_end
         self.parameter: str = parameter
         self.comment: str = comment
         self.description: str = description
-        self.see_also: list[str] = see_also
+        self.see_also: str = see_also
         self.source: str = source
 
     def fix_documentation(self):

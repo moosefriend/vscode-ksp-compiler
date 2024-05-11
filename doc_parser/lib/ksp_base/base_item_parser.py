@@ -309,15 +309,15 @@ class BaseItemParser:
                     for line in item.parsed_text.splitlines():
                         log.info(line)
                     log.info(f"{'*' * 10} Parsed Text End {'*' * 10}")
-                for title in ("Headline", "Category", "Source", "Name"):
-                    attribute = title.lower()
-                    log.info(f"{title}: {item.__dict__[attribute]}")
+                for title in ("Headline", "Category", "Block Headline", "Item List Headline", "Source", "Name", "Comment"):
+                    attribute = title.replace(" ", "_").lower()
+                    if attribute in item.__dict__ and (value := item.__dict__[attribute]):
+                        log.info(f"{title}: {value}")
                 if "parameter_list" in item.__dict__:
                     log.info(f"Parameters: {','.join(item.__dict__['parameter_list'])}")
                 for title in ("Description", "Remarks", "Examples", "See Also"):
                     attribute = title.replace(" ", "_").lower()
-                    value: str = item.__dict__[attribute]
-                    if value:
+                    if attribute in item.__dict__ and (value := item.__dict__[attribute]):
                         log.info(f"{'>' * 10} {title} {'<' * 10}")
                         for line in value.splitlines():
                             log.info(line)
