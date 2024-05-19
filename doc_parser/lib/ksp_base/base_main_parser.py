@@ -152,7 +152,8 @@ class BaseMainParser:
             toc = "Table of Contents "
         else:
             toc = ""
-        with open(self.txt_file_original, "w", encoding='utf-8') as f:
+        self.txt_file_original.parent.mkdir(parents=True, exist_ok=True)
+        with self.txt_file_original.open("w", encoding='utf-8') as f:
             log.info(f"Convert PDF to TEXT: {self.pdf_file} -> {self.txt_file_original}")
             page_cnt = 0
             for page in reader.pages:
@@ -265,8 +266,8 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     root = Path(__file__).parent.parent.parent
     out_dir = root / "out"
-    version = "7.8"
-    pdf_file = root / "in" / "KSP_Reference_7_8_Manual_en.pdf"
+    version = "7.10"
+    pdf_file = root / "in" / "KSP_Reference_7_10_Manual_en.pdf"
     parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ",")
-    # parser.convert_to_text()
+    parser.convert_to_text()
     parser.parse()

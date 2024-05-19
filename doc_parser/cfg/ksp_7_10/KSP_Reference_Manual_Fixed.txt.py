@@ -6,7 +6,7 @@ Table of Contents
 1. Disclaimer  .................................................................................................................           1
 
 2. Welcome to KSP ........................................................................................................          2
-What's New in Kontakt 7.8 .........................................................................................                       2
+What's New in Kontakt 7.10 ........................................................................................                      2
 
 3. Callbacks    ..................................................................................................................           3
 General Information ...................................................................................................                         3
@@ -273,87 +273,93 @@ mf_set_num_export_areas() ......................................................
 21. Built-in Variables and Constants      ............................................................................       259
 General ................................................................................................................                             259
 Events and MIDI ....................................................................................................                          261
-Transport and Timing ............................................................................................                        264
+Time and Transport ...............................................................................................                        264
 Callbacks and UI ...................................................................................................                         266
 Mathematical Constants ........................................................................................                       268
 
 22. Control Parameters   ...............................................................................................         269
 General ................................................................................................................                             269
-Specific ................................................................................................................                             275
+Size, Position and Look ..........................................................................................                       270
+Values ..................................................................................................................                             272
+Text .....................................................................................................................                              273
+Automation ...........................................................................................................                           275
+Key Modifiers ........................................................................................................                           276
+Specific ................................................................................................................                             277
 
-23. Engine Parameters   ................................................................................................         284
-Instrument, Source and Amplifier  Module ................................................................                 284
-Filter and EQ .........................................................................................................                           288
-Insert Effects ........................................................................................................                           290
-Send Effects .........................................................................................................                           304
-Modulation ...........................................................................................................                           309
-Module Types and Subtypes ..................................................................................                     311
-Group Start Options Query .....................................................................................                      315
+23. Engine Parameters   ................................................................................................         285
+Instrument, Source and Amplifier  Module ................................................................                 285
+Filter and EQ .........................................................................................................                           289
+Insert Effects ........................................................................................................                           291
+Send Effects .........................................................................................................                           305
+Modulation ...........................................................................................................                           310
+Module Types and Subtypes ..................................................................................                     313
+Group Start Options Query .....................................................................................                      317
 
-24. Zone Parameters    ..................................................................................................         316
-Zone Parameters ..................................................................................................                         316
-Loop Parameters ...................................................................................................                         319
-Sample Parameters ...............................................................................................                        320
+24. Zone Parameters    ..................................................................................................         318
+Zone Parameters ..................................................................................................                         318
+Loop Parameters ...................................................................................................                         321
+Sample Parameters ...............................................................................................                        322
 
-25. Advanced Concepts  ..............................................................................................        321
-Preprocessor & System Scripts ...............................................................................                    321
-PGS .....................................................................................................................                              323
-Resource Container ...............................................................................................                        325
-Changing FX from KSP ..........................................................................................                       327
-The Advanced Engine Tab ......................................................................................                      329
+25. Advanced Concepts  ..............................................................................................        323
+Preprocessor & System Scripts ...............................................................................                    323
+PGS .....................................................................................................................                              325
+Resource Container ...............................................................................................                        327
+Changing FX from KSP ..........................................................................................                       329
+The Advanced Engine Tab ......................................................................................                      331
 
-26. Multi Script ...........................................................................................................          330
-General Information ...............................................................................................                        330
-ignore_midi ...........................................................................................................                           331
-on midi_in .............................................................................................................                            332
-set_midi() .............................................................................................................                            333
-Multi Script Command Arguments ..........................................................................                   334
+26. Multi Script ...........................................................................................................          332
+General Information ...............................................................................................                        332
+ignore_midi ...........................................................................................................                           333
+on midi_in .............................................................................................................                            334
+set_midi() .............................................................................................................                            335
+Multi Script Command Arguments ..........................................................................                   336
 
-27. Additional Resources   ............................................................................................        336
+27. Additional Resources   ............................................................................................        338
 
-28. Version History .....................................................................................................         337
-Kontakt 7.6 ...........................................................................................................                           337
-Kontakt 7.5 ...........................................................................................................                           338
-Kontakt 7.3 ...........................................................................................................                           339
-Kontakt 7.2 ...........................................................................................................                           340
-Kontakt 7.1 ...........................................................................................................                           341
-Kontakt 7 ..............................................................................................................                            342
-Kontakt 6.7.0 ........................................................................................................                           343
-Kontakt 6.6.0 ........................................................................................................                           344
-Kontakt 6.5.0 ........................................................................................................                           345
-Kontakt 6.4.0 ........................................................................................................                           346
-Kontakt 6.3.0 ........................................................................................................                           347
+28. Version History .....................................................................................................         339
+Kontakt 7.8 ...........................................................................................................                           339
+Kontakt 7.6 ...........................................................................................................                           340
+Kontakt 7.5 ...........................................................................................................                           341
+Kontakt 7.3 ...........................................................................................................                           342
+Kontakt 7.2 ...........................................................................................................                           343
+Kontakt 7.1 ...........................................................................................................                           344
 <<<<<<<<<<<<<<<<<<<< Table of Contents Page 8 >>>>>>>>>>>>>>>>>>>>
-Kontakt 6.2.0 ........................................................................................................                           348
-Kontakt 6.1.0 ........................................................................................................                           349
-Kontakt 6.0.2 ........................................................................................................                           350
-Kontakt 5.8.0 ........................................................................................................                           351
-Kontakt 5.7.0 ........................................................................................................                           352
-Kontakt 5.6.8 ........................................................................................................                           353
-Kontakt 5.6.5 ........................................................................................................                           354
-Kontakt 5.6.0 ........................................................................................................                           355
-Kontakt 5.5.0 ........................................................................................................                           356
-Kontakt 5.4.2 ........................................................................................................                           357
-Kontakt 5.4.1 ........................................................................................................                           358
-Kontakt 5.3.0 ........................................................................................................                           359
-Kontakt 5.2.0 ........................................................................................................                           360
-Kontakt 5.1.1 ........................................................................................................                           361
-Kontakt 5.1.0 ........................................................................................................                           362
-Kontakt 5.0.2 ........................................................................................................                           363
-Kontakt 5.0.1 ........................................................................................................                           364
-Kontakt 5 ..............................................................................................................                            365
-Kontakt 4.2.0 ........................................................................................................                           366
-Kontakt 4.1.2 ........................................................................................................                           367
-Kontakt 4.1.1 ........................................................................................................                           368
-Kontakt 4.1.0 ........................................................................................................                           369
-Kontakt 4.0.2 ........................................................................................................                           370
-Kontakt 4 ..............................................................................................................                            371
-Kontakt 3.5.0 ........................................................................................................                           372
-Kontakt 3 ..............................................................................................................                            373
-Kontakt 2.2.0 ........................................................................................................                           374
-Kontakt 2.1.1 ........................................................................................................                           375
-Kontakt 2.1.0 ........................................................................................................                           376
-Kontakt 2 ..............................................................................................................                            377
+Kontakt 7 ..............................................................................................................                            345
+Kontakt 6.7.0 ........................................................................................................                           346
+Kontakt 6.6.0 ........................................................................................................                           347
+Kontakt 6.5.0 ........................................................................................................                           348
+Kontakt 6.4.0 ........................................................................................................                           349
+Kontakt 6.3.0 ........................................................................................................                           350
+Kontakt 6.2.0 ........................................................................................................                           351
+Kontakt 6.1.0 ........................................................................................................                           352
+Kontakt 6.0.2 ........................................................................................................                           353
+Kontakt 5.8.0 ........................................................................................................                           354
+Kontakt 5.7.0 ........................................................................................................                           355
+Kontakt 5.6.8 ........................................................................................................                           356
+Kontakt 5.6.5 ........................................................................................................                           357
+Kontakt 5.6.0 ........................................................................................................                           358
+Kontakt 5.5.0 ........................................................................................................                           359
+Kontakt 5.4.2 ........................................................................................................                           360
+Kontakt 5.4.1 ........................................................................................................                           361
+Kontakt 5.3.0 ........................................................................................................                           362
+Kontakt 5.2.0 ........................................................................................................                           363
+Kontakt 5.1.1 ........................................................................................................                           364
+Kontakt 5.1.0 ........................................................................................................                           365
+Kontakt 5.0.2 ........................................................................................................                           366
+Kontakt 5.0.1 ........................................................................................................                           367
+Kontakt 5 ..............................................................................................................                            368
+Kontakt 4.2.0 ........................................................................................................                           369
+Kontakt 4.1.2 ........................................................................................................                           370
+Kontakt 4.1.1 ........................................................................................................                           371
+Kontakt 4.1.0 ........................................................................................................                           372
+Kontakt 4.0.2 ........................................................................................................                           373
+Kontakt 4 ..............................................................................................................                            374
+Kontakt 3.5.0 ........................................................................................................                           375
+Kontakt 3 ..............................................................................................................                            376
+Kontakt 2.2.0 ........................................................................................................                           377
+Kontakt 2.1.1 ........................................................................................................                           378
+Kontakt 2.1.0 ........................................................................................................                           379
+Kontakt 2 ..............................................................................................................                            380
 <<<<<<<<<<<<<<<<<<<< Page 1 >>>>>>>>>>>>>>>>>>>>
 1. Disclaimer
 
@@ -385,15 +391,19 @@ short code snippets that demonstrate how a given function can be used. To learn 
 Kontakt, refer to the Kontakt User Manual.
 We hope you enjoy exploring KSP!
 
-What's New in Kontakt 7.8
+What's New in Kontakt 7.10
 
 New Features
-•     New callback type, on ui_controls, which allows defining behavior of all UI widgets by their ID in
-a single callback.
-•     Engine parameters for new effects: EP Preamps, Big Fuzz, Fuzz, Stereo Tune.
+•     Engine parameters for new Electric Grand EQ and preamp modes of EP Preamps effect.
+•     Engine parameters for Flex Envelope modulator (number of stages, loop start, loop end, per-
+stage time, level, slope).
+•     Built-in variables for system date and time.
 
 Improved Features
-•  $EVENT_PAR_SOURCE now works in multi scripts.
+•     Waveforms in 3D mode of ui_wavetable widget now correctly display wavetable shaper
+adjustments.
+•     Effect edit panels in Instrument Edit mode now correctly update their UI upon certain engine
+parameter changes from KSP.
 <<<<<<<<<<<<<<<<<<<< Page 3 >>>>>>>>>>>>>>>>>>>>
 3. Callbacks
 
@@ -2846,7 +2856,7 @@ ignore_controller
 
 ignore_controller
 Ignores a MIDI Continuous Controller, Pitch Bend or Channel Aftertouch event in the on
-controller callback.
+controller callback, or Polyphonic Aftertouch event in the on poly_at callback.
 
 Examples
 
@@ -2894,7 +2904,7 @@ See Also
 reset_ksp_timer
 ui_label
 set_text()
-Transport and Timing: $ENGINE_UPTIME, $KSP_TIMER
+Time and Transport: $ENGINE_UPTIME, $KSP_TIMER
 <<<<<<<<<<<<<<<<<<<< Page 77 >>>>>>>>>>>>>>>>>>>>
 
 note_off()
@@ -4459,7 +4469,7 @@ Displaying the current host tempo.
 
 See Also
 ticks_to_ms()
-Transport and Timing: $NI_SONG_POSITION
+Time and Transport: $NI_SONG_POSITION
 <<<<<<<<<<<<<<<<<<<< Page 120 >>>>>>>>>>>>>>>>>>>>
 
 set_listener()
@@ -4601,7 +4611,7 @@ end on
 A nested while loop – takes about 5400 to 5800 microseconds.
 
 See Also
-Transport and Timing: $ENGINE_UPTIME, $KSP_TIMER
+Time and Transport: $ENGINE_UPTIME, $KSP_TIMER
 <<<<<<<<<<<<<<<<<<<< Page 123 >>>>>>>>>>>>>>>>>>>>
 
 ticks_to_ms()
@@ -4640,7 +4650,7 @@ Displaying the song position in realtime.
 
 See Also
 ms_to_ticks()
-Transport and Timing: $NI_SONG_POSITION
+Time and Transport: $NI_SONG_POSITION
 <<<<<<<<<<<<<<<<<<<< Page 124 >>>>>>>>>>>>>>>>>>>>
 
 wait()
@@ -4675,7 +4685,7 @@ stop_wait()
 wait_async()
 wait_ticks()
 while ()
-Transport and Timing: $DURATION_QUARTER
+Time and Transport: $DURATION_QUARTER
 <<<<<<<<<<<<<<<<<<<< Page 125 >>>>>>>>>>>>>>>>>>>>
 
 wait_async()
@@ -6713,8 +6723,12 @@ For buses, this parameter specifies the actual bus:
 $NI_BUS_OFFSET + [0 ... 15] One of the 16 buses
 For internal modulators, this parameter specifies the modulation slider which
 you can retrieve by using get_target_idx().
-For Step Modulator, this parameter specifies which step value to change when
-using $ENGINE_PAR_STEPMOD_STEP_VALUE.
+For Flex Envelope, this parameter specifies which envelope
+stage to target when using $ENGINE_PAR_FLEXENV_STAGE_TIME,
+$ENGINE_PAR_FLEXENV_STAGE_LEVEL and
+$ENGINE_PAR_FLEXENV_STAGE_SLOPE.
+For Step Modulator, this parameter specifies which step value to target when
+using $ENGINE_PAR_STEPSEQ_STEP_VALUE.
 For all other applications, set this parameter to -1.
 
 Examples
@@ -6733,16 +6747,14 @@ on init
         inc($i)
     end while
 end on
+<<<<<<<<<<<<<<<<<<<< Page 185 >>>>>>>>>>>>>>>>>>>>
+
+
 Output the name and index of release trigger group
 
 on init
     declare ui_label $label (2, 6)
     declare ui_button $Refresh
-<<<<<<<<<<<<<<<<<<<< Page 185 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
 
     declare $i
     declare !effect_name[128]
@@ -6780,7 +6792,7 @@ end on
 Output the effect types of all eight send effect slots.
 
 See Also
-Module Status Retrieval
+Module Types and Subtypes
 <<<<<<<<<<<<<<<<<<<< Page 186 >>>>>>>>>>>>>>>>>>>>
 
 get_engine_par_disp()
@@ -6809,8 +6821,12 @@ For buses, this parameter specifies the actual bus:
 $NI_BUS_OFFSET + [0 ... 15] One of the 16 buses
 For internal modulators, this parameter specifies the modulation slider which
 you can retrieve by using get_target_idx().
-For Step Modulator, this parameter specifies which step value to change when
-using $ENGINE_PAR_STEPMOD_STEP_VALUE.
+For Flex Envelope, this parameter specifies which envelope
+stage to target when using $ENGINE_PAR_FLEXENV_STAGE_TIME,
+$ENGINE_PAR_FLEXENV_STAGE_LEVEL and
+$ENGINE_PAR_FLEXENV_STAGE_SLOPE.
+For Step Modulator, this parameter specifies which step value to target when
+using $ENGINE_PAR_STEPSEQ_STEP_VALUE.
 For all other applications, set this parameter to -1.
 
 Examples
@@ -6837,7 +6853,7 @@ get_voice_limit(<voice-type>)
 Returns the voice limit for the Time Machine Pro sampler mode of the Source module.
 <voice-type>The voice type, can be one of the following:
 •  $NI_VL_TMPRO_STANDARD: Standard quality mode
-•  $NI_VL_TMRPO_HQ: High quality mode
+•  $NI_VL_TMPRO_HQ: High quality mode
 
 Examples
 
@@ -6846,7 +6862,7 @@ on init
 
     add_text_line($label, "Standard Voice Limit: " &
 get_voice_limit($NI_VL_TMPRO_STANDARD))
-    add_text_line($label,"HQ Voice Limit: " & get_voice_limit($NI_VL_TMPRO_HQ))
+    add_text_line($label, "HQ Voice Limit: " & get_voice_limit($NI_VL_TMPRO_HQ))
 end on
 Displaying TM Pro voice limits.
 
@@ -6917,8 +6933,12 @@ For buses, this parameter specifies the actual bus:
 $NI_BUS_OFFSET + [0 ... 15] One of the 16 buses
 For internal modulators, this parameter specifies the modulation slider which
 you can retrieve by using get_target_idx().
-For Step Modulator, this parameter specifies which step value to change when
-using $ENGINE_PAR_STEPMOD_STEP_VALUE.
+For Flex Envelope, this parameter specifies which envelope
+stage to target when using $ENGINE_PAR_FLEXENV_STAGE_TIME,
+$ENGINE_PAR_FLEXENV_STAGE_LEVEL and
+$ENGINE_PAR_FLEXENV_STAGE_SLOPE.
+For Step Modulator, this parameter specifies which step value to target when
+using $ENGINE_PAR_STEPSEQ_STEP_VALUE.
 For all other applications, set this parameter to -1.
 
 Examples
@@ -6931,6 +6951,10 @@ on ui_control ($Volume)
     set_engine_par($ENGINE_PAR_VOLUME, $Volume, -1, -1, -1)
 end on
 A knob controls the instrument volume.
+<<<<<<<<<<<<<<<<<<<< Page 190 >>>>>>>>>>>>>>>>>>>>
+
+
+
 
 on init
     declare ui_knob $Freq (0, 1000000, 1000000)
@@ -6938,11 +6962,6 @@ on init
 end on
 
 on ui_control ($Freq)
-<<<<<<<<<<<<<<<<<<<< Page 190 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     set_engine_par($ENGINE_PAR_CUTOFF, $Freq, 0, 0, -1)
 end on
 
@@ -6984,7 +7003,7 @@ set_voice_limit(<voice-type>, <value>)
 Sets the voice limit for the Time Machine Pro mode of the Source module.
 <voice-type>The voice type, can be one of the following:
 •  $NI_VL_TMPRO_STANDARD: Standard quality mode
-•  $NI_VL_TMRPO_HQ: High quality mode
+•  $NI_VL_TMPRO_HQ: High quality mode
 <value>The voice limit of the Time Machine Pro mode.
 
 Remarks
@@ -9151,7 +9170,18 @@ This variable array contains 1 if a note, independent of the octave, is held. 0 
 the note number should be a value between 0 (C) and 11 (B).
 <<<<<<<<<<<<<<<<<<<< Page 264 >>>>>>>>>>>>>>>>>>>>
 
-Transport and Timing
+Time and Transport
+
+Date And Time Variables
+These variables return the current date and time as set by the operating system, in form of integer
+values.
+$NI_DATE_YEAR
+$NI_DATE_MONTH (1 ... 12)
+$NI_DATE_DAY (1 ... 31)
+$NI_TIME_HOUR (0 ... 23)
+$NI_TIME_MINUTE (0 ... 59)
+$NI_TIME_SECOND (0 ... 59)
+
 
 $DISTANCE_BAR_START
 This variable returns the time of a MIDI Note On message in microseconds from the beginning of
@@ -9189,6 +9219,8 @@ It can be reset with reset_ksp_timer.
 The KSP timer is based on the CPU clock and thus runs at a constant rate, regardless of whether or
 not Kontakt is being used in real time. As such, it should be used to test the efficiency of scripts and
 not to make musical calculations.
+<<<<<<<<<<<<<<<<<<<< Page 265 >>>>>>>>>>>>>>>>>>>>
+
 
 
 $NI_SONG_POSITION
@@ -9201,8 +9233,6 @@ This variable contains 1 if the host's transport is running, 0 otherwise.
 
 $SIGNATURE_NUM
 This variable contains the numerator of the current time signature, i.e. 4/4.
-<<<<<<<<<<<<<<<<<<<< Page 265 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $SIGNATURE_DENOM
@@ -9322,9 +9352,7 @@ This constant returns the value of e (approximately 2.71828…).
 <<<<<<<<<<<<<<<<<<<< Page 269 >>>>>>>>>>>>>>>>>>>>
 22. Control Parameters
 
-
 General
-
 
 $CONTROL_PAR_NONE
 Nothing will be applied to the widget.
@@ -9356,8 +9384,9 @@ $NI_CONTROL_TYPE_XY
 $NI_CONTROL_TYPE_LEVEL_METER
 $NI_CONTROL_TYPE_MOUSE_AREA
 $NI_CONTROL_TYPE_PANEL
+<<<<<<<<<<<<<<<<<<<< Page 270 >>>>>>>>>>>>>>>>>>>>
 
-Size, Position, and Look
+Size, Position and Look
 
 $CONTROL_PAR_POS_X
 Sets or returns the horizontal position in pixels.
@@ -9365,8 +9394,6 @@ Sets or returns the horizontal position in pixels.
 
 $CONTROL_PAR_POS_Y
 Sets or returns the vertical position in pixels.
-<<<<<<<<<<<<<<<<<<<< Page 270 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $CONTROL_PAR_GRID_X
@@ -9402,6 +9429,8 @@ $HIDE_PART_MOD_LIGHT (mod ring light of ui_knob)
 $HIDE_PART_NOTHING (show all elements of the widget)
 $HIDE_PART_CURSOR (cursor of ui_xy)
 $HIDE_WHOLE_CONTROL
+<<<<<<<<<<<<<<<<<<<< Page 271 >>>>>>>>>>>>>>>>>>>>
+
 
 
 $CONTROL_PAR_PICTURE
@@ -9415,8 +9444,6 @@ the Kontakt factory pictures folder.
 $CONTROL_PAR_PICTURE_STATE
 Sets or returns the picture state of the control for ui_label, ui_table, ui_value_edit and
 ui_xy.
-<<<<<<<<<<<<<<<<<<<< Page 271 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $CONTROL_PAR_PARENT_PANEL
@@ -9446,30 +9473,32 @@ Z layer order by widget type (from top to bottom):
 13. Wavetable
 14. Waveform
 15. File Selector
+<<<<<<<<<<<<<<<<<<<< Page 272 >>>>>>>>>>>>>>>>>>>>
 
 Values
 
 $CONTROL_PAR_MIN_VALUE
 Returns the minimum declared value of the widget. This control parameter only makes sense for
 ui_knob, ui_slider and ui_value_edit.
+Only works with get_control_par().
 
 
 $CONTROL_PAR_MAX_VALUE
 Returns the minimum declared value of the widget. This control parameter only makes sense for
 ui_knob, ui_slider and ui_value_edit.
+Only works with get_control_par().
 
 
 $CONTROL_PAR_VALUE
 Sets or returns the value of the widget. Note that doing this does NOT execute the UI callback of the
 widget!
-<<<<<<<<<<<<<<<<<<<< Page 272 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $CONTROL_PAR_DEFAULT_VALUE
 Sets or returns the default value of the widget. A widget is set to the default value when clicking
 it with [Ctrl] (Windows) or [Cmd] (macOS) key held. This is only applicable to ui_knob and
 ui_slider.
+<<<<<<<<<<<<<<<<<<<< Page 273 >>>>>>>>>>>>>>>>>>>>
 
 Text
 
@@ -9478,7 +9507,6 @@ Sets or returns the widget text, similar to set_text().
 
 
 $CONTROL_PAR_TEXTLINE
-
 Adds a text line to multiline labels, similar to add_text_line().
 
 
@@ -9504,7 +9532,7 @@ Sets or returns the short name of the widget.
 
 $CONTROL_PAR_UNIT
 Sets or returns the knob unit, similar to set_knob_unit().
-<<<<<<<<<<<<<<<<<<<< Page 273 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 274 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -9559,8 +9587,7 @@ The text alignment in ui_button, ui_switch, ui_label, ui_menu and ui_text_edit:
 
 $CONTROL_PAR_VALUEPOS_Y
 Shifts the vertical position in pixels of the parameter value in ui_value_edit.
-<<<<<<<<<<<<<<<<<<<< Page 274 >>>>>>>>>>>>>>>>>>>>
-
+<<<<<<<<<<<<<<<<<<<< Page 275 >>>>>>>>>>>>>>>>>>>>
 
 Automation
 
@@ -9586,6 +9613,7 @@ Automation IDs can only be assigned to automatable widgets (ui_knob, ui_slider, 
 ui_xy cursors).
 When assigning automation IDs to ui_xy cursors, use set_control_par_arr() command
 instead of set_control_par().
+<<<<<<<<<<<<<<<<<<<< Page 276 >>>>>>>>>>>>>>>>>>>>
 
 Key Modifiers
 
@@ -9606,14 +9634,14 @@ Returns 1 if the [Ctrl] (Windows) or [Cmd] (macOS) key was pressed (0 otherwise)
 UI widget.
 ui_menu and ui_value_edit are not supported.
 The basic [Ctrl]/[Cmd] modifier functionality on ui_slider and ui_knob is preserved.
-<<<<<<<<<<<<<<<<<<<< Page 275 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 277 >>>>>>>>>>>>>>>>>>>>
 
 Specific
 
 Tables
 
 $NI_CONTROL_PAR_IDX
-Returns the index of the ui_table column or ui_xy cursor that triggered the on ui_control callback.
+Returns the index of the ui_table column that triggered the on ui_control callback.
 
 Tables and Waveforms
 
@@ -9650,7 +9678,7 @@ These can be set to one of the following values:
 $NI_DND_ACCEPT_NONE
 $NI_DND_ACCEPT_ONE
 $NI_DND_ACCEPT_MULTIPLE
-<<<<<<<<<<<<<<<<<<<< Page 276 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 278 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -9700,7 +9728,7 @@ Level Meters
 
 $CONTROL_PAR_BG_COLOR
 Sets or returns the background color of ui_level_meter.
-<<<<<<<<<<<<<<<<<<<< Page 277 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 279 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -9746,7 +9774,7 @@ $CONTROL_PAR_FILEPATH
 Sets or returns the actual path (full path of the file) currently selected in ui_file_selector. The file path
 must be a subpath of the instrument’s basepath. This control parameter is useful for recalling the
 prior state of the file selector upon loading the instrument. Can only be used in on init callback.
-<<<<<<<<<<<<<<<<<<<< Page 278 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 280 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -9783,32 +9811,30 @@ Waveform
 
 Waveform Flag Constants
 To be used with attach_zone(). You can combine flag constants using the bitwise .or..
-$UI_WAVEFORM_USE_SLICEDisplay the zone’s slice markers.
-S
+$UI_WAVEFORM_USE_SLICES Display the zone’s slice markers.
 $UI_WAVEFORM_USE_TABLE Display a per-slice table.
 Note: this only works if the slice markers are also active.
-$UI_WAVEFORM_TABLE_IS_Make the table bipolar.
-BIPOLAR
-$UI_WAVEFORM_USE_MIDI_Display a MIDI drag and drop icon.
-DRAG Note: this only works if the slice markers are also active.
+$UI_WAVEFORM_TABLE_IS_BIPOLMake the table bipolar.
+AR
+$UI_WAVEFORM_USE_MIDI_DRAG Display a MIDI drag and drop icon.
+Note: this only works if the slice markers are also active.
 
 
 Waveform Property Constants
 To be used with get_ui_wf_property() and set_ui_wf_property().
-<<<<<<<<<<<<<<<<<<<< Page 279 >>>>>>>>>>>>>>>>>>>>
+$UI_WF_PROP_PLAY_CURSOR Sets or returns the play cursor position, in microseconds.
+<<<<<<<<<<<<<<<<<<<< Page 281 >>>>>>>>>>>>>>>>>>>>
 
 
 
 Waveform Property Constants
-$UI_WF_PROP_PLAY_CURSOSets or returns the play cursor position, in microseconds.
-R
 $UI_WF_PROP_FLAGS Used to set new flag constants after the attach_zone()
 command is used.
 $UI_WF_PROP_TABLE_VAL Sets or returns the value of the indexed slice’s table.
-$UI_WF_PROP_TABLE_IDX_Highlights the indexed slice within the ui_waveform widget.
-HIGHLIGHT
-$UI_WF_PROP_MIDI_DRAG_Defines the start note for the MIDI drag and drop function.
-START_NOTE
+$UI_WF_PROP_TABLE_IDX_HIGHLHighlights the indexed slice within the ui_waveform
+IGHT widget.
+$UI_WF_PROP_MIDI_DRAG_STARTDefines the start note for the MIDI drag and drop function.
+_NOTE
 
 
 $CONTROL_PAR_WF_VIS_MODE
@@ -9827,7 +9853,6 @@ Sets or returns the color of the waveform drawn in ui_waveform.
 
 
 $CONTROL_PAR_WAVE_CURSOR_COLOR
-
 Sets or returns the color of the playback cursor in ui_waveform.
 
 
@@ -9843,8 +9868,6 @@ Wavetable
 
 $CONTROL_PAR_WT_ZONE
 Attaches a zone to ui_wavetable, taking the zone ID as the argument.
-<<<<<<<<<<<<<<<<<<<< Page 280 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $CONTROL_PAR_WT_VIS_MODE
@@ -9852,6 +9875,8 @@ Sets or returns the visualization mode of ui_wavetable. Can be set to the follow
 $NI_WT_VIS_2D (2D, oscilloscope-style visualization, only showing the current wavetable position)
 $NI_WT_VIS_3D (3D visualization displaying the whole wavetable as well as the the current
 position)
+<<<<<<<<<<<<<<<<<<<< Page 282 >>>>>>>>>>>>>>>>>>>>
+
 
 
 $CONTROL_PAR_PARALLAX_X
@@ -9895,19 +9920,20 @@ Range: 0 (fully transparent) to 255 (fully opaque).
 
 
 Additional Color and Alpha Parameters
+
 To be paired with the above control parameters in order to create gradient effects. If not explicitly
 set, they inherit the value of their match from above, resulting in no gradient.
-<<<<<<<<<<<<<<<<<<<< Page 281 >>>>>>>>>>>>>>>>>>>>
-
-
-
-Additional Color and Alpha Parameters
 $CONTROL_PAR_WAVE_END_Sets or returns the color for the end of the gradient applied to the
 COLOR waveform (2D) or current waveform (3D).
 $CONTROL_PAR_WAVE_END_Sets or returns the alpha channel (opacity) for the end of the
 ALPHA gradient applied to the waveform (2D) or current waveform (3D).
 $CONTROL_PAR_WAVETABLESets or returns the color for the end of the gradient applied to the
 _END_COLOR background waveforms (3D).
+<<<<<<<<<<<<<<<<<<<< Page 283 >>>>>>>>>>>>>>>>>>>>
+
+
+
+Additional Color and Alpha Parameters
 $CONTROL_PAR_WAVETABLESets or returns the alpha channel (opacity) for the end of the
 _END_ALPHA gradient applied to the background waveforms (3D).
 
@@ -9939,8 +9965,6 @@ based on the $CONTROL_PAR_MOUSE_BEHAVIOUR settings.
 immediately matching the mouse cursor. Clicking anywhere and dragging has a similar effect; the
 $CONTROL_PAR_MOUSE_BEHAVIOUR settings are ignored; cursor always follows mouse cursor
 one-to-one.
-<<<<<<<<<<<<<<<<<<<< Page 282 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $CONTROL_PAR_ACTIVE_INDEX
@@ -9955,6 +9979,8 @@ cursor.
 The index can only ever be an even number (with the exception of the -1 value) that matches the
 index of the X axis of the cursor in the main array representing the XY control, e.g. the first cursor
 has an index of 0, the second one has an index of 2, etc.
+<<<<<<<<<<<<<<<<<<<< Page 284 >>>>>>>>>>>>>>>>>>>>
+
 
 
 $CONTROL_PAR_CURSOR_PICTURE
@@ -9989,8 +10015,6 @@ $NI_CONTROL_PAR_IDX
 Returns the index of the cursor that triggered the on ui_control callback of a ui_xy widget. Note that
 indices are always even numbers starting from 0, so the first cursor has an index of 0, the second
 has an index of 2, and so on.
-<<<<<<<<<<<<<<<<<<<< Page 283 >>>>>>>>>>>>>>>>>>>>
-
 
 
 $NI_MOUSE_EVENT_TYPE
@@ -10000,7 +10024,7 @@ The following mouse event types are available:
 $NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN
 $NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP
 $NI_MOUSE_EVENT_TYPE_DRAG
-<<<<<<<<<<<<<<<<<<<< Page 284 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 285 >>>>>>>>>>>>>>>>>>>>
 23. Engine Parameters
 
 Instrument, Source and  Amplifier Module
@@ -10023,7 +10047,7 @@ Group or instrument bus left-right channel swap.
 
 $ENGINE_PAR_TUNE
 Instrument or group tuning.
-<<<<<<<<<<<<<<<<<<<< Page 285 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 286 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10071,12 +10095,12 @@ $ENGINE_PAR_WT_FORM_MODE
     $NI_WT_FORM_SYNC2
     $NI_WT_FORM_SYNC3
     $NI_WT_FORM_SYNC4
-<<<<<<<<<<<<<<<<<<<< Page 286 >>>>>>>>>>>>>>>>>>>>
+    $NI_WT_FORM_SYNC5
+<<<<<<<<<<<<<<<<<<<< Page 287 >>>>>>>>>>>>>>>>>>>>
 
 
 
 Source Module
-    $NI_WT_FORM_SYNC5
     $NI_WT_FORM_SYNC6
     $NI_WT_FORM_BENDP
     $NI_WT_FORM_BENDM
@@ -10117,7 +10141,7 @@ $ENGINE_PAR_S1200_FILTER_MODE
 
 $ENGINE_PAR_POST_FX_SLOT
 Sets the number of Post Amp group effects.
-<<<<<<<<<<<<<<<<<<<< Page 287 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 288 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10128,7 +10152,7 @@ Designates the output for the group or bus.
 -2: Routes to the instrument output with the instrument insert effects bypassed.
 $NI_BUS_OFFSET + 0 ... 15: Routes to one of the buses. Buses cannot be routed to other
 buses.
-<<<<<<<<<<<<<<<<<<<< Page 288 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 289 >>>>>>>>>>>>>>>>>>>>
 
 Filter and EQ
 
@@ -10179,7 +10203,7 @@ $ENGINE_PAR_FORMANT_SIZE
 Simple Filter
 $ENGINE_PAR_LP_CUTOFF
 $ENGINE_PAR_HP_CUTOFF
-<<<<<<<<<<<<<<<<<<<< Page 289 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 290 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10212,7 +10236,7 @@ $ENGINE_PAR_SEQ_HF_FREQ
 $ENGINE_PAR_SEQ_HF_BELL
 $ENGINE_PAR_SEQ_LP
 $ENGINE_PAR_SEQ_LP_FREQ
-<<<<<<<<<<<<<<<<<<<< Page 290 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 291 >>>>>>>>>>>>>>>>>>>>
 
 Insert Effects
 
@@ -10255,7 +10279,7 @@ $ENGINE_PAR_FCOMP_LINK
 Limiter
 $ENGINE_PAR_LIM_IN_GAIN
 $ENGINE_PAR_LIM_RELEASE
-<<<<<<<<<<<<<<<<<<<< Page 291 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 292 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10301,7 +10325,7 @@ $ENGINE_PAR_TR_INPUT
 $ENGINE_PAR_TR_ATTACK
 $ENGINE_PAR_TR_SUSTAIN
 $ENGINE_PAR_TR_SMOOTH
-<<<<<<<<<<<<<<<<<<<< Page 292 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 293 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10335,7 +10359,7 @@ $ENGINE_PAR_BASSINVADER_MASTER
 $ENGINE_PAR_BASSINVADER_LO_CUT
 $ENGINE_PAR_BASSINVADER_MID_CONTOUR
 $ENGINE_PAR_BASSINVADER_HI_BOOST
-<<<<<<<<<<<<<<<<<<<< Page 293 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 294 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10371,7 +10395,7 @@ $ENGINE_PAR_CB_AIR
 $ENGINE_PAR_CB_TREBLE
 $ENGINE_PAR_CB_BASS
 $ENGINE_PAR_CABINET_TYPE
-<<<<<<<<<<<<<<<<<<<< Page 294 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 295 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10388,6 +10412,7 @@ $ENGINE_PAR_EPP_EQ_MODE
     $NI_EPP_EQ_MODE_PASSIVE
     $NI_EPP_EQ_MODE_70S
     $NI_EPP_EQ_MODE_80S
+    $NI_EPP_EQ_MODE_E_GRAND
 $ENGINE_PAR_EPP_EQ_BASS
 $ENGINE_PAR_EPP_EQ_MID
 $ENGINE_PAR_EPP_EQ_TREBLE
@@ -10398,6 +10423,7 @@ $ENGINE_PAR_EPP_TREMOLO_MODE
     $NI_EPP_TREMOLO_MODE_80S
     $NI_EPP_TREMOLO_MODE_SYNTH
     $NI_EPP_TREMOLO_MODE_GUITAR
+    $NI_EPP_TREMOLO_MODE_E_GRAND
 $ENGINE_PAR_EPP_TREMOLO_WAVE
     $NI_EPP_TREMOLO_WAVE_SINE
     $NI_EPP_TREMOLO_WAVE_TRIANGLE
@@ -10409,7 +10435,7 @@ $ENGINE_PAR_EPP_TREMOLO_RATE_UNIT
 $ENGINE_PAR_EPP_TREMOLO_AMOUNT
 $ENGINE_PAR_EPP_TREMOLO_WIDTH
 $ENGINE_PAR_EPP_MONO
-<<<<<<<<<<<<<<<<<<<< Page 295 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 296 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10444,7 +10470,7 @@ $ENGINE_PAR_TW_MID
 $ENGINE_PAR_TW_BASS
 $ENGINE_PAR_TW_BRIGHT
 $ENGINE_PAR_TW_MONO
-<<<<<<<<<<<<<<<<<<<< Page 296 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 297 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10488,7 +10514,7 @@ $ENGINE_PAR_CT_MONO
 Cry Wah
 $ENGINE_PAR_CW_MONO
 $ENGINE_PAR_CW_PEDAL
-<<<<<<<<<<<<<<<<<<<< Page 297 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 298 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10498,23 +10524,23 @@ $ENGINE_PAR_DIRT_AMOUNTA
 $ENGINE_PAR_DIRT_BIASA
 $ENGINE_PAR_DIRT_TILTA
 $ENGINE_PAR_DIRT_MODEA
-$NI_DIRT_MODE_I
-$NI_DIRT_MODE_II
-$NI_DIRT_MODE_III
+    $NI_DIRT_MODE_I
+    $NI_DIRT_MODE_II
+    $NI_DIRT_MODE_III
 $ENGINE_PAR_DIRT_SAFETYA
 $ENGINE_PAR_DIRT_DRIVEB
 $ENGINE_PAR_DIRT_AMOUNTB
 $ENGINE_PAR_DIRT_BIASB
 $ENGINE_PAR_DIRT_TILTB
 $ENGINE_PAR_DIRT_MODEB
-$NI_DIRT_MODE_I
-$NI_DIRT_MODE_II
-$NI_DIRT_MODE_III
+    $NI_DIRT_MODE_I
+    $NI_DIRT_MODE_II
+    $NI_DIRT_MODE_III
 $ENGINE_PAR_DIRT_SAFETYB
 $ENGINE_PAR_DIRT_ROUTING
-$NI_DIRT_ROUTING_ATOB
-$NI_DIRT_ROUTING_BTOA
-$NI_DIRT_ROUTING_PARALLEL
+    $NI_DIRT_ROUTING_ATOB
+    $NI_DIRT_ROUTING_BTOA
+    $NI_DIRT_ROUTING_PARALLEL
 $ENGINE_PAR_DIRT_MIX
 $ENGINE_PAR_DIRT_BLEND
 
@@ -10523,8 +10549,8 @@ Distortion
 $ENGINE_PAR_DRIVE
 $ENGINE_PAR_DAMPING
 $ENGINE_PAR_DISTORTION_TYPE
-$NI_DISTORTION_TYPE_TUBE
-$NI_DISTORTION_TYPE_TRANS
+    $NI_DISTORTION_TYPE_TUBE
+    $NI_DISTORTION_TYPE_TRANS
 
 
 DStortion
@@ -10535,7 +10561,7 @@ $ENGINE_PAR_DS_BASS
 $ENGINE_PAR_DS_MID
 $ENGINE_PAR_DS_TREBLE
 $ENGINE_PAR_DS_MONO
-<<<<<<<<<<<<<<<<<<<< Page 298 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 299 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10550,9 +10576,9 @@ Saturation
 
 $ENGINE_PAR_SHAPE
 $ENGINE_PAR_SHAPE_TYPE
-$NI_SHAPE_TYPE_CLASSIC
-$NI_SHAPE_TYPE_ENHANCED
-$NI_SHAPE_TYPE_DRUMS
+    $NI_SHAPE_TYPE_CLASSIC
+    $NI_SHAPE_TYPE_ENHANCED
+    $NI_SHAPE_TYPE_DRUMS
 
 
 Skreamer
@@ -10562,8 +10588,6 @@ $ENGINE_PAR_SK_DRIVE
 $ENGINE_PAR_SK_BASS
 $ENGINE_PAR_SK_BRIGHT
 $ENGINE_PAR_SK_MIX
-<<<<<<<<<<<<<<<<<<<< Page 299 >>>>>>>>>>>>>>>>>>>>
-
 
 Lo-Fi
 
@@ -10579,14 +10603,15 @@ $ENGINE_PAR_BITE_PREFILTER
 $ENGINE_PAR_BITE_POSTFILTER
 $ENGINE_PAR_BITE_DC_QUANT
 $ENGINE_PAR_BITE_HPF
-$NI_BITE_HPF_MODE_5
-$NI_BITE_HPF_MODE_100
-$NI_BITE_HPF_MODE_200
+    $NI_BITE_HPF_MODE_5
+    $NI_BITE_HPF_MODE_100
+    $NI_BITE_HPF_MODE_200
 $ENGINE_PAR_BITE_MIX
+<<<<<<<<<<<<<<<<<<<< Page 300 >>>>>>>>>>>>>>>>>>>>
+
 
 
 Lo-Fi
-
 $ENGINE_PAR_BITS
 $ENGINE_PAR_FREQUENCY
 $ENGINE_PAR_NOISELEVEL
@@ -10612,18 +10637,17 @@ $ENGINE_PAR_WOWFLUTTER_AGE
 $ENGINE_PAR_WOWFLUTTER_SATURATION
 $ENGINE_PAR_WOWFLUTTER_MIX
 $ENGINE_PAR_WOWFLUTTER_GATE
-<<<<<<<<<<<<<<<<<<<< Page 300 >>>>>>>>>>>>>>>>>>>>
-
 
 Modulation
 
 Choral
+
 $ENGINE_PAR_CHORAL_RATE
 $ENGINE_PAR_CHORAL_MODE
-$NI_CHORAL_MODE_SYNTH
-$NI_CHORAL_MODE_ENSEMBLE
-$NI_CHORAL_MODE_DIMENSION
-$NI_CHORAL_MODE_UNIVERSAL
+    $NI_CHORAL_MODE_SYNTH
+    $NI_CHORAL_MODE_ENSEMBLE
+    $NI_CHORAL_MODE_DIMENSION
+    $NI_CHORAL_MODE_UNIVERSAL
 $ENGINE_PAR_CHORAL_AMOUNT
 $ENGINE_PAR_CHORAL_VOICES
 $ENGINE_PAR_CHORAL_DELAY
@@ -10632,39 +10656,41 @@ $ENGINE_PAR_CHORAL_FEEDBACK
 $ENGINE_PAR_CHORAL_SCATTER
 $ENGINE_PAR_CHORAL_INVERT_PHASE
 $ENGINE_PAR_CHORAL_MIX
+<<<<<<<<<<<<<<<<<<<< Page 301 >>>>>>>>>>>>>>>>>>>>
+
 
 
 Flair
 $ENGINE_PAR_FLAIR_MODE
-$NI_FLAIR_MODE_STANDARD
-$NI_FLAIR_MODE_THRU_ZERO
-$NI_FLAIR_MODE_SCAN
-$ENGINE_PAR_FLAIR_CHORD
+    $NI_FLAIR_MODE_STANDARD
+    $NI_FLAIR_MODE_THRU_ZERO
+    $NI_FLAIR_MODE_SCAN
+$ENGINE_PAR_FLAIR_CHORD (0 ... 23)
 $ENGINE_PAR_FLAIR_INVERT_PHASE
 $ENGINE_PAR_FLAIR_RATE
 $ENGINE_PAR_FLAIR_RATE_UNIT
 $ENGINE_PAR_FLAIR_FEEDBACK
 $ENGINE_PAR_FLAIR_AMOUNT
 $ENGINE_PAR_FLAIR_WIDTH
-$ENGINE_PAR_FLAIR_PITCH
+$ENGINE_PAR_FLAIR_PITCH (0 ... 96)
 $ENGINE_PAR_FLAIR_DAMPING
 $ENGINE_PAR_FLAIR_VOICES
 $ENGINE_PAR_FLAIR_DETUNE
 $ENGINE_PAR_FLAIR_MIX
 $ENGINE_PAR_FLAIR_OFFSET
 $ENGINE_PAR_FLAIR_SCANMODE
-$NI_FLAIR_SCANMODE_TRIANGLE
-$NI_FLAIR_SCANMODE_SAW_UP
-$NI_FLAIR_SCANMODE_SAW_DOWN
-<<<<<<<<<<<<<<<<<<<< Page 301 >>>>>>>>>>>>>>>>>>>>
+    $NI_FLAIR_SCANMODE_TRIANGLE
+    $NI_FLAIR_SCANMODE_SAW_UP
+    $NI_FLAIR_SCANMODE_SAW_DOWN
+<<<<<<<<<<<<<<<<<<<< Page 302 >>>>>>>>>>>>>>>>>>>>
 
 
 
 Freak
 $ENGINE_PAR_FREAK_MODE
-$NI_FREAK_MODE_RADIO
-$NI_FREAK_MODE_OSCILLATOR
-$NI_FREAK_MODE_SIDECHAIN
+    $NI_FREAK_MODE_RADIO
+    $NI_FREAK_MODE_OSCILLATOR
+    $NI_FREAK_MODE_SIDECHAIN
 $ENGINE_PAR_FREAK_TYPE
 $ENGINE_PAR_FREAK_HARMONICS
 $ENGINE_PAR_FREAK_FEEDBACK
@@ -10694,11 +10720,11 @@ $ENGINE_PAR_PHASIS_STEREO
 $ENGINE_PAR_PHASIS_SPREAD
 $ENGINE_PAR_PHASIS_FEEDBACK
 $ENGINE_PAR_PHASIS_MOD_MIX
-$ENGINE_PAR_PHASIS_NOTCHES
+$ENGINE_PAR_PHASIS_NOTCHES (2 ... 12)
 $ENGINE_PAR_PHASIS_INVERT_PHASE
 $ENGINE_PAR_PHASIS_INVERT_MOD_MIX
 $ENGINE_PAR_PHASIS_MIX
-<<<<<<<<<<<<<<<<<<<< Page 302 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 303 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10708,10 +10734,11 @@ $ENGINE_PAR_RINGMOD_FM
 $ENGINE_PAR_RINGMOD_FREQUENCY
 $ENGINE_PAR_RINGMOD_EDGE
 $ENGINE_PAR_RINGMOD_LFO_RATE
+$ENGINE_PAR_RINGMOD_LFO_RATE_UNIT
 $ENGINE_PAR_RINGMOD_LFO_AMOUNT
 $ENGINE_PAR_RINGMOD_LFO_WAVE
-$NI_RINGMOD_LFO_WAVE_SINE
-$NI_RINGMOD_LFO_WAVE_SQUARE
+    $NI_RINGMOD_LFO_WAVE_SINE
+    $NI_RINGMOD_LFO_WAVE_SQUARE
 $ENGINE_PAR_RINGMOD_FAST_MODE
 
 
@@ -10732,16 +10759,18 @@ $ENGINE_PAR_VC_RATE
 $ENGINE_PAR_VC_WIDTH
 $ENGINE_PAR_VC_MIX
 $ENGINE_PAR_VC_DEPTH
-$NI_VC_DEPTH_1
-$NI_VC_DEPTH_2
-$NI_VC_DEPTH_3
-$NI_VC_DEPTH_4
-$NI_VC_DEPTH_5
-$NI_VC_DEPTH_6
+    $NI_VC_DEPTH_1
+    $NI_VC_DEPTH_2
+    $NI_VC_DEPTH_3
+    $NI_VC_DEPTH_4
+    $NI_VC_DEPTH_5
+    $NI_VC_DEPTH_6
 $ENGINE_PAR_VC_COLOR
-$NI_VC_COLOR_TYPE_A
-$NI_VC_COLOR_TYPE_B
-$NI_VC_COLOR_TYPE_C
+    $NI_VC_COLOR_TYPE_A
+    $NI_VC_COLOR_TYPE_B
+    $NI_VC_COLOR_TYPE_C
+<<<<<<<<<<<<<<<<<<<< Page 304 >>>>>>>>>>>>>>>>>>>>
+
 
 Spatial
 
@@ -10749,8 +10778,6 @@ Stereo Modeller
 $ENGINE_PAR_STEREO
 $ENGINE_PAR_STEREO_PAN
 $ENGINE_PAR_STEREO_PSEUDO
-<<<<<<<<<<<<<<<<<<<< Page 303 >>>>>>>>>>>>>>>>>>>>
-
 
 
 Stereo Tune
@@ -10794,7 +10821,7 @@ $ENGINE_PAR_SENDLEVEL_4
 $ENGINE_PAR_SENDLEVEL_5
 $ENGINE_PAR_SENDLEVEL_6
 $ENGINE_PAR_SENDLEVEL_7
-<<<<<<<<<<<<<<<<<<<< Page 304 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 305 >>>>>>>>>>>>>>>>>>>>
 
 Send Effects
 
@@ -10803,12 +10830,12 @@ Bypass button of all send effects.
 
 
 $ENGINE_PAR_SEND_EFFECT_DRY_LEVEL
-Dry amount of send effects when used in an Insert FX chain.
+Dry amount of send effects when used in an Instrument Bus, Insert or Main FX  chain.
 
 
 $ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN
 When used with send effects, this controls either:
-•     Wet amount of send effects when used in an Insert FX chain
+•     Wet amount of send effects when used in an Instrument Bus, Insert or Main FX  chain
 •     Return amount of send effects when used in a Send FX chain
 
 Delay
@@ -10824,7 +10851,7 @@ $ENGINE_PAR_PSYDL_DETUNE
 $ENGINE_PAR_PSYDL_REVERSE
 $ENGINE_PAR_PSYDL_REVERSE_STEREO
 $ENGINE_PAR_PSYDL_DETUNE_STEREO
-<<<<<<<<<<<<<<<<<<<< Page 305 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 306 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10858,7 +10885,6 @@ $ENGINE_PAR_RDL_BBDTYPE
 
 
 Twin Delay
-
 $ENGINE_PAR_TDL_PREDELAY_L
 $ENGINE_PAR_TDL_PREDELAY_L_UNIT
 $ENGINE_PAR_TDL_TIME_L
@@ -10873,7 +10899,7 @@ $ENGINE_PAR_TDL_FEEDBACK_R
 $ENGINE_PAR_TDL_LEVEL_R
 $ENGINE_PAR_TDL_CROSS_FEEDBACK
 $ENGINE_PAR_TDL_WIDTH
-<<<<<<<<<<<<<<<<<<<< Page 306 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 307 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10906,7 +10932,7 @@ $ENGINE_PAR_PR_LOWSHELF
 $ENGINE_PAR_PR_HIDAMP
 $ENGINE_PAR_PR_PREDELAY
 $ENGINE_PAR_PR_STEREO
-<<<<<<<<<<<<<<<<<<<< Page 307 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 308 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -10932,6 +10958,7 @@ $ENGINE_PAR_RAUM_SPARSE
 
 
 Reverb
+
 $ENGINE_PAR_RV2_TYPE
     $NI_REVERB2_TYPE_ROOM
     $NI_REVERB2_TYPE_HALL
@@ -10944,7 +10971,6 @@ $ENGINE_PAR_RV2_PREDELAY
 $ENGINE_PAR_RV2_HIGHCUT
 $ENGINE_PAR_RV2_LOWSHELF
 $ENGINE_PAR_RV2_STEREO
-$ENGINE_PAR_RV2_TYPE
 
 
 Legacy Reverb
@@ -10953,7 +10979,7 @@ $ENGINE_PAR_RV_SIZE
 $ENGINE_PAR_RV_COLOUR
 $ENGINE_PAR_RV_STEREO
 $ENGINE_PAR_RV_DAMPING
-<<<<<<<<<<<<<<<<<<<< Page 308 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 309 >>>>>>>>>>>>>>>>>>>>
 
 
 Modulation
@@ -10987,7 +11013,7 @@ Utilities
 
 Gainer
 $ENGINE_PAR_GN_GAIN
-<<<<<<<<<<<<<<<<<<<< Page 309 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 310 >>>>>>>>>>>>>>>>>>>>
 
 Modulation
 
@@ -11037,13 +11063,19 @@ $ENGINE_PAR_BREAK
 $ENGINE_PAR_DECAY2
 $ENGINE_PAR_DECAY2_UNIT
 $ENGINE_PAR_ENV_DBD_EASY
-<<<<<<<<<<<<<<<<<<<< Page 310 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 311 >>>>>>>>>>>>>>>>>>>>
 
 
 
 Flexible Envelope
 $ENGINE_PAR_FLEXENV_LOOP
 $ENGINE_PAR_FLEXENV_ONESHOT
+$ENGINE_PAR_FLEXENV_NUM_STAGES (3 ... 31)
+$ENGINE_PAR_FLEXENV_LOOP_START (1 ... 30)
+$ENGINE_PAR_FLEXENV_LOOP_END (2 ... 31)
+$ENGINE_PAR_FLEXENV_STAGE_TIME (1000000 is one second)
+$ENGINE_PAR_FLEXENV_STAGE_LEVEL
+$ENGINE_PAR_FLEXENV_STAGE_SLOPE
 
 
 Envelope Follower
@@ -11072,17 +11104,20 @@ $ENGINE_PAR_LFO_NORMALIZE
 
 
 Step Modulator
+
 $ENGINE_PAR_INTMOD_FREQUENCY
 $ENGINE_PAR_INTMOD_FREQUENCY_UNIT
 $ENGINE_PAR_STEPSEQ_STEPS
 $ENGINE_PAR_STEPSEQ_ONESHOT
 $ENGINE_PAR_STEPSEQ_STEP_VALUE
+<<<<<<<<<<<<<<<<<<<< Page 312 >>>>>>>>>>>>>>>>>>>>
+
 
 
 Glide
 $ENGINE_PAR_GLIDE_COEF
 $ENGINE_PAR_GLIDE_COEF_UNIT
-<<<<<<<<<<<<<<<<<<<< Page 311 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 313 >>>>>>>>>>>>>>>>>>>>
 
 Module Types and Subtypes
 
@@ -11129,7 +11164,7 @@ $EFFECT_TYPE_IRC (Convolution)
 $EFFECT_TYPE_PLATEREVERB
 $EFFECT_TYPE_RAUM
 $EFFECT_TYPE_REVERB2
-<<<<<<<<<<<<<<<<<<<< Page 312 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 314 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -11170,7 +11205,7 @@ $EFFECT_TYPE_CHORUS
 $EFFECT_TYPE_FLANGER
 $EFFECT_TYPE_PHASER
 $EFFECT_TYPE_GAINER
-<<<<<<<<<<<<<<<<<<<< Page 313 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 315 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -11219,7 +11254,7 @@ $FILTER_TYPE_AR_HP2
 $FILTER_TYPE_AR_HP4
 $FILTER_TYPE_AR_HP24
 $FILTER_TYPE_DAFT_HP
-<<<<<<<<<<<<<<<<<<<< Page 314 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 316 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -11266,7 +11301,7 @@ $LFO_TYPE_TRIANGLE
 $LFO_TYPE_SAWTOOTH
 $LFO_TYPE_RANDOM
 $LFO_TYPE_MULTI
-<<<<<<<<<<<<<<<<<<<< Page 315 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 317 >>>>>>>>>>>>>>>>>>>>
 
 Group Start Options Query
 
@@ -11291,7 +11326,7 @@ $ENGINE_PAR_START_CRITERIA_NEXT_CRIT
     $START_CRITERIA_AND_NEXT
     $START_CRITERIA_AND_NOT_NEXT
     $START_CRITERIA_OR_NEXT
-<<<<<<<<<<<<<<<<<<<< Page 316 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 318 >>>>>>>>>>>>>>>>>>>>
 24. Zone Parameters
 
 
@@ -11338,7 +11373,7 @@ $ZONE_PAR_FADE_LOW_VELO
 Optionally use this parameter to create zone crossfades. The value is set in the form of a distance to
 the $$ZONE_PAR_LOW_VELO.
 Range: $ZONE_PAR_HIGH_VELO - $ZONE_PAR_LOW_VELO + 1
-<<<<<<<<<<<<<<<<<<<< Page 317 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 319 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -11395,7 +11430,7 @@ on init
 
     set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 0)
     set_zone_par(%NI_USER_ZONE_IDS[1], $ZONE_PAR_GROUP, 1)
-<<<<<<<<<<<<<<<<<<<< Page 318 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 320 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -11405,7 +11440,7 @@ on init
 end on
 Creates 4 user zones in an instrument and assigns each to a separate group. Make sure that you
 have enough empty groups defined in the instrument when testing this example!
-<<<<<<<<<<<<<<<<<<<< Page 319 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 321 >>>>>>>>>>>>>>>>>>>>
 
 Loop Parameters
 
@@ -11456,7 +11491,7 @@ on ui_control ($SampleLoopOn)
     wait_async(set_loop_par(%NI_USER_ZONE_IDS[0], 0, $LOOP_PAR_MODE, $SampleLoopOn))
 end on
 Enable or disable the loop of a sample loaded into a user zone.
-<<<<<<<<<<<<<<<<<<<< Page 320 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 322 >>>>>>>>>>>>>>>>>>>>
 
 Sample Parameters
 
@@ -11474,7 +11509,7 @@ The full OS path of a zone’s sample (uses backslashes on Windows).
 
 $NI_FILE_EXTENSION
 The file extension of a zone’s sample (without the dot).
-<<<<<<<<<<<<<<<<<<<< Page 321 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 323 >>>>>>>>>>>>>>>>>>>>
 25. Advanced Concepts
 
 
@@ -11523,7 +11558,7 @@ Resets the release trigger counter (used by the release trigger system script).
 will_never_terminate(<event-id>)
 Tells the script engine that this event will never be finished (used by the release trigger system
 script).
-<<<<<<<<<<<<<<<<<<<< Page 322 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 324 >>>>>>>>>>>>>>>>>>>>
 
 
 Examples
@@ -11567,7 +11602,7 @@ on release
     { do something custom here }
 end on
 If we want to do our own release triggering logic, this is the first step to do so.
-<<<<<<<<<<<<<<<<<<<< Page 323 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 325 >>>>>>>>>>>>>>>>>>>>
 
 PGS
 
@@ -11626,7 +11661,7 @@ Callback type, executed whenever any pgs_set_key_val() is executed in any script
 
 It is possible to have as many keys as you want, however each key can only have up to 256
 elements.
-<<<<<<<<<<<<<<<<<<<< Page 324 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 326 >>>>>>>>>>>>>>>>>>>>
 
 
 The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference:
@@ -11638,7 +11673,7 @@ pgs_create_str_key(<key-id>)
 pgs_str_key_exists(<key-id>)
 pgs_set_str_key_val(<key-id>, <string>)
 <string> := pgs_get_str_key_val(<key-id>)
-<<<<<<<<<<<<<<<<<<<< Page 325 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 327 >>>>>>>>>>>>>>>>>>>>
 
 Resource Container
 
@@ -11685,7 +11720,7 @@ file, or they will be ignored.
 •     Check the data subfolder for any .nka files which will then be put into the monolith.
 •     Check the performance_view folder for any .nckp files containing performance views
 created by Creator Tools.
-<<<<<<<<<<<<<<<<<<<< Page 326 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 328 >>>>>>>>>>>>>>>>>>>>
 
 
 After that, rename your Resources folder and reopen your Instrument. Now that the Resources
@@ -11702,7 +11737,7 @@ into the monolith. The path to the resource container will be saved as an absolu
 will only work locally on your machine - on other computers Content Missing dialog will show
 up upon loading such Instrument, since the path to the resource container is most likely not
 going to be valid anymore.
-<<<<<<<<<<<<<<<<<<<< Page 327 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 329 >>>>>>>>>>>>>>>>>>>>
 
 Changing FX from KSP
 
@@ -11754,12 +11789,12 @@ modulators. Specifically, one could switch between envelope types (AHDSR, Flex a
 LFO types (Rectangle, Triangle, Sawtooth, Random, Multi, Multi Digital). A modulator cannot be
 inserted or removed. Its type (LFO, Envelope, Step Modulator, Envelope Follower and Glide) cannot
 be changed either.
-<<<<<<<<<<<<<<<<<<<< Page 328 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 330 >>>>>>>>>>>>>>>>>>>>
 
 
 Special Cases
 There are two effect types which cannot be set from KSP: Surround Panner  and AET Filter.
-<<<<<<<<<<<<<<<<<<<< Page 329 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 331 >>>>>>>>>>>>>>>>>>>>
 
 The Advanced Engine Tab
 
@@ -11805,7 +11840,7 @@ loaded. It has the following parameters:
 access. It is essentially a more accurate version of the Disk meter in Kontakt’s Header.
 •     DFD memory: a measurement of how much RAM is being used to process the DFD stream.
 •     DFD requests: the total number of requests made by Kontakt to read data from the hard disk.
-<<<<<<<<<<<<<<<<<<<< Page 330 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 332 >>>>>>>>>>>>>>>>>>>>
 26. Multi Script
 
 General Information
@@ -11843,7 +11878,7 @@ instrument level. This simply means that play_note(), note_off() etc. don't work
 script.
 It is beneficial to be familiar with the basic structure of MIDI messages when working with the
 multi script.
-<<<<<<<<<<<<<<<<<<<< Page 331 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 333 >>>>>>>>>>>>>>>>>>>>
 
 ignore_midi
 
@@ -11873,7 +11908,7 @@ a velocity of 0 to designate a Note Off command.
 
 See Also
 ignore_event()
-<<<<<<<<<<<<<<<<<<<< Page 332 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 334 >>>>>>>>>>>>>>>>>>>>
 
 on midi_in
 
@@ -11908,7 +11943,7 @@ Monitoring various incoming MIDI messages.
 
 See Also
 ignore_midi
-<<<<<<<<<<<<<<<<<<<< Page 333 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 335 >>>>>>>>>>>>>>>>>>>>
 
 set_midi()
 
@@ -11941,7 +11976,7 @@ See Also
 set_event_par()
 Events and MIDI: $EVENT_PAR_MIDI_CHANNEL, $EVENT_PAR_MIDI_COMMAND,
 $EVENT_PAR_MIDI_BYTE_1, $EVENT_PAR_MIDI_BYTE_2
-<<<<<<<<<<<<<<<<<<<< Page 334 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 336 >>>>>>>>>>>>>>>>>>>>
 
 Multi Script Command Arguments
 
@@ -11990,7 +12025,7 @@ $MIDI_BYTE_2: not used
 $MIDI_COMMAND_MONO_AT
 $MIDI_BYTE_1: channel pressure value
 $MIDI_BYTE_2: not used
-<<<<<<<<<<<<<<<<<<<< Page 335 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 337 >>>>>>>>>>>>>>>>>>>>
 
 
 
@@ -12012,7 +12047,7 @@ $EVENT_PAR_MIDI_CHANNEL
 $EVENT_PAR_MIDI_COMMAND
 $EVENT_PAR_MIDI_BYTE_1
 $EVENT_PAR_MIDI_BYTE_2
-<<<<<<<<<<<<<<<<<<<< Page 336 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 338 >>>>>>>>>>>>>>>>>>>>
 27. Additional Resources
 
 Whether you are starting out with KSP or a seasoned veteran, find a variety of resources, from KSP
@@ -12035,11 +12070,22 @@ larger Kontakt environment, from GUI tools to sample manipulation.
 developers.
 •     NI Scripting Forum: Become a part of the discussion on the new NI community forum.
 •     VS Code extension: KSP language support for Visual Studio Code.
-<<<<<<<<<<<<<<<<<<<< Page 337 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 339 >>>>>>>>>>>>>>>>>>>>
 28. Version History
 
 The following changelog provides a version history of all new and improved features released in
 Kontakt.
+
+Kontakt 7.8
+
+New Features
+•     New callback type, on ui_controls, which allows defining behavior of all UI widgets by their ID in
+a single callback.
+•     Engine parameters for new effects: EP Preamps, Big Fuzz, Fuzz, Stereo Tune.
+
+Improved Features
+•  $EVENT_PAR_SOURCE now works in multi scripts.
+<<<<<<<<<<<<<<<<<<<< Page 340 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 7.6
 
@@ -12063,7 +12109,7 @@ and only a single event mark was queried.
 case an event held an active voice. Now it works identically regardless of voices being played
 or not.
 •     set_event_par() can now set $EVENT_PAR_MIDI_CHANNEL for events in instrument scripts.
-<<<<<<<<<<<<<<<<<<<< Page 338 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 341 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 7.5
 
@@ -12087,7 +12133,7 @@ collapsing the whole function call stack (this happened only if exit was the fir
 a function).
 •     TMPro polyphony can now be set to 0 via set_voice_limit() command (previously the
 minimum value was 1).
-<<<<<<<<<<<<<<<<<<<< Page 339 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 342 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 7.3
 
@@ -12095,7 +12141,7 @@ Improved Features
 •  sort() command now supports two additional arguments which specify the array bounds
 within which values will be sorted.
 •  in_range() command now also works with real expressions.
-<<<<<<<<<<<<<<<<<<<< Page 340 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 343 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 7.2
 
@@ -12107,7 +12153,7 @@ module parameters: $ENGINE_PAR_TRACKING, $ENGINE_PAR_HQI_MODE,
 $ENGINE_PAR_S1200_FILTER_MODE, $ENGINE_PAR_TMPRO_KEEP_FORMANTS.
 •     New command to retrieve filename of the last loaded MIDI file, mf_get_last_filename().
 •     New constant which allows determining if Kontakt is running as a plugin or in standalone:
-$NI_Kontakt_IS_STANDALONE.
+$NI_KONTAKT_IS_STANDALONE.
 
 Improved Features
 •     Major performance improvement of set_sample(), set_zone_par() and
@@ -12118,7 +12164,7 @@ that will be searched through.
 instrument buses.
 •     Easier resource container updating via single click on Repack button in Instrument Options →
 Instrument tab, provided the resource container has already been assigned to the instrument.
-<<<<<<<<<<<<<<<<<<<< Page 341 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 344 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 7.1
 
@@ -12140,7 +12186,7 @@ command also deprecates the usage of is_zone_empty()!
 •     New zone parameters to get the sample rate of the sample used by the zone
 ($ZONE_PAR_SAMPLE_RATE) and get or set the zone BPM ($ZONE_PAR_BPM)
 •     XY pad values can now be retrieved and set using UI IDs
-(get_control_par_arr(), set_control_par_arr())
+(get_control_par_real_arr(), set_control_par_real_arr())
 •     New real number math commands: cbrt(), log2(), log10(), exp2()
 •     New basic operators dealing with the negative sign: signbit(), sgn()
 •     New boolean operator: xor
@@ -12156,7 +12202,7 @@ mode 0 which disregarded zone pan/volume adjustments entirely
 3, from any callback type
 •     The mod basic operator now also works with real numbers, providing remainder after regular
 floating-point division
-<<<<<<<<<<<<<<<<<<<< Page 342 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 345 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 7
 
@@ -12174,14 +12220,14 @@ $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT control parameters
 Improved Features
 •     Increased number of user zones to 1024
 •  $EVENT_PAR_MOD_VALUE_ID can now be retrieved by using get_event_par_arr()
-<<<<<<<<<<<<<<<<<<<< Page 343 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 346 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.7.0
 
 New Features
 •     New snapshot types for saving only the persistent KSP variables with snapshots
 •     Engine parameters for the following new effects: Bass Invader  , Bass Pro
-<<<<<<<<<<<<<<<<<<<< Page 344 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 347 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.6.0
 
@@ -12201,7 +12247,7 @@ $CONTROL_PAR_RANGE_MIN, $CONTROL_PAR_RANGE_MAX
 Improved Features
 •  $CONTROL_PAR_BASEPATH can be set from anywhere in the script, updating the file selector
 even if the path did not change
-<<<<<<<<<<<<<<<<<<<< Page 345 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 348 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.5.0
 
@@ -12226,7 +12272,7 @@ $ENGINE_PAR_LFO_NORMALIZE)
 Improved Features
 •     The maximum number of UI controls has been increased to 999 per UI control type (except for
 the UI file selector)
-<<<<<<<<<<<<<<<<<<<< Page 346 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 349 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.4.0
 
@@ -12248,14 +12294,14 @@ $EVENT_PAR_CUSTOM
 
 Improved Features
 •     The number of maximum MIDI object export areas has been increased to 512
-<<<<<<<<<<<<<<<<<<<< Page 347 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 350 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.3.0
 
 New Features
 •     New constant for handling release velocity: $EVENT_PAR_REL_VELOCITY
 •     New constant for hiding the value display of ui_table: $HIDE_PART_VALUE
-<<<<<<<<<<<<<<<<<<<< Page 348 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 351 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.2.0
 
@@ -12274,7 +12320,7 @@ samples based on their audio characteristics.
 Improved Features
 •  purge_group() now returns an async ID, allowing for reliable tracking of the operation's
 completion.
-<<<<<<<<<<<<<<<<<<<< Page 349 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 352 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.1.0
 
@@ -12287,7 +12333,7 @@ $NI_WF_VIS_MODE_1, $NI_WF_VIS_MODE_2 and $NI_WF_VIS_MODE_3 as values)
 •     New UI widget (ui_panel) and related control parameter ($CONTROL_PAR_PARENT_PANEL)
 •     New user interface command (load_performance_view()) to load performance views
 created in Creator Tools
-<<<<<<<<<<<<<<<<<<<< Page 350 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 353 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 6.0.2
 
@@ -12314,7 +12360,7 @@ Pad allow identification of the mouse events that trigger its
 callback: $NI_MOUSE_EVENT_TYPE, $NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN,
 $NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP and $NI_MOUSE_EVENT_TYPE_DRAG
 •  $CONTROL_PAR_TEXTPOS_Y is now allowed on value edit controls.
-<<<<<<<<<<<<<<<<<<<< Page 351 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 354 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.8.0
 
@@ -12322,7 +12368,7 @@ Improved Features
 •     It is now possible to have up to three file selectors per script slot.
 •     The maximum number of controls per type has now been raised to 512.
 •     The maximum size for an array has now been raised to 1000000.
-<<<<<<<<<<<<<<<<<<<< Page 352 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 355 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.7.0
 
@@ -12339,13 +12385,13 @@ effects: $ENGINE_PAR_DISTORTION_TYPE, $ENGINE_PAR_SHAPE_TYPE
 Improved Features
 •     ui_waveform now accepts $HIDE_PART_BG as a hide_part() and $CONTROL_PAR_HIDE
 constant.
-<<<<<<<<<<<<<<<<<<<< Page 353 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 356 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.6.8
 
 New Features
 •     New built-in control parameters: $NI_CONTROL_PAR_IDX, $HIDE_PART_CURSOR
-<<<<<<<<<<<<<<<<<<<< Page 354 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 357 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.6.5
 
@@ -12355,7 +12401,7 @@ variables: $CONTROL_PAR_CURSOR_PICTURE, $CONTROL_PAR_MOUSE_MODE,
 $CONTROL_PAR_ACTIVE_INDEX, $CONTROL_PAR_MOUSE_BEHAVIOUR_X,
 $CONTROL_PAR_MOUSE_BEHAVIOUR_Y
 •     New UI commands: set_control_par_arr() and set_control_par_str_arr()
-<<<<<<<<<<<<<<<<<<<< Page 355 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 358 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.6.0
 
@@ -12365,7 +12411,7 @@ New Features
 •     New constants: ~NI_MATH_PI and ~NI_MATH_E
 •     New UI commands: set_ui_color() and set_ui_width_px()
 •     New control parameter for setting automation IDs via KSP: $CONTROL_PAR_AUTOMATION_ID
-<<<<<<<<<<<<<<<<<<<< Page 356 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 359 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.5.0
 
@@ -12377,13 +12423,13 @@ e. g. set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER, 0, 0,
 -1). For more information, refer to Changing FX from KSP.
 •     It is now possible to set Time Machine Pro voice settings: set_voice_limit(),
 get_voice_limit(), $NI_VL_TMPRO_STANDARD, $NI_VL_TMRPO_HQ
-<<<<<<<<<<<<<<<<<<<< Page 357 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 360 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.4.2
 
 Improvements
 •     Various corrections to the KSP reference manual.
-<<<<<<<<<<<<<<<<<<<< Page 358 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 361 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.4.1
 
@@ -12401,13 +12447,13 @@ set_keyrange(), remove_keyrange()
 Improved Features
 •  Data folder in resource container, additional mode 2 for load_array()
 •  load_array_str() can now be used in more callback types.
-<<<<<<<<<<<<<<<<<<<< Page 359 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 362 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.3.0
 
 New Features
 •     Added engine parameters for the new Simple LP/HP filter.
-<<<<<<<<<<<<<<<<<<<< Page 360 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 363 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.2.0
 
@@ -12416,13 +12462,13 @@ New Features
 
 Improved Features
 •     Updated MIDI file handling.
-<<<<<<<<<<<<<<<<<<<< Page 361 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 364 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.1.1
 
 New Features
 •     Added engine parameters for the new Feedback Compressor  effect.
-<<<<<<<<<<<<<<<<<<<< Page 362 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 365 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.1.0
 
@@ -12432,20 +12478,20 @@ New Features
 
 Improvements
 •     Various corrections and improvements to the KSP reference manual.
-<<<<<<<<<<<<<<<<<<<< Page 363 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 366 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.0.2
 
 New Features
 •     New engine parameters for Time Machine Pro in HQ Mode):
 $ENGINE_PAR_ENVELOPE_ORDER, $ENGINE_PAR_FORMANT_SHIFT
-<<<<<<<<<<<<<<<<<<<< Page 364 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 367 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5.0.1
 
 New Features
 •     Added effect type and sub-type constants for the new Kontakt 5 effects.
-<<<<<<<<<<<<<<<<<<<< Page 365 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 368 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 5
 
@@ -12481,7 +12527,7 @@ Improved Features
 •     PGS support for strings: pgs_create_str_key(), pgs_str_key_exists(),
 pgs_set_str_key_val(), pgs_get_str_key_val()
 •     The maximum height of set_ui_height_px() is now 540 pixels.
-<<<<<<<<<<<<<<<<<<<< Page 366 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 369 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 4.2.0
 
@@ -12500,7 +12546,7 @@ Improved Features
 •     The script editor is now much more efficient, especially with large scripts.
 •     New UI widget limit: 256 (per widget type and script slot).
 •     Event parameters can now be used without affecting the system scripts.
-<<<<<<<<<<<<<<<<<<<< Page 367 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 370 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 4.1.2
 
@@ -12514,14 +12560,14 @@ $UI_WAVEFORM_TABLE_IS_BIPOLAR, $UI_WAVEFORM_USE_MIDI_DRAG,
 $UI_WF_PROP_PLAY_CURSOR, $UI_WF_PROP_FLAGS, $UI_WF_PROP_TABLE_VAL,
 $UI_WF_PROP_TABLE_IDX_HIGHLIGHT, $UI_WF_PROP_MIDI_DRAG_START_NOTE
 •     New event parameter: $EVENT_PAR_PLAY_POS
-<<<<<<<<<<<<<<<<<<<< Page 368 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 371 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 4.1.1
 
 Improved Features
 •     The built-in variables $SIGNATURE_NUM and $SIGNATURE_DENOM don't reset to 4/4 if the
 host's transport is stopped
-<<<<<<<<<<<<<<<<<<<< Page 369 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 372 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 4.1.0
 
@@ -12540,7 +12586,7 @@ Improved Features
 •     The sample offset parameter in play_note() now also works in DFD mode, according to the
 S. Mod value set for the respective zone in Kontakt's Wave Editor
 •     KSP reference corrections for the modulation engine parameters
-<<<<<<<<<<<<<<<<<<<< Page 370 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 373 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 4.0.2
 
@@ -12555,7 +12601,7 @@ Improved Features
 •     The load_ir_sample() command now also accepts single file names for loading IR
 samples into Kontakt's Convolution effect, i.e. without a path designation. In this case the
 sample is expected to reside in the folder called ir_samples inside the user folder.
-<<<<<<<<<<<<<<<<<<<< Page 371 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 374 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 4
 
@@ -12579,7 +12625,7 @@ $EVENT_PAR_TUNE, $EVENT_PAR_VOL and $EVENT_PAR_PAN
 •     Larger performance view size: set_ui_height(), set_script_title()
 •     Beginning underscores from Kontakt 2/3 commands like _set_engine_par() can now be
 omitted, i.e. you can write set_engine_par() instead.
-<<<<<<<<<<<<<<<<<<<< Page 372 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 375 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 3.5.0
 
@@ -12590,7 +12636,7 @@ New Features
 Improved Features
 •     Support for channel aftertouch: $VCC_MONO_AT
 •     New array size limit: 2048
-<<<<<<<<<<<<<<<<<<<< Page 373 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 376 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 3
 
@@ -12605,7 +12651,7 @@ _pgs_key_exists(), _pgs_set_key_val(), _pgs_get_key_val()
 
 Improved Features
 •     All five performance views can now be displayed together.
-<<<<<<<<<<<<<<<<<<<< Page 374 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 377 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 2.2.0
 
@@ -12616,7 +12662,7 @@ New Features
 various Group Start Options variables.
 •     Retrieving the release trigger state of a group: $ENGINE_PAR_RELEASE_TRIGGER
 •     Default values for knobs: set_knob_defval()
-<<<<<<<<<<<<<<<<<<<< Page 375 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 378 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 2.1.1
 
@@ -12624,7 +12670,7 @@ New Features
 •     Assign unit marks to knobs: set_knob_unit()
 •     Assign text strings to knobs: set_knob_label()
 •     Retrieve the knob display: _get_engine_par_disp()
-<<<<<<<<<<<<<<<<<<<< Page 376 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 379 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 2.1.0
 
@@ -12644,7 +12690,7 @@ Improved Features
 •     Moving and hiding UI widgets: move_control()
 •     MIDI CCs generated by set_controller() can now also be used for automation as well as
 modulation.
-<<<<<<<<<<<<<<<<<<<< Page 377 >>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<< Page 380 >>>>>>>>>>>>>>>>>>>>
 
 Kontakt 2
 
