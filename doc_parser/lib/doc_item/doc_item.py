@@ -95,3 +95,4 @@ class DocItem:
         self.description = self.description.replace(" .", ".")
         self.description = self.description.replace("( ", "(")
         self.description = self.description.replace(" )", ")")
+        self.description = self.fix_bullet_items(self.description)

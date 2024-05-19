@@ -9132,7 +9132,7 @@ $NI_CONTROL_TYPE_LEVEL_METER
 $NI_CONTROL_TYPE_MOUSE_AREA
 $NI_CONTROL_TYPE_PANEL
 
-[C]Size, Position, and Look
+[C]Size, Position and Look
 
 $CONTROL_PAR_POS_X
 Sets or returns the horizontal position in pixels.
@@ -9317,7 +9317,7 @@ Shifts the vertical position in pixels of the parameter value in ui_value_edit.
 <<<<<<<<<<<<<<<<<<<< Page 274 >>>>>>>>>>>>>>>>>>>>
 
 
-Automation
+[C]Automation
 
 $CONTROL_PAR_ALLOW_AUTOMATION
 Sets or returns if a UI widget can be automated (1) or not (0). By default, automation is allowed for

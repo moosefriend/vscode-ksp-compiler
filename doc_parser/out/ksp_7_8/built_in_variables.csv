@@ -308,21 +308,21 @@ KSP_Reference_Manual_Fixed.txt.py,269,9130,22. Control Parameters,General,,Possi
 KSP_Reference_Manual_Fixed.txt.py,269,9131,22. Control Parameters,General,,Possible return values are,$NI_CONTROL_TYPE_LEVEL_METER,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,269,9132,22. Control Parameters,General,,Possible return values are,$NI_CONTROL_TYPE_MOUSE_AREA,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,269,9133,22. Control Parameters,General,,Possible return values are,$NI_CONTROL_TYPE_PANEL,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,269,9137,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_POS_X,,,Sets or returns the horizontal position in pixels.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,269,9141,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_POS_Y,,,Sets or returns the vertical position in pixels.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9147,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_GRID_X,,,Sets or returns the horizontal position in grid units.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9151,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_GRID_Y,,,Sets or returns the vertical position in grid units.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9155,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_WIDTH,,,Sets or returns the width of the control in pixels.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9159,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_HEIGHT,,,Sets or returns the height of the control in pixels.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9163,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_GRID_WIDTH,,,Sets or returns the width of the control in grid units.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9167,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_GRID_HEIGHT,,,Sets or returns the height of the control in grid units.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9171,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_HIDE,,,Sets or returns the hide status.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9173,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_PART_BG,,"background of ui_knob, ui_label, ui_value_edit and ui_table",,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9174,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_PART_VALUE,,value of ui_knob and ui_table,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9175,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_PART_TITLE,,title of ui_knob,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9176,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_PART_MOD_LIGHT,,mod ring light of ui_knob,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9177,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_PART_NOTHING,,show all elements of the widget,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9178,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_PART_CURSOR,,cursor of ui_xy,"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors. Below is a
+KSP_Reference_Manual_Fixed.txt.py,269,9137,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_POS_X,,,Sets or returns the horizontal position in pixels.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,269,9141,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_POS_Y,,,Sets or returns the vertical position in pixels.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9147,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_GRID_X,,,Sets or returns the horizontal position in grid units.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9151,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_GRID_Y,,,Sets or returns the vertical position in grid units.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9155,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_WIDTH,,,Sets or returns the width of the control in pixels.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9159,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_HEIGHT,,,Sets or returns the height of the control in pixels.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9163,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_GRID_WIDTH,,,Sets or returns the width of the control in grid units.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9167,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_GRID_HEIGHT,,,Sets or returns the height of the control in grid units.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9171,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_HIDE,,,Sets or returns the hide status.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9173,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_PART_BG,,"background of ui_knob, ui_label, ui_value_edit and ui_table",,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9174,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_PART_VALUE,,value of ui_knob and ui_table,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9175,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_PART_TITLE,,title of ui_knob,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9176,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_PART_MOD_LIGHT,,mod ring light of ui_knob,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9177,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_PART_NOTHING,,show all elements of the widget,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9178,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_PART_CURSOR,,cursor of ui_xy,"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors. Below is a
 
 if ($hide = 1)
   set_control_par_arr($id, $CONTROL_PAR_HIDE, $HIDE_PART_CURSOR, $index)
@@ -342,17 +342,17 @@ end if
 The index should be an even number that matches the index of the X axis of the cursor in the main
 array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
 and so on.","$,H,I,D,E,_,P,A,R,T,_,C,U,R,S,O,R",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9179,22. Control Parameters,"Size, Position, and Look",, Can be used with the following built-in constants,$HIDE_WHOLE_CONTROL,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9182,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_PICTURE,,,"Sets or returns the picture name. Full path and extension are not required. If the instrument
+KSP_Reference_Manual_Fixed.txt.py,270,9179,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_WHOLE_CONTROL,,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,270,9182,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_PICTURE,,,"Sets or returns the picture name. Full path and extension are not required. If the instrument
 references a resource container (in this case, Kontakt will look for the specified filename in the
 pictures subfolder). If the NKI does not reference a resource container, it will first look in the
 user pictures folder (Documents/Native Instruments/Kontakt 7/pictures), then in
 the Kontakt factory pictures folder.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,270,9190,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_PICTURE_STATE,,,"Sets or returns the picture state of the control for ui_label, ui_table, ui_value_edit and
+KSP_Reference_Manual_Fixed.txt.py,270,9190,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_PICTURE_STATE,,,"Sets or returns the picture state of the control for ui_label, ui_table, ui_value_edit and
 ui_xy.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,271,9197,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_PARENT_PANEL,,,"Assigns a widget to a particular ui_panel. The value should be the UI ID of the panel. A given
+KSP_Reference_Manual_Fixed.txt.py,271,9197,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_PARENT_PANEL,,,"Assigns a widget to a particular ui_panel. The value should be the UI ID of the panel. A given
 widget can only belong to a single parent panel.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,271,9202,22. Control Parameters,"Size, Position, and Look",,,$CONTROL_PAR_Z_LAYER,,,"Sets or returns the Z layer position of the widget. Widgets can be placed in one of three layers.
+KSP_Reference_Manual_Fixed.txt.py,271,9202,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_Z_LAYER,,,"Sets or returns the Z layer position of the widget. Widgets can be placed in one of three layers.
 Within these layers they are then positioned by widget type, and then by declaration order.
 0: Default layer. All widgets are assigned to this layer by default.
 -1: Background layer. Widgets in this layer are placed below the default layer.
@@ -407,16 +407,16 @@ KSP_Reference_Manual_Fixed.txt.py,273,9308,22. Control Parameters,Text,,,$CONTRO
 1: Centered
 2: Right",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,273,9315,22. Control Parameters,Text,,,$CONTROL_PAR_VALUEPOS_Y,,,Shifts the vertical position in pixels of the parameter value in ui_value_edit.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,274,9322,22. Control Parameters,Text,Automation,,$CONTROL_PAR_ALLOW_AUTOMATION,,,"Sets or returns if a UI widget can be automated (1) or not (0). By default, automation is allowed for
+KSP_Reference_Manual_Fixed.txt.py,274,9322,22. Control Parameters,Automation,,,$CONTROL_PAR_ALLOW_AUTOMATION,,,"Sets or returns if a UI widget can be automated (1) or not (0). By default, automation is allowed for
 all automatable widgets (ui_knob, ui_slider, ui_switch, ui_xy cursors).
 This control parameter can only be used in the on init callback.
 When allowing automation for ui_xy cursors, use set_control_par_arr() command instead
 of set_control_par().",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,274,9330,22. Control Parameters,Text,,,$CONTROL_PAR_AUTOMATION_NAME,,,"Sets or returns an automation name to a UI widget when used with set_control_par_str().
+KSP_Reference_Manual_Fixed.txt.py,274,9330,22. Control Parameters,Automation,,,$CONTROL_PAR_AUTOMATION_NAME,,,"Sets or returns an automation name to a UI widget when used with set_control_par_str().
 $CONTROL_PAR_LABEL can be used to set the automation value string.
 When assigning automation names to ui_xy cursors, use set_control_par_str_arr()
 command instead of set_control_par_str().",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,274,9337,22. Control Parameters,Text,,,$CONTROL_PAR_AUTOMATION_ID,,,"Sets or returns an automation ID to a UI widget, in range 0... 2047. Can only be used in the init
+KSP_Reference_Manual_Fixed.txt.py,274,9337,22. Control Parameters,Automation,,,$CONTROL_PAR_AUTOMATION_ID,,,"Sets or returns an automation ID to a UI widget, in range 0... 2047. Can only be used in the init
 callback.
 Automation IDs can only be assigned to automatable widgets (ui_knob, ui_slider, ui_switch,
 ui_xy cursors).
@@ -1204,8 +1204,8 @@ KSP_Reference_Manual_Fixed.txt.py,303,10532,23. Engine Parameters,Utilities,Send
 KSP_Reference_Manual_Fixed.txt.py,303,10533,23. Engine Parameters,Utilities,Send Levels,,$ENGINE_PAR_SENDLEVEL_7,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,304,10538,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_BYPASS,,,Bypass button of all send effects.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,304,10542,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_DRY_LEVEL,,,Dry amount of send effects when used in an Insert FX chain.,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,304,10546,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,,,"•   Wet amount of send effects when used in an Insert FX chain
-•   Return amount of send effects when used in a Send FX chain",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,304,10546,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,,,"- Wet amount of send effects when used in an Insert FX chain
+- Return amount of send effects when used in a Send FX chain",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,304,10554,23. Engine Parameters,Delay,PsycheDelay,,$ENGINE_PAR_PSYDL_TIME,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,304,10555,23. Engine Parameters,Delay,PsycheDelay,,$ENGINE_PAR_PSYDL_TIME_UNIT,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,304,10556,23. Engine Parameters,Delay,PsycheDelay,,$ENGINE_PAR_PSYDL_FEEDBACK,,,,,BUILT-IN

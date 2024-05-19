@@ -1221,8 +1221,8 @@ KSP_Reference_Manual_Fixed.txt.py,304,10567,23. Engine Parameters,Utilities,Send
 KSP_Reference_Manual_Fixed.txt.py,304,10568,23. Engine Parameters,Utilities,Send Levels,,$ENGINE_PAR_SENDLEVEL_7,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,305,10573,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_BYPASS,,,Bypass button of all send effects.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,305,10577,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_DRY_LEVEL,,,"Dry amount of send effects when used in an Instrument Bus, Insert or Main FX chain.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,305,10581,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,,,"•   Wet amount of send effects when used in an Instrument Bus, Insert or Main FX chain
-•   Return amount of send effects when used in a Send FX chain",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,305,10581,23. Engine Parameters,Send Effects,,,$ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,,,"- Wet amount of send effects when used in an Instrument Bus, Insert or Main FX chain
+- Return amount of send effects when used in a Send FX chain",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,305,10589,23. Engine Parameters,Delay,PsycheDelay,,$ENGINE_PAR_PSYDL_TIME,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,305,10590,23. Engine Parameters,Delay,PsycheDelay,,$ENGINE_PAR_PSYDL_TIME_UNIT,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,305,10591,23. Engine Parameters,Delay,PsycheDelay,,$ENGINE_PAR_PSYDL_FEEDBACK,,,,,BUILT-IN
