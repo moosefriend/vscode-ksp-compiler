@@ -124,6 +124,8 @@ class BaseItemParser:
         """See also lines found for the current item"""
         self.doc_state: DocState = DocState.NONE
         """Internal parser state for current item"""
+        self.skip_parsed_line: bool = False
+        """True if the current line shall not be included in the parsed text"""
 
     def parse(self):
         """
@@ -210,8 +212,9 @@ class BaseItemParser:
                 # Add line to corresponding item documentation
                 elif self.doc_state != DocState.CATEGORY:
                     self.add_item_documentation(line)
-                if self.item_list:
+                if self.item_list and not self.skip_parsed_line:
                     self.item_list[-1].parsed_text += f"{line}\n"
+                self.skip_parsed_line = False
                 # 1 empty lines in the See Also section is a signal for the end of the description ot
                 # 2 empty lines are a signal for the end of the description
                 if line == "" and (self.doc_state == DocState.SEE_ALSO or self.last_line == ""):

@@ -130,17 +130,13 @@ class BaseVariableParser(BaseItemParser):
                     self.add_item_documentation(description + ".")
                 else:
                     self.block_description += description + "."
-
-            # TODO: In the dump of variables also the next item list header is printed:
-            #   ********** Parsed Text Start **********
-            #   •  $EVENT_PAR_MIDI_CHANNEL
-            #   Event parameters to be used with set_event_par_arr() and get_event_par_arr():
-            #   ********** Parsed Text End **********
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
             log.debug(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
+            # Skip the current line to be reported in the parsed text
+            self.skip_parsed_line = True
         # Check for block headline or description block before the variable(s)
         elif self.doc_state == DocState.CATEGORY and line != "":
             if not self.block_headline:
