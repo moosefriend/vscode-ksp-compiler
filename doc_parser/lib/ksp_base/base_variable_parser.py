@@ -94,9 +94,6 @@ class BaseVariableParser(BaseItemParser):
         doc_state: Optional[DocState] = None
         # TODO: Main variable in the block header followed by description, then the constants
         #    The constants should be also listed in the main variable
-
-        # TODO: Sometimes the See Also section is filled with the variable name with commas
-        #    Example: $,E,F,F,E,C,T,_,T,Y,P,E,_,G,A,I,N,E,R
         # Check for normal variable
         if m := self.VAR_PATTERN.match(line):
             name = m.group(1)
