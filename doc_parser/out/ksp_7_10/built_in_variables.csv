@@ -343,7 +343,7 @@ else
 end if
 The index should be an even number that matches the index of the X axis of the cursor in the main
 array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
-and so on.","$,H,I,D,E,_,P,A,R,T,_,C,U,R,S,O,R",BUILT-IN
+and so on.",$HIDE_PART_CURSOR,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,284,9750,22. Control Parameters,XY Pad,,,$HIDE_PART_CURSOR,,,"When used with set_control_par_arr(), this can be used to hide specific ui_xy cursors. Below is a
 
 if ($hide = 1)
@@ -353,7 +353,7 @@ else
 end if
 The index should be an even number that matches the index of the X axis of the cursor in the main
 array representing the XY control, so the first cursor has an index of 0, the second has an index of 2,
-and so on.","$,H,I,D,E,_,P,A,R,T,_,C,U,R,S,O,R",BUILT-IN
+and so on.",$HIDE_PART_CURSOR,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,270,9214,22. Control Parameters,"Size, Position and Look",, Can be used with the following built-in constants,$HIDE_WHOLE_CONTROL,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,271,9219,22. Control Parameters,"Size, Position and Look",,,$CONTROL_PAR_PICTURE,,,"Sets or returns the picture name. Full path and extension are not required. If the instrument
 references a resource container (in this case, Kontakt will look for the specified filename in the
@@ -450,12 +450,12 @@ KSP_Reference_Manual_Fixed.txt.py,277,9406,22. Control Parameters,Specific,Table
 
 Returns the index of the cursor that triggered the on ui_control callback of a ui_xy widget. Note that
 indices are always even numbers starting from 0, so the first cursor has an index of 0, the second
-has an index of 2, and so on.","$,N,I,_,C,O,N,T,R,O,L,_,P,A,R,_,I,D,X",BUILT-IN
+has an index of 2, and so on.",$NI_CONTROL_PAR_IDX,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,284,9764,22. Control Parameters,XY Pad,,,$NI_CONTROL_PAR_IDX,,,"Returns the index of the ui_table column that triggered the on ui_control callback.
 
 Returns the index of the cursor that triggered the on ui_control callback of a ui_xy widget. Note that
 indices are always even numbers starting from 0, so the first cursor has an index of 0, the second
-has an index of 2, and so on.","$,N,I,_,C,O,N,T,R,O,L,_,P,A,R,_,I,D,X",BUILT-IN
+has an index of 2, and so on.",$NI_CONTROL_PAR_IDX,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,277,9411,22. Control Parameters,Tables and Waveforms,,,$CONTROL_PAR_BAR_COLOR,,,"Sets or returns the color of the step bar in ui_table and ui_value_edit.
 0ff0000h { red }
 The 0 at the start is just to let Kontakt know the value is a number. The h or H at the end is to
@@ -506,24 +506,24 @@ KSP_Reference_Manual_Fixed.txt.py,278,9492,22. Control Parameters,Level Meters,,
 Sets or returns the background color of ui_waveform.
 
 
-Sets or returns the background color of ui_wavetable.","$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,C,O,L,O,R,
-,$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,C,O,L,O,R",BUILT-IN
+Sets or returns the background color of ui_wavetable.","$CONTROL_PAR_BG_COLOR
+$CONTROL_PAR_BG_COLOR",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9603,22. Control Parameters,Waveform,,,$CONTROL_PAR_BG_COLOR,,,"Sets or returns the background color of ui_level_meter.
 
 
 Sets or returns the background color of ui_waveform.
 
 
-Sets or returns the background color of ui_wavetable.","$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,C,O,L,O,R,
-,$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,C,O,L,O,R",BUILT-IN
+Sets or returns the background color of ui_wavetable.","$CONTROL_PAR_BG_COLOR
+$CONTROL_PAR_BG_COLOR",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,282,9667,22. Control Parameters,Wavetable,,,$CONTROL_PAR_BG_COLOR,,,"Sets or returns the background color of ui_level_meter.
 
 
 Sets or returns the background color of ui_waveform.
 
 
-Sets or returns the background color of ui_wavetable.","$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,C,O,L,O,R,
-,$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,C,O,L,O,R",BUILT-IN
+Sets or returns the background color of ui_wavetable.","$CONTROL_PAR_BG_COLOR
+$CONTROL_PAR_BG_COLOR",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,279,9498,22. Control Parameters,Level Meters,,,$CONTROL_PAR_OFF_COLOR,,,Sets the second background color of ui_level_meter.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,279,9502,22. Control Parameters,Level Meters,,,$CONTROL_PAR_ON_COLOR,,,Sets the main level meter color of ui_level_meter.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,279,9506,22. Control Parameters,Level Meters,,,$CONTROL_PAR_OVERLOAD_COLOR,,,Sets the color of ui_level_meter overload section.,,BUILT-IN
@@ -585,24 +585,24 @@ KSP_Reference_Manual_Fixed.txt.py,281,9607,22. Control Parameters,Waveform,,,$CO
 
 
 Sets or returns the color of the waveform drawn in 2D visualization mode, or the current waveform
-drawn in 3D visualization mode of ui_wavetable.","$,C,O,N,T,R,O,L,_,P,A,R,_,W,A,V,E,_,C,O,L,O,R",BUILT-IN
+drawn in 3D visualization mode of ui_wavetable.",$CONTROL_PAR_WAVE_COLOR,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,282,9646,22. Control Parameters,Wavetable,,,$CONTROL_PAR_WAVE_COLOR,,,"Sets or returns the color of the waveform drawn in ui_waveform.
 
 
 Sets or returns the color of the waveform drawn in 2D visualization mode, or the current waveform
-drawn in 3D visualization mode of ui_wavetable.","$,C,O,N,T,R,O,L,_,P,A,R,_,W,A,V,E,_,C,O,L,O,R",BUILT-IN
+drawn in 3D visualization mode of ui_wavetable.",$CONTROL_PAR_WAVE_COLOR,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9611,22. Control Parameters,Waveform,,,$CONTROL_PAR_WAVE_CURSOR_COLOR,,,Sets or returns the color of the playback cursor in ui_waveform.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9615,22. Control Parameters,Waveform,,,$CONTROL_PAR_SLICEMARKERS_COLOR,,,Sets or returns the color of the slice markers in ui_waveform.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9619,22. Control Parameters,Waveform,,,$CONTROL_PAR_BG_ALPHA,,,"Sets or returns the alpha channel (opacity) of the background of ui_waveform.
 Range: 0 (fully transparent) to 255 (fully opaque).
 
 Sets or returns the alpha channel (opacity) of ui_wavetable.
-Range: 0 (fully transparent) to 255 (fully opaque).","$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,A,L,P,H,A",BUILT-IN
+Range: 0 (fully transparent) to 255 (fully opaque).",$CONTROL_PAR_BG_ALPHA,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,282,9671,22. Control Parameters,Wavetable,,,$CONTROL_PAR_BG_ALPHA,,,"Sets or returns the alpha channel (opacity) of the background of ui_waveform.
 Range: 0 (fully transparent) to 255 (fully opaque).
 
 Sets or returns the alpha channel (opacity) of ui_wavetable.
-Range: 0 (fully transparent) to 255 (fully opaque).","$,C,O,N,T,R,O,L,_,P,A,R,_,B,G,_,A,L,P,H,A",BUILT-IN
+Range: 0 (fully transparent) to 255 (fully opaque).",$CONTROL_PAR_BG_ALPHA,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9625,22. Control Parameters,Wavetable,,,$CONTROL_PAR_WT_ZONE,,,"Attaches a zone to ui_wavetable, taking the zone ID as the argument.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9629,22. Control Parameters,Wavetable,,,$CONTROL_PAR_WT_VIS_MODE,,,Sets or returns the visualization mode of ui_wavetable.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,281,9631,22. Control Parameters,Wavetable,, Can be set to the following values,$NI_WT_VIS_2D,,"2D, oscilloscope-style visualization, only showing the current wavetable position",,,BUILT-IN
@@ -677,8 +677,8 @@ KSP_Reference_Manual_Fixed.txt.py,285,9782,23. Engine Parameters,"Instrument, So
 KSP_Reference_Manual_Fixed.txt.py,285,9786,23. Engine Parameters,"Instrument, Source and Amplifier Module",,,$ENGINE_PAR_PAN,,,"Instrument, group or bus panorama.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,285,9790,23. Engine Parameters,"Instrument, Source and Amplifier Module",,,$ENGINE_PAR_PHASE_INVERT,,,Group or instrument bus phase invert.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,304,10555,23. Engine Parameters,Utilities,Inverter,,$ENGINE_PAR_PHASE_INVERT,,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,285,9794,23. Engine Parameters,"Instrument, Source and Amplifier Module",,,$ENGINE_PAR_LR_SWAP,,,Group or instrument bus left-right channel swap.,"$,E,N,G,I,N,E,_,P,A,R,_,L,R,_,S,W,A,P",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,304,10556,23. Engine Parameters,Utilities,Inverter,,$ENGINE_PAR_LR_SWAP,,,Group or instrument bus left-right channel swap.,"$,E,N,G,I,N,E,_,P,A,R,_,L,R,_,S,W,A,P",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,285,9794,23. Engine Parameters,"Instrument, Source and Amplifier Module",,,$ENGINE_PAR_LR_SWAP,,,Group or instrument bus left-right channel swap.,$ENGINE_PAR_LR_SWAP,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,304,10556,23. Engine Parameters,Utilities,Inverter,,$ENGINE_PAR_LR_SWAP,,,Group or instrument bus left-right channel swap.,$ENGINE_PAR_LR_SWAP,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,285,9798,23. Engine Parameters,"Instrument, Source and Amplifier Module",,,$ENGINE_PAR_TUNE,,,Instrument or group tuning.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,286,9805,23. Engine Parameters,"Instrument, Source and Amplifier Module",Source Module,,$ENGINE_PAR_SOURCE_MODE,,only works with get_engine_par()!,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,286,9806,23. Engine Parameters,"Instrument, Source and Amplifier Module",Source Module,,$NI_SOURCE_MODE_SAMPLER,,,,,BUILT-IN
@@ -772,11 +772,11 @@ KSP_Reference_Manual_Fixed.txt.py,289,9909,23. Engine Parameters,Filter and EQ,,
 KSP_Reference_Manual_Fixed.txt.py,289,9913,23. Engine Parameters,Filter and EQ,,,$ENGINE_PAR_EFFECT_BYPASS,,,"Bypass button of all filters and EQs.
 
 
-Bypass button of all insert effects.","$,E,N,G,I,N,E,_,P,A,R,_,E,F,F,E,C,T,_,B,Y,P,A,S,S",BUILT-IN
+Bypass button of all insert effects.",$ENGINE_PAR_EFFECT_BYPASS,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,291,9989,23. Engine Parameters,Insert Effects,,,$ENGINE_PAR_EFFECT_BYPASS,,,"Bypass button of all filters and EQs.
 
 
-Bypass button of all insert effects.","$,E,N,G,I,N,E,_,P,A,R,_,E,F,F,E,C,T,_,B,Y,P,A,S,S",BUILT-IN
+Bypass button of all insert effects.",$ENGINE_PAR_EFFECT_BYPASS,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,289,9917,23. Engine Parameters,Filter and EQ,,,$ENGINE_PAR_GAIN,,,Gain control for the Ladder and Daft filter types.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,289,9921,23. Engine Parameters,Filter and EQ,,,$ENGINE_PAR_FILTER_LADDER_HQ,,,High Quality mode for the Ladder filter types.,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,289,9925,23. Engine Parameters,Filter and EQ,,,$ENGINE_PAR_BANDWIDTH,,,"Bandwidth control, found on the following filter types: SV Par. LP/HP, SV Par. BP/BP, SV Ser. LP/HP.",,BUILT-IN
@@ -1472,8 +1472,8 @@ KSP_Reference_Manual_Fixed.txt.py,314,10924,23. Engine Parameters,Module Types a
 KSP_Reference_Manual_Fixed.txt.py,314,10925,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_STEREO_TUNE,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,314,10926,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_SURROUND_PANNER,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,314,10927,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_AET_FILTER,,Group FX chain only!,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,314,10928,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_GAINER,,,,"$,E,F,F,E,C,T,_,T,Y,P,E,_,G,A,I,N,E,R",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,314,10948,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_GAINER,,,,"$,E,F,F,E,C,T,_,T,Y,P,E,_,G,A,I,N,E,R",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,314,10928,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_GAINER,,,,$EFFECT_TYPE_GAINER,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,314,10948,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_GAINER,,,,$EFFECT_TYPE_GAINER,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,314,10929,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_INVERTER,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,314,10930,23. Engine Parameters,Module Types and Subtypes,, Can be any of the following,$EFFECT_TYPE_SEND_LEVELS,,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,314,10933,23. Engine Parameters,Module Types and Subtypes,,,$ENGINE_PAR_SEND_EFFECT_TYPE,,,Used to query the type of an effect loaded in Send FX chain.,,BUILT-IN

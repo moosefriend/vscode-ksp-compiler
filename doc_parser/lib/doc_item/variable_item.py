@@ -70,4 +70,4 @@ class VariableItem(DocItem):
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.block_headline,
-                self.item_list_headline,  self.name, self.parameter, self.comment, self.description, ",".join(self.see_also), self.source)
+                self.item_list_headline,  self.name, self.parameter, self.comment, self.description, self.see_also, self.source)
