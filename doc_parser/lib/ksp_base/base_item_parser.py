@@ -131,7 +131,8 @@ class BaseItemParser:
         """
         Parse the text file for widgets.
         """
-        log.info(f"Parse {self.reader.file} for {self.doc_item_class.plural()}")
+        log.info(f"Parse {self.doc_item_class.plural()} in {self.reader.file}")
+        self.reader.reset()
         self.search_content_start()
         self.scan_items()
         log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")

@@ -88,7 +88,7 @@ class BaseFunctionParser(BaseItemParser):
         """
         if description is None:
             description = ""
-        command = FunctionItem(
+        function = FunctionItem(
             file=self.reader.file,
             page_no=self.reader.page_no,
             line_no=self.reader.line_no,
@@ -99,4 +99,4 @@ class BaseFunctionParser(BaseItemParser):
             description=description,
             source="BUILT-IN"
         )
-        self.add_item(command)
+        self.add_item(function)

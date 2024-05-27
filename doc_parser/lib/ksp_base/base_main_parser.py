@@ -182,18 +182,18 @@ class BaseMainParser:
         with RewindReader(self.txt_file_fixed, page_no_pattern=BaseMainParser.PAGE_PATTERN) as self.reader:
             self.toc = BaseMainParser.get_parser(ParserType.TOC, self.version, self.reader)
             self.toc.parse()
-            # log.info("-" * 80)
-            # self.callbacks: BaseCallbackParser = BaseMainParser.get_parser(
-            #     ParserType.CALLBACK,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.callbacks_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.callbacks.parse()
-            # self.callbacks.export()
+            log.info("-" * 80)
+            self.callbacks: BaseCallbackParser = BaseMainParser.get_parser(
+                ParserType.CALLBACK,
+                self.version,
+                self.toc,
+                self.reader,
+                self.callbacks_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.callbacks.parse()
+            self.callbacks.export()
             # self.callbacks.dump()
             log.info("-" * 80)
             self.widgets: BaseWidgetParser = BaseMainParser.get_parser(
@@ -207,45 +207,45 @@ class BaseMainParser:
             )
             self.widgets.parse()
             self.widgets.export()
-            self.widgets.dump()
-            # log.info("-" * 80)
-            # self.functions: BaseFunctionParser = BaseMainParser.get_parser(
-            #     ParserType.FUNCTION,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.functions_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.functions.parse()
-            # self.functions.export()
+            # self.widgets.dump()
+            log.info("-" * 80)
+            self.functions: BaseFunctionParser = BaseMainParser.get_parser(
+                ParserType.FUNCTION,
+                self.version,
+                self.toc,
+                self.reader,
+                self.functions_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.functions.parse()
+            self.functions.export()
             # self.functions.dump()
-            # log.info("-" * 80)
-            # self.commands: BaseCommandParser = BaseMainParser.get_parser(
-            #     ParserType.COMMAND,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.commands_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.commands.parse()
-            # self.commands.export()
+            log.info("-" * 80)
+            self.commands: BaseCommandParser = BaseMainParser.get_parser(
+                ParserType.COMMAND,
+                self.version,
+                self.toc,
+                self.reader,
+                self.commands_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.commands.parse()
+            self.commands.export()
             # self.commands.dump()
-            # log.info("-" * 80)
-            # self.variables: BaseVariableParser = BaseMainParser.get_parser(
-            #     ParserType.VARIABLE,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.variables_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.variables.parse()
-            # self.variables.export()
+            log.info("-" * 80)
+            self.variables: BaseVariableParser = BaseMainParser.get_parser(
+                ParserType.VARIABLE,
+                self.version,
+                self.toc,
+                self.reader,
+                self.variables_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.variables.parse()
+            self.variables.export()
             # self.variables.dump()
 
     def get_body(self, page: PageObject, toc: str) -> str:

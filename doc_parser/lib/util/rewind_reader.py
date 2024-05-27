@@ -102,6 +102,12 @@ class RewindReader:
             line = line.rstrip(self.right_strip)
         return line
 
+    def reset(self):
+        """
+        Rollback to the beginning of the file.
+        """
+        self.handle.seek(0)
+
     def rewind(self):
         """
         Rollback the file pointer before the last read line.

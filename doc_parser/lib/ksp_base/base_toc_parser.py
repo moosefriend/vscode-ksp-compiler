@@ -56,7 +56,7 @@ class BaseTocParser:
         """
         Parse the text file for table of contents.
         """
-        log.info(f"Parse {self.reader.file} for headlines and categories")
+        log.info(f"Parse headlines and categories in {self.reader.file}")
         self.search_toc_start()
         self.scan_toc()
         log.info(f"{self.headline_cnt} headlines found")
