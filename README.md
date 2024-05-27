@@ -9,12 +9,18 @@ Features:
   autocompletion incl. documentation hints
 
 # Status
-## Parsing the KSP manuals (in work)
+## Parsing the KSP manuals (done)
 Currently, the `doc_parser` is developed using Python.
 As IDE for the Python script development it's recommended to use PyCharm Community Edition.
 * Convert *.pdf manual into a *.txt file (done)
-* Parse the *.txt and generate *.csv for built-in variables (in work)
-* Parse the *.txt and generate *.csv for built-in functions (open)
+* Parse the *.txt for table of content (done)
+* Parse the *.txt and generate *.csv for built-in callbacks (done)
+* Parse the *.txt and generate *.csv for built-in widgets (done)
+* Parse the *.txt and generate *.csv for built-in functions (done)
+* Parse the *.txt and generate *.csv for built-in commands (done)
+* Parse the *.txt and generate *.csv for built-in variables (done)
+ 
+### Parsing external libraries (open)
 * Parse Koala library and generate *.csv for variables and functions incl. their documentation (open)
 
 ## Visual Studio Code Extension (planned)

@@ -2,6 +2,7 @@
 ## Convert KSP PDF Manual to Text Document
 - Download the PDF to the `doc_parser/in`folder and rename it to "KSP_Reference_\<major>_\<minor>_Manual_en.pdf"
 - The KSP manuals as PDF can be downloaded from
+  - v7.10: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP-7-10-reference-manual-english.pdf
   - v7.8: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP-7-8-reference-manual-english.pdf
   - v7.6: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP_Reference_7_6_Manual_en.pdf
   - v7.5: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP_Reference_Manual_en_7_5_0823.pdf
@@ -362,7 +363,7 @@
 - Item list headlines end with a colon
 - Variables might be prepended with an item symbol ("•")
 
-#### Variable with List of other Constants/Variables
+#### Variable with List of other Constants/Variables (TODO)
 - Example:
   ```
   $CONTROL_PAR_TYPE
