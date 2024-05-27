@@ -32,8 +32,8 @@ log = logging.getLogger(__name__)
 
 class BaseWidgetParser(BaseItemParser):
     # Example: declare ui_table %<array-name>[num-elements] (<grid-width>, <grid-height>, <range>)
-    WIDGET_PATTERN = re.compile(r"^declare\s+([a-z_]+)\s+([$%]<[a-z-]+>)(?:\[(.+)])?(?:\s+\((?:<([a-z-]+)>(?:,\s+)?)+\))?$")
-    """Pattern to find a widget, e.g. on init"""
+    WIDGET_PATTERN = re.compile(r"^declare\s+([a-z_]+)\s+([$%]<[a-z-]+>)(?:\[([^]]+)])?(?:\s+\((.*)\))?$")
+    """Pattern to find a widget, e.g. declare ui_button $<variable-name>"""
     CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?User Interface Widgets$", re.IGNORECASE)
     """Pattern to find the start headline for scanning the content"""
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?User-defined Functions$", re.IGNORECASE)
@@ -51,58 +51,58 @@ class BaseWidgetParser(BaseItemParser):
         :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
             after the table of contents
         """
-        super().__init__(version, toc, WidgetItem, reader, self.CONTENT_START_PATTERN, self.CONTENT_STOP_PATTERN,
-                         csv_file, delimiter, page_offset)
+        super().__init__(
+            version,
+            toc,
+            WidgetItem,
+            reader,
+            self.CONTENT_START_PATTERN,
+            self.CONTENT_STOP_PATTERN,
+            csv_file,
+            delimiter,
+            page_offset
+        )
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
         # Check if the line contains a widget
         if m := self.WIDGET_PATTERN.match(line):
             name = m.group(1)
-            var_name = m.group(2)
+            variable_name = m.group(2)
             index_name = m.group(3)
-            par_list: list[str] = []
-            n = 4
-            while m.group(n):
-                par_list.append(m.group(n))
-            widget = self.add_widget(name, var_name, index_name, par_list)
-            if widget:
-                self.item_list.append(widget)
+            arguments = m.group(4)
+            parameter_list = []
+            if arguments:
+                for parameter in arguments.split(","):
+                    parameter = parameter.strip().replace("<", "").replace(">", "")
+                    parameter_list.append(parameter)
+            self.add_widget(name, variable_name, index_name, parameter_list)
             doc_state = DocState.DESCRIPTION
         return doc_state
 
-    def add_widget(self, name: str, var_name: str, index_name: str, par_list: list[str]) -> WidgetItem:
+    def add_widget(self, name: str, var_name: str, index_name: str, parameter_list: list[str]):
         """
         Add a widget if it does not exist.
 
         :param name: Name of the widget
         :param var_name: Name of the variable
-        :param index_name: Name of the index_name if any
-        :param par_list: List of parameter names
-        :return: WidgetItem of the just created widget or None if duplicate
+        :param index_name: Name of the index if any
+        :param parameter_list: List of parameter names
         """
-        widget: Optional[WidgetItem] = None
-        if name in self.all_items:
-            log.info(f"      - Duplicate {name} ({self.reader.location()})")
-            self.duplicate_cnt += 1
-        else:
-            log.info(f"      - Found {name} ({self.reader.location()})")
-            self.item_cnt += 1
-            widget = WidgetItem(
-                file=self.reader.file,
-                page_no=self.reader.page_no,
-                line_no=self.reader.line_no,
-                headline=self.headline,
-                category=self.category,
-                name=name,
-                var_name=var_name,
-                index_name=index_name,
-                par_list=par_list,
-                description="",
-                remarks="",
-                examples="",
-                see_also="",
-                source="BUILT-IN"
-            )
-            self.all_items[name] = widget
-        return widget
+        widget = WidgetItem(
+            file=self.reader.file,
+            page_no=self.reader.page_no,
+            line_no=self.reader.line_no,
+            headline=self.headline,
+            category=self.category,
+            name=name,
+            variable_name=var_name,
+            index_name=index_name,
+            parameter_list=parameter_list,
+            description="",
+            remarks="",
+            examples="",
+            see_also="",
+            source="BUILT-IN"
+        )
+        self.add_item(widget)

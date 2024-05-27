@@ -183,9 +183,8 @@ class BaseItemParser:
                 self.doc_state = DocState.NONE
             # Check for categories
             # Some categories are not mentioned in the table of contents => Those are marked with "[C]"
-            # Special case for callbacks: The category, e.g. on init appears twice
-            # So check if the category is already set
-            elif self.check_category(line):
+            # Sometimes in the "See Also" section there is also a reference to another category
+            elif self.doc_state != DocState.SEE_ALSO and self.check_category(line):
                 if self.finalize_item_list:
                     self.finalize_item_list()
                 if line.startswith("[C]"):
@@ -215,7 +214,7 @@ class BaseItemParser:
                 if self.item_list and not self.skip_parsed_line:
                     self.item_list[-1].parsed_text += f"{line}\n"
                 self.skip_parsed_line = False
-                # 1 empty lines in the See Also section is a signal for the end of the description ot
+                # 1 empty lines in the See Also section is a signal for the end of the description or
                 # 2 empty lines are a signal for the end of the description
                 if line == "" and (self.doc_state == DocState.SEE_ALSO or self.last_line == ""):
                     if self.finalize_item_list:
@@ -312,11 +311,12 @@ class BaseItemParser:
                     for line in item.parsed_text.splitlines():
                         log.info(line)
                     log.info(f"{'*' * 10} Parsed Text End {'*' * 10}")
-                for title in ("Headline", "Category", "Block Headline", "Item List Headline", "Source", "Name", "Parameter", "Comment"):
+                for title in ("Headline", "Category", "Block Headline", "Item List Headline", "Source", "Name",
+                              "Parameter", "Variable Name", "Index Name", "Comment"):
                     attribute = title.replace(" ", "_").lower()
                     if attribute in item.__dict__ and (value := item.__dict__[attribute]):
                         log.info(f"{title}: {value}")
-                if "parameter_list" in item.__dict__:
+                if "parameter_list" in item.__dict__ and len(item.__dict__["parameter_list"]) > 0:
                     log.info(f"Parameters: {','.join(item.__dict__['parameter_list'])}")
                 for title in ("Description", "Remarks", "Examples", "See Also"):
                     attribute = title.replace(" ", "_").lower()

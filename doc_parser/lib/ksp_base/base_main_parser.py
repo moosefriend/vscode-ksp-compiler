@@ -194,18 +194,20 @@ class BaseMainParser:
             # )
             # self.callbacks.parse()
             # self.callbacks.export()
-            # log.info("-" * 80)
-            # self.widgets: BaseWidgetParser = BaseMainParser.get_parser(
-            #     ParserType.WIDGET,
-            #     self.version,
-            #     self.toc,
-            #     self.reader,
-            #     self.widgets_csv,
-            #     self.delimiter,
-            #     self.page_offset
-            # )
-            # self.widgets.parse()
-            # self.widgets.export()
+            # self.callbacks.dump()
+            log.info("-" * 80)
+            self.widgets: BaseWidgetParser = BaseMainParser.get_parser(
+                ParserType.WIDGET,
+                self.version,
+                self.toc,
+                self.reader,
+                self.widgets_csv,
+                self.delimiter,
+                self.page_offset
+            )
+            self.widgets.parse()
+            self.widgets.export()
+            self.widgets.dump()
             # log.info("-" * 80)
             # self.functions: BaseFunctionParser = BaseMainParser.get_parser(
             #     ParserType.FUNCTION,
@@ -218,6 +220,7 @@ class BaseMainParser:
             # )
             # self.functions.parse()
             # self.functions.export()
+            # self.functions.dump()
             # log.info("-" * 80)
             # self.commands: BaseCommandParser = BaseMainParser.get_parser(
             #     ParserType.COMMAND,
@@ -231,19 +234,19 @@ class BaseMainParser:
             # self.commands.parse()
             # self.commands.export()
             # self.commands.dump()
-            log.info("-" * 80)
-            self.variables: BaseVariableParser = BaseMainParser.get_parser(
-                ParserType.VARIABLE,
-                self.version,
-                self.toc,
-                self.reader,
-                self.variables_csv,
-                self.delimiter,
-                self.page_offset
-            )
-            self.variables.parse()
-            self.variables.export()
-            self.variables.dump()
+            # log.info("-" * 80)
+            # self.variables: BaseVariableParser = BaseMainParser.get_parser(
+            #     ParserType.VARIABLE,
+            #     self.version,
+            #     self.toc,
+            #     self.reader,
+            #     self.variables_csv,
+            #     self.delimiter,
+            #     self.page_offset
+            # )
+            # self.variables.parse()
+            # self.variables.export()
+            # self.variables.dump()
 
     def get_body(self, page: PageObject, toc: str) -> str:
         """

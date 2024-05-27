@@ -22,9 +22,8 @@ from doc_item.doc_item import DocItem
 
 
 class WidgetItem(DocItem):
-    # TODO: Implement WidgetItem
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
-                 var_name: str, index_name: str, par_list: list[str],
+                 variable_name: str, index_name: str, parameter_list: list[str],
                  description: str, remarks: str, examples: str, see_also: str, source: str = None):
         """
         Container for type documentation.
@@ -35,9 +34,9 @@ class WidgetItem(DocItem):
         :param headline: Main headline where the item has been found
         :param category: Category (= Sub-headline in the table of contents) where the widget has been found
         :param name: Widget name
-        :param var_name: Name of the variable
+        :param variable_name: Name of the variable
         :param index_name: Name of the index if any
-        :param par_list: List of parameter names
+        :param parameter_list: List of parameter names
         :param description: Widget documentation
         :param remarks: Remarks for the widget
         :param examples: Examples for the widget
@@ -45,9 +44,9 @@ class WidgetItem(DocItem):
         :param source: Where the widget has been parsed, e.g. build-in
         """
         super().__init__(file, page_no, line_no, headline, category, name, description, source)
-        self.var_name: str = var_name
+        self.variable_name: str = variable_name
         self.index_name: str = index_name
-        self.par_list: list[str] = par_list
+        self.parameter_list: list[str] = parameter_list
         self.remarks: str = remarks
         self.examples: str = examples
         self.see_also: str = see_also
@@ -58,6 +57,7 @@ class WidgetItem(DocItem):
         """
         self.description = self.description.strip()
         self.remarks = self.remarks.strip()
+        self.remarks = self.fix_bullet_items(self.remarks)
         self.examples = self.examples.strip()
         self.see_also = self.see_also.strip()
 
@@ -67,6 +67,6 @@ class WidgetItem(DocItem):
                 "Parameter List", "Description", "Remarks", "Examples", "See Also", "Source")
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str, str]:
-        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.var_name,
-                self.index_name, ",".join(self.par_list), self.description,  self.remarks, self.examples, self.see_also,
-                self.source)
+        return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.variable_name,
+                self.index_name, ",".join(self.parameter_list), self.description,  self.remarks, self.examples,
+                self.see_also, self.source)
