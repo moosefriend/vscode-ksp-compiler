@@ -1,2 +1,9 @@
+# vs_code_extension
+out
+dist
+node_modules
+# doc_parser
+__pycache__/
+*.pyc
 /doc_parser/in/*.pdf
 .~lock.*

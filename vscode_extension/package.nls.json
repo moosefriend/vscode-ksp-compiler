@@ -1,0 +1,14 @@
+{
+	"configuration.title": "KONTAKT Script Processor (KSP)",
+	"configuration.python.location": "Location of python executable. Default is \"python\" (Search from $PATH variable)",
+	"configuration.compiler.script": "Path to the KSP compiler python script",
+	"configuration.compiler.compact": "Minimize whitespace in compiled code",
+	"configuration.compiler.extra_syntax_check": "Additional syntax checks",
+	"configuration.compiler.optimize": "Optimize the generated code",
+	"configuration.compiler.date": "Add current date comment at the beginning of compiled file",
+	"configuration.validate.enable": "Enable/disable KSP syntax validation",
+	"configuration.realtime.validate.enable": "Enable/disable Realtime KSP syntax validation. If true, validator runs on type and save. If false, validator runs on save only.",
+	"configuration.realtime.validate.delay": "Delay time to start validation. (unit:milliseconds) Recommend: about 500 ms.",
+
+    "command.compile": "NI KSP: Run Compiler & copy script to clipboard"
+}
