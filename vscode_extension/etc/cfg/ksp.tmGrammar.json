@@ -6,52 +6,51 @@
         "ksp",
         "txt"
     ],
-
     "patterns": [
         {
-            "include": "#ksp_string_literal"
+            "include": "#string_literal"
         },
         {
-            "include": "#ksp_numeric_literal"
+            "include": "#numeric_literal"
         },
         {
-            "include": "#ksp_comments"
+            "include": "#comments"
         },
         {
-            "include": "#ksp_callback"
+            "include": "#callback"
         },
         {
-            "include": "#ksp_user_function"
+            "include": "#user_function"
         },
         {
-            "include": "#ksp_variables"
+            "include": "#variables"
         },
         {
-            "include": "#ksp_ui_controls"
+            "include": "#ui_controls"
         },
         {
-            "include": "#ksp_control_statements"
+            "include": "#control_statements"
         },
         {
-            "include": "#ksp_operators"
+            "include": "#operators"
         },
         {
-            "include": "#ksp_builtin_commands"
+            "include": "#builtin_commands"
         },
         {
-            "include": "#ksp_other_keyword"
+            "include": "#other_keyword"
         },
         {
-            "include": "#ksp_ident"
+            "include": "#ident"
         }
     ],
     "repository":
     {
-        "ksp_string_literal":
+        "string_literal":
         {
             "patterns":[
                 {
-                    "name":    "string.quoted.double.ksp",
+                    "name": "string.quoted.double.ksp",
                     "comment": "String literals",
                     "begin": "\"",
                     "beginCaptures": {
@@ -73,7 +72,7 @@
 
             ]
         },
-        "ksp_numeric_literal":
+        "numeric_literal":
         {
             "patterns":[
                 {
@@ -90,7 +89,7 @@
                 }
             ]
         },
-        "ksp_comments":
+        "comments":
         {
             "patterns":[
                 {
@@ -107,13 +106,13 @@
                 }
             ]
         },
-        "ksp_ident":
+        "ident":
         {
             "patterns":[
                 { "match": "([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)" }
             ]
         },
-        "ksp_callback":
+        "callback":
         {
             "patterns":[
                 {
@@ -126,7 +125,7 @@
                 }
             ]
         },
-        "ksp_user_function":
+        "user_function":
         {
             "patterns":[
                 {
@@ -139,7 +138,7 @@
                 }
             ]
         },
-        "ksp_variables":
+        "variables":
         {
             "patterns":[
                 {
@@ -156,7 +155,7 @@
                 }
             ]
         },
-        "ksp_ui_controls":
+        "ui_controls":
         {
             "patterns":[
                 {
@@ -165,7 +164,7 @@
                 }
             ]
         },
-        "ksp_control_statements":
+        "control_statements":
         {
             "patterns":[
                 {
@@ -174,7 +173,7 @@
                 }
             ]
         },
-        "ksp_operators":
+        "operators":
         {
             "patterns":[
                 {
@@ -191,7 +190,7 @@
                 }
             ]
         },
-        "ksp_builtin_commands":
+        "builtin_commands":
         {
             "patterns":[
                 {
@@ -200,7 +199,7 @@
                 }
             ]
         },
-        "ksp_other_keyword":
+        "other_keyword":
         {
             "patterns":[
                 {
