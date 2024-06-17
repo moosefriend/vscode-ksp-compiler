@@ -156,7 +156,7 @@
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
-        "yaml2json": "python yaml2json.py language-configuration.yml \"syntaxes/*.yml\" \"snippets/*.yml\"",
+        "yaml2json": "python yaml2json.py",
         "test": "vscode-test"
     },
     "dependencies": {
