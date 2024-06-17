@@ -23,9 +23,9 @@
         "url": "https://github.com/moosefriend/vscode-ksp-compiler.git"
     },
     "bugs": {
-        "url": "https://github.com/r-koubou/vscode-ksp/issues"
+        "url": "https://github.com/moosefriend/vscode-ksp-compiler/issues"
     },
-    "icon": "etc/images/icon.png",
+    "icon": "images/icon.png",
     "main": "./out/src/main",
     "engines": {
         "vscode": "^1.89.0"
@@ -51,20 +51,20 @@
                     ".ksp",
                     ".ksp.txt"
                 ],
-                "configuration": "./etc/cfg/language-configuration.json"
+                "configuration": "./out/language-configuration.json"
             }
         ],
         "grammars": [
             {
                 "language": "ksp",
                 "scopeName": "source.ksp",
-                "path": "./etc/cfg/ksp.tmGrammar.json"
+                "path": "./out/ksp.tmGrammar.json"
             }
         ],
         "snippets": [
             {
                 "language": "ksp",
-                "path": "./etc/cfg/ksp.snippets.json"
+                "path": "./out/ksp.snippets.json"
             }
         ],
         "commands": [
@@ -156,6 +156,7 @@
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
+        "yaml2json": "python yaml2json.py language-configuration.yml \"syntaxes/*.yml\" \"snippets/*.yml\"",
         "test": "vscode-test"
     },
     "dependencies": {
