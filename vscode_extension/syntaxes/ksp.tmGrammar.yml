@@ -44,7 +44,7 @@ repository:
         -   name: constant.numeric.ksp
             match: (0|[1-9][0-9]*)\b
         -   name: constant.numeric.ksp
-            match: (9[0-9|a-f|A-F]+h)\b
+            match: (0[0-9|a-f|A-F]+[hH])\b
         -   name: constant.numeric.ksp
             match: (\.[0-9]*)\b
 
