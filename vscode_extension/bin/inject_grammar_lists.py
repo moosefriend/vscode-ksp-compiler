@@ -35,33 +35,45 @@ def replace_in_file(file: Path, search_string: str, replace_string: str):
     :param search_string: String to search which will be replaced
     :param replace_string: String to replace in the file
     """
-    file.write_text(file.read_text().replace(search_string, replace_string))
+    content = file.read_text()
+    if search_string in content:
+        print(f"Replace {search_string} in {file.as_posix()}")
+        file.write_text(content.replace(search_string, replace_string))
+    else:
+        print(f"*** WARNING: Search string {search_string} not found in {file.as_posix()}")
 
 
 def read_name_list(csv_file: Path) -> str:
     """
     From the given *.csv file read the Name column and combine the names with "|"
     """
-    with csv_file.open(newline='') as f:
-        csv_reader = csv.DictReader(f)
+    print(f"Read name list from {csv_file.as_posix()}")
+    with csv_file.open(newline='', encoding="utf-8") as f:
+        csv_reader = csv.DictReader(f, delimiter=",")
+        name_list = []
         for row in csv_reader:
-            print(row['first_name'], row['last_name'])
+            name_list.append(row["Name"])
+        return "|".join(name_list)
 
 
-root_dir = Path(__file__).parent.parent
-replace_list = [
-    "buit_in_callbacks",
-    "built_in_commands",
-    "built_in_functions",
-    "built_in_widgets"
-]
-input_dir = root_dir / "in"
-output_dir = root_dir / "out"
+def main():
+    root_dir = Path(__file__).parent.parent
+    replace_list = [
+        "built_in_callbacks",
+        "built_in_commands",
+        "built_in_functions",
+        "built_in_widgets"
+    ]
+    input_dir = root_dir / "in"
+    output_dir = root_dir / "out"
 
-grammar_file = output_dir / "ksp.tmGrammar.json"
+    grammar_file = output_dir / "ksp.tmGrammar.json"
 
-for category in replace_list:
-    csv_file = input_dir / f"{category}.csv"
-    search_string = f"<<{category}>>"
-    replace_string = read_name_list(csv_file)
-    replace_in_file(grammar_file, search_string, replace_string)
+    for category in replace_list:
+        csv_file = input_dir / f"{category}.csv"
+        search_string = f"<<{category}>>"
+        replace_string = read_name_list(csv_file)
+        replace_in_file(grammar_file, search_string, replace_string)
+
+
+main()
