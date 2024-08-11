@@ -152,11 +152,12 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
+        "precompile": "npm run yaml2json", 
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
-        "yaml2json": "python yaml2json.py",
+        "yaml2json": "python bin/yaml2json.py",
         "test": "vscode-test"
     },
     "dependencies": {
