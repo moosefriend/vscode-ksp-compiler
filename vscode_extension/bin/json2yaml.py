@@ -19,7 +19,6 @@
 import json
 from pathlib import Path
 import yaml
-from yaml import SafeLoader
 
 cur_dir = Path(__file__).parent
 input_file_list = [
@@ -27,7 +26,7 @@ input_file_list = [
     Path("syntaxes/ksp.tmGrammar.json"),
     Path("snippets/ksp.snippets.json")
 ]
-output_dir = Path("out")
+output_dir = Path("../out")
 
 for input_file in input_file_list:
     base_name = input_file.stem
