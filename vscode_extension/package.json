@@ -152,12 +152,13 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "precompile": "npm run yaml2json", 
+        "precompile": "npm run yaml2json && npm run inject_grammar_lists",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
         "yaml2json": "python bin/yaml2json.py",
+        "inject_grammar_lists": "python bin/inject_grammar_lists.py",
         "test": "vscode-test"
     },
     "dependencies": {
