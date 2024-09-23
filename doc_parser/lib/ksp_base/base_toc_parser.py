@@ -35,18 +35,10 @@ class BaseTocParser:
     TOC_CATEGORY_PATTERN = re.compile(r"^(.+?)\s+\.+\s+(\d+)$")
     """Pattern to find a headline in the table of contents"""
 
-    def __init__(self, version: str, reader: RewindReader, verbose: bool = False):
+    def __init__(self):
         """
         Parse the table of contents for headlines and categories.
-
-        :param version: Kontakt manual version needed to select the right parser
-        :param reader: RewindReader to read from the Kontakt KSP reference text file
-        :param verbose: If True then it prints each found headline and category
         """
-        self.version: str = version
-        self.reader: RewindReader = reader
-        self.ksp_name: str = f"ksp_{version.replace('.', '_')}"
-        self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
         self.all_headlines: dict[str, int] = {}
         self.all_categories: dict[str, dict[str, int]] = {}
         self.headline_cnt: int = 0
