@@ -124,12 +124,13 @@ class SystemConfig(metaclass=Singleton):
         :return: List of active parser types
         """
         phases = set()
-        for line in self.settings[name]:
+        for line in self.settings[name].splitlines():
             if line:
                 parser_type = ParserType.from_string(line)
-                if parser_type in (ParserType.MAIN, ParserType.TOC):
+                if parser_type in ParserType.all_phases():
+                    phases.add(parser_type)
+                else:
                     log.warning(f"Phase {parser_type.value} will allways be called and needs not to be specified")
-                phases.add(parser_type)
         return phases
 
     def has_phase(self, parser_type: ParserType) -> bool:

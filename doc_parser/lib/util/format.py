@@ -44,3 +44,13 @@ def headline(text: str, level=1):
         for line in text.splitlines():
             log.info(f"{char} {line}")
         log.info(f"{char * 80}")
+
+
+def log_step(text: str, prefix: str = ">>>>>"):
+    """
+    Logs a step headline.
+
+    :param text: Text of the step
+    :param prefix: Prefix to print before the step
+    """
+    log.info(f"{prefix} {text}")
