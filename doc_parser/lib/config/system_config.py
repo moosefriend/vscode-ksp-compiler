@@ -162,8 +162,8 @@ class SystemConfig(metaclass=Singleton):
         )
         # Create a custom logger
         logger = logging.getLogger()
-        file_handler = logging.FileHandler(self.log_file)
         self.log_file.unlink(missing_ok=True)
+        file_handler = logging.FileHandler(self.log_file)
         file_handler.setLevel(logging.DEBUG)
         file_format = logging.Formatter("[%(asctime)s] %(message)s", "%Y-%m-%d %H:%M:%S")
         file_handler.setFormatter(file_format)
