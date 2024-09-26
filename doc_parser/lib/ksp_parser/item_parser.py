@@ -19,20 +19,21 @@
 import csv
 import logging
 import re
+from pathlib import Path
 from re import compile, Pattern
 from abc import abstractmethod
-from pathlib import Path
 from typing import Optional, Callable
 
 from doc_item.doc_item import DocItem
-from ksp_base.base_toc_parser import BaseTocParser
-from ksp_base.constants import DocState
+from ksp_parser.toc_parser import TocParser
+from config.constants import DocState
+from config.system_config import SystemConfig
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
 
 
-class BaseItemParser:
+class ItemParser:
     REMARKS_PATTERN = compile(r"^Remarks$")
     """Pattern to find the remarks section"""
     EXAMPLES_PATTERN = compile(r"^\s*Examples?$")
@@ -41,65 +42,40 @@ class BaseItemParser:
     """Pattern to find the see also section"""
 
     def __init__(
-        self,
-        version: str,
-        toc: BaseTocParser,
-        doc_item_class: type[DocItem],
-        reader: RewindReader,
-        content_start_pattern: Pattern,
-        content_stop_pattern: Pattern,
-        csv_file: Path,
-        delimiter: str,
-        page_offset: int = 0,
-        on_headline: Callable[[str], None] = None,
-        on_category: Callable[[str], None] = None,
-        finalize_item_list: Callable[[], None] = None
+            self,
+            doc_item_class: type[DocItem],
+            content_start_pattern: Pattern,
+            content_stop_pattern: Pattern,
+            csv_file: Path,
+            on_headline: Callable[[str], None] = None,
+            on_category: Callable[[str], None] = None,
+            finalize_item_list: Callable[[], None] = None
     ):
         """
         Base parser for documentation items in the Kontakt KSP text manual.
 
-        :param version: Kontakt manual version needed to select the right parser
-        :param toc: Table of content parser containing the headlines and categories
         :param doc_item_class: Class of the items to be parsed, e.g. CallbackItem
-        :param reader: Reader for the already open Kontakt KSP text manual
         :param content_start_pattern: Pattern to find the content start headline
         :param content_stop_pattern: Pattern to find the content end headline
-        :param csv_file: Comma separated file to export the parsed data
-        :param delimiter: CSV delimiter for the export file
-        :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
-            after the table of contents
+        :param csv_file: Path of the *.csv export file
         :param on_headline: Callback for each new headline e.g. for initialization
         :param on_category: Callback for each new category e.g. for initialization
         :param finalize_item_list: Callback after the item list has been processed
         """
-        self.version: str = version
-        """Kontakt version"""
-        self.ksp_name: str = f"ksp_{version.replace('.', '_')}"
-        """Directory name to be used for finding the parser"""
-        self.toc: BaseTocParser = toc
-        """Parsed table of contents"""
         self.doc_item_class: type[DocItem] = doc_item_class
         """Class of the items to be parsed, e.g. CallbackItem"""
-        self.reader: RewindReader = reader
-        """File reader to be used for reading lines from the converted text file"""
         self.content_start_pattern: Pattern = content_start_pattern
         """Pattern to find the content start headline"""
         self.content_stop_pattern: Pattern = content_stop_pattern
         """Pattern to find the content end headline"""
         self.csv_file: Path = csv_file
-        """Export *.csv file"""
-        self.delimiter: str = delimiter
-        """CSV delimiter, e.g. ';'"""
-        self.page_offset: int = page_offset
-        """Page offset when the content starts in order to skip the table of contents"""
+        """Path of the *.csv export file"""
         self.on_headline: Callable[[str], None] = on_headline
         """Optional callback for new headlines"""
         self.on_category: Callable[[str], None] = on_category
         """Optional callback for new categories"""
         self.finalize_item_list: Callable[[], None] = finalize_item_list
-        """Optional callback afte the item_list has been processed"""
-        self.cfg_version_dir: Path = Path(__file__).parent.parent.parent / "cfg" / self.ksp_name
-        """Directory containing the configuration data"""
+        """Optional callback after the item_list has been processed"""
         self.duplicate_cnt: int = 0
         """Number of duplicate items"""
         self.item_cnt: int = 0
@@ -126,6 +102,10 @@ class BaseItemParser:
         """Internal parser state for current item"""
         self.skip_parsed_line: bool = False
         """True if the current line shall not be included in the parsed text"""
+        self.reader: RewindReader = SystemConfig().reader
+        """RewindReader to be used to read from the *.txt file"""
+        self.toc: TocParser = SystemConfig().toc
+        """Object containing the table of contents (TOC)"""
 
     def parse(self):
         """
@@ -284,7 +264,7 @@ class BaseItemParser:
         """
         log.info(f"Export {self.doc_item_class.plural()} to {self.csv_file}")
         with open(self.csv_file, 'w', newline='', encoding='utf-8') as f:
-            csv_writer = csv.writer(f, delimiter=self.delimiter, quoting=csv.QUOTE_MINIMAL)
+            csv_writer = csv.writer(f, delimiter=SystemConfig().delimiter, quoting=csv.QUOTE_MINIMAL)
             # Write the headline
             csv_writer.writerow(self.doc_item_class.csv_header())
             # Sort the list for identifier rules

@@ -18,19 +18,17 @@
 ##############################################################################
 import logging
 import re
-from pathlib import Path
 from typing import Optional
 
 from doc_item.variable_item import VariableItem
-from ksp_base.base_item_parser import BaseItemParser
-from ksp_base.base_toc_parser import BaseTocParser
-from ksp_base.constants import DocState
-from util.rewind_reader import RewindReader
+from ksp_parser.item_parser import ItemParser
+from config.constants import DocState
+from config.system_config import SystemConfig
 
 log = logging.getLogger(__name__)
 
 
-class BaseVariableParser(BaseItemParser):
+class VariableParser(ItemParser):
     VAR_PATTERN = re.compile(r"^(?:•?\s*)?([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?(?:\s+\((.+)\))?$")
     """Pattern to find a variable or constant, e.g. $VAR1, •$VAR1 (comment)"""
     VAR_TABLE_PATTERN = re.compile(r"^([$%!~@?][A-Z]+[A-Z_0-9]*)(\[<(.+)>])?:\s+(.+)$")
@@ -42,29 +40,15 @@ class BaseVariableParser(BaseItemParser):
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
     """Pattern to find the headline for the content end"""
 
-    def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str,
-                 page_offset: int = 0):
+    def __init__(self):
         """
         Parse variables in the Kontakt KSP text manual.
-
-        :param version: Kontakt manual version needed to select the right parser
-        :param toc: Table of content parser containing the headlines and categories
-        :param reader: Reader for the already open Kontakt KSP text manual
-        :param csv_file: Comma separated file to export the parsed data
-        :param delimiter: CSV delimiter for the export file
-        :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
-            after the table of contents
         """
         super().__init__(
-            version,
-            toc,
             VariableItem,
-            reader,
-            self.CONTENT_START_PATTERN,
-            self.CONTENT_STOP_PATTERN,
-            csv_file,
-            delimiter,
-            page_offset,
+            VariableParser.CONTENT_START_PATTERN,
+            VariableParser.CONTENT_STOP_PATTERN,
+            SystemConfig().variables_csv,
             on_headline=self.reset_descriptions,
             on_category=self.reset_descriptions,
             finalize_item_list=self.finalize_item_list
@@ -95,14 +79,14 @@ class BaseVariableParser(BaseItemParser):
         # TODO: Main variable in the block header followed by description, then the constants
         #    The constants should be also listed in the main variable
         # Check for normal variable
-        if m := self.VAR_PATTERN.match(line):
+        if m := VariableParser.VAR_PATTERN.match(line):
             name = m.group(1)
             parameter = m.group(3)
             self.comment = m.group(4)
             self.add_variable(name, parameter)
             doc_state = DocState.DESCRIPTION
         # Check variable in a table, e.g. $VAR: Description
-        elif m := self.VAR_TABLE_PATTERN.match(line):
+        elif m := VariableParser.VAR_TABLE_PATTERN.match(line):
             name = m.group(1)
             parameter = m.group(3)
             description = m.group(4)
@@ -110,7 +94,7 @@ class BaseVariableParser(BaseItemParser):
             self.add_item_documentation(description)
             doc_state = DocState.DESCRIPTION
         # Check for variable ranges, e.g. $MARK_1 ... $MARK_28
-        elif m := self.VAR_RANGE_PATTERN.match(line):
+        elif m := VariableParser.VAR_RANGE_PATTERN.match(line):
             base_name = m.group(1)
             range_start = int(m.group(2))
             range_end = int(m.group(4))

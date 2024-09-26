@@ -18,14 +18,14 @@
 ##############################################################################
 import logging
 import re
-from pathlib import Path
 
+from config.system_config import SystemConfig
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
 
 
-class BaseTocParser:
+class TocParser:
     TOC_START_PATTERN = re.compile(r"^(\d+\.\s+)?Table of Contents")
     """Pattern to find the headline of the table of contents"""
     TOC_END_PATTERN = re.compile(r"^(\d+\.\s+)?Disclaimer$")
@@ -43,6 +43,7 @@ class BaseTocParser:
         self.all_categories: dict[str, dict[str, int]] = {}
         self.headline_cnt: int = 0
         self.category_cnt: int = 0
+        self.reader: RewindReader = SystemConfig().reader
 
     def parse(self):
         """

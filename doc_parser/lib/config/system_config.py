@@ -20,10 +20,11 @@ import logging
 import re
 from configparser import ConfigParser, ExtendedInterpolation
 from pathlib import Path
-from typing import Optional
-
-from ksp_base.base_toc_parser import BaseTocParser
+from typing import Optional, TYPE_CHECKING
 from util.rewind_reader import RewindReader
+
+if TYPE_CHECKING:
+    from ksp_parser.toc_parser import TocParser
 
 log = logging.getLogger(__name__)
 
@@ -68,7 +69,7 @@ class SystemConfig(metaclass=Singleton):
         self.delimiter: str = self.settings["delimiter"]
         self.verbose: bool = self._get_bool("verbose")
         self.reader: Optional[RewindReader] = None
-        self.toc: Optional[BaseTocParser] = None
+        self.toc: Optional[TocParser] = None
 
     def _get_dir(self, name: str) -> Path:
         """
