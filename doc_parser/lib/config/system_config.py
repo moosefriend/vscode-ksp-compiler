@@ -57,7 +57,10 @@ class SystemConfig(metaclass=Singleton):
         self.settings = config["General"]
         self.kontakt_version: str = self.settings["kontakt_version"].replace("_", ".")
         self.cfg_dir: Path = self._get_dir("cfg_dir")
-        self.out_dir: Path = self._get_dir("out_dir")
+        self.out_dir: Path = self._get_dir("out_dir", create=True)
+        self.log_dir: Path = self._get_dir("log_dir", create=True)
+        self.log_file: Path = self._get_file("log_file")
+        self.initialize_logging()
         self.pdf_file: Path = self._get_file("pdf_file")
         self.txt_file_original: Path = self._get_file("txt_file_original")
         self.txt_file_fixed: Path = self._get_file("txt_file_fixed")
@@ -75,16 +78,19 @@ class SystemConfig(metaclass=Singleton):
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[TocParser] = None
 
-    def _get_dir(self, name: str) -> Path:
+    def _get_dir(self, name: str, create: bool = False) -> Path:
         """
         Get the path of the directory read from the *.ini file.
 
         :param name: Name of the setting in the *.ini file
+        :param create: If True then the directory is created if it does not exist
         :return: Path of the directory
         """
         path = Path(self.settings[name])
         if not path.is_absolute():
             path = self.ini_dir / path
+        if create:
+            path.mkdir(exist_ok=True, parents=True)
         return path.resolve()
 
     def _get_file(self, name: str) -> Path:
@@ -144,6 +150,24 @@ class SystemConfig(metaclass=Singleton):
         if parser_type in self.phases:
             ret_val = True
         return ret_val
+
+    def initialize_logging(self):
+        """
+        Initialize the logging.
+        """
+        logging.basicConfig(
+            level=logging.INFO,
+            format="[%(asctime)s] %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        )
+        # Create a custom logger
+        logger = logging.getLogger()
+        file_handler = logging.FileHandler(self.log_file)
+        self.log_file.unlink(missing_ok=True)
+        file_handler.setLevel(logging.DEBUG)
+        file_format = logging.Formatter("[%(asctime)s] %(message)s", "%Y-%m-%d %H:%M:%S")
+        file_handler.setFormatter(file_format)
+        logger.addHandler(file_handler)
 
 
 def debug(message: str):
