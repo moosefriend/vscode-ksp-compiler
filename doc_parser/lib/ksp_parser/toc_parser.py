@@ -19,7 +19,7 @@
 import logging
 import re
 
-from config.system_config import SystemConfig
+from config.system_config import SystemConfig, debug
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -40,9 +40,14 @@ class TocParser:
         Parse the table of contents for headlines and categories.
         """
         self.all_headlines: dict[str, int] = {}
+        """Dictionary of main headlines where the key is the headline and the value the page number"""
         self.all_categories: dict[str, dict[str, int]] = {}
+        """Dictionary of categories which are some kind of sub-headlines. The key is the headline and the value
+        is another dictionary where the key is the category name and the value is the page number."""
         self.headline_cnt: int = 0
+        """Number of found main headlines"""
         self.category_cnt: int = 0
+        """Nuber of found sub-headlines"""
         self.reader: RewindReader = SystemConfig().reader
 
     def parse(self):
@@ -62,7 +67,7 @@ class TocParser:
         for line in self.reader:
             # Search for the table of content
             if self.TOC_START_PATTERN.match(line):
-                log.debug(f"Found TOC Start ({self.reader.location()})")
+                debug(f"Found TOC Start ({self.reader.location()})")
                 self.reader.rewind()
                 break
 
@@ -76,21 +81,31 @@ class TocParser:
         for line in self.reader:
             # Check for the end of the table of contents
             if self.TOC_END_PATTERN.match(line):
-                log.debug(f"Found TOC End ({self.reader.location()})")
+                debug(f"Found TOC End ({self.reader.location()})")
                 self.reader.rewind()
                 break
             # Check for headline
             elif m := self.TOC_HEADLINE_PATTERN.match(line):
-                log.debug(f"- Found TOC Headline: {m.group(1)} ({self.reader.location()})")
+                debug(f"- Found TOC Headline: {m.group(1)} ({self.reader.location()})")
                 self.all_headlines[m.group(1)] = m.group(2)
                 self.headline_cnt += 1
                 last_headline = m.group(1)
             # Check for category
             elif m := self.TOC_CATEGORY_PATTERN.match(line):
-                log.debug(f"   - Found TOC Category: {m.group(1)} ({self.reader.location()})")
+                debug(f"   - Found TOC Category: {m.group(1)} ({self.reader.location()})")
                 if not last_headline:
                     raise AssertionError(f"No headline for category {m.group(1)} ({self.reader.location()})")
                 if last_headline not in self.all_categories:
                     self.all_categories[last_headline] = {}
                 self.all_categories[last_headline][m.group(1)] = m.group(2)
                 self.category_cnt += 1
+
+    def dump(self):
+        """
+        Dump the table of contents.
+        """
+        for headline, headline_page in self.all_headlines.items():
+            log.info(f"{headline} {'.' * (78 - len(headline) - len(str(headline_page)))} {headline_page}")
+            if headline in self.all_categories:
+                for category, category_page in self.all_categories[headline].items():
+                    log.info(f"   {category} {'.' * (75 - len(category) - len(str(category_page)))} {category_page}")
