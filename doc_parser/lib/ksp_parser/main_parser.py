@@ -31,7 +31,7 @@ from ksp_parser.item_parser import ItemParser
 from ksp_parser.toc_parser import TocParser
 from config.constants import ParserType
 from config.system_config import SystemConfig
-from util.format import headline
+from util.format import headline, log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -114,7 +114,7 @@ class MainParser:
                     self.items.parse()
                     self.items.export()
                     if SystemConfig().dump:
-                        self.items.dump()
+                        self.items.dump(SystemConfig().verbose)
 
     @staticmethod
     def get_body(page: PageObject, toc: str) -> str:
@@ -143,6 +143,7 @@ class MainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
+        log_step(f"Load {parser_type.value.lower()} parser")
         return MainParser.load_parser(parser_type, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod

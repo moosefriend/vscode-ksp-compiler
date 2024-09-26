@@ -28,6 +28,7 @@ from doc_item.doc_item import DocItem
 from ksp_parser.toc_parser import TocParser
 from config.constants import DocState
 from config.system_config import SystemConfig, debug
+from util.format import log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -111,7 +112,7 @@ class ItemParser:
         """
         Parse the text file for widgets.
         """
-        log.info(f"Parse {self.doc_item_class.plural()} in {self.reader.file}")
+        log_step(f"Parse {self.doc_item_class.plural()} in {self.reader.file}")
         self.reader.reset()
         self.search_content_start()
         self.scan_items()
@@ -262,7 +263,7 @@ class ItemParser:
         """
         Export the internal parsed items to the *.csv file.
         """
-        log.info(f"Export {self.doc_item_class.plural()} to {self.csv_file}")
+        log_step(f"Export {self.doc_item_class.plural()} to {self.csv_file}")
         with open(self.csv_file, 'w', newline='', encoding='utf-8') as f:
             csv_writer = csv.writer(f, delimiter=SystemConfig().delimiter, quoting=csv.QUOTE_MINIMAL)
             # Write the headline
@@ -280,7 +281,7 @@ class ItemParser:
 
         :param dump_text: If True then it prints also the original parsed text
         """
-        log.info(f"{'=' * 30} {self.doc_item_class.plural().upper()} {'=' * 30}")
+        log_step(f"Dump {self.doc_item_class.plural()}")
         for name, item_list in self.all_items.items():
             log.info(f"{'-' * 30} {name} {'-' * 30}")
             for i, item in enumerate(item_list):

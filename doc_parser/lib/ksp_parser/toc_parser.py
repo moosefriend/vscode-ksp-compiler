@@ -20,6 +20,7 @@ import logging
 import re
 
 from config.system_config import SystemConfig, debug
+from util.format import log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ class TocParser:
         """
         Parse the text file for table of contents.
         """
-        log.info(f"Parse headlines and categories in {self.reader.file}")
+        log_step(f"Parse headlines and categories in {self.reader.file}")
         self.search_toc_start()
         self.scan_toc()
         log.info(f"{self.headline_cnt} headlines found")
@@ -104,6 +105,7 @@ class TocParser:
         """
         Dump the table of contents.
         """
+        log_step(f"Dump Table of Contents")
         for headline, headline_page in self.all_headlines.items():
             log.info(f"{headline} {'.' * (78 - len(headline) - len(str(headline_page)))} {headline_page}")
             if headline in self.all_categories:

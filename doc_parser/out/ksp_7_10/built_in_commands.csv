@@ -1,5 +1,5 @@
 File;Page No;Line No;Headline;Category;Name;Parameters;Description;Remarks;Examples;See Also;Source
-KSP_Reference_Manual_Fixed.txt.py;42;7592;5. Arithmetic Commands & Operators;random();random;min,max;Generates a random integer between (and including) <min> and <max>.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;42;5768;5. Arithmetic Commands & Operators;random();random;min,max;Generates a random integer between (and including) <min> and <max>.;;"on init
     declare $rnd_amt
     declare $new_vel
 end on
@@ -20,7 +20,7 @@ on note
     change_velo($EVENT_ID, $new_vel)
 end on
 Randomly changing velocities by ±10 percent.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;43;7622;5. Arithmetic Commands & Operators;real();real;integer-value;Converts an integer value into a real number.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;43;5798;5. Arithmetic Commands & Operators;real();real;integer-value;Converts an integer value into a real number.;;"on init
     declare ~velocity_disp
 end on
 
@@ -29,7 +29,7 @@ on note
     message(~velocity_disp)
 end on
 Displays the event velocity in the range from 0.0 to 1.0.";int();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;44;7643;5. Arithmetic Commands & Operators;int();int;real-value;Converts a real number into an integer.;"- Using this command without any rounding function will cause the real value to be truncated, so
+KSP_Reference_Manual_Fixed.txt.py;44;5819;5. Arithmetic Commands & Operators;int();int;real-value;Converts a real number into an integer.;"- Using this command without any rounding function will cause the real value to be truncated, so
 performing this function with real values 2.2 and 2.8 will both return an integer value of 2
 - Be aware that this command reduces precision from 64-bit to 32-bit, which means that valid
 real numbers outside of 32-bit signed integer range (-2147483648 ... 2147483647) will not be
@@ -42,7 +42,7 @@ properly converted, since they end up in overflow.";"on init
 end on
 Converting a variable from real to integer and then displaying it.";"real()
 Rounding Commands: ceil(), floor(), round()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;45;7671;5. Arithmetic Commands & Operators;msb();msb;value;Returns the most significant byte portion of a 14-bit value.;;"on rpn
+KSP_Reference_Manual_Fixed.txt.py;45;5847;5. Arithmetic Commands & Operators;msb();msb;value;Returns the most significant byte portion of a 14-bit value.;;"on rpn
     message(msb($RPN_VALUE))
 end on
 Commonly used when working with RPN and NRPN messages.
@@ -56,7 +56,7 @@ on ui_control ($Value)
 end on
 Understanding MSB and LSB.";"lsb()
 Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;46;7697;5. Arithmetic Commands & Operators;lsb();lsb;value;Returns the least significant byte portion of a 14-bit value.;;"on rpn
+KSP_Reference_Manual_Fixed.txt.py;46;5873;5. Arithmetic Commands & Operators;lsb();lsb;value;Returns the least significant byte portion of a 14-bit value.;;"on rpn
     message(lsb($RPN_VALUE))
 end on
 Commonly used when working with RPN and NRPN messages.
@@ -70,7 +70,7 @@ on ui_control ($Value)
 end on
 Understanding MSB and LSB.";"msb()
 Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;73;8620;9. General Commands;disable_logging();disable_logging;event-type;"Disables emission of messages, warnings or watched variable events to both the Kontakt status bar
+KSP_Reference_Manual_Fixed.txt.py;73;6796;9. General Commands;disable_logging();disable_logging;event-type;"Disables emission of messages, warnings or watched variable events to both the Kontakt status bar
 and Creator Tools Debugger.
 <event-type>: Which event type emission to deactivate. Available options:
 - $NI_LOG_MESSAGE
@@ -83,7 +83,7 @@ end on
 Keep the lines above commented out while development and bring them back in right before
 shipping your product to disable any debugging-related content.";"watch_var()
 watch_array_idx()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;74;8648;9. General Commands;exit;exit;;Immediately stops a callback or exits a function.;"- exit is a very strong command. Be careful when using it, especially when dealing with larger
+KSP_Reference_Manual_Fixed.txt.py;74;6824;9. General Commands;exit;exit;;Immediately stops a callback or exits a function.;"- exit is a very strong command. Be careful when using it, especially when dealing with larger
 scripts.
 - If used within a function, exit only exits the function, but not the entire callback.";"on note
     if (not in_range($EVENT_NOTE, 60, 71))
@@ -94,7 +94,7 @@ scripts.
 end on
 Useful for quickly setting up key ranges to be affected by the script.";"wait()
 stop_wait()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;75;8674;9. General Commands;ignore_controller;ignore_controller;;"Ignores a MIDI Continuous Controller, Pitch Bend or Channel Aftertouch event in the on
+KSP_Reference_Manual_Fixed.txt.py;75;6850;9. General Commands;ignore_controller;ignore_controller;;"Ignores a MIDI Continuous Controller, Pitch Bend or Channel Aftertouch event in the on
 controller callback, or Polyphonic Aftertouch event in the on poly_at callback.";;"on controller
     if ($CC_NUM = 1)
         ignore_controller
@@ -104,7 +104,7 @@ end on
 Transform the modwheel into aftertouch.";"ignore_event()
 set_controller()
 on controller";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;76;8696;9. General Commands;message();message;variable-or-string;Displays text in the status line of Kontakt.;"- This command is intended to be used for debugging and testing while programming a script.
+KSP_Reference_Manual_Fixed.txt.py;76;6872;9. General Commands;message();message;variable-or-string;Displays text in the status line of Kontakt.;"- This command is intended to be used for debugging and testing while programming a script.
 Since there is only one status line in Kontakt, it should not be used as a generic means of
 communication with the user. Use a label widget instead.
 - Make it a habit to write message("""") at the start of the on init callback. You can then be
@@ -121,7 +121,7 @@ Concatenating strings and expressions in a message() command.";"reset_ksp_timer
 ui_label
 set_text()
 Time and Transport: $ENGINE_UPTIME, $KSP_TIMER";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;77;8728;9. General Commands;note_off();note_off;event-id;"Sends a MIDI Note Off message for a specific note event ID.
+KSP_Reference_Manual_Fixed.txt.py;77;6904;9. General Commands;note_off();note_off;event-id;"Sends a MIDI Note Off message for a specific note event ID.
 <event-id>: Unique identification number of the note event to be changed.";"- note_off() is equivalent to releasing a key, thus it will always trigger an on release
 callback, as well as jump to the release portion of a volume envelope. Notice the difference
 between note_off() and fade_out(), since fade_out() works on voice level.";"on controller
@@ -147,7 +147,7 @@ on release
 end on
 Delaying the release of each note by 200 milliseconds.";"fade_out()
 play_note()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;78;8769;9. General Commands;play_note();play_note;note-number,velocity,sample-offset,duration;"Generates a note event, i.e. a Note On message followed by a Note Off message.
+KSP_Reference_Manual_Fixed.txt.py;78;6945;9. General Commands;play_note();play_note;note-number,velocity,sample-offset,duration;"Generates a note event, i.e. a Note On message followed by a Note Off message.
 <note-number>: The MIDI note number to be generated (0 ... 127).
 <velocity>: Velocity of the generated note (1 ... 127).
 <sample-offset>: Sample offset in microseconds.
@@ -179,7 +179,7 @@ on controller
     end if
 end on
 Trigger a MIDI note by pressing the sustain pedal.";note_off();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;79;8816;9. General Commands;set_controller();set_controller;controller,value;"Sends a MIDI Continuous Controller, Pitch Bend or Channel Pressure message
+KSP_Reference_Manual_Fixed.txt.py;79;6992;9. General Commands;set_controller();set_controller;controller,value;"Sends a MIDI Continuous Controller, Pitch Bend or Channel Pressure message
 <controller>: This parameter sets the type, and in the case of MIDI CCs, sets the CC number:
 - A number (0 ... 127) designates a MIDI CC number
 - $VCC_PITCH_BEND indicates MIDI Pitch Bend
@@ -204,7 +204,7 @@ on release
 end on
 If you have a keyboard with no aftertouch, press C1 instead.";;"ignore_controller
 Events and MIDI: $VCC_PITCH_BEND, $VCC_MONO_AT";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;80;8853;9. General Commands;set_rpn()/set_nrpn();set_rpn;address,value;"Sends a MIDI RPN or NRPN message.
+KSP_Reference_Manual_Fixed.txt.py;80;7029;9. General Commands;set_rpn()/set_nrpn();set_rpn;address,value;"Sends a MIDI RPN or NRPN message.
 <address>: The RPN or NRPN address (0 ... 16383).
 <value>: The value of the RPN or NRPN message (0 ... 16383).";"- Kontakt cannot handle RPN or NRPN messages as external modulation sources. You can
 however use these messages for simple inter-script communication.";;"on rpn/nrpn
@@ -212,7 +212,7 @@ set_controller()
 msb()
 lsb()
 Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;80;8853;9. General Commands;set_rpn()/set_nrpn();set_nrpn;address,value;"Sends a MIDI RPN or NRPN message.
+KSP_Reference_Manual_Fixed.txt.py;80;7029;9. General Commands;set_rpn()/set_nrpn();set_nrpn;address,value;"Sends a MIDI RPN or NRPN message.
 <address>: The RPN or NRPN address (0 ... 16383).
 <value>: The value of the RPN or NRPN message (0 ... 16383).";"- Kontakt cannot handle RPN or NRPN messages as external modulation sources. You can
 however use these messages for simple inter-script communication.";;"on rpn/nrpn
@@ -220,7 +220,7 @@ set_controller()
 msb()
 lsb()
 Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;81;8872;9. General Commands;set_snapshot_type();set_snapshot_type;type;"Configures the behavior of all five slots when a snapshot is saved or recalled.
+KSP_Reference_Manual_Fixed.txt.py;81;7048;9. General Commands;set_snapshot_type();set_snapshot_type;type;"Configures the behavior of all five slots when a snapshot is saved or recalled.
 <type>: The available types are:
 0: The init callback will always be executed upon snapshot change, then the on
 persistence_changed callback will be executed (default behavior).
@@ -259,7 +259,7 @@ on ui_control ($gui_btn)
 end on
 Retaining the GUI upon loading snapshots.";"on init
 on persistence_changed";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;82;8927;10. Event Commands;by_marks();by_marks;mark;"A user-defined group of events.
+KSP_Reference_Manual_Fixed.txt.py;82;7103;10. Event Commands;by_marks();by_marks;mark;"A user-defined group of events.
 
 <mark>: One of 28 marks, $MARK_1 ... $MARK_28, which was assigned to the event.
 You can also select more than one event group by using the bitwise .or.
@@ -279,7 +279,7 @@ on controller
 end on
 Moving the modwheel changes the tuning of all C notes (C-2, C-1…C8).";"set_event_mark()
 Events and MIDI: $EVENT_ID, $ALL_EVENTS, $MARK_1 … $MARK_28";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;232;13960;20. MIDI Object Commands;by_marks();by_marks;mark;"Used to access a user-defined group of MIDI object events.
+KSP_Reference_Manual_Fixed.txt.py;232;12136;20. MIDI Object Commands;by_marks();by_marks;mark;"Used to access a user-defined group of MIDI object events.
 <mark>: The event mark number, $MARK_1 ... $MARK_10 .";;;"mf_insert_file()
 mf_insert_event()
 mf_remove_event()
@@ -289,7 +289,7 @@ mf_set_mark()
 mf_get_mark()
 mf_get_id()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;83;8962;10. Event Commands;change_note();change_note;event-id,note-number;Changes the note number of a specific event ID.;"- change_note() is only allowed in the on note callback and only works before the first
+KSP_Reference_Manual_Fixed.txt.py;83;7138;10. Event Commands;change_note();change_note;event-id,note-number;Changes the note number of a specific event ID.;"- change_note() is only allowed in the on note callback and only works before the first
 wait() statement. If the voice is already running, only the value of the $EVENT_NOTE variable
 changes.
 - Once the note number of a particular note event is changed, it becomes the new
@@ -305,7 +305,7 @@ on note
 end on
 Constrain all notes to white keys, i.e. C major.";"change_velo()
 Events and MIDI: $EVENT_NOTE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;84;8993;10. Event Commands;change_pan();change_pan;event-id,panorama,relative-bit;"Changes the pan position of a specific note event.
+KSP_Reference_Manual_Fixed.txt.py;84;7169;10. Event Commands;change_pan();change_pan;event-id,panorama,relative-bit;"Changes the pan position of a specific note event.
 <event-id>: Unique identification number of the note event to be changed.
 <panorama>: The pan position of the note event, from -1000 (left) to 1000 (right).
 <relative-bit>: If set to 0, the amount is absolute , i.e. the amount overwrites any previous
@@ -341,7 +341,7 @@ on note
 end on
 Notes below C3 utilize a relative bit of 0. C3 and above utilize a relative bit of 1.";"change_vol()
 change_tune()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;85;9044;10. Event Commands;change_tune();change_tune;event-id,tune-amount,relative-bit;"Changes the tuning of a specific note event in millicents.
+KSP_Reference_Manual_Fixed.txt.py;85;7220;10. Event Commands;change_tune();change_tune;event-id,tune-amount,relative-bit;"Changes the tuning of a specific note event in millicents.
 <event-id>: Unique identification number of the note event to be changed.
 <tune-amount>: The tune amount in millicents. 100000 equals 100 cents (one semitone).
 <relative-bit>: If set to 0, the amount is absolute , i.e. the amount overwrites any previous set
@@ -360,7 +360,7 @@ on note
 end on
 Randomly detune every played note by ±50 cents";"change_vol()
 change_pan()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;86;9078;10. Event Commands;change_velo();change_velo;event-id,velocity;Changes the velocity of a specific note event ID.;"- change_velo() is only allowed in the on note callback and only works before the first
+KSP_Reference_Manual_Fixed.txt.py;86;7254;10. Event Commands;change_velo();change_velo;event-id,velocity;Changes the velocity of a specific note event ID.;"- change_velo() is only allowed in the on note callback and only works before the first
 wait() statement. If the voice is already running, only the value of the variable changes.
 - Once the velocity of a particular note event is changed, it becomes the new
 $EVENT_VELOCITY.
@@ -370,7 +370,7 @@ $EVENT_VELOCITY.
 end on
 All velocities are set to 100. Note that $EVENT_VELOCITY will also change to 100.";"change_note()
 Events and MIDI: $EVENT_VELOCITY";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;87;9103;10. Event Commands;change_vol();change_vol;event-id,volume,relative-bit;"Changes the volume of a specific note event in millidecibels.
+KSP_Reference_Manual_Fixed.txt.py;87;7279;10. Event Commands;change_vol();change_vol;event-id,volume,relative-bit;"Changes the volume of a specific note event in millidecibels.
 <event-id>: Unique identification number of the note event to be changed.
 <volume>: The volume change in millidecibels (1000 millidecibels = 1 decibel).
 <relative-bit>: If set to 0, the amount is absolute , i.e. the amount overwrites any previous
@@ -395,12 +395,12 @@ A simple dynamic expander: lightly played notes will be softer, harder played no
 change_pan()
 fade_in()
 fade_out()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;88;9143;10. Event Commands;delete_event_mark();delete_event_mark;event-id,mark;"Delete an event mark, i.e. ungroup the specified event from an event group.
+KSP_Reference_Manual_Fixed.txt.py;88;7319;10. Event Commands;delete_event_mark();delete_event_mark;event-id,mark;"Delete an event mark, i.e. ungroup the specified event from an event group.
 <event-id>: Unique identification number of the note event to be ungrouped.
 <mark>: One of 28 marks, $MARK_1 ... $MARK_28, which was assigned to the event.";;;"set_event_mark()
 by_marks()
 Events and MIDI: $EVENT_ID, $ALL_EVENTS, $MARK_1 … $MARK_28";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;89;9156;10. Event Commands;event_status();event_status;event-id;"Retrieves the status of a particular note event (or MIDI event in the multi script). These are the
+KSP_Reference_Manual_Fixed.txt.py;89;7332;10. Event Commands;event_status();event_status;event-id;"Retrieves the status of a particular note event (or MIDI event in the multi script). These are the
 possible states:
 - $EVENT_STATUS_NOTE_QUEUE (note is active - instrument script only)
 - $EVENT_STATUS_MIDI_QUEUE (MIDI event is active - multi script only)
@@ -418,7 +418,7 @@ end on
 Limit the number of active note events to one per MIDI key.";"get_event_ids()
 Events and MIDI: $EVENT_STATUS_INACTIVE, $EVENT_STATUS_NOTE_QUEUE,
 $EVENT_STATUS_MIDI_QUEUE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;90;9189;10. Event Commands;fade_in();fade_in;event-id,fade-time;"Performs a fade in for a specific note event.
+KSP_Reference_Manual_Fixed.txt.py;90;7365;10. Event Commands;fade_in();fade_in;event-id,fade-time;"Performs a fade in for a specific note event.
 <event-id>: Unique identification number of the note event to be faded in.
 <fade-time>: The fade in time in microseconds.";;"on init
     declare $note_1_id
@@ -434,7 +434,7 @@ on note
 end on
 Fading in the first two harmonics.";"change_vol()
 fade_out()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;91;9217;10. Event Commands;fade_out();fade_out;event-id,fade-time,stop-voice;"Performs a fade-out for a specific note event.
+KSP_Reference_Manual_Fixed.txt.py;91;7393;10. Event Commands;fade_out();fade_out;event-id,fade-time,stop-voice;"Performs a fade-out for a specific note event.
 <event-id>: Unique identification number of the note event to be faded out.
 <fade-time>: The fade out time in microseconds.
 <stop-voice>: If set to 1, the voice is stopped after the fade out.
@@ -456,7 +456,7 @@ on controller
 end on
 A custom All Sound Off implementation triggered by the modwheel.";"change_vol()
 fade_out()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;92;9251;10. Event Commands;get_event_ids();get_event_ids;array-name;"Fills the specified array with all active event IDs.
+KSP_Reference_Manual_Fixed.txt.py;92;7427;10. Event Commands;get_event_ids();get_event_ids;array-name;"Fills the specified array with all active event IDs.
 <array-name>: Array to be filled with active event IDs.";"- The command overwrites all existing values as long as there are active events, and writes 0 if
 no events are active anymore. If there are more active events than array indices, the array will
 be filled until it is full, ignoring the remaining event IDs.
@@ -482,7 +482,7 @@ on note
     message(""Active Events: "" & $note_count)
 end on
 Monitoring the number of active events.";event_status();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;93;9292;10. Event Commands;get_event_mark();get_event_mark;event-id,mark;"Checks if the specified event ID belongs to a specific event group (returns 1 if the bit mark is set, 0
+KSP_Reference_Manual_Fixed.txt.py;93;7468;10. Event Commands;get_event_mark();get_event_mark;event-id,mark;"Checks if the specified event ID belongs to a specific event group (returns 1 if the bit mark is set, 0
 otherwise).
 <event-id>: Unique identification number of the note event to be checked.
 
@@ -502,7 +502,7 @@ on release
     end if
 end on
 A rather long-winded way to check if you've released a C key.";set_event_mark();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;94;9324;10. Event Commands;get_event_par();get_event_par;event-id,parameter;"Returns the value of a specific event parameter of the specified event.
+KSP_Reference_Manual_Fixed.txt.py;94;7500;10. Event Commands;get_event_par();get_event_par;event-id,parameter;"Returns the value of a specific event parameter of the specified event.
 <event-id>: Unique identification number of the note event to be changed.
 <parameter>: The event parameter, either one of four freely assignable event parameters:
 - $EVENT_PAR_0
@@ -543,7 +543,7 @@ wait(1) in order to properly retrieve the zone ID.";"set_event_par()
 ignore_event()
 set_event_par_arr()
 get_event_par_arr()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;96;9381;10. Event Commands;get_event_par_arr();get_event_par_arr;event-id,parameter,index;"Retrieves the value of a specified event parameter of a specific event.
+KSP_Reference_Manual_Fixed.txt.py;96;7557;10. Event Commands;get_event_par_arr();get_event_par_arr;event-id,parameter,index;"Retrieves the value of a specified event parameter of a specific event.
 <event-id>: Unique identification number of the note event.
 <parameter>: Can be one of the following:
 - $EVENT_PAR_ALLOW_GROUP
@@ -584,7 +584,7 @@ A simple group monitor.";"set_event_par_arr()
 get_event_par()
 Events and MIDI: $EVENT_PAR_ALLOW_GROUP, $EVENT_PAR_MOD_VALUE_ID,
 $EVENT_PAR_CUSTOM , %GROUPS_AFFECTED";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;98;9438;10. Event Commands;ignore_event();ignore_event;event-id;Ignores a note event in on note or on release callbacks.;"- If you ignore an event, any volume, tune or pan information is lost. You can however retrieve
+KSP_Reference_Manual_Fixed.txt.py;98;7614;10. Event Commands;ignore_event();ignore_event;event-id;Ignores a note event in on note or on release callbacks.;"- If you ignore an event, any volume, tune or pan information is lost. You can however retrieve
 this infomation with get_event_par(), refer to the two examples below.
 - ignore_event() is a very ""strong"" command. Always check if you can get the same results
 with the various change_...() commands without having to ignore the event.";"on note
@@ -611,7 +611,7 @@ end on
 Better: the tuning (plus volume and pan, to be precise) information is retrieved and applied to the
 played note.";"ignore_controller
 get_event_par()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;99;9480;10. Event Commands;redirect_output();redirect_output;event-id,output-type,index;"Routes the audio signal of the specified event to a specific output or bus.
+KSP_Reference_Manual_Fixed.txt.py;99;7656;10. Event Commands;redirect_output();redirect_output;event-id,output-type,index;"Routes the audio signal of the specified event to a specific output or bus.
 <event-id>: Unique identification number of the note event to be routed.
 <output-type>: Can be one of the following:
 - $OUTPUT_TYPE_DEFAULT: The audio signal of the event is routed to the
@@ -645,7 +645,7 @@ on note
     redirect_output($new_id_2, $OUTPUT_TYPE_BUS_OUT, 2)
 end on
 Creating a major triad and routing each note to a separate instrument bus.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;100;9526;10. Event Commands;set_event_mark();set_event_mark;event-id,mark;"Assigns the specified event ID to a specific event group.
+KSP_Reference_Manual_Fixed.txt.py;100;7702;10. Event Commands;set_event_mark();set_event_mark;event-id,mark;"Assigns the specified event ID to a specific event group.
 <event-id>: Unique identification number of the note event.
 <mark>: One of 28 marks, from $MARK_1 to $MARK_28 which will be assigned to the
 event. You can also assign more than one mark to a single event, either by
@@ -668,7 +668,7 @@ end on
 The played note belongs to event mark 1, the harmonized note belongs to both event marks 1 and 2.";"by_marks()
 delete_event_mark()
 Events and MIDI: $EVENT_ID, $ALL_EVENTS, $MARK_1 … $MARK_28";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;101;9564;10. Event Commands;set_event_par();set_event_par;event-id,parameter,value;"Assigns a specific event parameter value to a specific event.
+KSP_Reference_Manual_Fixed.txt.py;101;7740;10. Event Commands;set_event_par();set_event_par;event-id,parameter,value;"Assigns a specific event parameter value to a specific event.
 <event-id>: Unique identification number of the note event.
 <parameter>: The event parameter, either one of four freely assignable event parameters:
 - $EVENT_PAR_0
@@ -746,7 +746,7 @@ Release velocity in MPE (MIDI Polyphonic Expression) context.";"get_event_par()
 ignore_event()
 set_event_par_arr()
 get_event_par_arr()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;103;9658;10. Event Commands;set_event_par_arr();set_event_par_arr;event-id,parameter,value,index;"Assigns an event parameter array to a specific event.
+KSP_Reference_Manual_Fixed.txt.py;103;7834;10. Event Commands;set_event_par_arr();set_event_par_arr;event-id,parameter,value,index;"Assigns an event parameter array to a specific event.
 <event-id>: Unique identification number of the note event.
 <parameter>: Can be one of the following:
 - $EVENT_PAR_ALLOW_GROUP
@@ -802,7 +802,7 @@ disallow_group()
 get_event_par_arr()
 set_event_par()
 Events and MIDI: $EVENT_PAR_ALLOW_GROUP";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;105;9730;10. Event Commands;set_map_editor_event_color();set_map_editor_event_color;hex-value;"Assigns the specified color to events generated in the current script slot, visible in Kontakt's
+KSP_Reference_Manual_Fixed.txt.py;105;7906;10. Event Commands;set_map_editor_event_color();set_map_editor_event_color;hex-value;"Assigns the specified color to events generated in the current script slot, visible in Kontakt's
 Mapping Editor.
 <hex value>: The hexadecimal color value in the following format:
 0ff0000h {red}
@@ -820,7 +820,7 @@ on note
     play_note(($EVENT_NOTE + 12) mod 127, $EVENT_VELOCITY, 0, -1)
 end on
 Add a note played an octave up. This event will be shown as a green blip in Kontakt's Mapping Editor.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;106;9761;11. Array Commands;array_equal();array_equal;array-variable,array-variable;Checks the values of two arrays. Returns 1 if all values are equal, 0 if not.;- This command does not work with arrays of real numbers.;"on init
+KSP_Reference_Manual_Fixed.txt.py;106;7937;11. Array Commands;array_equal();array_equal;array-variable,array-variable;Checks the values of two arrays. Returns 1 if all values are equal, 0 if not.;- This command does not work with arrays of real numbers.;"on init
     declare %array_1[10]
     declare %array_2[11]
 
@@ -833,7 +833,7 @@ end on
 This script will produce an error message as the two arrays don't have the same size.";"sort()
 num_elements()
 search()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;107;9789;11. Array Commands;num_elements();num_elements;array-variable;Returns the number of elements in an array.;"- With this function you can, e.g., check how many groups are affected by the current event,
+KSP_Reference_Manual_Fixed.txt.py;107;7965;11. Array Commands;num_elements();num_elements;array-variable;Returns the number of elements in an array.;"- With this function you can, e.g., check how many groups are affected by the current event,
 using num_elements(%GROUPS_AFFECTED).";"on note
     message(num_elements(%GROUPS_AFFECTED))
 end on
@@ -841,7 +841,7 @@ Outputs the number of groups that are playing when you press a key.";"array_equa
 sort()
 search()
 Events and MIDI: %GROUPS_AFFECTED";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;108;9812;11. Array Commands;search();search;array-variable,value;"search(<array-variable>, <value>, <from>, <to>)
+KSP_Reference_Manual_Fixed.txt.py;108;7988;11. Array Commands;search();search;array-variable,value;"search(<array-variable>, <value>, <from>, <to>)
 Searches the specified array for the specified value (optionally within the range specified by <from>
 and <to>) and returns the index of its first position. If the value is not found, the function returns -1.
 <array-variable>: Array to be searched through
@@ -900,7 +900,7 @@ Searching for a specific value in a smaller part of a large array - much more pe
 the same thing with a while loop directly in KSP!";"array_equal()
 num_elements()
 sort()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;110;9887;11. Array Commands;sort();sort;array-variable,direction;"sort(<array-variable>, <direction>, <from>, <to>)
+KSP_Reference_Manual_Fixed.txt.py;110;8063;11. Array Commands;sort();sort;array-variable,direction;"sort(<array-variable>, <direction>, <from>, <to>)
 Sorts an array in ascending or descending order (optionally within the range specified by <from>
 and <to>).
 <array-variable>: The array to be sorted.
@@ -971,7 +971,7 @@ end on
 Comparing sorting the whole array versus sorting a range within the array.";"array_equal()
 num_elements()
 sort()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;112;9972;12. Group Commands;allow_group();allow_group;group-index;Allows the specified group, i.e. makes it available for playback.;"- This commmand is only available in on note and on release callbacks.
+KSP_Reference_Manual_Fixed.txt.py;112;8148;12. Group Commands;allow_group();allow_group;group-index;Allows the specified group, i.e. makes it available for playback.;"- This commmand is only available in on note and on release callbacks.
 - The numbering of the group index is zero-based, i.e. index of the first instrument group is 0.
 - The group allow states can only be changed if the voice is not running.";"on note
     disallow_group($ALL_GROUPS)
@@ -980,7 +980,7 @@ end on
 Only the first group will play back.";"disallow_group()
 set_event_par_arr()
 Events and MIDI: $ALL_GROUPS, $EVENT_PAR_ALLOW_GROUP";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;113;9996;12. Group Commands;disallow_group();disallow_group;group-index;Disallows the specified group, i.e. makes it unavailable for playback.;"- This commmand is only available in on note and on release callbacks.
+KSP_Reference_Manual_Fixed.txt.py;113;8172;12. Group Commands;disallow_group();disallow_group;group-index;Disallows the specified group, i.e. makes it unavailable for playback.;"- This commmand is only available in on note and on release callbacks.
 - The numbering of the group index is zero-based, i.e. index of the first instrument group is 0.
 - The group disallow states can only be changed if the voice is not running.";"on init
     declare $count
@@ -1003,7 +1003,7 @@ end on
 Muting one specific group of an instrument.";"allow_group()
 set_event_par_arr()
 Events and MIDI: $ALL_GROUPS, $EVENT_PAR_ALLOW_GROUP";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;114;10034;12. Group Commands;get_group_idx();get_group_idx;group-name;Returns the group index for the specified group name.;- If no group with the specified name is found, this command will return $NI_NOT_FOUND.;"on init
+KSP_Reference_Manual_Fixed.txt.py;114;8210;12. Group Commands;get_group_idx();get_group_idx;group-name;Returns the group index for the specified group name.;- If no group with the specified name is found, this command will return $NI_NOT_FOUND.;"on init
     declare $group_idx
 end on
 
@@ -1017,7 +1017,7 @@ end on
 A simple, yet useful script.";"allow_group()
 disallow_group()
 group_name()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;115;10063;12. Group Commands;get_purge_state();get_purge_state;group-index;"Returns the purge state of the specified group.
+KSP_Reference_Manual_Fixed.txt.py;115;8239;12. Group Commands;get_purge_state();get_purge_state;group-index;"Returns the purge state of the specified group.
 0: The group is purged.
 1: The group is not purged, i.e. the samples are loaded.
 <group-index>: The index number of the group that should be checked.";;"on init
@@ -1041,7 +1041,7 @@ on ui_control ($checkpurge)
     end if
 end on
 A simple purge check.";purge_group();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;116;10099;12. Group Commands;group_name();group_name;group-index;Returns the group name for the specified group.;- The numbering of the group index is zero-based, i.e. index of the first instrument group is 0.;"on init
+KSP_Reference_Manual_Fixed.txt.py;116;8275;12. Group Commands;group_name();group_name;group-index;Returns the group name for the specified group.;- The numbering of the group index is zero-based, i.e. index of the first instrument group is 0.;"on init
     declare $count
     declare ui_menu $groups_menu
 
@@ -1078,7 +1078,7 @@ disallow_group()
 get_group_idx()
 output_channel_name()
 Events and MIDI: $ALL_GROUPS, $NUM_GROUPS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;117;10151;12. Group Commands;purge_group();purge_group;group-index,mode;"Purges (i.e. unloads from RAM) the samples of the specified group.
+KSP_Reference_Manual_Fixed.txt.py;117;8327;12. Group Commands;purge_group();purge_group;group-index,mode;"Purges (i.e. unloads from RAM) the samples of the specified group.
 <group-index>: The index number of the group which contains the samples to be purged.
 <mode>: If set to 0, the samples of the specified group are unloaded.
 If set to 1, the samples are reloaded.";"- When using purge_group() in a while loop, don’t use any wait() commands within the loop.
@@ -1108,7 +1108,7 @@ on async_complete
     end if
 end on
 Unloading all samples of the first group.";get_purge_state();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;118;10198;13. Time-Related Commands;change_listener_par();change_listener_par;signal-type,parameter;"Changes the parameters of the on listener callback. It can be used in any callback.
+KSP_Reference_Manual_Fixed.txt.py;118;8374;13. Time-Related Commands;change_listener_par();change_listener_par;signal-type,parameter;"Changes the parameters of the on listener callback. It can be used in any callback.
 <signal-type>: The signal to be changed, can be:
 $NI_SIGNAL_TIMER_MS
 $NI_SIGNAL_TIMER_BEAT
@@ -1141,13 +1141,13 @@ end on
 A very basic metronome.";"on listener
 set_listener()
 Callbacks and UI: $NI_SIGNAL_TYPE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;119;10246;13. Time-Related Commands;ms_to_ticks();ms_to_ticks;microseconds;Converts a microseconds value into a value in tempo-dependent MIDI ticks.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;119;8422;13. Time-Related Commands;ms_to_ticks();ms_to_ticks;microseconds;Converts a microseconds value into a value in tempo-dependent MIDI ticks.;;"on init
     declare ui_label $bpm (1, 1)
     set_text($bpm, ms_to_ticks(60000000) / 960)
 end on
 Displaying the current host tempo.";"ticks_to_ms()
 Time and Transport: $NI_SONG_POSITION";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;120;10264;13. Time-Related Commands;set_listener();set_listener;signal-type,parameter;"Sets the signals on which the listener callback should react to. Can only be used in the on init
+KSP_Reference_Manual_Fixed.txt.py;120;8440;13. Time-Related Commands;set_listener();set_listener;signal-type,parameter;"Sets the signals on which the listener callback should react to. Can only be used in the on init
 callback.
 <signal-type>: The event on which the listener callback should react. The following types are
 available:
@@ -1175,7 +1175,7 @@ on listener
 end on
 Triggering the listener callback every beat. Triggering will occur even when transport is stopped.";"change_listener_par()
 Callbacks and UI: $NI_SIGNAL_TYPE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;121;10307;13. Time-Related Commands;stop_wait();stop_wait;callback-id,parameter;"Stops wait commands in the specified callback.
+KSP_Reference_Manual_Fixed.txt.py;121;8483;13. Time-Related Commands;stop_wait();stop_wait;callback-id,parameter;"Stops wait commands in the specified callback.
 <callback-id>: The callback’s ID number in which the wait commands will be stopped.
 <parameter>: 0: stops only the current wait.
 1: stops the current wait and ignores all following wait commands in this
@@ -1213,7 +1213,7 @@ arpeggios.";"wait()
 wait_async()
 wait_ticks()
 Callbacks and UI: Callback Type Variables and Constants";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;122;10360;13. Time-Related Commands;reset_ksp_timer;reset_ksp_timer;;Resets the KSP timer built-in variable ($KSP_TIMER) to zero.;"- Note that the $KSP_TIMER variable, due to its 32-bit signed nature, will reach its limit after
+KSP_Reference_Manual_Fixed.txt.py;122;8536;13. Time-Related Commands;reset_ksp_timer;reset_ksp_timer;;Resets the KSP timer built-in variable ($KSP_TIMER) to zero.;"- Note that the $KSP_TIMER variable, due to its 32-bit signed nature, will reach its limit after
 2147483648 microseconds, or roughly 35 minutes and 47 seconds.
 - Since the KSP timer is based on the CPU clock, the main reason to use it is for debugging and
 optimization. It is a great tool to measure the efficiency of certain script passages. However,
@@ -1242,7 +1242,7 @@ on note
     message($KSP_TIMER)
 end on
 A nested while loop – takes about 5400 to 5800 microseconds.";Time and Transport: $ENGINE_UPTIME, $KSP_TIMER;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;123;10404;13. Time-Related Commands;ticks_to_ms();ticks_to_ms;ticks;Converts a tempo-dependent MIDI ticks value into a value in microseconds.;"- Since the returned value is in microseconds, note that due to its 32-bit signed nature it will not
+KSP_Reference_Manual_Fixed.txt.py;123;8580;13. Time-Related Commands;ticks_to_ms();ticks_to_ms;ticks;Converts a tempo-dependent MIDI ticks value into a value in microseconds.;"- Since the returned value is in microseconds, note that due to its 32-bit signed nature it will not
 return correct values if specified number of ticks at the current tempo exceeds 2147483648
 microseconds, or roughly 35 minutes and 47 seconds.";"on init
     declare $msec
@@ -1265,7 +1265,7 @@ on listener
 end on
 Displaying the song position in realtime.";"ms_to_ticks()
 Time and Transport: $NI_SONG_POSITION";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;124;10442;13. Time-Related Commands;wait();wait;wait-time;Pauses the callback for the specified time in microseconds.;"- wait() stops the callback at the position in the script for the specified time. In other words, it
+KSP_Reference_Manual_Fixed.txt.py;124;8618;13. Time-Related Commands;wait();wait;wait-time;Pauses the callback for the specified time in microseconds.;"- wait() stops the callback at the position in the script for the specified time. In other words, it
 freezes the callback, although other callbacks can still be processed during this time. After the
 specified time, period the callback continues.";"on note
     ignore_event($EVENT_ID)
@@ -1285,7 +1285,7 @@ wait_async()
 wait_ticks()
 while ()
 Time and Transport: $DURATION_QUARTER";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;125;10477;13. Time-Related Commands;wait_async();wait_async;async-id;Waits until the async command identified by the <async-id> is finished.;"- When performing multiple operations it is also possible to collect them together and then
+KSP_Reference_Manual_Fixed.txt.py;125;8653;13. Time-Related Commands;wait_async();wait_async;async-id;Waits until the async command identified by the <async-id> is finished.;"- When performing multiple operations it is also possible to collect them together and then
 calling the wait_async() function on the collection. When the operations are collected
 in this manner they will be calculated in one block, resulting in a performance gain. If the
 async operation is not in the pipeline anymore or is invalid, there is no waiting and the script
@@ -1305,10 +1305,10 @@ while($i < num_elements(%asyncid))
     inc($i)
 end while
 Performing multiple async operations.";General: $NI_ASYNC_EXIT_STATUS, $NI_ASYNC_ID;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;126;10512;13. Time-Related Commands;wait_ticks();wait_ticks;ticks;Pauses the callback for the specified time in MIDI ticks.;"- Same as wait() but with MIDI ticks as the wait time parameter.
+KSP_Reference_Manual_Fixed.txt.py;126;8688;13. Time-Related Commands;wait_ticks();wait_ticks;ticks;Pauses the callback for the specified time in MIDI ticks.;"- Same as wait() but with MIDI ticks as the wait time parameter.
 - 960 MIDI ticks equals one quarter note.";;"stop_wait()
 wait()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;127;10527;14. User Interface Commands;add_menu_item();add_menu_item;variable,text,value;"Create an entry in a ui_menu widget.
+KSP_Reference_Manual_Fixed.txt.py;127;8703;14. User Interface Commands;add_menu_item();add_menu_item;variable,text,value;"Create an entry in a ui_menu widget.
 <variable>: The variable name of the ui_menu widget.
 <text>: The text of the menu entry.
 <value>: The value of the menu entry.";"- You can create menu entries only in the on init callback, but you can change their text and
@@ -1330,7 +1330,7 @@ set_menu_item_str()
 set_menu_item_visibility()
 ui_menu
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;128;10564;14. User Interface Commands;add_text_line();add_text_line;variable,text;"Add a new text line in the specified ui_label, without erasing existing text.
+KSP_Reference_Manual_Fixed.txt.py;128;8740;14. User Interface Commands;add_text_line();add_text_line;variable,text;"Add a new text line in the specified ui_label, without erasing existing text.
 <variable>: The variable name of the ui_label widget.
 <text>: The text to be displayed.";;"on init
     declare $count
@@ -1355,7 +1355,7 @@ on note
 end on
 Monitoring the last four played notes.";"set_text()
 ui_label";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;129;10601;14. User Interface Commands;attach_level_meter();attach_level_meter;ui-id,group,slot,channel,generic;"Attach a ui_level_meter to a certain location within the instrument to read volume data.
+KSP_Reference_Manual_Fixed.txt.py;129;8777;14. User Interface Commands;attach_level_meter();attach_level_meter;ui-id,group,slot,channel,generic;"Attach a ui_level_meter to a certain location within the instrument to read volume data.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <group>: The index of the group you want to access. Should be set to -1 if not using the
 group level.
@@ -1402,7 +1402,7 @@ Specific: $CONTROL_PAR_BG_COLOR, $CONTROL_PAR_OFF_COLOR,
 $CONTROL_PAR_ON_COLOR, $CONTROL_PAR_OVERLOAD_COLOR,
 $CONTROL_PAR_PEAK_COLOR, $CONTROL_PAR_VERTICAL, $CONTROL_PAR_RANGE_MIN,
 $CONTROL_PAR_RANGE_MAX";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;131;10664;14. User Interface Commands;attach_zone();attach_zone;variable,zone-id,flags;"Connects the corresponding zone to the waveform so that it shows up on the ui_waveform
+KSP_Reference_Manual_Fixed.txt.py;131;8840;14. User Interface Commands;attach_zone();attach_zone;variable,zone-id,flags;"Connects the corresponding zone to the waveform so that it shows up on the ui_waveform
 widget.
 <variable>: The variable name of the ui_waveform widget.
 <zone-id>: The ID number of the zone that you want to attach.
@@ -1422,19 +1422,19 @@ get_ui_wf_property()
 ui_waveform
 Zone and Slice Functions: find_zone()
 Specific: Waveform Flag Constants, Waveform Property Constants";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;132;10699;14. User Interface Commands;fs_get_filename();fs_get_filename;ui-id,return-parameter;"Return the filename of the last selected file in a ui_file_selector widget.
+KSP_Reference_Manual_Fixed.txt.py;132;8875;14. User Interface Commands;fs_get_filename();fs_get_filename;ui-id,return-parameter;"Return the filename of the last selected file in a ui_file_selector widget.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <return-parameter>: 0: Returns the filename without extension.
 1: Returns the filename with extension.
 2: Returns the whole path.";- This command is only available in the on ui_control callbacks of ui_file_selectors.;;"fs_navigate()
 ui_file_selector";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;133;10716;14. User Interface Commands;fs_navigate();fs_navigate;ui-id,direction;"Jump to the previous or next file in a ui_file_selector widget and trigger its callback.
+KSP_Reference_Manual_Fixed.txt.py;133;8892;14. User Interface Commands;fs_navigate();fs_navigate;ui-id,direction;"Jump to the previous or next file in a ui_file_selector widget and trigger its callback.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <direction>: 0: The previous file (in relation to the currently selected one) is selected
 1: The next file (in relation to the currently selected one) is selected";"- This command is only available in the on ui_control callbacks of ui_file_selectors.
 - It will always call the UI callback of the ui_file_selector it is pointed to.";;"fs_get_filename()
 ui_file_selector";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;134;10733;14. User Interface Commands;get_control_par();get_control_par;ui-id,control-parameter;"Retrieve various parameters of the specified UI widget.
+KSP_Reference_Manual_Fixed.txt.py;134;8909;14. User Interface Commands;get_control_par();get_control_par;ui-id,control-parameter;"Retrieve various parameters of the specified UI widget.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.";"- get_control_par_str() is an additional flavor of the command for use with strings (i.e.
 retrieving text from ui_label or automation name from ui_slider).";"on init
@@ -1444,7 +1444,7 @@ end on
 Retrieving the width of a value edit in pixels.";"set_control_par()
 General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT,
 $CONTROL_PAR_KEY_CONTROL";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;135;10758;14. User Interface Commands;get_control_par_arr();get_control_par_arr;ui-id,control-parameter,index;"Retrieve various parameters of the specified UI widget
+KSP_Reference_Manual_Fixed.txt.py;135;8934;14. User Interface Commands;get_control_par_arr();get_control_par_arr;ui-id,control-parameter,index;"Retrieve various parameters of the specified UI widget
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
 <index>: Array index of the UI widget we want to retrieve.";"- get_control_par_arr() comes in two additional flavors:
@@ -1482,7 +1482,7 @@ set_control_par()
 set_control_par_arr()
 General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT,
 $CONTROL_PAR_KEY_CONTROL";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;137;10812;14. User Interface Commands;get_font_id();get_font_id;file-name;"Returns a font ID generated for a custom font based on an image file. This font ID can be used on
+KSP_Reference_Manual_Fixed.txt.py;137;8988;14. User Interface Commands;get_font_id();get_font_id;file-name;"Returns a font ID generated for a custom font based on an image file. This font ID can be used on
 any control that has dynamic text elements.
 <file-name>: Name of the image, without extension. The image has to be in PNG format and
 reside in the ""pictures"" subfolder of the resource container.";"- This command is only available in the on init callback.
@@ -1498,7 +1498,7 @@ get_font_id(""Font1""))
 end on
 Using a custom font on a ui_text_edit control.";"set_control_par()
 General: $CONTROL_PAR_FONT_TYPE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;138;10843;14. User Interface Commands;get_menu_item_str();get_menu_item_str;ui-id,index;"Returns the string value of a particular ui_menu entry.
+KSP_Reference_Manual_Fixed.txt.py;138;9019;14. User Interface Commands;get_menu_item_str();get_menu_item_str;ui-id,index;"Returns the string value of a particular ui_menu entry.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <index>: The index (not the value!) of the menu item.";"- The <index> is defined by the order in which the menu items are added within the on init
 callback; it cannot be changed afterwards.";"on init
@@ -1521,7 +1521,7 @@ get_menu_item_str()
 set_menu_item_value()
 set_menu_item_visibility()
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;139;10881;14. User Interface Commands;get_menu_item_value();get_menu_item_value;ui-id,index;"Returns the value of a particular ui_menu entry.
+KSP_Reference_Manual_Fixed.txt.py;139;9057;14. User Interface Commands;get_menu_item_value();get_menu_item_value;ui-id,index;"Returns the value of a particular ui_menu entry.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <index>: The index (not the value!) of the menu item.";"- The <index> is defined by the order in which the menu items are added within the on init
 callback; it cannot be changed afterwards.";"on init
@@ -1542,7 +1542,7 @@ set_menu_item_str()
 set_menu_item_value()
 set_menu_item_visibility()
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;140;10917;14. User Interface Commands;get_menu_item_visibility();get_menu_item_visibility;ui-id,index;"Returns 1 if a particular ui_menu entry is visible, otherwise 0.
+KSP_Reference_Manual_Fixed.txt.py;140;9093;14. User Interface Commands;get_menu_item_visibility();get_menu_item_visibility;ui-id,index;"Returns 1 if a particular ui_menu entry is visible, otherwise 0.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <index>: The index (not the value!) of the menu entry.";"- The <index> is defined by the order in which the menu items are added within the on init
 callback; it cannot be changed afterwards.";"on init
@@ -1570,7 +1570,7 @@ set_menu_item_str()
 set_menu_item_value()
 set_menu_item_visibility()
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;141;10960;14. User Interface Commands;get_ui_id();get_ui_id;variable;Retrieves the UI ID number of a UI widget.;"- UI IDs are assigned sequentially from the very first variable or constant declared in the script,
+KSP_Reference_Manual_Fixed.txt.py;141;9136;14. User Interface Commands;get_ui_id();get_ui_id;variable;Retrieves the UI ID number of a UI widget.;"- UI IDs are assigned sequentially from the very first variable or constant declared in the script,
 which starts at 32768.
 - Even regular variables and constants (those that are not UI widgets) get a UI ID assigned,
 however this ID cannot be used with various get_control_par()/set_control_par()
@@ -1603,7 +1603,7 @@ on ui_control ($Set)
 end on
 Store IDs in an array and use those IDs to set multiple knobs to the same value.";"set_control_par()
 get_control_par()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;142;11008;14. User Interface Commands;get_ui_wf_property();get_ui_wf_property;variable,property,index;"Returns the values of different properties pertaining to the ui_waveform widget.
+KSP_Reference_Manual_Fixed.txt.py;142;9184;14. User Interface Commands;get_ui_wf_property();get_ui_wf_property;variable,property,index;"Returns the values of different properties pertaining to the ui_waveform widget.
 <variable>: Variable name of the ui_waveform widget.
 <property>: The following properties are available:
 $UI_WF_PROP_PLAY_CURSOR
@@ -1634,7 +1634,7 @@ ui_waveform
 attach_zone()
 Zone and Slice Functions: find_zone()
 Specific: Waveform Flag Constants, Waveform Property Constants";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;143;11051;14. User Interface Commands;hide_part();hide_part;variable,hide-mask;"Hide specific parts of various widgets.
+KSP_Reference_Manual_Fixed.txt.py;143;9227;14. User Interface Commands;hide_part();hide_part;variable,hide-mask;"Hide specific parts of various widgets.
 <variable>: The variable name of the widget.
 <hide-mask>: Bitmask of visibility states for various parts of UI controls, consisting of the
 following constants:
@@ -1655,7 +1655,7 @@ on init
     hide_part($label_1, $HIDE_PART_BG)
 end on
 Hide the background of a label. This is also possible with other UI elements.";Specific: $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING, $HIDE_WHOLE_CONTROL;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;144;11084;14. User Interface Commands;load_performance_view();load_performance_view;filename;"Loads a performance view file (.nckp) that was created in the Creator Tools GUI Designer.
+KSP_Reference_Manual_Fixed.txt.py;144;9260;14. User Interface Commands;load_performance_view();load_performance_view;filename;"Loads a performance view file (.nckp) that was created in the Creator Tools GUI Designer.
 <filename>: The filename of the .nckp file without extension, entered as a string.";"- Only one performance view file can be loaded per script slot.
 - This command is only available in the on init callback.
 - This command cannot be used alongside make_perfview.
@@ -1676,7 +1676,7 @@ on ui_control ($testButton)
 end on
 Loads a performance view file and then defines some basic behavior involving two of the contained
 controls.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;145;11117;14. User Interface Commands;make_perfview;make_perfview;;Activates the performance view for the respective script slot.;"- This command can only be used in the on init callback.
+KSP_Reference_Manual_Fixed.txt.py;145;9293;14. User Interface Commands;make_perfview;make_perfview;;Activates the performance view for the respective script slot.;"- This command can only be used in the on init callback.
 - Cannot be used alongside the load_performance_view() command.";"on init
     message("""")
 
@@ -1689,7 +1689,7 @@ set_ui_height()
 set_ui_height_px()
 set_ui_width_px()
 set_ui_color()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;146;11145;14. User Interface Commands;move_control();move_control;variable,x-position,y-position;"Position UI widgets in the standard Kontakt grid.
+KSP_Reference_Manual_Fixed.txt.py;146;9321;14. User Interface Commands;move_control();move_control;variable,x-position,y-position;"Position UI widgets in the standard Kontakt grid.
 <variable>: The variable name of the UI widget.
 <x-position>: The horizontal position of the widget in grid units (0 ... 6).
 <y-position>: The vertical position of the widget in grid units (0 ... 16).";"- move_control() can be used in all callbacks.
@@ -1713,7 +1713,7 @@ on controller
 end on
 Move a UI element with the modwheel.";"move_control_px()
 General: $CONTROL_PAR_HIDE";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;147;11184;14. User Interface Commands;move_control_px();move_control_px;variable,x-position,y-position;"Position UI widgets in pixels.
+KSP_Reference_Manual_Fixed.txt.py;147;9360;14. User Interface Commands;move_control_px();move_control_px;variable,x-position,y-position;"Position UI widgets in pixels.
 <variable>: The variable name of the UI widget.
 <x-position>: The horizontal position of the widget in pixels (0 ... 1000).
 <y-position>: The vertical position of the widget in pixels (0 ... 750).";"- Pixel-based control parameters cannot be mixed with grid-based ones, so if you want to set
@@ -1740,7 +1740,7 @@ on controller
 end on
 Transform CC values into pixel position. This might be useful for reference.";"move_control()
 General: $CONTROL_PAR_POS_X, $CONTROL_PAR_POS_Y";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;148;11226;14. User Interface Commands;set_control_help();set_control_help;variable,text;"Assigns a text string to be displayed when hovering over a UI widget. The text will appear in
+KSP_Reference_Manual_Fixed.txt.py;148;9402;14. User Interface Commands;set_control_help();set_control_help;variable,text;"Assigns a text string to be displayed when hovering over a UI widget. The text will appear in
 Kontakt's info pane.
 <variable>: The variable name of the UI widget.
 <text>: The info text to be displayed.";- The text string used can contain a maximum of 320 characters.;"on init
@@ -1750,7 +1750,7 @@ end on
 set_control_help() in action.";"set_script_title()
 General:
 $CONTROL_PAR_HELP";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;149;11251;14. User Interface Commands;set_control_par();set_control_par;ui-id,control-parameter,value;"Change various parameters of the specified UI widget.
+KSP_Reference_Manual_Fixed.txt.py;149;9427;14. User Interface Commands;set_control_par();set_control_par;ui-id,control-parameter,value;"Change various parameters of the specified UI widget.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <control-parameter>: Parameter of the UI control we wish to set, i.e. $CONTROL_PAR_WIDTH.
 <value>: The value of the control parameter we wish to set.";"- set_control_par_str() is an additional flavor of the command for use with strings (i.e.
@@ -1771,7 +1771,7 @@ end on
 Set and center text in labels.";"get_control_par()
 set_control_par_arr()
 get_ui_id()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;150;11287;14. User Interface Commands;set_control_par_arr();set_control_par_arr;ui-id,control-parameter,value,index;"Change various parameters of an element within an array-based UI widget, e.g. ui_xy cursors.
+KSP_Reference_Manual_Fixed.txt.py;150;9463;14. User Interface Commands;set_control_par_arr();set_control_par_arr;ui-id,control-parameter,value,index;"Change various parameters of an element within an array-based UI widget, e.g. ui_xy cursors.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <control-parameter>: Parameter of the UI widgetwe wish to set,e.g. $CONTROL_PAR_AUTOMATION_ID.
 <value>: The value of the control parameter we wish to set.
@@ -1799,7 +1799,7 @@ cursors)
 end on
 Setting automation IDs and names of an XY pad with two cursors.";"General: $CONTROL_PAR_AUTOMATION_ID, $CONTROL_PAR_AUTOMATION_NAME
 Specific: $CONTROL_PAR_CURSOR_PICTURE, $HIDE_PART_CURSOR";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;151;11330;14. User Interface Commands;set_knob_defval();set_knob_defval;variable,value;"Assign a default value to a ui_knob to which it will be reset when pressing [Ctrl] (on Windows)
+KSP_Reference_Manual_Fixed.txt.py;151;9506;14. User Interface Commands;set_knob_defval();set_knob_defval;variable,value;"Assign a default value to a ui_knob to which it will be reset when pressing [Ctrl] (on Windows)
 or [Cmd] (on macOS) and clicking the knob.";"- In order to assign a default value to a ui_slider, use set_control_par() with
 $CONTROL_PAR_DEFAULT_VALUE control parameter.";"on init
     declare ui_knob $Knob (-100, 100, 0)
@@ -1811,7 +1811,7 @@ $CONTROL_PAR_DEFAULT_VALUE control parameter.";"on init
     $Slider := 0
 end on
 Assigning default values for a knob and a slider.";General: $CONTROL_PAR_DEFAULT_VALUE;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;152;11357;14. User Interface Commands;set_knob_label();set_knob_label;variable,text;Assign a text string to a ui_knob.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;152;9533;14. User Interface Commands;set_knob_label();set_knob_label;variable,text;Assign a text string to a ui_knob.;;"on init
     declare !rate_names[18]
     !rate_names[ 0] := ""1/128""
     !rate_names[ 1] := ""1/64""
@@ -1844,7 +1844,7 @@ on ui_control ($Rate)
     set_knob_label($Rate, !rate_names[$Rate])
 end on
 Useful for displaying rhythmical values.";General: $CONTROL_PAR_LABEL;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;153;11402;14. User Interface Commands;set_knob_unit();set_knob_unit;variable,knob-unit-constant;"Assign a unit mark to a ui_knob. The following constants are available:
+KSP_Reference_Manual_Fixed.txt.py;153;9578;14. User Interface Commands;set_knob_unit();set_knob_unit;variable,knob-unit-constant;"Assign a unit mark to a ui_knob. The following constants are available:
 $KNOB_UNIT_NONE
 $KNOB_UNIT_DB
 $KNOB_UNIT_HZ
@@ -1868,7 +1868,7 @@ $KNOB_UNIT_ST";;"on init
     set_knob_unit($Tune, $KNOB_UNIT_HZ)
 end on
 Various knob unit marks.";General: $CONTROL_PAR_UNIT;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;154;11438;14. User Interface Commands;set_menu_item_str();set_menu_item_str;ui-id,index,string;"Sets the value of a ui_menu entry.
+KSP_Reference_Manual_Fixed.txt.py;154;9614;14. User Interface Commands;set_menu_item_str();set_menu_item_str;ui-id,index,string;"Sets the value of a ui_menu entry.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <index>: The index of the menu item.
 <string>: The text you wish to set for the selected menu item.";"- The <index> is defined by the order in which the menu items are added within the on init
@@ -1890,7 +1890,7 @@ get_menu_item_visibility()
 set_menu_item_value()
 set_menu_item_visibility()
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;155;11475;14. User Interface Commands;set_menu_item_value();set_menu_item_value;ui-id,index,value;"Sets the value of a ui_menu entry.
+KSP_Reference_Manual_Fixed.txt.py;155;9651;14. User Interface Commands;set_menu_item_value();set_menu_item_value;ui-id,index,value;"Sets the value of a ui_menu entry.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <index>: The index of the menu item.
 <value>: The value you want to give the menu item.";"- The <index> is defined by the order in which the menu items are added within the on init
@@ -1910,7 +1910,7 @@ get_menu_item_visibility()
 set_menu_item_str()
 set_menu_item_visibility()
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;156;11510;14. User Interface Commands;set_menu_item_visibility();set_menu_item_visibility;ui-id,index,visibility;"Sets the visibility of a ui_menu entry.
+KSP_Reference_Manual_Fixed.txt.py;156;9686;14. User Interface Commands;set_menu_item_visibility();set_menu_item_visibility;ui-id,index,visibility;"Sets the visibility of a ui_menu entry.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <index>: The index of the menu item.
 <visibility>: Set to either 0 (invisible) or 1 (visible).";"- The <index> is defined by the order in which the menu items are added within the on init
@@ -1936,7 +1936,7 @@ get_menu_item_visibility()
 set_menu_item_str()
 set_menu_item_value()
 Specific: $CONTROL_PAR_SELECTED_ITEM_IDX, $CONTROL_PAR_NUM_ITEMS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;157;11551;14. User Interface Commands;set_table_steps_shown();set_table_steps_shown;variable,num-of-steps;"Changes the number of displayed columns in a ui_table widget.
+KSP_Reference_Manual_Fixed.txt.py;157;9727;14. User Interface Commands;set_table_steps_shown();set_table_steps_shown;variable,num-of-steps;"Changes the number of displayed columns in a ui_table widget.
 <variable>: The variable name of the ui_table widget.
 <num-of-steps>: The number of displayed steps.";;"on init
     declare ui_table %table[32] (5, 4, 127)
@@ -1950,7 +1950,7 @@ on ui_control($Steps)
     set_table_steps_shown(%table, $Steps)
 end on
 Changing the number of shown steps.";ui_table;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;158;11577;14. User Interface Commands;set_script_title();set_script_title;text;Set the script title.;- This command overrides any manually set script titles.;"on init
+KSP_Reference_Manual_Fixed.txt.py;158;9753;14. User Interface Commands;set_script_title();set_script_title;text;Set the script title.;- This command overrides any manually set script titles.;"on init
     message("""")
 
     make_perfview
@@ -1958,7 +1958,7 @@ KSP_Reference_Manual_Fixed.txt.py;158;11577;14. User Interface Commands;set_scri
     set_ui_height(6)
 end on
 Many performance view scripts start like this.";make_perfview;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;159;11600;14. User Interface Commands;set_skin_offset();set_skin_offset;offset-in-px;Offsets the chosen background picture file by the specified number of pixels.;"- If a PNG file used for the background has been set and is larger than the maximum height
+KSP_Reference_Manual_Fixed.txt.py;159;9776;14. User Interface Commands;set_skin_offset();set_skin_offset;offset-in-px;Offsets the chosen background picture file by the specified number of pixels.;"- If a PNG file used for the background has been set and is larger than the maximum height
 of the performance view, you can use this command to offset the background graphic, thus
 creating separate backgrounds for each of the script slots while only using one picture file.";"on init
     make_perfview
@@ -1971,7 +1971,7 @@ on controller
     end if
 end on";"make_perfview
 set_ui_height_px()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;160;11628;14. User Interface Commands;set_text();set_text;variable,text;"When applied to a ui_label: replace the text currently visible in the specified label and add new
+KSP_Reference_Manual_Fixed.txt.py;160;9804;14. User Interface Commands;set_text();set_text;variable,text;"When applied to a ui_label: replace the text currently visible in the specified label and add new
 text.
 When applied to ui_knob, ui_button, ui_switch and ui_value_edit: set the display name
 of the widget.";;"on init
@@ -1992,7 +1992,7 @@ end on
 Hide the background of a label. This is also possible with other widgets.";"add_text_line()
 set_control_par(): set_control_par_str()
 General: $CONTROL_PAR_TEXT";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;161;11661;14. User Interface Commands;set_ui_color();set_ui_color;hex-value;"Set the main background color of the performance view.
+KSP_Reference_Manual_Fixed.txt.py;161;9837;14. User Interface Commands;set_ui_color();set_ui_color;hex-value;"Set the main background color of the performance view.
 <hex value>The hexadecimal color value in the following format:
 0ff0000h {red}
 The 0 at the start lets Kontakt know the value is a number.
@@ -2003,7 +2003,7 @@ uppercase H.";- This command can be used in all callbacks.;"on init
 end on
 Paint it black.";"set_ui_height()
 set_ui_height_px()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;162;11687;14. User Interface Commands;set_ui_height();set_ui_height;height;"Set the height of a script performance view in grid units.
+KSP_Reference_Manual_Fixed.txt.py;162;9863;14. User Interface Commands;set_ui_height();set_ui_height;height;"Set the height of a script performance view in grid units.
 <height>: The height of script in grid units (1 ... 8).";- This command can only be used in the on init callback.;"on init
     message("""")
 
@@ -2012,7 +2012,7 @@ KSP_Reference_Manual_Fixed.txt.py;162;11687;14. User Interface Commands;set_ui_h
     set_ui_height(6)
 end on
 Many performance view scripts start like this.";set_ui_height_px();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;163;11711;14. User Interface Commands;set_ui_height_px();set_ui_height_px;height;"Set the height of a script performance view in pixels.
+KSP_Reference_Manual_Fixed.txt.py;163;9887;14. User Interface Commands;set_ui_height_px();set_ui_height_px;height;"Set the height of a script performance view in pixels.
 <height>: The height of script in pixels (50 ... 750).";- This command can only be used in the on init callback.;"on init
     make_perfview
 
@@ -2030,14 +2030,14 @@ on ui_control ($Slide)
     set_skin_offset(($Slide - 1) * ($SIZE / $NUM_FRAMES))
 end on";"set_ui_height()
 set_ui_height_px()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;164;11744;14. User Interface Commands;set_ui_width_px();set_ui_width_px;width;"Set the width of a script performance view in pixels.
+KSP_Reference_Manual_Fixed.txt.py;164;9920;14. User Interface Commands;set_ui_width_px();set_ui_width_px;width;"Set the width of a script performance view in pixels.
 <width>: The width of the script in pixels (633 ... 1000).";- This command can only be used in the on init callback.;"on init
     make_perfview
     set_ui_height_px(750)
     set_ui_width_px(1000)
 end on
 Making a performance view with the largest possible size.";set_ui_height_px();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;165;11766;14. User Interface Commands;set_ui_wf_property();set_ui_wf_property;variable,property,index,value;"Sets different properties for the ui_waveform widget.
+KSP_Reference_Manual_Fixed.txt.py;165;9942;14. User Interface Commands;set_ui_wf_property();set_ui_wf_property;variable,property,index,value;"Sets different properties for the ui_waveform widget.
 <variable>: Variable name of the ui_waveform widget.
 <property>: The following properties are available:
 $UI_WF_PROP_PLAY_CURSOR
@@ -2068,7 +2068,7 @@ ui_waveform
 attach_zone()
 Zone and Slice Functions: find_zone()
 Specific: Waveform Flag Constants, Waveform Property Constants";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;166;11810;15. Keyboard Commands;get_key_color();get_key_color;note-number;Returns the color constant of the specified note number.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;166;9986;15. Keyboard Commands;get_key_color();get_key_color;note-number;Returns the color constant of the specified note number.;;"on init
     message("""")
 
     declare $count
@@ -2101,7 +2101,7 @@ on release
     message("""")
 end on
 Catch me if you can.";set_key_color();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;167;11855;15. Keyboard Commands;get_key_name();get_key_name;note-number;Returns the name of the specified note number.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;167;10031;15. Keyboard Commands;get_key_name();get_key_name;note-number;Returns the name of the specified note number.;;"on init
     declare $count
 
     while ($count < 128)
@@ -2116,7 +2116,7 @@ end on
 on note
     message(get_key_name($EVENT_NOTE))
 end on";set_key_name();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;168;11882;15. Keyboard Commands;get_key_triggerstate();get_key_triggerstate;note-number;"Returns the pressed state of the specified note number, i.e. key, on the Kontakt keyboard. It can be
+KSP_Reference_Manual_Fixed.txt.py;168;10058;15. Keyboard Commands;get_key_triggerstate();get_key_triggerstate;note-number;"Returns the pressed state of the specified note number, i.e. key, on the Kontakt keyboard. It can be
 either 1 (key pressed) or 0 (key released).";- get_key_triggerstate() only works when set_key_pressed_support() is set to 1.;"on init
     set_key_pressed_support(1)
 end on
@@ -2131,8 +2131,8 @@ on release
     message(get_key_triggerstate($EVENT_NOTE))
 end on";"set_key_pressed()
 set_key_pressed_support()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;169;11912;15. Keyboard Commands;get_key_type();get_key_type;note-number;Returns the key type constant of the specified note number.;;;set_key_type();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;170;11921;15. Keyboard Commands;get_keyrange_min_note();get_keyrange_min_note;note-number;Returns the lowest note of the specified key range.;"- Since a key range cannot have overlapping notes, it is sufficient with all get_keyrange_...
+KSP_Reference_Manual_Fixed.txt.py;169;10088;15. Keyboard Commands;get_key_type();get_key_type;note-number;Returns the key type constant of the specified note number.;;;set_key_type();BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py;170;10097;15. Keyboard Commands;get_keyrange_min_note();get_keyrange_min_note;note-number;Returns the lowest note of the specified key range.;"- Since a key range cannot have overlapping notes, it is sufficient with all get_keyrange_...
 commands to specify the key range with one note number only.";"on init
     declare $count
     while ($count < 128)
@@ -2147,7 +2147,7 @@ end on
 on note
     message(get_keyrange_min_note($EVENT_NOTE))
 end on";set_keyrange();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;171;11951;15. Keyboard Commands;get_keyrange_max_note();get_keyrange_max_note;note-number;Returns the highest note of the specified key range.;"- Since a key range cannot have overlapping notes, it is sufficient with all get_keyrange_...
+KSP_Reference_Manual_Fixed.txt.py;171;10127;15. Keyboard Commands;get_keyrange_max_note();get_keyrange_max_note;note-number;Returns the highest note of the specified key range.;"- Since a key range cannot have overlapping notes, it is sufficient with all get_keyrange_...
 commands to specify the key range with one note number only.";"on init
     declare $count
     while ($count < 128)
@@ -2162,7 +2162,7 @@ end on
 on note
     message(get_keyrange_max_note($EVENT_NOTE))
 end on";set_keyrange();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;172;11981;15. Keyboard Commands;get_keyrange_name();get_keyrange_name;note-number;Returns the name of the specified key range.;"- Since a key range cannot have overlapping notes, it is sufficient with all get_keyrange_...
+KSP_Reference_Manual_Fixed.txt.py;172;10157;15. Keyboard Commands;get_keyrange_name();get_keyrange_name;note-number;Returns the name of the specified key range.;"- Since a key range cannot have overlapping notes, it is sufficient with all get_keyrange_...
 commands to specify the key range with one note number only.";"on init
     declare $count
     while ($count < 128)
@@ -2177,7 +2177,7 @@ end on
 on note
     message(get_keyrange_name($EVENT_NOTE))
 end on";set_keyrange();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;173;12011;15. Keyboard Commands;set_key_color();set_key_color;note-number,key-color-constant;"Sets the color of the specified key, i.e. MIDI note, on the Kontakt virtual keyboard.
+KSP_Reference_Manual_Fixed.txt.py;173;10187;15. Keyboard Commands;set_key_color();set_key_color;note-number,key-color-constant;"Sets the color of the specified key, i.e. MIDI note, on the Kontakt virtual keyboard.
 <note-number>: MIDI note number of the key (0 ... 127).
 <key-color-constant>: One of available key color constant to specify the color used. The followingconstants are available:
 $KEY_COLOR_RED
@@ -2214,7 +2214,7 @@ keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.";
     declare %colors[16] := ( ...
         $KEY_COLOR_RED, ...
         $KEY_COLOR_ORANGE, ...";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;175;12122;15. Keyboard Commands;set_key_name();set_key_name;note-number,name;"Assigns a text string to the specified note number.
+KSP_Reference_Manual_Fixed.txt.py;175;10298;15. Keyboard Commands;set_key_name();set_key_name;note-number,name;"Assigns a text string to the specified note number.
 <note-number>: MIDI note number of the key (0 ... 127).
 <name>: Text string to assign.";"- Key names are instrument parameters and reside outside of KSP, i.e. changing the key name
 is similar to changing a Kontakt knob with set_engine_par(). Make sure to always reset all
@@ -2232,7 +2232,7 @@ key on the Kontakt keyboard.";"on init
     set_key_name(60, ""Middle C"")
 end on";"set_keyrange()
 get_key_name()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;176;12155;15. Keyboard Commands;set_key_pressed();set_key_pressed;note-number,value;"Sets the trigger state of the specified key on Kontakt's keyboard.
+KSP_Reference_Manual_Fixed.txt.py;176;10331;15. Keyboard Commands;set_key_pressed();set_key_pressed;note-number,value;"Sets the trigger state of the specified key on Kontakt's keyboard.
 <note-number>: MIDI note number of the key (0 ... 127).
 <value>: 0: Key is released
 1: Key is pressed";"- By using set_key_pressed() in combination with set_key_pressed_support() set to
@@ -2251,7 +2251,7 @@ on release
 end on
 Insert this after an arpeggiator or harmonizer script.";"set_key_pressed_support()
 get_key_triggerstate()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;177;12189;15. Keyboard Commands;set_key_pressed_support();set_key_pressed_support;mode;"Sets the pressed state support mode for Kontakt's keyboard.
+KSP_Reference_Manual_Fixed.txt.py;177;10365;15. Keyboard Commands;set_key_pressed_support();set_key_pressed_support;mode;"Sets the pressed state support mode for Kontakt's keyboard.
 <mode>: 0: Kontakt handles all pressed states. set_key_pressed() commands are
 ignored (this is the default).
 1: Kontakt's keyboard is only affected by set_key_pressed() commands.";"- The pressed state mode resides outside of KSP, i.e. changing the mode is similar to changing a
@@ -2281,7 +2281,7 @@ on release
 end on
 Press the button and you will see what you hear.";"set_key_pressed()
 get_key_triggerstate()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;178;12234;15. Keyboard Commands;set_key_type();set_key_type;note-number,key-type-constant;"Assigns a key type to the specified key.
+KSP_Reference_Manual_Fixed.txt.py;178;10410;15. Keyboard Commands;set_key_type();set_key_type;note-number,key-type-constant;"Assigns a key type to the specified key.
 <note-number>: MIDI note number of the key (0 ... 127).
 <key-type-constant>: The following key types are available:$NI_KEY_TYPE_DEFAULT Normally mapped keys that produce sound.
 $NI_KEY_TYPE_CONTROL Keyswitches or other keysthat do not produce
@@ -2309,7 +2309,7 @@ control functionality, e.g. keyswitches, should not be affected by any note proc
         inc($count)
     end while
 end on";get_key_type();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;179;12277;15. Keyboard Commands;set_keyrange();set_keyrange;min-note,max-note,name;"Assigns a text string to the specified range of keys.
+KSP_Reference_Manual_Fixed.txt.py;179;10453;15. Keyboard Commands;set_keyrange();set_keyrange;min-note,max-note,name;"Assigns a text string to the specified range of keys.
 <min-note>: First key of the key range (0 ... 127).
 <max-note>: Last key of the key range (0 ... 127).
 <name>: Text string specifying the name of the key range.";"- Key ranges are instrument parameters and reside outside of KSP, i.e. changing the key range is
@@ -2330,7 +2330,7 @@ dash.";"on init
     set_keyrange(36, 72, ""Middle Range"")
 end on";"remove_keyrange()
 set_key_name()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;180;12313;15. Keyboard Commands;remove_keyrange();remove_keyrange;note-number;Removes the range of keys to which the specified note number belongs.;"- Key ranges are instrument parameters and reside outside of KSP, i.e. changing the key range is
+KSP_Reference_Manual_Fixed.txt.py;180;10489;15. Keyboard Commands;remove_keyrange();remove_keyrange;note-number;Removes the range of keys to which the specified note number belongs.;"- Key ranges are instrument parameters and reside outside of KSP, i.e. changing the key range is
 similar to changing a Kontakt knob withset_engine_par(). Make sure to always remove all
 key ranges in the on init callback or whenever you want to change them later.";"on init
     declare $count
@@ -2343,7 +2343,7 @@ key ranges in the on init callback or whenever you want to change them later.";"
 
     set_keyrange(36, 72, ""Middle Range"")
 end on";set_keyrange();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;181;12342;16. Engine Parameter Commands;get_mod_idx();get_mod_idx;group-index,mod-name;"Returns the slot index of an internal modulator or external modulation slot.
+KSP_Reference_Manual_Fixed.txt.py;181;10518;16. Engine Parameter Commands;get_mod_idx();get_mod_idx;group-index,mod-name;"Returns the slot index of an internal modulator or external modulation slot.
 <group-index>: The index of the group (see Index column in Monitor -> Groups pane inKontakt).
 <mod-name>: The name of the internal (LFO, envelope, step modulator...) or external (velocity,
 key position, mono aftertouch...) modulator.";"- Each modulator has a predefined name, based on its type and the parameter it targets.
@@ -2400,7 +2400,7 @@ end on
 Creating a slider which controls the velocity to volume modulation intensity of all groups, if they
 exist.";"get_target_idx()
 set_engine_par()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;183;12415;16. Engine Parameter Commands;get_target_idx();get_target_idx;group-index,mod-index,target-name;"Returns the modulation target slot index of an internal modulator
+KSP_Reference_Manual_Fixed.txt.py;183;10591;16. Engine Parameter Commands;get_target_idx();get_target_idx;group-index,mod-index,target-name;"Returns the modulation target slot index of an internal modulator
 <group-index>: The index of the group (see Index column in Monitor -> Groups pane inKontakt).
 <mod-index>: The slot index of an internal modulator (LFO, envelope, step modulator...). Can
 be retrieved with get_mod_idx().
@@ -2428,7 +2428,7 @@ end on
 Controlling the envelope to filter cutoff modulation amount in the first group. Note: the filter envelope
 has been manually renamed to ""FILTER_ENV"", and the target to ""FILTER_ENV > CUTOFF"".";"get_mod_idx()
 set_engine_par()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;184;12458;16. Engine Parameter Commands;get_engine_par();get_engine_par;parameter,group,slot,generic;"Returns the value of a specific engine parameter.
+KSP_Reference_Manual_Fixed.txt.py;184;10634;16. Engine Parameter Commands;get_engine_par();get_engine_par;parameter,group,slot,generic;"Returns the value of a specific engine parameter.
 <parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
 <group>: The index (zero-based) of the group in which the specified parameter resides.
@@ -2471,7 +2471,7 @@ For all other applications, set this parameter to -1.";;"on init
         inc($i)
     end while
 end on";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;186;12553;16. Engine Parameter Commands;get_engine_par_disp();get_engine_par_disp;parameter,group,slot,generic;"Returns the displayed value of a specific engine parameter, as a string.
+KSP_Reference_Manual_Fixed.txt.py;186;10729;16. Engine Parameter Commands;get_engine_par_disp();get_engine_par_disp;parameter,group,slot,generic;"Returns the displayed value of a specific engine parameter, as a string.
 <parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
 <group>: The index (zero-based) of the group in which the specified parameter resides.
@@ -2514,7 +2514,7 @@ get_engine_par_disp($ENGINE_PAR_VOLUME, $i, -1, -1) & "" dB"")
     end while
 end on
 Query the group volume settings in an instrument.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;187;12605;16. Engine Parameter Commands;get_voice_limit();get_voice_limit;voice-type;"Returns the voice limit for the Time Machine Pro sampler mode of the Source module.
+KSP_Reference_Manual_Fixed.txt.py;187;10781;16. Engine Parameter Commands;get_voice_limit();get_voice_limit;voice-type;"Returns the voice limit for the Time Machine Pro sampler mode of the Source module.
 <voice-type>: The voice type, can be one of the following:
 - $NI_VL_TMPRO_STANDARD: Standard quality mode
 - $NI_VL_TMPRO_HQ: High quality mode";;"on init
@@ -2524,7 +2524,7 @@ KSP_Reference_Manual_Fixed.txt.py;187;12605;16. Engine Parameter Commands;get_vo
     add_text_line($label, ""HQ Voice Limit: "" & get_voice_limit($NI_VL_TMPRO_HQ))
 end on
 Displaying TM Pro voice limits.";set_voice_limit();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;188;12627;16. Engine Parameter Commands;output_channel_name();output_channel_name;output-number;"Returns the channel name for the specified output.
+KSP_Reference_Manual_Fixed.txt.py;188;10803;16. Engine Parameter Commands;output_channel_name();output_channel_name;output-number;"Returns the channel name for the specified output.
 <output-number>: The number of the output channel (zero-based, i.e. the first output is 0).";;"on init
     declare $i
 
@@ -2545,7 +2545,7 @@ on ui_control ($menu)
     set_engine_par($ENGINE_PAR_OUTPUT_CHANNEL,$menu, 0, -1, -1)
 end on
 Mirroring the output channel assignment menu of the first group.";General: $NUM_OUTPUT_CHANNELS, $ENGINE_PAR_OUTPUT_CHANNEL;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;189;12660;16. Engine Parameter Commands;set_engine_par();set_engine_par;parameter,value,group,slot,generic;"Control various Kontakt parameters and buttons.
+KSP_Reference_Manual_Fixed.txt.py;189;10836;16. Engine Parameter Commands;set_engine_par();set_engine_par;parameter,value,group,slot,generic;"Control various Kontakt parameters and buttons.
 <parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
 <value>: The value to which the specified parameter is set.
@@ -2585,7 +2585,7 @@ on ui_control ($Volume)
     set_engine_par($ENGINE_PAR_VOLUME, $Volume, -1, -1, -1)
 end on
 A knob controls the instrument volume.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;191;12752;16. Engine Parameter Commands;set_voice_limit();set_voice_limit;voice-type,value;"Sets the voice limit for the Time Machine Pro mode of the Source module.
+KSP_Reference_Manual_Fixed.txt.py;191;10928;16. Engine Parameter Commands;set_voice_limit();set_voice_limit;voice-type,value;"Sets the voice limit for the Time Machine Pro mode of the Source module.
 <voice-type>: The voice type, can be one of the following:
 - $NI_VL_TMPRO_STANDARD: Standard quality mode
 - $NI_VL_TMPRO_HQ: High quality mode
@@ -2614,7 +2614,7 @@ get_voice_limit($NI_VL_TMPRO_STANDARD))
     end if
 end on
 Changing TM Pro voice limits.";get_voice_limit();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;194;12849;17. Zone Commands;get_loop_par();get_loop_par;zone-id,loop-index,parameter;"Returns the value of a particular loop parameter of a zone.
+KSP_Reference_Manual_Fixed.txt.py;194;11025;17. Zone Commands;get_loop_par();get_loop_par;zone-id,loop-index,parameter;"Returns the value of a particular loop parameter of a zone.
 <zone-id>: The ID of the zone.
 <loop-index>: The index of the loop (0 ... 7).
 <parameter>: The following parameters are available:
@@ -2624,18 +2624,18 @@ $LOOP_PAR_LENGTH
 $LOOP_PAR_XFADE
 $LOOP_PAR_COUNT
 $LOOP_PAR_TUNING";- get_loop_par() works on both normal and user zones.;message(get_loop_par($myZoneId, 0, $LOOP_PAR_MODE));set_loop_par();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;195;12874;17. Zone Commands;get_num_zones();get_num_zones;;Returns the total number of all zones that are present in the instrument (normal and user zones).;;"on init
+KSP_Reference_Manual_Fixed.txt.py;195;11050;17. Zone Commands;get_num_zones();get_num_zones;;Returns the total number of all zones that are present in the instrument (normal and user zones).;;"on init
     message(get_num_zones())
 end on
 Quite self-explanatory.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;196;12887;17. Zone Commands;get_sample();get_sample;zone-id,return-parameter;"Returns paths, file names and extensions of samples.
+KSP_Reference_Manual_Fixed.txt.py;196;11063;17. Zone Commands;get_sample();get_sample;zone-id,return-parameter;"Returns paths, file names and extensions of samples.
 <zone-id>: The ID of the zone.
 <return-parameter>: The following parameters are available:$NI_FILE_NAME
 $NI_FILE_FULL_PATH
 $NI_FILE_FULL_PATH_OS
 $NI_FILE_EXTENSION";- get_sample() works on both normal and user zones.;message(get_sample(%NI_USER_ZONE_IDS[0], $NI_FILE_NAME));"set_sample()
 Sample Parameters";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;197;12909;17. Zone Commands;get_sel_zones_idx();get_sel_zones_idx;array-name;"Fills the specified array with indices of all selected zones in Kontakt's Mapping Editor.
+KSP_Reference_Manual_Fixed.txt.py;197;11085;17. Zone Commands;get_sel_zones_idx();get_sel_zones_idx;array-name;"Fills the specified array with indices of all selected zones in Kontakt's Mapping Editor.
 <array-name>: Array to be filled with indices of selected zones.";"- The command overwrites all existing values as long as there are selected zones. If there
 are more selected zones than array indices, the array will be filled until it is full, ignoring the
 remaining selected zones.
@@ -2681,7 +2681,7 @@ on note
 end on
 Using the lowest keys of an 88 key MIDI controller to finely adjust zone volume and tuning in 0.01
 steps";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;199;12968;17. Zone Commands;get_zone_id();get_zone_id;zone-index;"Returns the ID of the zone with the specified zone index.
+KSP_Reference_Manual_Fixed.txt.py;199;11144;17. Zone Commands;get_zone_id();get_zone_id;zone-index;"Returns the ID of the zone with the specified zone index.
 <zone-index>: Index of the zone (see Index column in Monitor → Zones pane in Kontakt) .";;"on init
     set_snapshot_type(3) { Must be 2 or 3 or else set_zone_par works only on user zones }
 
@@ -2698,7 +2698,7 @@ on ui_control ($slider)
     set_text($label, get_zone_par(0, $ZONE_PAR_ROOT_KEY))
 end on
 Adjusting the root key of the first zone in the instrument.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;200;12994;17. Zone Commands;get_zone_par();get_zone_par;zone-id,parameter;"Returns the value of a particular zone parameter.
+KSP_Reference_Manual_Fixed.txt.py;200;11170;17. Zone Commands;get_zone_par();get_zone_par;zone-id,parameter;"Returns the value of a particular zone parameter.
 <zone-id>: The ID of the zone.
 <parameter>: The following parameters are available:
 $ZONE_PAR_HIGH_KEY
@@ -2721,7 +2721,7 @@ $ZONE_PAR_SAMPLE_RATE
 $ZONE_PAR_SELECTED
 $ZONE_PAR_BPM";"- get_zone_par() works on both normal and user zones.
 - $ZONE_PAR_BPM returns the BPM value multiplied by 1000, so 120 BPM would be 120000.";get_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_PAN);set_zone_par();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;201;13032;17. Zone Commands;get_zone_status();get_zone_status;zone-ID;"Queries the status of the zone ID in question. Zone status has four possible states:
+KSP_Reference_Manual_Fixed.txt.py;201;11208;17. Zone Commands;get_zone_status();get_zone_status;zone-ID;"Queries the status of the zone ID in question. Zone status has four possible states:
 - $NI_ZONE_STATUS_EMPTY Zone is a user zone and has no sample loaded
 - $NI_ZONE_STATUS_LOADED Zone is a user zone and has a sample loaded
 - $NI_ZONE_STATUS_PURGED Zone is purged from memory (valid for both regular and user
@@ -2749,7 +2749,7 @@ on ui_control ($ZoneID)
     end select
 end on
 Query the status of the first 1001 zone IDs.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;202;13072;17. Zone Commands;set_loop_par();set_loop_par;zone-id,loop-index,parameter,value;"Sets the loop parameters of a user zone.
+KSP_Reference_Manual_Fixed.txt.py;202;11248;17. Zone Commands;set_loop_par();set_loop_par;zone-id,loop-index,parameter,value;"Sets the loop parameters of a user zone.
 <zone-id>: The ID of the zone.
 <loop-index>: The index of the loop (0 ... 7).
 <parameter>: The following parameters are available:
@@ -2770,7 +2770,7 @@ until the end of the callback, whichever comes first. So, if it is required to s
 parameters in batch, it is recommended to first collect all the async IDs into an array, and only
 then run any wait() commands, as shown in the description of wait_async() command.";wait_async(set_loop_par(%NI_USER_ZONE_IDS[0], 0, $LOOP_PAR_MODE, $SampleLoopOnA));"get_loop_par()
 wait_async()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;203;13108;17. Zone Commands;set_num_user_zones();set_num_user_zones;value;"Creates empty user zones.
+KSP_Reference_Manual_Fixed.txt.py;203;11284;17. Zone Commands;set_num_user_zones();set_num_user_zones;value;"Creates empty user zones.
 <value>: Defines the number of user zones to be created. %NI_USER_ZONE_IDS is the
 array of size <value> with all the user zone IDs.";"- A maximum of 1024 user zones per instrument can be created.
 - User zones are shown with a different color in Kontakt's Mapping Editor.
@@ -2783,7 +2783,7 @@ should be used instead of the hard-coded zone IDs.";"on init
     set_zone_par(%NI_USER_ZONE_IDS[1], $ZONE_PAR_GROUP, 1)
 end on
 Create two empty zones and place each to its own group.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;204;13133;17. Zone Commands;set_sample();set_sample;zone-id,path;"Sets the user sample in a zone.
+KSP_Reference_Manual_Fixed.txt.py;204;11309;17. Zone Commands;set_sample();set_sample;zone-id,path;"Sets the user sample in a zone.
 <zone-id>: The ID of the zone.
 <path>: The file path to the sample to be loaded.";"- set_sample() only works on user zones.
 - When executed in the on init callback, this function runs synchronously and returns -1.
@@ -2802,7 +2802,7 @@ then run any wait() commands, as shown in the description of wait_async() comman
     end if
 end on";"get_sample()
 wait_async()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;205;13167;17. Zone Commands;set_zone_par();set_zone_par;zone-id,parameter,value;"Sets the user zone parameters.
+KSP_Reference_Manual_Fixed.txt.py;205;11343;17. Zone Commands;set_zone_par();set_zone_par;zone-id,parameter,value;"Sets the user zone parameters.
 <zone-id>: The ID of the zone.
 <parameter>: The following flags are available:
 $ZONE_PAR_HIGH_KEY
@@ -2837,7 +2837,7 @@ forward, execution of this command has been delayed until the first wait() comma
 until the end of the callback, whichever comes first. So, if it is required to set a lot of zone
 parameters in batch, it is recommended to first collect all the async IDs into an array, and only
 then run any wait() commands, as shown in the description of wait_async() command.";set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 0);;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;208;13254;18. Load/Save Commands;get_folder();get_folder;path-variable;"Returns the path specified with the built-in path variable.
+KSP_Reference_Manual_Fixed.txt.py;208;11430;18. Load/Save Commands;get_folder();get_folder;path-variable;"Returns the path specified with the built-in path variable.
 <path-variable>: The following path variables are available:$GET_FOLDER_LIBRARY_DIR
 If used with an NKI which belongs to a Kontakt Player encoded library: library
 folder.
@@ -2858,7 +2858,7 @@ end on
 Displaying the path of Kontakt's factory data folder.";"load_ir_sample()
 General: $GET_FOLDER_LIBRARY_DIR, $GET_FOLDER_FACTORY_DIR,
 $GET_FOLDER_PATCH_DIR";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;209;13287;18. Load/Save Commands;load_array();load_array;array-variable,mode;"Loads an array from an external .nka file.
+KSP_Reference_Manual_Fixed.txt.py;209;11463;18. Load/Save Commands;load_array();load_array;array-variable,mode;"Loads an array from an external .nka file.
 <array-variable>: The name of the array variable. This name must be present as the first line of the .nka file.
 <mode>:  0: A dialog window pops up, allowing you to select an .nka file to load. This
 mode can only be used in on persistence_changed, on ui_control and on
@@ -2942,7 +2942,7 @@ end on
 Exporting and loading the contents of a ui_table widget.";"on async_complete
 save_array()
 General: $NI_ASYNC_ID, $NI_ASYNC_EXIT_STATUS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;211;13387;18. Load/Save Commands;load_array_str();load_array_str;array-variable,path;"Loads an array from an external .nka file, using an absolute path to the file.
+KSP_Reference_Manual_Fixed.txt.py;211;11563;18. Load/Save Commands;load_array_str();load_array_str;array-variable,path;"Loads an array from an external .nka file, using an absolute path to the file.
 <array-variable>: The name of the array variable, this must be present as the first line of the .nka file.
 <path>:  The absolute path of the .nka file.";"- The behaviour is similar to load_array() with mode set to 0, but instead of manually choosing
 an .nka file, you can specify it with an absolute path.
@@ -3007,7 +3007,7 @@ on ui_control ($file_browser)
 end on
 Loading different table presets with a browser. Make sure to first set the browser path of the file
 selector to point to a folder with compatible .nka files.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;213;13465;18. Load/Save Commands;load_ir_sample();load_ir_sample;path-or-filename,slot,generic;"Loads an impulse response sample into Kontakt's convolution effect.
+KSP_Reference_Manual_Fixed.txt.py;213;11641;18. Load/Save Commands;load_ir_sample();load_ir_sample;path-or-filename,slot,generic;"Loads an impulse response sample into Kontakt's convolution effect.
 <path-or-filename>: The absolute file path of the IR sample.If no path is specified, the command will look for the specified sample within
 the ir_samples folder of the resource container.
 If no resource container is available, the folder ir_samples within the Kontakt
@@ -3050,7 +3050,7 @@ end on
 Load an IR sample into a convolution reverb, placed in the first slot of send effect chain.";"get_folder()
 on async_complete
 General: $NI_ASYNC_ID";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;215;13524;18. Load/Save Commands;save_array();save_array;array-variable,mode;"Saves an array to an external .nka file
+KSP_Reference_Manual_Fixed.txt.py;215;11700;18. Load/Save Commands;save_array();save_array;array-variable,mode;"Saves an array to an external .nka file
 <array-variable>: The name of the array variable to be saved.
 <mode>: 0: A dialog window pops up, allowing you to save the .nka file. This mode
 can only be used in on persistence_changed, on ui_control and on
@@ -3068,7 +3068,7 @@ line.
 - When using mode 0, the callback continues even if the loading dialog is still open.";;"on async_complete
 load_array()
 General: $NI_ASYNC_ID, $NI_ASYNC_EXIT_STATUS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;216;13553;18. Load/Save Commands;save_array_str();save_array_str;array-variable,path;"Saves an array to an external .nka file with the specified absolute path.
+KSP_Reference_Manual_Fixed.txt.py;216;11729;18. Load/Save Commands;save_array_str();save_array_str;array-variable,path;"Saves an array to an external .nka file with the specified absolute path.
 <array-variable>: The name of the array variable to be saved.
 <path>: The absolute path of the .nka file to be saved.";"- The behaviour is similar to save_array(), but instead of manually choosing a save location,
 you can directly save the file to the specified location.
@@ -3123,7 +3123,7 @@ on async_complete
 end on
 Save table presets with custom names. Make sure to set the path where the .nka files will be saved.";"save_array()
 load_array_str()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;218;13624;18. Load/Save Commands;save_midi_file();save_midi_file;path;"Saves a MIDI file with the range specified by the mf_set_export_area() command.
+KSP_Reference_Manual_Fixed.txt.py;218;11800;18. Load/Save Commands;save_midi_file();save_midi_file;path;"Saves a MIDI file with the range specified by the mf_set_export_area() command.
 <path>: The absolute path of the MIDI file to be saved.";;"on init
     message("""")
 
@@ -3160,34 +3160,34 @@ on async_complete
 end on
 Saving a MIDI file.";"mf_insert_file()
 mf_set_export_area()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;220;13684;19. Music Information Retrieval;detect_pitch();detect_pitch;zone-id,pitch-result;"Returns a real value representing the fundamental frequency of an audio sample, in semitones and
+KSP_Reference_Manual_Fixed.txt.py;220;11860;19. Music Information Retrieval;detect_pitch();detect_pitch;zone-id,pitch-result;"Returns a real value representing the fundamental frequency of an audio sample, in semitones and
 cents. If detection fails, the function will return ~NI_DETECT_PITCH_INVALID.
 <zone-id>: The ID of the zone.
 <pitch-result>: The MIDI note value of the detected pitch.";;;;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;221;13693;19. Music Information Retrieval;detect_loudness();detect_loudness;zone-id,loudness-result;"Returns a real value representing the loudness of an audio sample in decibels. Loudness is
+KSP_Reference_Manual_Fixed.txt.py;221;11869;19. Music Information Retrieval;detect_loudness();detect_loudness;zone-id,loudness-result;"Returns a real value representing the loudness of an audio sample in decibels. Loudness is
 measured according to the standard established by the International Telecommunication Union:
 Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If
 detection fails, the function will return ~NI_DETECT_LOUDNESS_INVALID.
 <zone-id>: The ID of the zone.
 <loudness-result>: The real value of the detected loudness in decibels.";;;;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;222;13704;19. Music Information Retrieval;detect_peak();detect_peak;zone-id,peak-result;"Returns a real value representing peak level of an audio sample in decibels. Peak is measured
+KSP_Reference_Manual_Fixed.txt.py;222;11880;19. Music Information Retrieval;detect_peak();detect_peak;zone-id,peak-result;"Returns a real value representing peak level of an audio sample in decibels. Peak is measured
 according to the standard established by the International Telecommunication Union: Algorithms to
 measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection
 fails, the function will set <peak-result> to ~NI_DETECT_PEAK_INVALID.
 <zone-id>: The ID of the zone.
 <peak-result>: The real value of the detected peak level in decibels.";;;;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;223;13715;19. Music Information Retrieval;detect_rms();detect_rms;zone-id,rms-result;"Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the
+KSP_Reference_Manual_Fixed.txt.py;223;11891;19. Music Information Retrieval;detect_rms();detect_rms;zone-id,rms-result;"Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the
 function will return ~NI_DETECT_RMS_INVALID.
 <zone-id>: The ID of the zone.
 <rms-result>: The real value of the RMS level of the audio sample in decibels.";;;;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;224;13724;19. Music Information Retrieval;detect_sample_type();detect_sample_type;zone-id,sample-type-result;"Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether
+KSP_Reference_Manual_Fixed.txt.py;224;11900;19. Music Information Retrieval;detect_sample_type();detect_sample_type;zone-id,sample-type-result;"Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether
 an audio sample is a drum or an instrument. If detection fails, the function will return
 $NI_DETECT_SAMPLE_TYPE_INVALID.
 <zone-id>: The ID of the zone.
 <sample-type-result>: The detected sample type, can be one of the following:$NI_DETECT_SAMPLE_TYPE_INVALID
 $NI_DETECT_SAMPLE_TYPE_INSTRUMENT
 $NI_DETECT_SAMPLE_TYPE_DRUM";;;;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;225;13736;19. Music Information Retrieval;detect_drum_type();detect_drum_type;zone-id,drum-type-result;"Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an
+KSP_Reference_Manual_Fixed.txt.py;225;11912;19. Music Information Retrieval;detect_drum_type();detect_drum_type;zone-id,drum-type-result;"Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an
 audio sample. You can use this function if detect_sample_type() determines that a given audio
 sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return
 ~NI_DETECT_DRUM_TYPE_INVALID.
@@ -3203,7 +3203,7 @@ $NI_DETECT_DRUM_TYPE_CLAP
 $NI_DETECT_DRUM_TYPE_SHAKER
 $NI_DETECT_DRUM_TYPE_PERC_DRUM
 $NI_DETECT_DRUM_TYPE_PERC_OTHER";;;;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;226;13757;19. Music Information Retrieval;detect_instrument_type();detect_instrument_type;zone-id,instr-type-result;"Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the
+KSP_Reference_Manual_Fixed.txt.py;226;11933;19. Music Information Retrieval;detect_instrument_type();detect_instrument_type;zone-id,instr-type-result;"Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the
 instrument type of an audio sample. Hint: use this function if detect_sample_type()
 determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT. If
 detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
@@ -3343,7 +3343,7 @@ on ui_control ($Drop)
 end on
 Detect whether a sample is of type instrument or drum, and detect the corresponding drum or
 instrument type.";;BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;233;13978;20. MIDI Object Commands;by_track();by_track;track;"Used to access events grouped by their track number.
+KSP_Reference_Manual_Fixed.txt.py;233;12154;20. MIDI Object Commands;by_track();by_track;track;"Used to access events grouped by their track number.
 <track>: The track number of the events you wish to access.";- Similar in functionality to the by_marks() command.;;"mf_insert_file()
 mf_insert_event()
 mf_remove_event()
@@ -3353,7 +3353,7 @@ mf_set_mark()
 mf_get_mark()
 mf_get_id()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;234;13999;20. MIDI Object Commands;mf_copy_export_area();mf_copy_export_area;index;Copies the contents of MIDI export area 0 to the export area with the specified <index>.;;"on init
+KSP_Reference_Manual_Fixed.txt.py;234;12175;20. MIDI Object Commands;mf_copy_export_area();mf_copy_export_area;index;Copies the contents of MIDI export area 0 to the export area with the specified <index>.;;"on init
     message("""")
     make_perfview
 
@@ -3394,7 +3394,7 @@ end on
 Loads a MIDI file and distributes the content found in the first four MIDI channels to four separate
 MIDI areas.";"mf_set_export_area()
 mf_set_num_export_areas()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;235;14052;20. MIDI Object Commands;mf_get_buffer_size();mf_get_buffer_size;;Returns the size of the MIDI object's event buffer.;"- The maximum buffer size is 1000000 events, including both active and inactive events.
+KSP_Reference_Manual_Fixed.txt.py;235;12228;20. MIDI Object Commands;mf_get_buffer_size();mf_get_buffer_size;;Returns the size of the MIDI object's event buffer.;"- The maximum buffer size is 1000000 events, including both active and inactive events.
 - Inserting a MIDI event will decrease the buffer size by one. Removing an event will increase it
 by one.";;"mf_insert_file()
 mf_set_buffer_size()
@@ -3402,7 +3402,7 @@ mf_reset()
 mf_insert_event()
 mf_remove_event()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;236;14071;20. MIDI Object Commands;mf_get_event_par();mf_get_event_par;event-id,parameter;"Returns the value of an event parameter.
+KSP_Reference_Manual_Fixed.txt.py;236;12247;20. MIDI Object Commands;mf_get_event_par();mf_get_event_par;event-id,parameter;"Returns the value of an event parameter.
 <event-id>: The ID of the event to be edited.
 <parameter>: The event parameter, either one of four freely assignable event parameters:
 $EVENT_PAR_0
@@ -3427,7 +3427,7 @@ mf_remove_event()
 mf_get_id()
 save_midi_file()
 Events and MIDI: $CURRENT_EVENT";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;237;14107;20. MIDI Object Commands;mf_get_first();mf_get_first;track-index;"Moves the position marker to the first event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py;237;12283;20. MIDI Object Commands;mf_get_first();mf_get_first;track-index;"Moves the position marker to the first event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.";- Using this command will also select the event at the position marker for editing.;;"mf_insert_file()
 mf_get_next()
 mf_get_next_at()
@@ -3436,14 +3436,14 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;238;14127;20. MIDI Object Commands;mf_get_id();mf_get_id;;"Returns the ID of the currently selected event, when using the navigation commands like
+KSP_Reference_Manual_Fixed.txt.py;238;12303;20. MIDI Object Commands;mf_get_id();mf_get_id;;"Returns the ID of the currently selected event, when using the navigation commands like
 mf_get_first(), mf_get_next(), etc.";;;"mf_get_first()
 mf_get_next()
 mf_get_next_at()
 mf_get_prev()
 mf_get_prev_at()
 mf_get_last()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;239;14142;20. MIDI Object Commands;mf_get_last();mf_get_last;track-index;"Moves the position marker to the last event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py;239;12318;20. MIDI Object Commands;mf_get_last();mf_get_last;track-index;"Moves the position marker to the last event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.";- Using this command will also select the event at the position marker for editing.;;"mf_insert_file()
 mf_get_first()
 mf_get_next()
@@ -3452,7 +3452,7 @@ mf_get_num_tracks()
 mf_get_prev()
 mf_get_prev_at()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;240;14162;20. MIDI Object Commands;mf_get_last_filename();mf_get_last_filename;;"Returns the filename (not the full path!) of the last MIDI file that was inserted into Kontakt, either via
+KSP_Reference_Manual_Fixed.txt.py;240;12338;20. MIDI Object Commands;mf_get_last_filename();mf_get_last_filename;;"Returns the filename (not the full path!) of the last MIDI file that was inserted into Kontakt, either via
 mf_insert_file(), or via drag and drop operation on ui_mouse_area.";"- This command will pair Note On and Note Off events to a single Note On with a Note Length
 parameter. The Note Off events will be discarded.";"on init
     message("""")
@@ -3495,7 +3495,7 @@ parameter. The Note Off events will be discarded.";"on init
 end on
 MIDI file loader which allows exporting first four tracks as individual MIDI files. Utilizes
 mf_get_last_filename() to show the exact name of the MIDI file that was loaded.";mf_insert_file();BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;242;14221;20. MIDI Object Commands;mf_get_mark();mf_get_mark;event-id,mark;"Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
+KSP_Reference_Manual_Fixed.txt.py;242;12397;20. MIDI Object Commands;mf_get_mark();mf_get_mark;event-id,mark;"Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
 <event-id>: The ID of the event to be edited
 <mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
 more than one mark to a single event, either by typing the command again, or
@@ -3509,7 +3509,7 @@ mf_set_mark()
 mf_get_mark()
 mf_get_id()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;243;14243;20. MIDI Object Commands;mf_get_next();mf_get_next;track-index;"Moves the position marker to the next event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py;243;12419;20. MIDI Object Commands;mf_get_next();mf_get_next;track-index;"Moves the position marker to the next event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.";- Using this command will also select the event at the position marker for editing.;;"load_midi_file()
 mf_get_first()
 mf_get_next_at()
@@ -3518,7 +3518,7 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;244;14263;20. MIDI Object Commands;mf_get_next_at();mf_get_next_at;track-index,pos;"Moves the position marker to the next event in the MIDI track right after the defined position.
+KSP_Reference_Manual_Fixed.txt.py;244;12439;20. MIDI Object Commands;mf_get_next_at();mf_get_next_at;track-index,pos;"Moves the position marker to the next event in the MIDI track right after the defined position.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.
 <pos>: Position in MIDI ticks.";- Using this command will also select the event at the position marker for editing.;;"load_midi_file()
 mf_get_first()
@@ -3528,7 +3528,7 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;245;14284;20. MIDI Object Commands;mf_get_num_tracks();mf_get_num_tracks;;Returns the number of tracks in the MIDI object.;;;"mf_insert_file()
+KSP_Reference_Manual_Fixed.txt.py;245;12460;20. MIDI Object Commands;mf_get_num_tracks();mf_get_num_tracks;;Returns the number of tracks in the MIDI object.;;;"mf_insert_file()
 mf_get_first()
 mf_get_next()
 mf_get_next_at()
@@ -3536,7 +3536,7 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;246;14300;20. MIDI Object Commands;mf_get_prev();mf_get_prev;track-index;"Moves the position marker to the previous event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py;246;12476;20. MIDI Object Commands;mf_get_prev();mf_get_prev;track-index;"Moves the position marker to the previous event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.";- Using this command will also select the event at the position marker for editing.;;"load_midi_file()
 mf_get_first()
 mf_get_next()
@@ -3545,7 +3545,7 @@ mf_get_num_tracks()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;247;14320;20. MIDI Object Commands;mf_get_prev_at();mf_get_prev_at;track-index,pos;"Moves the position marker to the first event before the defined position.
+KSP_Reference_Manual_Fixed.txt.py;247;12496;20. MIDI Object Commands;mf_get_prev_at();mf_get_prev_at;track-index,pos;"Moves the position marker to the first event before the defined position.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.
 <pos>: Position in MIDI ticks.";- Using this command will also select the event at the position marker for editing.;;"load_midi_file()
 mf_get_first()
@@ -3555,7 +3555,7 @@ mf_get_num_tracks()
 mf_get_prev()
 mf_get_last()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;248;14341;20. MIDI Object Commands;mf_insert_event();mf_insert_event;track,pos,command,byte1,byte2;"Activates an inactive MIDI event in the MIDI object. However, because the command and position
+KSP_Reference_Manual_Fixed.txt.py;248;12517;20. MIDI Object Commands;mf_insert_event();mf_insert_event;track,pos,command,byte1,byte2;"Activates an inactive MIDI event in the MIDI object. However, because the command and position
 are defined in this command, it can be considered as an insertion.
 <track>: The track into which the event will be inserted.
 <pos>: The position at which the event will be inserted, in ticks.
@@ -3578,7 +3578,7 @@ mf_get_buffer_size()
 mf_reset()
 mf_remove_event()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;249;14375;20. MIDI Object Commands;mf_insert_file();mf_insert_file;path,track-offset,position-offset,mode;"Inserts a MIDI file into the object.
+KSP_Reference_Manual_Fixed.txt.py;249;12551;20. MIDI Object Commands;mf_insert_file();mf_insert_file;path,track-offset,position-offset,mode;"Inserts a MIDI file into the object.
 <path>: The absolute path of the MIDI file, including the file name.
 <track-offset>: Applies a track offset to the MIDI data.
 <position-offset>: Applies a position offset, in ticks, to the MIDI data.
@@ -3622,14 +3622,14 @@ save_midi_file()
 mf_set_event_par()
 mf_get_event_par()
 General: $NI_ASYNC_ID, $NI_ASYNC_EXIT_STATUS";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;251;14435;20. MIDI Object Commands;mf_remove_event();mf_remove_event;event-id;"Deactivates an event in the MIDI object, effectively removing it.
+KSP_Reference_Manual_Fixed.txt.py;251;12611;20. MIDI Object Commands;mf_remove_event();mf_remove_event;event-id;"Deactivates an event in the MIDI object, effectively removing it.
 <event-id>: The ID of the event to be deactivated.";- Using this command will decrease the MIDI event buffer size by one.;;"mf_insert_file()
 mf_set_buffer_size()
 mf_get_buffer_size()
 mf_reset()
 mf_insert_event()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;252;14453;20. MIDI Object Commands;mf_reset();mf_reset;;Resets the MIDI object, sets the event buffer to zero, and removes all events.;"- This command purges all data in the MIDI object. Use with caution!
+KSP_Reference_Manual_Fixed.txt.py;252;12629;20. MIDI Object Commands;mf_reset();mf_reset;;Resets the MIDI object, sets the event buffer to zero, and removes all events.;"- This command purges all data in the MIDI object. Use with caution!
 - This command is asynchronous, thus it returns an async ID and calls the on
 async_complete callback.";;"mf_insert_file()
 mf_set_buffer_size()
@@ -3637,7 +3637,7 @@ mf_reset()
 mf_insert_event()
 mf_remove_event()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;253;14472;20. MIDI Object Commands;mf_set_buffer_size();mf_set_buffer_size;num-events;"Defines a number of inactive MIDI events, that can be activated and edited.
+KSP_Reference_Manual_Fixed.txt.py;253;12648;20. MIDI Object Commands;mf_set_buffer_size();mf_set_buffer_size;num-events;"Defines a number of inactive MIDI events, that can be activated and edited.
 <num-events>: The size of the MIDI object edit buffer.";"- Using the mf_insert_event() and mf_remove_event() technically activates or
 deactivates events in the buffer.
 - It is not possible to insert MIDI events without setting a buffer size first.
@@ -3653,7 +3653,7 @@ mf_reset()
 mf_insert_event()
 mf_remove_event()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;254;14499;20. MIDI Object Commands;mf_set_event_par();mf_set_event_par;event-id,parameter,value;"Sets an event parameter.
+KSP_Reference_Manual_Fixed.txt.py;254;12675;20. MIDI Object Commands;mf_set_event_par();mf_set_event_par;event-id,parameter,value;"Sets an event parameter.
 <event-id>: The ID of the event to be edited.
 <parameter>: The event parameter, either one of four freely assignable event parameters:
 $EVENT_PAR_0
@@ -3682,7 +3682,7 @@ by_track()
 mf_set_mark()
 mf_get_id()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;257;14595;20. MIDI Object Commands;mf_set_mark();mf_set_mark;event-id,mark,status;"Marks an event, so that you may group events together and process that group quickly.
+KSP_Reference_Manual_Fixed.txt.py;257;12771;20. MIDI Object Commands;mf_set_mark();mf_set_mark;event-id,mark,status;"Marks an event, so that you may group events together and process that group quickly.
 <event-id>: The ID of the event to be marked.
 <mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
 more than one mark to a single event, either by typing the command again, or
@@ -3696,7 +3696,7 @@ by_track()
 mf_get_mark()
 mf_get_id()
 save_midi_file()";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;258;14617;20. MIDI Object Commands;mf_set_num_export_areas();mf_set_num_export_areas;num-areas;Sets the number of export areas, with a maximum of 512.;"- Area index 0 is always set with mf_set_export_area().
+KSP_Reference_Manual_Fixed.txt.py;258;12793;20. MIDI Object Commands;mf_set_num_export_areas();mf_set_num_export_areas;num-areas;Sets the number of export areas, with a maximum of 512.;"- Area index 0 is always set with mf_set_export_area().
 - The contents of area index 0 can be copied to other areas by calling
 mf_copy_export_area().";;"mf_set_export_area()
 mf_copy_export_area()";BUILT-IN

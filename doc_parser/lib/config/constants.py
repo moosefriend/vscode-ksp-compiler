@@ -41,7 +41,7 @@ class ParserType(Enum):
         """
         :return: Plural version of the constant, e.g. "Callbacks"
         """
-        return self.value() + "s"
+        return self.value + "s"
 
     @staticmethod
     def from_string(value: str) -> 'ParserType':
@@ -54,6 +54,8 @@ class ParserType(Enum):
         for parser_type in ParserType:
             if parser_type.value.lower() == value.lower() or parser_type.lower_plural() == value.lower():
                 return parser_type
+        else:
+            raise ValueError(f"Unknown phase type {value}")
 
     @staticmethod
     def all_phases() -> tuple['ParserType', ...]:
