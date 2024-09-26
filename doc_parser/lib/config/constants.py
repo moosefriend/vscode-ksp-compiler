@@ -31,11 +31,36 @@ class ParserType(Enum):
     FUNCTION = "Function"
     VARIABLE = "Variable"
 
-    def plural(self) -> str:
+    def lower_plural(self) -> str:
         """
         :return: Plural version of the constant, e.g. "callbacks"
         """
         return self.value.lower() + "s"
+
+    def plural(self) -> str:
+        """
+        :return: Plural version of the constant, e.g. "Callbacks"
+        """
+        return self.value() + "s"
+
+    @staticmethod
+    def from_string(value: str) -> 'ParserType':
+        """
+        Get the parser type based on the specified string.
+
+        :param value: String to get the parser type for
+        :return: ParserType mathing the given string
+        """
+        for parser_type in ParserType:
+            if parser_type.value.lower() == value.lower() or parser_type.lower_plural() == value.lower():
+                return parser_type
+
+    @staticmethod
+    def all_phases() -> tuple['ParserType', ...]:
+        """
+        :return: Tuple of all ParserTypes for all phases
+        """
+        return ParserType.CALLBACK, ParserType.WIDGET, ParserType.COMMAND, ParserType.FUNCTION, ParserType.VARIABLE
 
 
 class DocState(Enum):

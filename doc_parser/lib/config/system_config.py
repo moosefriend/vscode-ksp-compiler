@@ -21,6 +21,8 @@ import re
 from configparser import ConfigParser, ExtendedInterpolation
 from pathlib import Path
 from typing import Optional, TYPE_CHECKING
+
+from config.constants import ParserType
 from util.rewind_reader import RewindReader
 
 if TYPE_CHECKING:
@@ -68,6 +70,8 @@ class SystemConfig(metaclass=Singleton):
         self.variables_csv: Path = self._get_file("variables_csv")
         self.delimiter: str = self.settings["delimiter"]
         self.verbose: bool = self._get_bool("verbose")
+        self.dump: bool = self._get_bool("dump")
+        self.phases: set[ParserType] = self._get_phases("phases")
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[TocParser] = None
 
@@ -111,6 +115,45 @@ class SystemConfig(metaclass=Singleton):
         """
         boolean = (self.settings[name].lower() == "true")
         return boolean
+
+    def _get_phases(self, name: str) -> set[ParserType]:
+        """
+        Get the list of parser types to run read from the *.ini file.
+
+        :param name: Name of the setting in the *.ini file
+        :return: List of active parser types
+        """
+        phases = set()
+        for line in self.settings[name]:
+            if line:
+                parser_type = ParserType.from_string(line)
+                if parser_type in (ParserType.MAIN, ParserType.TOC):
+                    log.warning(f"Phase {parser_type.value} will allways be called and needs not to be specified")
+                phases.add(parser_type)
+        return phases
+
+    def has_phase(self, parser_type: ParserType) -> bool:
+        """
+        Check if the specified phase is active.
+
+        :param parser_type: ParserType to check if it's active
+        :return: True if the phase is active, False otherwise
+        """
+        ret_val: bool = False
+        if parser_type in self.phases:
+            ret_val = True
+        return ret_val
+
+
+def debug(message: str):
+    """
+    Logs a debug message if verbose is set.
+
+    :param message: Message to log
+    :return:
+    """
+    if SystemConfig().verbose:
+        log.info(f"[VERBOSE] {message}")
 
 
 if __name__ == "__main__":
