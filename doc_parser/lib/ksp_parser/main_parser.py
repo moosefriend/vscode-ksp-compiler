@@ -27,20 +27,20 @@ from typing import Optional, Any
 import pypdf._text_extraction._layout_mode._fixed_width_page
 from pypdf import PageObject, PdfReader
 
-from ksp_base.base_callback_parser import BaseCallbackParser
-from ksp_base.base_command_parser import BaseCommandParser
-from ksp_base.base_function_parser import BaseFunctionParser
-from ksp_base.base_toc_parser import BaseTocParser
-from ksp_base.base_widget_parser import BaseWidgetParser
-from ksp_base.base_variable_parser import BaseVariableParser
-from ksp_base.constants import ParserType
-from ksp_base.system_config import SystemConfig
+from ksp_parser.callback_parser import CallbackParser
+from ksp_parser.command_parser import CommandParser
+from ksp_parser.function_parser import FunctionParser
+from ksp_parser.toc_parser import TocParser
+from ksp_parser.widget_parser import WidgetParser
+from ksp_parser.variable_parser import VariableParser
+from config.constants import ParserType
+from config.system_config import SystemConfig
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
 
 
-class BaseMainParser:
+class MainParser:
     PAGE_PATTERN = re.compile(f"{'<' * 20} (?:Table of Contents )?Page (\\d+) {'>' * 20}")
     """Pattern to find a page number"""
 
@@ -51,11 +51,11 @@ class BaseMainParser:
         """
         Parse the text from a text file which has been converted from the KSP Reference Manual PDF file.
         """
-        self.callbacks: Optional[BaseCallbackParser] = None
-        self.widgets: Optional[BaseWidgetParser] = None
-        self.functions: Optional[BaseFunctionParser] = None
-        self.commands: Optional[BaseCommandParser] = None
-        self.variables: Optional[BaseVariableParser] = None
+        self.callbacks: Optional[CallbackParser] = None
+        self.widgets: Optional[WidgetParser] = None
+        self.functions: Optional[FunctionParser] = None
+        self.commands: Optional[CommandParser] = None
+        self.variables: Optional[VariableParser] = None
 
     @staticmethod
     def fixed_char_width_hack(a, b) -> float:
@@ -72,7 +72,7 @@ class BaseMainParser:
         """
         # Note: The original function pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width returns
         # a ZeroDivisionError => Hack the code to return a fixed value
-        pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width.__code__ = BaseMainParser.fixed_char_width_hack.__code__
+        pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width.__code__ = MainParser.fixed_char_width_hack.__code__
         reader = PdfReader(SystemConfig().pdf_file)
         # If a page offset is specified then first scan the table of contents
         if SystemConfig().page_offset > 0:
@@ -85,7 +85,7 @@ class BaseMainParser:
             page_cnt = 0
             for page in reader.pages:
                 f.write(f"{'<' * 20} {toc}Page {page_cnt + 1} {'>' * 20}\n")
-                f.write(BaseMainParser.get_body(page, toc))
+                f.write(MainParser.get_body(page, toc))
                 if page_cnt and page_cnt % 80 == 0:
                     print("")
                 page_cnt += 1
@@ -106,34 +106,34 @@ class BaseMainParser:
         """
         Parse the content of the text file.
         """
-        with RewindReader(SystemConfig().txt_file_fixed, page_no_pattern=BaseMainParser.PAGE_PATTERN) as reader:
+        with RewindReader(SystemConfig().txt_file_fixed, page_no_pattern=MainParser.PAGE_PATTERN) as reader:
             SystemConfig().reader = reader
-            toc = BaseMainParser.get_toc_parser()
+            toc = MainParser.get_toc_parser()
             toc.parse()
             SystemConfig().toc = toc
             log.info("-" * 80)
             version = SystemConfig().kontakt_version
-            self.callbacks: BaseCallbackParser = BaseMainParser.get_callback_parser()
+            self.callbacks: CallbackParser = MainParser.get_callback_parser()
             self.callbacks.parse()
             self.callbacks.export()
             # self.callbacks.dump()
             log.info("-" * 80)
-            self.widgets: BaseWidgetParser = BaseMainParser.get_widget_parser()
+            self.widgets: WidgetParser = MainParser.get_widget_parser()
             self.widgets.parse()
             self.widgets.export()
             # self.widgets.dump()
             log.info("-" * 80)
-            self.functions: BaseFunctionParser = BaseMainParser.get_function_parser()
+            self.functions: FunctionParser = MainParser.get_function_parser()
             self.functions.parse()
             self.functions.export()
             # self.functions.dump()
             log.info("-" * 80)
-            self.commands: BaseCommandParser = BaseMainParser.get_command_parser()
+            self.commands: CommandParser = MainParser.get_command_parser()
             self.commands.parse()
             self.commands.export()
             # self.commands.dump()
             log.info("-" * 80)
-            self.variables: BaseVariableParser = BaseMainParser.get_variable_parser()
+            self.variables: VariableParser = MainParser.get_variable_parser()
             self.variables.parse()
             self.variables.export()
             # self.variables.dump()
@@ -155,7 +155,7 @@ class BaseMainParser:
         return content
 
     @staticmethod
-    def get_main_parser(*args, **kwargs) -> 'BaseMainParser':
+    def get_main_parser(*args, **kwargs) -> 'MainParser':
         """
         Dynamically load a class to handle the main parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -163,10 +163,10 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.MAIN, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.MAIN, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def get_toc_parser(*args, **kwargs) -> BaseTocParser:
+    def get_toc_parser(*args, **kwargs) -> TocParser:
         """
         Dynamically load a class to handle the toc parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -174,10 +174,10 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.TOC, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.TOC, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def get_callback_parser(*args, **kwargs) -> BaseCallbackParser:
+    def get_callback_parser(*args, **kwargs) -> CallbackParser:
         """
         Dynamically load a class to handle the callback parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -185,10 +185,10 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.CALLBACK, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.CALLBACK, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def get_widget_parser(*args, **kwargs) -> BaseWidgetParser:
+    def get_widget_parser(*args, **kwargs) -> WidgetParser:
         """
         Dynamically load a class to handle the widget parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -196,10 +196,10 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.WIDGET, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.WIDGET, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def get_function_parser(*args, **kwargs) -> BaseFunctionParser:
+    def get_function_parser(*args, **kwargs) -> FunctionParser:
         """
         Dynamically load a class to handle the function parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -207,10 +207,10 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.FUNCTION, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.FUNCTION, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def get_command_parser(*args, **kwargs) -> BaseCommandParser:
+    def get_command_parser(*args, **kwargs) -> CommandParser:
         """
         Dynamically load a class to handle the command parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -218,10 +218,10 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.COMMAND, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.COMMAND, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def get_variable_parser(*args, **kwargs) -> BaseVariableParser:
+    def get_variable_parser(*args, **kwargs) -> VariableParser:
         """
         Dynamically load a class to handle the variable parsing of the Kontakt KSP manual depending on the Kontakt version.
 
@@ -229,7 +229,7 @@ class BaseMainParser:
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        return BaseMainParser.load_parser(ParserType.VARIABLE, SystemConfig().kontakt_version, *args, **kwargs)
+        return MainParser.load_parser(ParserType.VARIABLE, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
     def load_parser(parser_type: ParserType, version: str, *args, **kwargs) -> Any:
@@ -244,7 +244,7 @@ class BaseMainParser:
         """
         # Dynamically try to load a class matching Kontakt manual version
         parser_name = parser_type.value.lower()
-        module_name = f"ksp_{version.replace('.', '_')}.ksp_{parser_name}_parser"
+        module_name = f"ksp_{version.replace('.', '_')}.ksp_{version.replace('.', '_')}_{parser_name}_parser"
         class_name = f"Ksp{parser_type.value}Parser"
         try:
             module = import_module(module_name)
@@ -253,7 +253,7 @@ class BaseMainParser:
         except ModuleNotFoundError:
             cur_major = version.split(".")[0]
             log.warning(f"No {parser_name} parser for Kontakt KSP manual version {version} found")
-            log.info(f"=> Check if there is a {parser_name} parser for Kontakt KSP manual version {cur_major}.*:")
+            log.info(f"=> Check if there is a {parser_name} parser for Kontakt KSP manual version {cur_major}.*")
             root_dir = Path(__file__).parent.parent
             cur_version = ""
             for importer, modname, is_pkg in pkgutil.iter_modules([root_dir.as_posix()]):
@@ -267,12 +267,12 @@ class BaseMainParser:
                         cur_version = f"{major}.{minor}"
             if cur_version:
                 log.info(f"FOUND => Use {parser_name} parser for Kontakt KSP manual version {cur_version} instead")
-                parser = BaseMainParser.load_parser(parser_type, cur_version, *args, **kwargs)
+                parser = MainParser.load_parser(parser_type, cur_version, *args, **kwargs)
             else:
-                log.info(f"No {parser_name} parser for Kontakt KSP manual version {cur_major}.* found\n" +
-                         f"=> Fallback to base parser")
-                module_name = f"ksp_base.base_{parser_name}_parser"
-                class_name = f"Base{parser_type.value}Parser"
+                log.info(f"=> No {parser_name} parser for Kontakt KSP manual version {cur_major}.* found")
+                log.info(f"=> Fallback to base {parser_name} parser")
+                module_name = f"ksp_parser.{parser_name}_parser"
+                class_name = f"{parser_type.value}Parser"
                 module = import_module(module_name)
                 parser_class = getattr(module, class_name)
                 parser = parser_class(*args, **kwargs)
@@ -285,6 +285,5 @@ if __name__ == "__main__":
     root = Path(__file__).parent.parent.parent
     ini_file = root / "cfg" / "ksp_7_10" / "system.ini"
     config = SystemConfig(ini_file)
-    log.info(SystemConfig().kontakt_version)
-    parser = BaseMainParser.get_main_parser()
+    parser = MainParser.get_main_parser()
     parser.parse()

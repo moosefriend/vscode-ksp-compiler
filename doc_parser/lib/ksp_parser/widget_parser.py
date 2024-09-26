@@ -18,19 +18,17 @@
 ##############################################################################
 import logging
 import re
-from pathlib import Path
 from typing import Optional
 
 from doc_item.widget_item import WidgetItem
-from ksp_base.base_item_parser import BaseItemParser
-from ksp_base.base_toc_parser import BaseTocParser
-from ksp_base.constants import DocState
-from util.rewind_reader import RewindReader
+from ksp_parser.item_parser import ItemParser
+from config.constants import DocState
+from config.system_config import SystemConfig
 
 log = logging.getLogger(__name__)
 
 
-class BaseWidgetParser(BaseItemParser):
+class WidgetParser(ItemParser):
     # Example: declare ui_table %<array-name>[num-elements] (<grid-width>, <grid-height>, <range>)
     WIDGET_PATTERN = re.compile(r"^declare\s+([a-z_]+)\s+([$%]<[a-z-]+>)(?:\[([^]]+)])?(?:\s+\((.*)\))?$")
     """Pattern to find a widget, e.g. declare ui_button $<variable-name>"""
@@ -39,34 +37,21 @@ class BaseWidgetParser(BaseItemParser):
     CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?User-defined Functions$", re.IGNORECASE)
     """Pattern to find the end headline for scanning the content"""
 
-    def __init__(self, version: str, toc: BaseTocParser, reader: RewindReader, csv_file: Path, delimiter: str, page_offset: int = 0):
+    def __init__(self):
         """
         Parse widgets in the Kontakt KSP text manual.
-
-        :param version: Kontakt manual version needed to select the right parser
-        :param toc: Table of content parser containing the headlines and categories
-        :param reader: Reader for the already open Kontakt KSP text manual
-        :param csv_file: Comma separated file to export the parsed data
-        :param delimiter: CSV delimiter for the export file
-        :param page_offset: The page number is decreased by this offset, e.g. if the page numbers start again with 1
-            after the table of contents
         """
         super().__init__(
-            version,
-            toc,
             WidgetItem,
-            reader,
-            self.CONTENT_START_PATTERN,
-            self.CONTENT_STOP_PATTERN,
-            csv_file,
-            delimiter,
-            page_offset
+            WidgetParser.CONTENT_START_PATTERN,
+            WidgetParser.CONTENT_STOP_PATTERN,
+            SystemConfig().widgets_csv
         )
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
         # Check if the line contains a widget
-        if m := self.WIDGET_PATTERN.match(line):
+        if m := WidgetParser.WIDGET_PATTERN.match(line):
             name = m.group(1)
             variable_name = m.group(2)
             index_name = m.group(3)

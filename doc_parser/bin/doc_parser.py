@@ -20,8 +20,8 @@ import argparse
 import logging
 from pathlib import Path
 
-from ksp_base.base_main_parser import BaseMainParser
-from ksp_base.constants import ParserType
+from ksp_parser.main_parser import MainParser
+from config.constants import ParserType
 
 log = logging.getLogger(__name__)
 
@@ -43,7 +43,7 @@ root = Path(__file__).parent.parent
 out_dir = root / "out"
 version = args.version
 pdf_file = args.pdf
-parser = BaseMainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ",")
+parser = MainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ",")
 if args.convert:
     parser.convert_to_text()
 else:
