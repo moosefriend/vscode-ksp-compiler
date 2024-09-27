@@ -17,34 +17,23 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 import argparse
-import logging
+import sys
 from pathlib import Path
 
+# noinspection PyUnresolvedReferences
+import find_lib
+from config.system_config import SystemConfig
 from ksp_parser.main_parser import MainParser
-from config.constants import ParserType
-
-log = logging.getLogger(__name__)
+from util.format import headline
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-v', '--version', required=True, help="Kontakt KSP version")
-parser.add_argument('-p', '--pdf', required=True, help="Kontakt KSP reference manual PDF input file for parsing")
-parser.add_argument('-c', '--convert', help="Convert the PDF file into a text file", type=bool, default=True)
-parser.add_argument('-l', '--logfile', help="Log file", default=None)
+parser = argparse.ArgumentParser(description="Convert a *.pdf Kontakt KSP manual to *.txt")
+parser.add_argument('-c', '--config-file', required=True, help="Path to the *.ini configuration file")
 args = parser.parse_args()
-
-logging.basicConfig(
-    filename=args.logfile,
-    level=logging.INFO,
-    format="[%(asctime)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-root = Path(__file__).parent.parent
-out_dir = root / "out"
-version = args.version
-pdf_file = args.pdf
-parser = MainParser.get_parser(ParserType.MAIN, version, pdf_file, out_dir, ",")
-if args.convert:
-    parser.convert_to_text()
-else:
-    parser.parse()
+ini_file = Path(args.config_file).resolve()
+if not ini_file.is_file():
+    print(f"*** Error: Can't find configuration file {ini_file}")
+    sys.exit(-1)
+config = SystemConfig(ini_file)
+headline("Convert *.pdf to *.txt")
+MainParser.convert_to_text()

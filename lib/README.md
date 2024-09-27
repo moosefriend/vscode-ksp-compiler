@@ -1,0 +1,1 @@
+Python packages used by the doc_parser and the vscode_extension
