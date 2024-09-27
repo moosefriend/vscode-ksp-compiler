@@ -27,7 +27,7 @@ from typing import Optional, Callable
 from doc_item.doc_item import DocItem
 from ksp_parser.toc_parser import TocParser
 from config.constants import DocState
-from config.system_config import SystemConfig, debug
+from config.system_config import SystemConfig
 from util.format import log_step
 from util.rewind_reader import RewindReader
 
@@ -126,7 +126,7 @@ class ItemParser:
         for line in self.reader:
             # Search for the content
             if self.content_start_pattern.match(line):
-                debug(f"Found Content Start ({self.reader.location()})")
+                log.debug(f"Found Content Start ({self.reader.location()})")
                 self.reader.rewind()
                 break
 
@@ -161,7 +161,7 @@ class ItemParser:
                 if self.on_headline:
                     self.on_headline(line)
                 self.item_list = []
-                debug(f"- Headline: {self.headline} ({self.reader.location()})")
+                log.debug(f"- Headline: {self.headline} ({self.reader.location()})")
                 self.doc_state = DocState.NONE
             # Check for categories
             # Some categories are not mentioned in the table of contents => Those are marked with "[C]"
@@ -176,7 +176,7 @@ class ItemParser:
                     self.on_category(line)
                 self.doc_state = DocState.CATEGORY
                 self.item_list = []
-                debug(f"   - Category: {self.category} ({self.reader.location()})")
+                log.debug(f"   - Category: {self.category} ({self.reader.location()})")
             elif self.doc_state != DocState.NONE:
                 # Check for items
                 if new_doc_state := self.check_item(line):
@@ -236,11 +236,11 @@ class ItemParser:
         """
         name = doc_item.name
         if name in self.all_items:
-            debug(f"      - Duplicate {name} ({self.reader.location()})")
+            log.debug(f"      - Duplicate {name} ({self.reader.location()})")
             self.item_list = self.all_items[name]
             self.duplicate_cnt += 1
         else:
-            debug(f"      - Found {name} ({self.reader.location()})")
+            log.debug(f"      - Found {name} ({self.reader.location()})")
             self.item_cnt += 1
             self.item_list = []
             self.all_items[name] = self.item_list
