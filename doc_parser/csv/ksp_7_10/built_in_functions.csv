@@ -1,4 +1,4 @@
-File;Page No;Line No;Headline;Category;Name;Parameters;Description;Source
+File;Page No;Line No;Headline;Category;Name;Parameter List;Description;Source
 KSP_Reference_Manual_Fixed.txt.py;36;14372;5. Arithmetic Commands & Operators;Basic Operators;abs;x;Absolute value.;BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py;36;14373;5. Arithmetic Commands & Operators;Basic Operators;signbit;x;Sign bit (returns 1 if the number is negative, 0 otherwise).;BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py;36;14374;5. Arithmetic Commands & Operators;Basic Operators;sgn;x;Signum function (returns -1 if the number is negative, 0 if it's zero, 1 if it's positive).;BUILT-IN

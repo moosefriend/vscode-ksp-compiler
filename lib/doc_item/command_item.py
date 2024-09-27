@@ -33,7 +33,7 @@ class CommandItem(DocItem):
         :param page_no: Page number in the PDF where the command has been found
         :param line_no: Line number in the file where the command has been found
         :param headline: Main headline where the item has been found
-        :param category: Category (= Sub-headline in the table of contents) where the item has been found
+        :param category: ItemType (= Sub-headline in the table of contents) where the item has been found
         :param name: Variable name
         :param parameter_list: List of parameter names
         :param description: Item documentation
@@ -61,7 +61,7 @@ class CommandItem(DocItem):
 
     @staticmethod
     def csv_header():
-        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Parameters", "Description", "Remarks",
+        return ("File", "Page No", "Line No", "Headline", "Category", "Name", "Parameter List", "Description", "Remarks",
                 "Examples", "See Also", "Source")
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:

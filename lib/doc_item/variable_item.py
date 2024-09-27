@@ -32,7 +32,7 @@ class VariableItem(DocItem):
         :param page_no: Page number in the PDF where the variable has been found
         :param line_no: Line number in the file where the variable has been found
         :param headline: Main headline where the item has been found
-        :param category: Category (= Sub-headline in the table of contents) where the item has been found
+        :param category: ItemType (= Sub-headline in the table of contents) where the item has been found
         :param block_headline: Headline of a block e.g. containing constants (if any)
         :param item_list_headline: Headline for an item list e.g. for constants (if any)
         :param name: Variable name

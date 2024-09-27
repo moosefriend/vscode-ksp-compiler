@@ -35,7 +35,7 @@ class DocItem:
         :param page_no: Page number in the PDF where the item has been found
         :param line_no: Line number in the file where the item has been found
         :param headline: Main headline where the item has been found
-        :param category: Category (= Sub-headline in the table of contents) where the item has been found
+        :param category: ItemType (= Sub-headline in the table of contents) where the item has been found
         :param name: Item name
         :param description: Item documentation
         :param source: Where the item has been parsed, e.g. build-in

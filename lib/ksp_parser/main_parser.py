@@ -29,9 +29,9 @@ from pypdf import PageObject, PdfReader
 
 from ksp_parser.item_parser import ItemParser
 from ksp_parser.toc_parser import TocParser
-from config.constants import ParserType
+from config.constants import ItemType
 from config.system_config import SystemConfig
-from util.format import headline, log_step
+from util.file_util import headline, log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -102,15 +102,15 @@ class MainParser:
         with RewindReader(SystemConfig().txt_file_fixed, page_no_pattern=MainParser.PAGE_PATTERN) as reader:
             SystemConfig().reader = reader
             headline("Processing Table of Contents (TOC)")
-            toc: TocParser = MainParser.get_parser(ParserType.TOC)
+            toc: TocParser = MainParser.get_parser(ItemType.TOC)
             toc.parse()
             if SystemConfig().dump:
                 toc.dump()
             SystemConfig().toc = toc
-            for parser_type in ParserType.all_phases():
-                if SystemConfig().has_phase(parser_type):
-                    headline(f"Processing {parser_type.plural()}")
-                    self.items = MainParser.get_parser(parser_type)
+            for item_type in ItemType.all_phases():
+                if SystemConfig().has_phase(item_type):
+                    headline(f"Processing {item_type.plural()}")
+                    self.items = MainParser.get_parser(item_type)
                     self.items.parse()
                     self.items.export()
                     if SystemConfig().dump:
@@ -133,34 +133,34 @@ class MainParser:
         return content
 
     @staticmethod
-    def get_parser(parser_type: ParserType, *args, **kwargs) -> Union['MainParser', TocParser, ItemParser]:
+    def get_parser(item_type: ItemType, *args, **kwargs) -> Union['MainParser', TocParser, ItemParser]:
         """
         Dynamically load a class to handle the parsing for the specified parser type of the Kontakt KSP manual
         depending on the Kontakt version.
 
-        :param parser_type: ParserType to load the corresponding class
+        :param item_type: ItemType to load the corresponding class
         :param args: Arguments for the constructor of the parser class
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
-        log_step(f"Load {parser_type.value.lower()} parser")
-        return MainParser.load_parser(parser_type, SystemConfig().kontakt_version, *args, **kwargs)
+        log_step(f"Load {item_type.value.lower()} parser")
+        return MainParser.load_parser(item_type, SystemConfig().kontakt_version, *args, **kwargs)
 
     @staticmethod
-    def load_parser(parser_type: ParserType, version: str, *args, **kwargs) -> Any:
+    def load_parser(item_type: ItemType, version: str, *args, **kwargs) -> Any:
         """
         Dynamically load a class to handle the parsing of the Kontakt KSP manual depending on the Kontakt version.
 
-        :param parser_type: ParserType to load the corresponding class
+        :param item_type: ItemType to load the corresponding class
         :param version: Kontakt manual version needed to select the right parser
         :param args: Arguments for the constructor of the parser class
         :param kwargs: Keyword arguments for the constructor of the parser class
         :return: Concrete parser for the specified parser type depending on the specified Kontakt KSP manual version
         """
         # Dynamically try to load a class matching Kontakt manual version
-        parser_name = parser_type.value.lower()
+        parser_name = item_type.value.lower()
         module_name = f"ksp_{version.replace('.', '_')}.ksp_{version.replace('.', '_')}_{parser_name}_parser"
-        class_name = f"Ksp{parser_type.value}Parser"
+        class_name = f"Ksp{item_type.value}Parser"
         try:
             module = import_module(module_name)
             parser_class = getattr(module, class_name)
@@ -182,12 +182,12 @@ class MainParser:
                         cur_version = f"{major}.{minor}"
             if cur_version:
                 log.info(f"FOUND => Use {parser_name} parser for Kontakt KSP manual version {cur_version} instead")
-                parser = MainParser.load_parser(parser_type, cur_version, *args, **kwargs)
+                parser = MainParser.load_parser(item_type, cur_version, *args, **kwargs)
             else:
                 log.info(f"=> No {parser_name} parser for Kontakt KSP manual version {cur_major}.* found")
                 log.info(f"=> Fallback to base {parser_name} parser")
                 module_name = f"ksp_parser.{parser_name}_parser"
-                class_name = f"{parser_type.value}Parser"
+                class_name = f"{item_type.value}Parser"
                 module = import_module(module_name)
                 parser_class = getattr(module, class_name)
                 parser = parser_class(*args, **kwargs)
@@ -201,5 +201,5 @@ if __name__ == "__main__":
     root = Path(__file__).parent.parent.parent
     ini_file = root / "cfg" / "ksp_7_10" / "system.ini"
     config = SystemConfig(ini_file)
-    parser = MainParser.get_parser(ParserType.MAIN)
+    parser = MainParser.get_parser(ItemType.MAIN)
     parser.parse()

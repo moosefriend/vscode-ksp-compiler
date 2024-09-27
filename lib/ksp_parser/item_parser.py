@@ -28,7 +28,7 @@ from doc_item.doc_item import DocItem
 from ksp_parser.toc_parser import TocParser
 from config.constants import DocState
 from config.system_config import SystemConfig
-from util.format import log_step
+from util.file_util import log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)
@@ -176,7 +176,7 @@ class ItemParser:
                     self.on_category(line)
                 self.doc_state = DocState.CATEGORY
                 self.item_list = []
-                log.debug(f"   - Category: {self.category} ({self.reader.location()})")
+                log.debug(f"   - ItemType: {self.category} ({self.reader.location()})")
             elif self.doc_state != DocState.NONE:
                 # Check for items
                 if new_doc_state := self.check_item(line):
@@ -293,7 +293,7 @@ class ItemParser:
                     for line in item.parsed_text.splitlines():
                         log.info(line)
                     log.info(f"{'*' * 10} Parsed Text End {'*' * 10}")
-                for title in ("Headline", "Category", "Block Headline", "Item List Headline", "Source", "Name",
+                for title in ("Headline", "ItemType", "Block Headline", "Item List Headline", "Source", "Name",
                               "Parameter", "Variable Name", "Index Name", "Comment"):
                     attribute = title.replace(" ", "_").lower()
                     if attribute in item.__dict__ and (value := item.__dict__[attribute]):

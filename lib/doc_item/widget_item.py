@@ -32,7 +32,7 @@ class WidgetItem(DocItem):
         :param page_no: Page number in the PDF where the widget has been found
         :param line_no: Line number in the file where the widget has been found
         :param headline: Main headline where the item has been found
-        :param category: Category (= Sub-headline in the table of contents) where the widget has been found
+        :param category: ItemType (= Sub-headline in the table of contents) where the widget has been found
         :param name: Widget name
         :param variable_name: Name of the variable
         :param index_name: Name of the index if any

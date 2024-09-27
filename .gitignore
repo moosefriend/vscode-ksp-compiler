@@ -8,4 +8,4 @@ __pycache__/
 *.pyc
 /doc_parser/in/*.pdf
 .~lock.*
-/doc_parser/logs/
+/logs/

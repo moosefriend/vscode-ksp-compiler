@@ -1,4 +1,4 @@
-File;Page No;Line No;Headline;Category;Name;Parameters;Description;Remarks;Examples;See Also;Source
+File;Page No;Line No;Headline;Category;Name;Parameter List;Description;Remarks;Examples;See Also;Source
 KSP_Reference_Manual_Fixed.txt.py;42;5768;5. Arithmetic Commands & Operators;random();random;min,max;Generates a random integer between (and including) <min> and <max>.;;"on init
     declare $rnd_amt
     declare $new_vel
