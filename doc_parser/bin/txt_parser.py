@@ -17,7 +17,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 import argparse
-import logging
 import sys
 from pathlib import Path
 

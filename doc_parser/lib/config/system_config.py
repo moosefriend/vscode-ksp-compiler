@@ -56,23 +56,32 @@ class SystemConfig(metaclass=Singleton):
         config.read(self.ini_file)
         self.settings = config["General"]
         self.kontakt_version: str = self.settings["kontakt_version"].replace("_", ".")
-        self.cfg_dir: Path = self._get_dir("cfg_dir")
-        self.out_dir: Path = self._get_dir("out_dir", create=True)
+        # Log Settings
         self.log_dir: Path = self._get_dir("log_dir", create=True)
         self.log_file: Path = self._get_file("log_file")
+        self.log_level_console: int = self._get_log_level("log_level_console")
+        self.log_level_file: int = self._get_log_level("log_level_file")
+        self.log_format_console: str = self.settings["log_format_console"]
+        self.log_format_file: str = self.settings["log_format_file"]
+        self.log_date_format_console: str = self.settings["log_date_format_console"]
+        self.log_date_format_file: str = self.settings["log_date_format_file"]
+        self.verbose: bool = self._get_bool("verbose")
         self.initialize_logging()
+        # PDF Converter Settings
+        self.txt_dir: Path = self._get_dir("txt_dir")
         self.pdf_file: Path = self._get_file("pdf_file")
         self.txt_file_original: Path = self._get_file("txt_file_original")
         self.txt_file_fixed: Path = self._get_file("txt_file_fixed")
+        # Parser Settings
         self.page_offset: int = self._get_int("page_offset")
         self.page_header_lines: int = self._get_int("page_header_lines")
+        self.out_dir: Path = self._get_dir("out_dir", create=True)
         self.callbacks_csv: Path = self._get_file("callbacks_csv")
         self.widgets_csv: Path = self._get_file("widgets_csv")
         self.functions_csv: Path = self._get_file("functions_csv")
         self.commands_csv: Path = self._get_file("commands_csv")
         self.variables_csv: Path = self._get_file("variables_csv")
         self.delimiter: str = self.settings["delimiter"]
-        self.verbose: bool = self._get_bool("verbose")
         self.dump: bool = self._get_bool("dump")
         self.phases: set[ParserType] = self._get_phases("phases")
         self.reader: Optional[RewindReader] = None
@@ -139,6 +148,16 @@ class SystemConfig(metaclass=Singleton):
                     log.warning(f"Phase {parser_type.value} will allways be called and needs not to be specified")
         return phases
 
+    def _get_log_level(self, name: str) -> int:
+        """
+        Convert the string value to Log level read from the *.ini file.
+
+        :param name: Name of the setting in the *.ini file
+        :return: Log level
+        """
+        log_level = logging.getLevelName(self.settings[name].upper())
+        return log_level
+
     def has_phase(self, parser_type: ParserType) -> bool:
         """
         Check if the specified phase is active.
@@ -155,30 +174,24 @@ class SystemConfig(metaclass=Singleton):
         """
         Initialize the logging.
         """
-        logging.basicConfig(
-            level=logging.INFO,
-            format="[%(asctime)s] %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S",
-        )
         # Create a custom logger
         logger = logging.getLogger()
-        self.log_file.unlink(missing_ok=True)
-        file_handler = logging.FileHandler(self.log_file)
-        file_handler.setLevel(logging.DEBUG)
-        file_format = logging.Formatter("[%(asctime)s] %(message)s", "%Y-%m-%d %H:%M:%S")
-        file_handler.setFormatter(file_format)
-        logger.addHandler(file_handler)
-
-
-def debug(message: str):
-    """
-    Logs a debug message if verbose is set.
-
-    :param message: Message to log
-    :return:
-    """
-    if SystemConfig().verbose:
-        log.info(f"[VERBOSE] {message}")
+        # Set the overall logging level
+        logger.setLevel(logging.DEBUG)
+        # Define a console handler
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(self.log_level_console)
+        console_format = logging.Formatter(self.log_format_console, self.log_date_format_console)
+        console_handler.setFormatter(console_format)
+        logger.addHandler(console_handler)
+        if self.log_file:
+            self.log_file.unlink(missing_ok=True)
+            # Define a file handler
+            file_handler = logging.FileHandler(self.log_file)
+            file_handler.setLevel(self.log_level_file)
+            file_format = logging.Formatter(self.log_format_file, self.log_date_format_file)
+            file_handler.setFormatter(file_format)
+            logger.addHandler(file_handler)
 
 
 if __name__ == "__main__":

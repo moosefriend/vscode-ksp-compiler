@@ -19,7 +19,7 @@
 import logging
 import re
 
-from config.system_config import SystemConfig, debug
+from config.system_config import SystemConfig
 from util.format import log_step
 from util.rewind_reader import RewindReader
 
@@ -68,7 +68,7 @@ class TocParser:
         for line in self.reader:
             # Search for the table of content
             if self.TOC_START_PATTERN.match(line):
-                debug(f"Found TOC Start ({self.reader.location()})")
+                log.debug(f"Found TOC Start ({self.reader.location()})")
                 self.reader.rewind()
                 break
 
@@ -82,18 +82,18 @@ class TocParser:
         for line in self.reader:
             # Check for the end of the table of contents
             if self.TOC_END_PATTERN.match(line):
-                debug(f"Found TOC End ({self.reader.location()})")
+                log.debug(f"Found TOC End ({self.reader.location()})")
                 self.reader.rewind()
                 break
             # Check for headline
             elif m := self.TOC_HEADLINE_PATTERN.match(line):
-                debug(f"- Found TOC Headline: {m.group(1)} ({self.reader.location()})")
+                log.debug(f"- Found TOC Headline: {m.group(1)} ({self.reader.location()})")
                 self.all_headlines[m.group(1)] = m.group(2)
                 self.headline_cnt += 1
                 last_headline = m.group(1)
             # Check for category
             elif m := self.TOC_CATEGORY_PATTERN.match(line):
-                debug(f"   - Found TOC Category: {m.group(1)} ({self.reader.location()})")
+                log.debug(f"   - Found TOC Category: {m.group(1)} ({self.reader.location()})")
                 if not last_headline:
                     raise AssertionError(f"No headline for category {m.group(1)} ({self.reader.location()})")
                 if last_headline not in self.all_categories:

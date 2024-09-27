@@ -23,7 +23,7 @@ from typing import Optional
 from doc_item.variable_item import VariableItem
 from ksp_parser.item_parser import ItemParser
 from config.constants import DocState
-from config.system_config import SystemConfig, debug
+from config.system_config import SystemConfig
 
 log = logging.getLogger(__name__)
 
@@ -116,7 +116,7 @@ class VariableParser(ItemParser):
                     self.block_description += description + "."
             # Remove the colon from the end
             self.item_list_headline = line[:-1]
-            debug(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
+            log.debug(f"   - Item List Headline: {self.item_list_headline} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
             # Skip the current line to be reported in the parsed text
@@ -125,10 +125,10 @@ class VariableParser(ItemParser):
         elif self.doc_state == DocState.CATEGORY and line != "":
             if not self.block_headline:
                 self.block_headline = line
-                debug(f"   - Block Header: {line} ({self.reader.location()})")
+                log.debug(f"   - Block Header: {line} ({self.reader.location()})")
             else:
                 self.block_description += line + "\n"
-                debug(f"   - Block Description: {line} ({self.reader.location()})")
+                log.debug(f"   - Block Description: {line} ({self.reader.location()})")
             # Don't change the documentation state
             doc_state = self.doc_state
         return doc_state
