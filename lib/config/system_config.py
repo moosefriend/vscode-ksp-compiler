@@ -18,6 +18,7 @@
 ##############################################################################
 import logging
 import re
+import sys
 from configparser import ConfigParser, ExtendedInterpolation
 from pathlib import Path
 from typing import Optional, TYPE_CHECKING
@@ -58,14 +59,13 @@ class SystemConfig(metaclass=Singleton):
         self.kontakt_version: str = self.settings["kontakt_version"].replace("_", ".")
         # Log Settings
         self.log_dir: Path = self._get_dir("log_dir", create=True)
-        self.log_file: Path = self._get_file("log_file")
+        self.log_file: Optional[Path] = None
         self.log_level_console: int = self._get_log_level("log_level_console")
         self.log_level_file: int = self._get_log_level("log_level_file")
         self.log_format_console: str = self.settings["log_format_console"]
         self.log_format_file: str = self.settings["log_format_file"]
         self.log_date_format_console: str = self.settings["log_date_format_console"]
         self.log_date_format_file: str = self.settings["log_date_format_file"]
-        self.verbose: bool = self._get_bool("verbose")
         self.initialize_logging()
         # PDF Converter Settings
         self.txt_dir: Path = self._get_dir("txt_dir")
@@ -83,6 +83,7 @@ class SystemConfig(metaclass=Singleton):
         self.variables_csv: Path = self._get_file("variables_csv")
         self.delimiter: str = self.settings["delimiter"]
         self.dump: bool = self._get_bool("dump")
+        self.verbose: bool = self._get_bool("verbose")
         self.phases: set[ParserType] = self._get_phases("phases")
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[TocParser] = None
@@ -184,7 +185,8 @@ class SystemConfig(metaclass=Singleton):
         console_format = logging.Formatter(self.log_format_console, self.log_date_format_console)
         console_handler.setFormatter(console_format)
         logger.addHandler(console_handler)
-        if self.log_file:
+        if self.log_dir:
+            self.log_file = self.log_dir / (Path(sys.argv[0]).stem + ".log")
             self.log_file.unlink(missing_ok=True)
             # Define a file handler
             file_handler = logging.FileHandler(self.log_file)

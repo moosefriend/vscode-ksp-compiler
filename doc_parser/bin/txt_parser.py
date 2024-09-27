@@ -25,7 +25,7 @@ import find_lib
 from config.system_config import SystemConfig
 from ksp_parser.main_parser import MainParser
 from config.constants import ParserType
-from util.format import headline
+from util.file_util import headline
 
 
 parser = argparse.ArgumentParser(description="Parse the text file of a Kontakt KSP manual which was converted from *.pdf to *.txt")
