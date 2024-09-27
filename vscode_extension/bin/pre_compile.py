@@ -23,12 +23,10 @@ from pathlib import Path
 # noinspection PyUnresolvedReferences
 import find_lib
 from config.system_config import SystemConfig
-from ksp_parser.main_parser import MainParser
-from config.constants import ItemType
-from util.file_util import headline
+from util.file_util import headline, yml2json
+from vscode_generator.grammar_generator import GrammarGenerator
 
-
-parser = argparse.ArgumentParser(description="Parse the text file of a Kontakt KSP manual which was converted from *.pdf to *.txt")
+parser = argparse.ArgumentParser(description="Convert *.yml to *.json and generate Type Script code for the extension")
 parser.add_argument('-c', '--config-file', required=True, help="Path to the *.ini configuration file")
 args = parser.parse_args()
 ini_file = Path(args.config_file).resolve()
@@ -36,6 +34,9 @@ if not ini_file.is_file():
     print(f"*** Error: Can't find configuration file {ini_file}")
     sys.exit(-1)
 config = SystemConfig(ini_file)
-headline("Loading Main Parser")
-main_parser = MainParser.get_parser(ItemType.MAIN)
-main_parser.parse()
+headline("Convert *.yml to *.json")
+yml2json(SystemConfig().lang_config_yml, SystemConfig().lang_config_json)
+yml2json(SystemConfig().grammar_yml, SystemConfig().grammar_json)
+yml2json(SystemConfig().snippets_yml, SystemConfig().snippets_json)
+headline("Inject names into the grammar JSON file")
+GrammarGenerator.fill_place_holders()

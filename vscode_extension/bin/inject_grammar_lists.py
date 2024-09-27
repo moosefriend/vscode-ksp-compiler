@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-
 """
 Inject lists in the file "out/ksp.tmGrammar.json":
 - Replace <<built_in_callbacks>> with the list of built_in_callbacks.csv column "Name"
@@ -26,22 +25,6 @@ Inject lists in the file "out/ksp.tmGrammar.json":
 """
 import csv
 from pathlib import Path
-
-def replace_in_file(file: Path, search_string: str, replace_string: str):
-    """
-    Replace the search string with the replace string in the given file.
-
-    :param file: File in which to replace the string
-    :param search_string: String to search which will be replaced
-    :param replace_string: String to replace in the file
-    """
-    content = file.read_text()
-    if search_string in content:
-        print(f"Replace {search_string} in {file.as_posix()}")
-        file.write_text(content.replace(search_string, replace_string))
-    else:
-        print(f"*** WARNING: Search string {search_string} not found in {file.as_posix()}")
-
 
 def read_name_list(csv_file: Path) -> str:
     """

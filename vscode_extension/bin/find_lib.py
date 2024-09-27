@@ -16,26 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-import argparse
+"""Simple module used to find the lib folder"""
 import sys
 from pathlib import Path
 
-# noinspection PyUnresolvedReferences
-import find_lib
-from config.system_config import SystemConfig
-from ksp_parser.main_parser import MainParser
-from config.constants import ItemType
-from util.file_util import headline
-
-
-parser = argparse.ArgumentParser(description="Parse the text file of a Kontakt KSP manual which was converted from *.pdf to *.txt")
-parser.add_argument('-c', '--config-file', required=True, help="Path to the *.ini configuration file")
-args = parser.parse_args()
-ini_file = Path(args.config_file).resolve()
-if not ini_file.is_file():
-    print(f"*** Error: Can't find configuration file {ini_file}")
-    sys.exit(-1)
-config = SystemConfig(ini_file)
-headline("Loading Main Parser")
-main_parser = MainParser.get_parser(ItemType.MAIN)
-main_parser.parse()
+# Add the lib directory to the search path
+root = Path(__file__).parent.parent.parent.resolve().as_posix()
+sys.path.append(f"{root}/lib")

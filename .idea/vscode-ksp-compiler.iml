@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/doc_parser/ksp_manuals_pdf" />
-      <excludeFolder url="file://$MODULE_DIR$/doc_parser/in" />
+      <excludeFolder url="file://$MODULE_DIR$/doc_parser/pdf" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -20,7 +20,7 @@ import logging
 import re
 
 from config.system_config import SystemConfig
-from util.format import log_step
+from util.file_util import log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)

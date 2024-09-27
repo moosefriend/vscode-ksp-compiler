@@ -23,7 +23,7 @@ from configparser import ConfigParser, ExtendedInterpolation
 from pathlib import Path
 from typing import Optional, TYPE_CHECKING
 
-from config.constants import ParserType
+from config.constants import ItemType
 from util.rewind_reader import RewindReader
 
 if TYPE_CHECKING:
@@ -68,14 +68,12 @@ class SystemConfig(metaclass=Singleton):
         self.log_date_format_file: str = self.settings["log_date_format_file"]
         self.initialize_logging()
         # PDF Converter Settings
-        self.txt_dir: Path = self._get_dir("txt_dir")
         self.pdf_file: Path = self._get_file("pdf_file")
         self.txt_file_original: Path = self._get_file("txt_file_original")
         self.txt_file_fixed: Path = self._get_file("txt_file_fixed")
         # Parser Settings
         self.page_offset: int = self._get_int("page_offset")
         self.page_header_lines: int = self._get_int("page_header_lines")
-        self.out_dir: Path = self._get_dir("out_dir", create=True)
         self.callbacks_csv: Path = self._get_file("callbacks_csv")
         self.widgets_csv: Path = self._get_file("widgets_csv")
         self.functions_csv: Path = self._get_file("functions_csv")
@@ -84,9 +82,16 @@ class SystemConfig(metaclass=Singleton):
         self.delimiter: str = self.settings["delimiter"]
         self.dump: bool = self._get_bool("dump")
         self.verbose: bool = self._get_bool("verbose")
-        self.phases: set[ParserType] = self._get_phases("phases")
+        self.phases: set[ItemType] = self._get_phases("phases")
         self.reader: Optional[RewindReader] = None
         self.toc: Optional[TocParser] = None
+        # VS Code Generator Settings
+        self.lang_config_yml: Path = self._get_file("lang_config_yml")
+        self.lang_config_json: Path = self._get_file("lang_config_json")
+        self.grammar_yml: Path = self._get_file("grammar_yml")
+        self.grammar_json: Path = self._get_file("grammar_json")
+        self.snippets_yml: Path = self._get_file("snippets_yml")
+        self.snippets_json: Path = self._get_file("snippets_json")
 
     def _get_dir(self, name: str, create: bool = False) -> Path:
         """
@@ -132,7 +137,7 @@ class SystemConfig(metaclass=Singleton):
         boolean = (self.settings[name].lower() == "true")
         return boolean
 
-    def _get_phases(self, name: str) -> set[ParserType]:
+    def _get_phases(self, name: str) -> set[ItemType]:
         """
         Get the list of parser types to run read from the *.ini file.
 
@@ -142,11 +147,11 @@ class SystemConfig(metaclass=Singleton):
         phases = set()
         for line in self.settings[name].splitlines():
             if line:
-                parser_type = ParserType.from_string(line)
-                if parser_type in ParserType.all_phases():
-                    phases.add(parser_type)
+                item_type = ItemType.from_string(line)
+                if item_type in ItemType.all_phases():
+                    phases.add(item_type)
                 else:
-                    log.warning(f"Phase {parser_type.value} will allways be called and needs not to be specified")
+                    log.warning(f"Phase {item_type.value} will allways be called and needs not to be specified")
         return phases
 
     def _get_log_level(self, name: str) -> int:
@@ -159,15 +164,15 @@ class SystemConfig(metaclass=Singleton):
         log_level = logging.getLevelName(self.settings[name].upper())
         return log_level
 
-    def has_phase(self, parser_type: ParserType) -> bool:
+    def has_phase(self, item_type: ItemType) -> bool:
         """
         Check if the specified phase is active.
 
-        :param parser_type: ParserType to check if it's active
+        :param item_type: ItemType to check if it's active
         :return: True if the phase is active, False otherwise
         """
         ret_val: bool = False
-        if parser_type in self.phases:
+        if item_type in self.phases:
             ret_val = True
         return ret_val
 
@@ -194,6 +199,28 @@ class SystemConfig(metaclass=Singleton):
             file_format = logging.Formatter(self.log_format_file, self.log_date_format_file)
             file_handler.setFormatter(file_format)
             logger.addHandler(file_handler)
+
+    def get_csv_file(self, item_type: ItemType) -> Path:
+        """
+        Get the *.csv file for the specified item type, e.g. for callbacks.
+
+        :param item_type: ItemType to get the path for
+        :return: Path of the *.csv file
+        """
+        match item_type:
+            case ItemType.CALLBACK:
+                path = self.callbacks_csv
+            case ItemType.WIDGET:
+                path = self.widgets_csv
+            case ItemType.FUNCTION:
+                path = self.functions_csv
+            case ItemType.COMMAND:
+                path = self.commands_csv
+            case ItemType.VARIABLE:
+                path = self.variables_csv
+            case _:
+                raise ValueError(f"No *.csv file for {item_type.name}")
+        return path
 
 
 if __name__ == "__main__":

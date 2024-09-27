@@ -31,7 +31,7 @@ class FunctionItem(DocItem):
         :param page_no: Page number in the PDF where the function has been found
         :param line_no: Line number in the file where the function has been found
         :param headline: Main headline where the item has been found
-        :param category: Category (= Sub-headline in the table of contents) where the item has been found
+        :param category: ItemType (= Sub-headline in the table of contents) where the item has been found
         :param name: Variable name
         :param parameter_list: List of parameter names
         :param description: Item documentation
@@ -49,7 +49,7 @@ class FunctionItem(DocItem):
 
     @staticmethod
     def csv_header():
-        return "File", "Page No", "Line No", "Headline", "Category", "Name", "Parameters", "Description", "Source"
+        return "File", "Page No", "Line No", "Headline", "Category", "Name", "Parameter List", "Description", "Source"
 
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name,

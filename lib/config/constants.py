@@ -19,9 +19,9 @@
 from enum import Enum
 
 
-class ParserType(Enum):
+class ItemType(Enum):
     """
-    Parser types used for dynamic loading.
+    Item types e.g. used for dynamic loading.
     """
     MAIN = "Main"
     TOC = "Toc"
@@ -33,7 +33,7 @@ class ParserType(Enum):
 
     def lower_plural(self) -> str:
         """
-        :return: Plural version of the constant, e.g. "callbacks"
+        :return: Plural lower case version of the constant, e.g. "callbacks"
         """
         return self.value.lower() + "s"
 
@@ -43,26 +43,32 @@ class ParserType(Enum):
         """
         return self.value + "s"
 
-    @staticmethod
-    def from_string(value: str) -> 'ParserType':
+    def category(self) -> str:
         """
-        Get the parser type based on the specified string.
+        :return: Return the category string, e.g. "built_in_callbacks"
+        """
+        return f"build_in_{self.value.lower()}s"
+
+    @staticmethod
+    def from_string(value: str) -> 'ItemType':
+        """
+        Get the category based on the specified string.
 
         :param value: String to get the parser type for
-        :return: ParserType mathing the given string
+        :return: ItemType matching the given string
         """
-        for parser_type in ParserType:
-            if parser_type.value.lower() == value.lower() or parser_type.lower_plural() == value.lower():
-                return parser_type
+        for item_type in ItemType:
+            if item_type.value.lower() == value.lower() or item_type.lower_plural() == value.lower():
+                return item_type
         else:
             raise ValueError(f"Unknown phase type {value}")
 
     @staticmethod
-    def all_phases() -> tuple['ParserType', ...]:
+    def all_phases() -> tuple['ItemType', ...]:
         """
-        :return: Tuple of all ParserTypes for all phases
+        :return: Tuple of all ItemTypes for all phases
         """
-        return ParserType.CALLBACK, ParserType.WIDGET, ParserType.COMMAND, ParserType.FUNCTION, ParserType.VARIABLE
+        return ItemType.CALLBACK, ItemType.WIDGET, ItemType.COMMAND, ItemType.FUNCTION, ItemType.VARIABLE
 
 
 class DocState(Enum):
