@@ -47,7 +47,7 @@ class ItemType(Enum):
         """
         :return: Return the category string, e.g. "built_in_callbacks"
         """
-        return f"build_in_{self.value.lower()}s"
+        return f"built_in_{self.value.lower()}s"
 
     @staticmethod
     def from_string(value: str) -> 'ItemType':
