@@ -18,6 +18,7 @@
 ##############################################################################
 import logging
 import re
+from copy import deepcopy
 from typing import Optional
 
 from doc_item.callback_item import CallbackItem
@@ -46,6 +47,15 @@ class CallbackParser(ItemParser):
             CallbackParser.CONTENT_STOP_PATTERN,
             SystemConfig().callbacks_csv
         )
+
+    def scan_items(self):
+        super().scan_items()
+        # Special handling for on rpn/on nrpn
+        # Copy the documentation from on nrpn to on rpn
+        nrpn_doc_item = self.all_items["nrpn"][0]
+        rpn_doc_item = deepcopy(nrpn_doc_item)
+        rpn_doc_item.name = "rpn"
+        self.all_items["rpn"][0] = rpn_doc_item
 
     def check_category(self, line) -> bool:
         """
