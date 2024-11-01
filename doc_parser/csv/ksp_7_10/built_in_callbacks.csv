@@ -258,7 +258,22 @@ end on
 Creating an artificial release triggered noise.";"on note
 ignore_event()
 get_event_par(): $EVENT_PAR_REL_VELOCITY";BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py;15;1160;3. Callbacks;on rpn/nrpn;rpn;;;;;;BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py;15;1160;3. Callbacks;on rpn/nrpn;rpn;;"RPN and NRPN callbacks, executed whenever a MIDI RPN or NRPN (registered/non-registered
+parameter number) message is received.";;"on rpn
+    select ($RPN_ADDRESS)
+        case 0
+            message(""Pitch Bend Sensitivity"" & "" - Value: "" & $RPN_VALUE)
+        case 1
+            message(""Fine Tuning"" & "" - Value: "" & $RPN_VALUE)
+        case 2
+            message(""Coarse Tuning"" & "" - Value: "" & $RPN_VALUE)
+    end select
+end on
+Query standard RPN messages.";"on controller
+set_rpn()/set_nrpn()
+msb()
+lsb()
+Events and MIDI: $RPN_ADDRESS, $RPN_VALUE";BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py;15;1160;3. Callbacks;on rpn/nrpn;nrpn;;"RPN and NRPN callbacks, executed whenever a MIDI RPN or NRPN (registered/non-registered
 parameter number) message is received.";;"on rpn
     select ($RPN_ADDRESS)
