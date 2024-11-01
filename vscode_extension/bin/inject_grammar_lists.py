@@ -26,6 +26,9 @@ Inject lists in the file "out/ksp.tmGrammar.json":
 import csv
 from pathlib import Path
 
+from util.file_util import replace_in_file
+
+
 def read_name_list(csv_file: Path) -> str:
     """
     From the given *.csv file read the Name column and combine the names with "|"
