@@ -25,6 +25,7 @@ import find_lib
 from config.system_config import SystemConfig
 from util.file_util import headline, yml2json
 from vscode_generator.grammar_generator import GrammarGenerator
+from vscode_generator.snippet_generator import SnippetGenerator
 
 parser = argparse.ArgumentParser(description="Convert *.yml to *.json and generate Type Script code for the extension")
 parser.add_argument('-c', '--config-file', required=True, help="Path to the *.ini configuration file")
@@ -40,3 +41,5 @@ yml2json(SystemConfig().grammar_yml, SystemConfig().grammar_json)
 yml2json(SystemConfig().snippets_yml, SystemConfig().snippets_json)
 headline("Inject names into the grammar JSON file")
 GrammarGenerator.fill_place_holders()
+headline("Inject callbacks and widgets into the snippets JSON file")
+SnippetGenerator.fill_place_holders()

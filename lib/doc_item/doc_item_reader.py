@@ -119,6 +119,9 @@ class DocItemReader:
             attr[name] = value
         # Special handling for "parameter_list": Split the value by comma
         if "parameter_list" in attr:
-            attr["parameter_list"] = attr["parameter_list"].split(",")
+            if attr["parameter_list"]:
+                attr["parameter_list"] = attr["parameter_list"].split(",")
+            else:
+                attr["parameter_list"] = []
         doc_item = self.doc_item_class(**attr)
         return doc_item
