@@ -56,6 +56,5 @@ class GrammarGenerator:
         for item_type in replace_list:
             search_string = f"<<{item_type.category()}>>"
             replace_string = GrammarGenerator.read_name_list(item_type)
-            log.info(f"=> Replace {search_string}")
             replace_in_file(SystemConfig().grammar_json, search_string, replace_string)
 

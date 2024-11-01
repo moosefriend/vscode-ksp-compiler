@@ -6,6 +6,6 @@ vscode_extension/node_modules/
 # doc_parser
 __pycache__/
 *.pyc
-/doc_parser/in/*.pdf
+/doc_parser/pdf/*.pdf
 .~lock.*
 /logs/
