@@ -67,3 +67,15 @@ class CallbackItem(DocItem):
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.parameter,
                 self.description, self.remarks, self.examples, self.see_also, self.source)
+
+    def get_snippet_parameter(self):
+        """
+        Construct the parameter to be used in the snippets.
+
+        :return: Parameter to be used in snippets
+        """
+        if self.parameter:
+            snippet_parameter = f"($${{2:{self.parameter}}})"
+        else:
+            snippet_parameter = ""
+        return snippet_parameter

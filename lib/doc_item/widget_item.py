@@ -70,3 +70,43 @@ class WidgetItem(DocItem):
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name, self.variable_name,
                 self.index_name, ",".join(self.parameter_list), self.description,  self.remarks, self.examples,
                 self.see_also, self.source)
+
+    def get_snippet_variable_name(self):
+        """
+        Construct the variable name to be used in the snippets.
+
+        :return: Variable name to be used in snippets
+        """
+        snippet_variable_name = self.variable_name
+        snippet_variable_name = snippet_variable_name.replace("<", "${1:")
+        snippet_variable_name = snippet_variable_name.replace(">", "}")
+        return snippet_variable_name
+
+    def get_snippet_index_name(self):
+        """
+        Construct the index name to be used in the snippets.
+
+        :return: Index name to be used in snippets
+        """
+        if self.index_name:
+            snippet_index_name = f"[${{2:{self.index_name}}}]"
+        else:
+            snippet_index_name = ""
+        return snippet_index_name
+
+    def get_snippet_parameter_list(self):
+        """
+        Construct the parameter list to be used in the snippets.
+
+        :return: Parameter list to be used in snippets
+        """
+        # "declare ui_table %${1:array}[${2:colmns}](${3:width}, ${4:height}, ${5:range})"
+        if self.parameter_list:
+            par_list = []
+            for i, cur_parameter in enumerate(self.parameter_list):
+                snippet_parameter = f"${{{i + 2}:{cur_parameter}}}"
+                par_list.append(snippet_parameter)
+            snippet_parameter_list = f"({', '.join(par_list)})"
+        else:
+            snippet_parameter_list = ""
+        return snippet_parameter_list
