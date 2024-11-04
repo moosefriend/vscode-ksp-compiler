@@ -271,8 +271,6 @@ class ItemParser:
             # Sort the list for identifier rules
             # for name in natsorted(self.all_items.keys()):
             for name in self.all_items.keys():
-                # TODO: Why for callbacks the on rpn has no description?
-                #       There is already a special handling in callback_parser.py
                 cur_item_list = self.all_items[name]
                 for cur_item in cur_item_list:
                     csv_writer.writerow(cur_item.as_csv_list())
