@@ -74,6 +74,7 @@ class SystemConfig(metaclass=Singleton):
         # Parser Settings
         self.page_offset: int = self._get_int("page_offset")
         self.page_header_lines: int = self._get_int("page_header_lines")
+        self.csv_dir: Path = self._get_dir("csv_dir")
         self.callbacks_csv: Path = self._get_file("callbacks_csv")
         self.widgets_csv: Path = self._get_file("widgets_csv")
         self.functions_csv: Path = self._get_file("functions_csv")

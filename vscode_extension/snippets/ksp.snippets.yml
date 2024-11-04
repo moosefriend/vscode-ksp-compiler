@@ -19,51 +19,51 @@
 const:
     body:
     - declare const $${1:name} := ${2:value}
-    description: declare a user-defined polyphonic variable to store a single integer
+    description: Declare a user-defined polyphonic variable to store a single integer
         value per note event
     prefix: const
 declare:
     body:
     - declare ${1:name}
-    description: declare a user-defined variable
+    description: Declare a user-defined variable
     prefix: declare
 int:
     body:
     - declare $${1:name}
-    description: declare a user-defined variable to store a single integer value
+    description: Declare a user-defined variable to store a single integer value
     prefix: int
 inta:
     body:
     - declare %${1:name}[${2:size}]
-    description: declare a user-defined array to store single integer values at specific
+    description: Declare a user-defined array to store single integer values at specific
         indices
     prefix: int array
 polyphonicv:
     body:
     - declare polyphonic $${1:name}
-    description: declare a user-defined polyphonic variable to store a single integer
+    description: Declare a user-defined polyphonic variable to store a single integer
         value per note event
     prefix: polyphonic
 real:
     body:
     - declare ~${1:name}
-    description: declare a user-defined variable to store a single real value
+    description: Declare a user-defined variable to store a single real value
     prefix: real
 reala:
     body:
     - declare ?${1:name}[${2:size}]
-    description: declare a user-defined array to store single real values at specific
+    description: Declare a user-defined array to store single real values at specific
         indices
     prefix: real array
 string:
     body:
     - declare @${1:name}
-    description: declare a user-defined string variable to store text
+    description: Declare a user-defined string variable to store text
     prefix: string
 stringa:
     body:
     - declare !${1:name}[${2:size}]
-    description: declare a user-defined string array to store text strings at specified
+    description: Declare a user-defined string array to store text strings at specified
         indices
     prefix: string array
 if:
@@ -88,7 +88,7 @@ select:
     - '    case ${2:case}'
     - '        ${3:{your code here\}}'
     - end select
-    description: if statement
+    description: select statement
     prefix: select
 region:
     body:
