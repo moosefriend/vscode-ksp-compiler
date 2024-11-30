@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
+# This file will be converted to *out/ksp.snippets.json
+# Then callbacks and widgets will be injected at the end
 const:
     body:
     - declare const $${1:name} := ${2:value}
@@ -142,5 +144,6 @@ boolean_op_or:
     - ${1:a} or ${2:b}
     description: 'Boolean Operator: true if a is true or b is true'
     prefix: or
+# Here the callbacks and widgets will be injected in the *.json file
 <<built_in_callbacks>>:
 <<built_in_widgets>>:

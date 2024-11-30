@@ -17,6 +17,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 # TextMate Grammar for KSP Script
+# This file will be converted to out/ksp.tmGrammar.json
+# Then the place holder <<...>> will be injected based on the *.csv files
 scopeName: source.ksp
 
 name: KSP
@@ -28,11 +30,14 @@ fileTypes:
 - txt
 
 patterns:
+- include: '#pragma'
+- include: '#macro'
 - include: '#string_literal'
 - include: '#numeric_literal'
 - include: '#comments'
 - include: '#callback'
 - include: '#user_function'
+- include: '#constants'
 - include: '#variables'
 - include: '#ui_controls'
 - include: '#control_statements'
@@ -42,6 +47,19 @@ patterns:
 - include: '#ident'
 
 repository:
+    # Extended Syntax
+    pragma:
+        patterns:
+        - name: pragma.compiler.ksp
+          match: \{\s*#pragma\s+(save_compiled_source|preserve_names|compile_with(|out)\s+(remove_whitespace|compact_variables|combine_callbacks|extra_syntax_checks|extra_branch_optimization|optimize_code|add_compile_date|sanitize_exit_command))\s*\}
+
+    # Extended Syntax
+    macro:
+        patterns:
+        -   name: macro.define.ksp
+            comment: Define macros
+            match: define\s+[a-z|A-Z][a-z|A-Z|0-9]\s*:=\s*(\S.*)$
+
     string_literal:
         patterns:
         -   name: string.quoted.double.ksp
@@ -65,6 +83,13 @@ repository:
             match: (0[0-9|a-f|A-F]+[hH])\b
         -   name: constant.numeric.ksp
             match: (\.[0-9]*)\b
+        # Extended Syntax
+        -   name: constant.numeric.ksp
+            match: (0[xX](0[0-9|a-f|A-F]+)\b
+        -   name: constant.numeric.ksp
+            match: (b[0-1]+)\b
+        -   name: constant.numeric.ksp
+            match: ([0-1]+b)\b
 
     comments:
         patterns:
@@ -74,7 +99,19 @@ repository:
                 '0':
                     name: punctuation.definition.comment.ksp
             end: \}
-            
+        # Extended Syntax
+        -   name: comment.line.ksp
+            match: (//).*$\n?
+            captures:
+                '1':
+                    name: punctuation.definition.comment.ksp
+        -   name: comment.block.ksp;
+            begin: /\*
+            captures:
+                '0':
+                    name = punctuation.definition.comment.ksp
+            end: \*/
+
     ident:
         patterns:
         -   match: ([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)
@@ -93,6 +130,22 @@ repository:
             match: ^\s*function\s+\b
         -   name: keyword.userfunction.ksp
             match: ^\s*end\s+function\b
+
+    # Extended Syntax
+    constant:
+        patterns:
+        -   name: constant.block.ksp
+            match: ^\s*const\s+\b
+        -   name: constant.block.ksp
+            match: ^\s*end\s+const\b
+
+    # Extended Syntax
+    struct:
+        patterns:
+        -   name: struct.block.ksp
+            match: ^\s*struct\s+\b
+        -   name: struct.block.ksp
+            match: ^\s*end\s+struct\b
 
     variables:
         patterns:
@@ -113,6 +166,9 @@ repository:
         patterns:
         -   name: keyword.other.statements.ksp
             match: (if|else|end\s+if|select|case|to|end\s+select|while|end\s+while|in_range)\b
+        # Extended Syntax
+        -   name: keyword.other.statements.ksp
+            match: (for|downto|step|else\s+if)\b
 
     operators:
         patterns:
@@ -129,6 +185,9 @@ repository:
             # List of built_in_commands.csv column Name
             # List of built_in_functions.csv column Name
             match: (<<built_in_commands>>|<<built_in_functions>>)\b
+        # Extended Syntax
+        -   name: support.function.builtin.ksp
+            match: import_nckp|concat\b
 
     other_keyword:
         patterns:
