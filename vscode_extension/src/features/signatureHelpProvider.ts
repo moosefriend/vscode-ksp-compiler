@@ -21,7 +21,7 @@
 'use strict';
 import vscode = require('vscode');
 
-const kspCommands = require('./generated/completionCommand');
+const kspCommands = require('./generated/commandCompletion');
 
 const _NL = '\n'.charCodeAt(0);
 const _TAB = '\t'.charCodeAt(0);

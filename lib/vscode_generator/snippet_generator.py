@@ -24,11 +24,12 @@ from config.constants import ItemType
 from config.system_config import SystemConfig
 from doc_item.doc_item_reader import DocItemReader
 from util.file_util import replace_in_file
+from vscode_generator.base_generator import BaseGenerator
 
 log = logging.getLogger(__name__)
 
 
-class SnippetGenerator:
+class SnippetGenerator(BaseGenerator):
     CALLBACK_TEMPLATE = cleandoc("""
     "on <<name>>": {
         "body": [
@@ -107,11 +108,11 @@ class SnippetGenerator:
         return ",\n".join(json_list)
 
     @staticmethod
-    def fill_place_holders():
+    def process():
         """
         Reads the snippets JSON file and replace <<category>> with the section list.
         """
-        log.info(f"Modify {SystemConfig().snippets_json}")
+        log.info(f"Modify {SystemConfig().snippets_json.as_posix()}")
         search_string = f'    "<<{ItemType.CALLBACK.category()}>>": null'
         replace_string = SnippetGenerator.read_callbacks()
         replace_in_file(SystemConfig().snippets_json, search_string, replace_string)

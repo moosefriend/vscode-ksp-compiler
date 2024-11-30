@@ -22,8 +22,8 @@
 
 import vscode = require('vscode');
 
-var builtinVariables = require('./generated/completionVariable');
-var commands = require('./generated/completionCommand');
+var builtinVariables = require('./generated/variableCompletion');
+var commands = require('./generated/commandCompletion');
 
 export class HoverProvider implements vscode.HoverProvider {
     /**

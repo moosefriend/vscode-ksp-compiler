@@ -17,6 +17,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 import logging
+from inspect import cleandoc
+from textwrap import indent
 
 from config.constants import ItemType
 from config.system_config import SystemConfig
@@ -27,22 +29,11 @@ from vscode_generator.base_generator import BaseGenerator
 log = logging.getLogger(__name__)
 
 
-class GrammarGenerator(BaseGenerator):
+class VariableNameGenerator(BaseGenerator):
     @staticmethod
     def process():
         """
-        Reads the grammar JSON file and replace <<category>> with the name list.
+        Reads the names from the *.csv file and generate the variable names type script file.
         """
-        replace_list = [
-            ItemType.CALLBACK,
-            ItemType.COMMAND,
-            ItemType.FUNCTION,
-            ItemType.WIDGET
-        ]
-        log.info(f"Modify {SystemConfig().grammar_json.as_posix()}")
-        for item_type in replace_list:
-            search_string = f"<<{item_type.category()}>>"
-            name_list = BaseGenerator.read_name_list(item_type)
-            replace_string = "|".join(name_list)
-            replace_in_file(SystemConfig().grammar_json, search_string, replace_string)
-
+        log.info(f"Generate {SystemConfig().variable_names_ts.as_posix()}")
+        ...continue...

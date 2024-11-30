@@ -18,7 +18,7 @@
  */
 import vscode = require('vscode');
 import CommandNameList = require('./generated/commandNames');
-import BuiltinVariableNameList = require('./generated/builtinVariableNames');
+import VariableNameList = require('./generated/variableNames');
 
 import { SymbolUtil } from './symbolUtil';
 import { SymbolType } from './symbolUtil';
@@ -68,7 +68,7 @@ export class ReferenceProvider implements vscode.ReferenceProvider {
             words.forEach(w => {
                 let found: boolean = false;
                 if (w == symbol) {
-                    BuiltinVariableNameList.BuiltinVariableNames.forEach(v => {
+                    VariableNameList.BuiltinVariableNames.forEach(v => {
                         if (v == symbol) {
                             result.push(new vscode.Location(
                                 document.uri,
