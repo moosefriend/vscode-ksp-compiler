@@ -22,8 +22,8 @@
 
 import vscode = require('vscode');
 
-import * as KSPVariables from "./generated/completionVariable";
-import * as KSPCommands from "./generated/completionCommand";
+import * as KSPVariables from "./generated/variableCompletion";
+import * as KSPCommands from "./generated/commandCompletion";
 
 export const VARIABLE_PREFIX_LIST: string[] = ['$', '%', '~', '?', '@', '!'];
 export const VARIABLE_REGEX: RegExp = /([\$%~\?@!][0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)/g;

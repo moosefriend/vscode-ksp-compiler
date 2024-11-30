@@ -93,6 +93,10 @@ class SystemConfig(metaclass=Singleton):
         self.grammar_json: Path = self._get_file("grammar_json")
         self.snippets_yml: Path = self._get_file("snippets_yml")
         self.snippets_json: Path = self._get_file("snippets_json")
+        self.variable_names_ts: Path = self._get_file("variable_names_ts")
+        self.variable_completion_ts: Path = self._get_file("variable_completion_ts")
+        self.command_names_ts: Path = self._get_file("command_names_ts")
+        self.command_completion_ts: Path = self._get_file("command_completion_ts")
 
     def _get_dir(self, name: str, create: bool = False) -> Path:
         """
