@@ -93,6 +93,7 @@ class SystemConfig(metaclass=Singleton):
         self.grammar_json: Path = self._get_file("grammar_json")
         self.snippets_yml: Path = self._get_file("snippets_yml")
         self.snippets_json: Path = self._get_file("snippets_json")
+        self.ts_dir: Path = self._get_dir("ts_dir", create=True)
         self.variable_names_ts: Path = self._get_file("variable_names_ts")
         self.variable_completion_ts: Path = self._get_file("variable_completion_ts")
         self.command_names_ts: Path = self._get_file("command_names_ts")

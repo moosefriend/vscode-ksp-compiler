@@ -123,5 +123,9 @@ class DocItemReader:
                 attr["parameter_list"] = attr["parameter_list"].split(",")
             else:
                 attr["parameter_list"] = []
+        # Special handling for variables: range_start and range_end is always 0
+        if self.doc_item_class == VariableItem:
+            attr["range_start"] = 0
+            attr["range_end"] = 0
         doc_item = self.doc_item_class(**attr)
         return doc_item

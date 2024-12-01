@@ -1,0 +1,4 @@
+File,Page No,Line No,Headline,Category,Block Headline,Item List Headline,Name,Parameter,Comment,Description,See Also,Source
+KSP_Reference_Manual_Fixed.txt.py,59,2290,7. User Interface Widgets,ui_mouse_area,,,!NI_DND_ITEMS_AUDIO,,,A mouse area widget which can accept a single audio or NKA file. The on ui_control callback is triggered by a drop action. It has 3 built-in array.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,59,2291,7. User Interface Widgets,ui_mouse_area,,,!NI_DND_ITEMS_MIDI,,,A mouse area widget which can accept a single audio or NKA file. The on ui_control callback is triggered by a drop action. It has 3 built-in array.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,59,2292,7. User Interface Widgets,ui_mouse_area,,,!NI_DND_ITEMS_ARRAY,,,A mouse area widget which can accept a single audio or NKA file. The on ui_control callback is triggered by a drop action. It has 3 built-in array.,,BUILT-IN

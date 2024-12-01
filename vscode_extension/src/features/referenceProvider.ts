@@ -68,7 +68,7 @@ export class ReferenceProvider implements vscode.ReferenceProvider {
             words.forEach(w => {
                 let found: boolean = false;
                 if (w == symbol) {
-                    VariableNameList.BuiltinVariableNames.forEach(v => {
+                    VariableNameList.VariableNames.forEach(v => {
                         if (v == symbol) {
                             result.push(new vscode.Location(
                                 document.uri,
