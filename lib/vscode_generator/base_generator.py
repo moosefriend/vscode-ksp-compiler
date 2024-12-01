@@ -27,17 +27,18 @@ log = logging.getLogger(__name__)
 
 class BaseGenerator:
     @staticmethod
-    def read_name_list(item_type: ItemType) -> list[str]:
+    def read_name_list(item_type: ItemType) -> set[str]:
         """
-        From the *.csv file read the Name column and combine the names with "|".
+        From the *.csv file read the Name column.
 
         :param item_type: ItemType for get the file to read
+        :return: Set of names read from the *.csv file
         """
-        name_list = []
+        name_list = set()
         with DocItemReader(item_type) as csv_reader:
             log.info(f"Read name list from {csv_reader.csv_file.as_posix()}")
             for doc_item in csv_reader:
-                name_list.append(doc_item.name)
+                name_list.add(doc_item.name)
         return name_list
 
     @staticmethod

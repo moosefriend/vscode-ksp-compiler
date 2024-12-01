@@ -26,6 +26,7 @@ from config.system_config import SystemConfig
 from util.file_util import headline, yml2json
 from vscode_generator.grammar_generator import GrammarGenerator
 from vscode_generator.snippet_generator import SnippetGenerator
+from vscode_generator.variable_name_generator import VariableNameGenerator
 
 parser = argparse.ArgumentParser(description="Convert *.yml to *.json and generate Type Script code for the extension")
 parser.add_argument('-c', '--config-file', required=True, help="Path to the *.ini configuration file")
@@ -45,9 +46,9 @@ headline("Inject callbacks and widgets into the snippets JSON file")
 SnippetGenerator.process()
 headline("Generate variable names as type script file")
 VariableNameGenerator.process()
-headline("Generate command names as type script file")
-CommandNameGenerator.process()
-headline("Generate variable completion as type script file")
-VariableCompletionGenerator.process()
-headline("Generate command completion as type script file")
-CommandCompletionGenerator.process()
+# headline("Generate command names as type script file")
+# CommandNameGenerator.process()
+# headline("Generate variable completion as type script file")
+# VariableCompletionGenerator.process()
+# headline("Generate command completion as type script file")
+# CommandCompletionGenerator.process()
