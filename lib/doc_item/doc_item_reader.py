@@ -17,6 +17,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 import csv
+import logging
 from pathlib import Path
 from types import TracebackType
 from typing import Optional, TextIO, Union
@@ -32,6 +33,8 @@ from doc_item.widget_item import WidgetItem
 DOC_ITEM_CLASS = Union[type[WidgetItem] | type[VariableItem] | type[FunctionItem] | type[CommandItem] | type[CallbackItem]]
 DOC_ITEM_TYPE = Union[WidgetItem | VariableItem | FunctionItem | CommandItem | CallbackItem]
 
+log = logging.getLogger(__name__)
+
 
 class DocItemReader:
     def __init__(self, item_type: ItemType, encoding: str = "utf-8"):
@@ -43,6 +46,8 @@ class DocItemReader:
         """
         self.doc_item_class: DOC_ITEM_CLASS = self.get_doc_item_class(item_type)
         self.csv_file: Path = SystemConfig().get_csv_file(item_type)
+        self.patch_csv_file: Path = SystemConfig().get_patch_csv_file(item_type)
+        self.doc_items: dict[str, DOC_ITEM_TYPE] = {}
         self.encoding: str = encoding
         self.handle: Optional[TextIO] = None
         self.csv_reader = None
@@ -71,12 +76,26 @@ class DocItemReader:
                 raise ValueError(f"No doc item type for {item_type.name}")
         return doc_item_class
 
+    def read_file(self, csv_file: Path):
+        """
+        Read the *.csv file into memory.
+        """
+        with csv_file.open(newline='', encoding=self.encoding) as f:
+            csv_reader = csv.DictReader(f, delimiter=SystemConfig().delimiter)
+            for row in csv_reader:
+                row: dict[str, str]
+                doc_item = self.create_doc_item(row)
+                if doc_item.name in self.doc_items:
+                    log.info(f"Override {doc_item.name}")
+                self.doc_items[doc_item.name] = doc_item
+
     def __enter__(self):
         """
         Context manager: Open the file.
         """
-        self.handle = self.csv_file.open(newline='', encoding=self.encoding)
-        self.csv_reader = csv.DictReader(self.handle, delimiter=SystemConfig().delimiter)
+        self.read_file(self.csv_file)
+        if self.patch_csv_file:
+            self.read_file(self.patch_csv_file)
         self.line_no = 0
         return self
 
@@ -84,27 +103,13 @@ class DocItemReader:
         """
         Context manager: Close the file.
         """
-        self.handle.close()
         self.line_no = 0
 
     def __iter__(self):
         """
-        Iterator which reads the separate rows of the *.csv file.
+        Iterator which returns the doc items.
         """
-        return self
-
-    def __next__(self) -> DOC_ITEM_TYPE:
-        """
-        Get the next row of the *.csv file and create the corresponding doc item object.
-
-        :return: DocItem based object containing the data read from the row
-        """
-        row = self.csv_reader.__next__()
-        if row is None:
-            raise StopIteration
-        doc_item = self.create_doc_item(row)
-        self.line_no += 1
-        return doc_item
+        return iter(self.doc_items.values())
 
     def create_doc_item(self, row: dict[str, str]) -> DOC_ITEM_TYPE:
         """

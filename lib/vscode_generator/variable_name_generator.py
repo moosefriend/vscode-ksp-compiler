@@ -21,6 +21,8 @@ from inspect import cleandoc
 from pathlib import Path
 from time import strftime
 
+from natsort import natsorted
+
 from config.constants import ItemType
 from config.system_config import SystemConfig
 from vscode_generator.base_generator import BaseGenerator
@@ -63,6 +65,6 @@ class VariableNameGenerator(BaseGenerator):
             f.write(f"// The variable names are based on {SystemConfig().variables_csv.as_posix()}\n")
             f.write(f"// Generated at: {strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"export var VariableNames: string[] = [\n")
-            for name in sorted(name_list):
+            for name in natsorted(name_list):
                 f.write(f'    "{name}",\n')
             f.write(f"]\n")
