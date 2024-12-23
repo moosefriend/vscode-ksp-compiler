@@ -24,7 +24,7 @@ KSP_Reference_Manual_Fixed.txt.py,260,23427,21. Built-in Variables and Constants
 If the patch was not saved before, an empty string is returned.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,260,23435,21. Built-in Variables and Constants,General,Time Machine Pro Variables,,$NI_VL_TMPRO_STANDARD,,,"User access for the two voice limits (Standard and High Quality) of the Time Machine Pro, to be
 used with set_voice_limit() and get_voice_limit().",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,260,23436,21. Built-in Variables and Constants,General,Time Machine Pro Variables,,$NI_VL_TMRPO_HQ,,,"User access for the two voice limits (Standard and High Quality) of the Time Machine Pro, to be
+KSP_Reference_Manual_Fixed.txt.py,260,23436,21. Built-in Variables and Constants,General,Time Machine Pro Variables,,$NI_VL_TMPRO_HQ,,,"User access for the two voice limits (Standard and High Quality) of the Time Machine Pro, to be
 used with set_voice_limit() and get_voice_limit().",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,261,23441,21. Built-in Variables and Constants,Events and MIDI,,,$ALL_GROUPS,,,"This constant addresses all groups in the instrument when used with disallow_group(),
 allow_group() or set_event_par_arr() functions.",,BUILT-IN
