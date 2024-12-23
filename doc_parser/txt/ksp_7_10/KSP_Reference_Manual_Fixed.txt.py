@@ -6116,7 +6116,7 @@ set_key_color()
 set_key_color(<note-number>, <key-color-constant>)
 Sets the color of the specified key, i.e. MIDI note, on the Kontakt virtual keyboard.
 <note-number>: MIDI note number of the key (0 ... 127).
-<key-color-constant>: One of available key color constant to specify the color used. The followingconstants are available:
+<key-color-constant>: One of available key color constant to specify the color used. The following constants are available:
 $KEY_COLOR_RED
 $KEY_COLOR_ORANGE
 $KEY_COLOR_LIGHT_ORANGE
@@ -8805,7 +8805,7 @@ Time Machine Pro Variables
 User access for the two voice limits (Standard and High Quality) of the Time Machine Pro, to be
 used with set_voice_limit() and get_voice_limit().
 $NI_VL_TMPRO_STANDARD
-$NI_VL_TMRPO_HQ
+$NI_VL_TMPRO_HQ
 <<<<<<<<<<<<<<<<<<<< Page 261 >>>>>>>>>>>>>>>>>>>>
 
 Events and MIDI

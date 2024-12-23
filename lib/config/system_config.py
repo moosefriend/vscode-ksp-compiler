@@ -228,6 +228,32 @@ class SystemConfig(metaclass=Singleton):
                 raise ValueError(f"No *.csv file for {item_type.name}")
         return path
 
+    def get_patch_csv_file(self, item_type: ItemType) -> Optional[Path]:
+        """
+        Get the patch *.csv file for the specified item type, e.g. for callbacks.
+
+        :param item_type: ItemType to get the path for
+        :return: Path of the patch *.csv file or None if there is no file
+        """
+        match item_type:
+            case ItemType.CALLBACK:
+                path = self.callbacks_csv
+            case ItemType.WIDGET:
+                path = self.widgets_csv
+            case ItemType.FUNCTION:
+                path = self.functions_csv
+            case ItemType.COMMAND:
+                path = self.commands_csv
+            case ItemType.VARIABLE:
+                path = self.variables_csv
+            case _:
+                raise ValueError(f"No *.csv file for {item_type.name}")
+        filename = path.name.replace("built_in", "patch")
+        path = path.parent / filename
+        if not path.is_file():
+            path = None
+        return path
+
 
 if __name__ == "__main__":
     # For testing only
