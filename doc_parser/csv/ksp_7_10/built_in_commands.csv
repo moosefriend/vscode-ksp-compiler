@@ -2179,7 +2179,7 @@ on note
 end on",set_keyrange(),BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,173,10187,15. Keyboard Commands,set_key_color(),set_key_color,"note-number,key-color-constant","Sets the color of the specified key, i.e. MIDI note, on the Kontakt virtual keyboard.
 <note-number>: MIDI note number of the key (0 ... 127).
-<key-color-constant>: One of available key color constant to specify the color used. The followingconstants are available:
+<key-color-constant>: One of available key color constant to specify the color used. The following constants are available:
 $KEY_COLOR_RED
 $KEY_COLOR_ORANGE
 $KEY_COLOR_LIGHT_ORANGE
