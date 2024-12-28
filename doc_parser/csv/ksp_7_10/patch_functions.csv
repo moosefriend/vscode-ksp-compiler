@@ -1,0 +1,2 @@
+File,Page No,Line No,Headline,Category,Name,Parameter List,Description,Source
+KSP_Reference_Manual_Fixed.txt.py,47,1835,6. Control Statements,Boolean Operators,in_range,"x,y,z",True if x is between (and including) y and z.,BUILT-IN

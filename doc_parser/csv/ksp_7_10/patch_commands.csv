@@ -117,12 +117,12 @@ KSP_Reference_Manual_Fixed.txt.py,326,11405,26. Advanced Concepts,PGS String Com
 KSP_Reference_Manual_Fixed.txt.py,326,11406,26. Advanced Concepts,PGS String Commands,pgs_str_key_exists,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,326,11407,26. Advanced Concepts,PGS String Commands,pgs_set_str_key_val,"key-id,value",The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,326,11408,26. Advanced Concepts,PGS String Commands,pgs_get_str_key_val,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,71,2669,8. User-defined Functions,,call,function-name,Calls a previously declared function.,"The function has to be declared before it is called.
-Empty parentheses can be optionally used when declaring and calling the function.",,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,71,2669,8. User-defined Functions,,call,function-name,Calls a previously declared function.,"- The function has to be declared before it is called.
+- Empty parentheses can be optionally used when declaring and calling the function.",,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,135,4871,14. User Interface Commands,,get_control_par_str_arr,,"Retrieve various parameters of the specified UI widget
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
-<index>: Array index of the UI widget we want to retrieve.",i.e. retrieving automation name of a particular ui_xy cursor,"on init
+<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving automation name of a particular ui_xy cursor,"on init
     declare ui_xy ?XY1[2]
     declare ui_xy ?XY2[2]
     declare ui_xy ?XY3[2]
@@ -156,7 +156,7 @@ General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL"
 KSP_Reference_Manual_Fixed.txt.py,135,4873,14. User Interface Commands,,get_control_par_real_arr,,"Retrieve various parameters of the specified UI widget
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
 <control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
-<index>: Array index of the UI widget we want to retrieve.",i.e. retrieving values of ui_xy cursor X and Y axes,"on init
+<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving values of ui_xy cursor X and Y axes,"on init
     declare ui_xy ?XY1[2]
     declare ui_xy ?XY2[2]
     declare ui_xy ?XY3[2]
@@ -189,9 +189,23 @@ set_control_par_arr()
 General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,134,4844,14. User Interface Commands,,get_control_par_str,,"Retrieve various parameters of the specified UI widget.
 <ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
-<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.",Flavor of the command for use with strings (i.e. retrieving text from ui_label or automation name from ui_slider).,"on init
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.",- Flavor of the command for use with strings (i.e. retrieving text from ui_label or automation name from ui_slider).,"on init
     declare ui_value_edit $Test (0, 100, 1)
     message(get_control_par(get_ui_id($Test), $CONTROL_PAR_WIDTH))
 end on
 Retrieving the width of a value edit in pixels.","set_control_par()
 General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,333,11634,26. Multi Script,,ignore_midi,,Ignores the event which triggered the callback.,"- Like ignore_event(), ignore_midi is a very ""strong"" command. Keep in mind that
+ignore_midi will ignore all incoming events.
+- If you just want to change the MIDI channel and/or any of the MIDI bytes of incoming events,
+you can also use set_event_par().","on midi_in
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 > 0)
+        ignore_midi
+    end if
+
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_OFF or ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 = 0))
+        ignore_midi
+    end if
+end on
+Ignoring Note On and Note Off messages. Note that some keyboards use a Note On command with
+a velocity of 0 to designate a Note Off command.",ignore_event(),BUILT-IN

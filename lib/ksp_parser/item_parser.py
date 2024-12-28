@@ -20,11 +20,12 @@ import csv
 import logging
 import re
 from pathlib import Path
-from re import compile, Pattern
+from re import compile
 from abc import abstractmethod
 from typing import Optional, Callable
 
 from doc_item.doc_item import DocItem
+from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.toc_parser import TocParser
 from config.constants import DocState
 from config.system_config import SystemConfig
@@ -45,8 +46,7 @@ class ItemParser:
     def __init__(
             self,
             doc_item_class: type[DocItem],
-            content_start_pattern: Pattern,
-            content_stop_pattern: Pattern,
+            content_patterns: list[ContentPattern],
             csv_file: Path,
             on_headline: Callable[[str], None] = None,
             on_category: Callable[[str], None] = None,
@@ -56,8 +56,7 @@ class ItemParser:
         Base parser for documentation items in the Kontakt KSP text manual.
 
         :param doc_item_class: Class of the items to be parsed, e.g. CallbackItem
-        :param content_start_pattern: Pattern to find the content start headline
-        :param content_stop_pattern: Pattern to find the content end headline
+        :param content_patterns: List of ContentPattern objects, where each object contains the start and stop patterns
         :param csv_file: Path of the *.csv export file
         :param on_headline: Callback for each new headline e.g. for initialization
         :param on_category: Callback for each new category e.g. for initialization
@@ -65,10 +64,8 @@ class ItemParser:
         """
         self.doc_item_class: type[DocItem] = doc_item_class
         """Class of the items to be parsed, e.g. CallbackItem"""
-        self.content_start_pattern: Pattern = content_start_pattern
-        """Pattern to find the content start headline"""
-        self.content_stop_pattern: Pattern = content_stop_pattern
-        """Pattern to find the content end headline"""
+        self.content_patterns: list[ContentPattern] = content_patterns
+        """List of ContentPattern objects, where each object contains the start and stop patterns"""
         self.csv_file: Path = csv_file
         """Path of the *.csv export file"""
         self.on_headline: Callable[[str], None] = on_headline
@@ -107,6 +104,8 @@ class ItemParser:
         """RewindReader to be used to read from the *.txt file"""
         self.toc: TocParser = SystemConfig().toc
         """Object containing the table of contents (TOC)"""
+        self.content_pattern: Optional[ContentPattern] = None
+        """Current content pattern (if any)"""
 
     def parse(self):
         """
@@ -114,21 +113,28 @@ class ItemParser:
         """
         log_step(f"Parse {self.doc_item_class.plural()} in {self.reader.file}")
         self.reader.reset()
-        self.search_content_start()
-        self.scan_items()
+        while self.search_content_start():
+            self.scan_items()
         log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")
         log.info(f"{self.duplicate_cnt} duplicate {self.doc_item_class.plural()}")
 
-    def search_content_start(self):
+    def search_content_start(self) -> bool:
         """
         Find the line where the content will start.
+
+        :return: True if content has been found, False otherwise
         """
         for line in self.reader:
             # Search for the content
-            if self.content_start_pattern.match(line):
-                log.debug(f"Found Content Start ({self.reader.location()})")
-                self.reader.rewind()
+            for content_pattern in self.content_patterns:
+                if content_pattern.start(line):
+                    log.debug(f"Found Content Start ({self.reader.location()})")
+                    self.reader.rewind()
+                    self.content_pattern = content_pattern
+                    break
+            if self.content_pattern:
                 break
+        return self.content_pattern is not None
 
     def scan_items(self):
         """
@@ -143,10 +149,11 @@ class ItemParser:
         self.doc_state = DocState.NONE
         for line in self.reader:
             # Check if this is the end of the content search
-            if self.content_stop_pattern.match(line):
+            if self.content_pattern.stop(line):
                 if self.finalize_item_list:
                     self.finalize_item_list()
                 self.reader.rewind()
+                self.content_pattern = None
                 break
             # Check for headlines
             elif line in self.toc.all_headlines:

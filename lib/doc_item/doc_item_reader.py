@@ -80,6 +80,7 @@ class DocItemReader:
         """
         Read the *.csv file into memory.
         """
+        log.info(f"Read {self.doc_item_class.plural()} from {csv_file}")
         with csv_file.open(newline='', encoding=self.encoding) as f:
             csv_reader = csv.DictReader(f, delimiter=SystemConfig().delimiter)
             for row in csv_reader:

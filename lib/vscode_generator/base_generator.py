@@ -58,7 +58,6 @@ class BaseGenerator:
         """
         name_list = set()
         with DocItemReader(item_type) as csv_reader:
-            log.info(f"Read name list from {csv_reader.csv_file.as_posix()}")
             for doc_item in csv_reader:
                 name_list.add(doc_item.name)
         return name_list
