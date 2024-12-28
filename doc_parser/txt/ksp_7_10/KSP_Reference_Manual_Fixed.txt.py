@@ -6911,38 +6911,56 @@ Zones pane.
 
 Zone and Slice Functions
 
+[C]find_zone()
+
 find_zone(<zone-name>)
 Returns the zone ID for the specified zone name. Only available in the on init callback.
 
+
+[C]get_sample_length()
 
 get_sample_length(<zone-id>)
 Returns the length of the specified zone's sample in microseconds.
 
 
+[C]num_slices_zone()
+
 num_slices_zone(<zone-id>)
 Returns the number of slices in the specified zone.
 
 
+[C]zone_slice_length()
+
 zone_slice_length(<zone-id>, <slice-index>)
 Returns the length of the specified slice in microseconds, with respect to the current tempo.
 
+
+[C]zone_slice_start()
 
 zone_slice_start(<zone-id>,<slice-index>)
 Returns the absolute start point of the specified slice in microseconds, independent of the current
 tempo.
 
 
+[C]zone_slice_idx_loop_start()
+
 zone_slice_idx_loop_start(<zone-id>, <loop-index>)
 Returns the index number of the slice at the loop start.
 
+
+[C]zone_slice_idx_loop_end()
 
 zone_slice_idx_loop_end(<zone-id>, <loop-index>)
 Returns the index number of the slice at the loop end.
 
 
+[C]zone_slice_loop_count()
+
 zone_slice_loop_count(<zone-id>, <loop-index>)
 Returns the loop count of the specified loop.
 
+
+[C]dont_use_machine_mode()
 
 dont_use_machine_mode(<ID-number>)
 Play the specified event in Sampler mode (only makes sense when the groups allowed for playback

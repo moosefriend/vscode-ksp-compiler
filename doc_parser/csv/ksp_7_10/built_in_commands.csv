@@ -279,7 +279,7 @@ on controller
 end on
 Moving the modwheel changes the tuning of all C notes (C-2, C-1…C8).","set_event_mark()
 Events and MIDI: $EVENT_ID, $ALL_EVENTS, $MARK_1 … $MARK_28",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,232,12136,20. MIDI Object Commands,by_marks(),by_marks,mark,"Used to access a user-defined group of MIDI object events.
+KSP_Reference_Manual_Fixed.txt.py,232,12154,20. MIDI Object Commands,by_marks(),by_marks,mark,"Used to access a user-defined group of MIDI object events.
 <mark>: The event mark number, $MARK_1 ... $MARK_10 .",,,"mf_insert_file()
 mf_insert_event()
 mf_remove_event()
@@ -2614,7 +2614,18 @@ get_voice_limit($NI_VL_TMPRO_STANDARD))
     end if
 end on
 Changing TM Pro voice limits.",get_voice_limit(),BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,194,11025,17. Zone Commands,get_loop_par(),get_loop_par,"zone-id,loop-index,parameter","Returns the value of a particular loop parameter of a zone.
+KSP_Reference_Manual_Fixed.txt.py,193,10987,17. Zone Commands,find_zone(),find_zone,zone-name,Returns the zone ID for the specified zone name. Only available in the on init callback.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,10993,17. Zone Commands,get_sample_length(),get_sample_length,zone-id,Returns the length of the specified zone's sample in microseconds.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,10999,17. Zone Commands,num_slices_zone(),num_slices_zone,zone-id,Returns the number of slices in the specified zone.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,11005,17. Zone Commands,zone_slice_length(),zone_slice_length,"zone-id,slice-index","Returns the length of the specified slice in microseconds, with respect to the current tempo.",,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,11011,17. Zone Commands,zone_slice_start(),zone_slice_start,"zone-id,slice-index","Returns the absolute start point of the specified slice in microseconds, independent of the current
+tempo.",,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,11018,17. Zone Commands,zone_slice_idx_loop_start(),zone_slice_idx_loop_start,"zone-id,loop-index",Returns the index number of the slice at the loop start.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,11024,17. Zone Commands,zone_slice_idx_loop_end(),zone_slice_idx_loop_end,"zone-id,loop-index",Returns the index number of the slice at the loop end.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,11030,17. Zone Commands,zone_slice_loop_count(),zone_slice_loop_count,"zone-id,loop-index",Returns the loop count of the specified loop.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,193,11036,17. Zone Commands,dont_use_machine_mode(),dont_use_machine_mode,ID-number,"Play the specified event in Sampler mode (only makes sense when the groups allowed for playback
+are in one of Machine modes).",,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,194,11043,17. Zone Commands,get_loop_par(),get_loop_par,"zone-id,loop-index,parameter","Returns the value of a particular loop parameter of a zone.
 <zone-id>: The ID of the zone.
 <loop-index>: The index of the loop (0 ... 7).
 <parameter>: The following parameters are available:
@@ -2624,18 +2635,18 @@ $LOOP_PAR_LENGTH
 $LOOP_PAR_XFADE
 $LOOP_PAR_COUNT
 $LOOP_PAR_TUNING",- get_loop_par() works on both normal and user zones.,"message(get_loop_par($myZoneId, 0, $LOOP_PAR_MODE))",set_loop_par(),BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,195,11050,17. Zone Commands,get_num_zones(),get_num_zones,,Returns the total number of all zones that are present in the instrument (normal and user zones).,,"on init
+KSP_Reference_Manual_Fixed.txt.py,195,11068,17. Zone Commands,get_num_zones(),get_num_zones,,Returns the total number of all zones that are present in the instrument (normal and user zones).,,"on init
     message(get_num_zones())
 end on
 Quite self-explanatory.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,196,11063,17. Zone Commands,get_sample(),get_sample,"zone-id,return-parameter","Returns paths, file names and extensions of samples.
+KSP_Reference_Manual_Fixed.txt.py,196,11081,17. Zone Commands,get_sample(),get_sample,"zone-id,return-parameter","Returns paths, file names and extensions of samples.
 <zone-id>: The ID of the zone.
 <return-parameter>: The following parameters are available:$NI_FILE_NAME
 $NI_FILE_FULL_PATH
 $NI_FILE_FULL_PATH_OS
 $NI_FILE_EXTENSION",- get_sample() works on both normal and user zones.,"message(get_sample(%NI_USER_ZONE_IDS[0], $NI_FILE_NAME))","set_sample()
 Sample Parameters",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,197,11085,17. Zone Commands,get_sel_zones_idx(),get_sel_zones_idx,array-name,"Fills the specified array with indices of all selected zones in Kontakt's Mapping Editor.
+KSP_Reference_Manual_Fixed.txt.py,197,11103,17. Zone Commands,get_sel_zones_idx(),get_sel_zones_idx,array-name,"Fills the specified array with indices of all selected zones in Kontakt's Mapping Editor.
 <array-name>: Array to be filled with indices of selected zones.","- The command overwrites all existing values as long as there are selected zones. If there
 are more selected zones than array indices, the array will be filled until it is full, ignoring the
 remaining selected zones.
@@ -2681,7 +2692,7 @@ on note
 end on
 Using the lowest keys of an 88 key MIDI controller to finely adjust zone volume and tuning in 0.01
 steps",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,199,11144,17. Zone Commands,get_zone_id(),get_zone_id,zone-index,"Returns the ID of the zone with the specified zone index.
+KSP_Reference_Manual_Fixed.txt.py,199,11162,17. Zone Commands,get_zone_id(),get_zone_id,zone-index,"Returns the ID of the zone with the specified zone index.
 <zone-index>: Index of the zone (see Index column in Monitor → Zones pane in Kontakt) .",,"on init
     set_snapshot_type(3) { Must be 2 or 3 or else set_zone_par works only on user zones }
 
@@ -2698,7 +2709,7 @@ on ui_control ($slider)
     set_text($label, get_zone_par(0, $ZONE_PAR_ROOT_KEY))
 end on
 Adjusting the root key of the first zone in the instrument.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,200,11170,17. Zone Commands,get_zone_par(),get_zone_par,"zone-id,parameter","Returns the value of a particular zone parameter.
+KSP_Reference_Manual_Fixed.txt.py,200,11188,17. Zone Commands,get_zone_par(),get_zone_par,"zone-id,parameter","Returns the value of a particular zone parameter.
 <zone-id>: The ID of the zone.
 <parameter>: The following parameters are available:
 $ZONE_PAR_HIGH_KEY
@@ -2721,7 +2732,7 @@ $ZONE_PAR_SAMPLE_RATE
 $ZONE_PAR_SELECTED
 $ZONE_PAR_BPM","- get_zone_par() works on both normal and user zones.
 - $ZONE_PAR_BPM returns the BPM value multiplied by 1000, so 120 BPM would be 120000.","get_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_PAN)",set_zone_par(),BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,201,11208,17. Zone Commands,get_zone_status(),get_zone_status,zone-ID,"Queries the status of the zone ID in question. Zone status has four possible states:
+KSP_Reference_Manual_Fixed.txt.py,201,11226,17. Zone Commands,get_zone_status(),get_zone_status,zone-ID,"Queries the status of the zone ID in question. Zone status has four possible states:
 - $NI_ZONE_STATUS_EMPTY Zone is a user zone and has no sample loaded
 - $NI_ZONE_STATUS_LOADED Zone is a user zone and has a sample loaded
 - $NI_ZONE_STATUS_PURGED Zone is purged from memory (valid for both regular and user
@@ -2749,7 +2760,7 @@ on ui_control ($ZoneID)
     end select
 end on
 Query the status of the first 1001 zone IDs.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,202,11248,17. Zone Commands,set_loop_par(),set_loop_par,"zone-id,loop-index,parameter,value","Sets the loop parameters of a user zone.
+KSP_Reference_Manual_Fixed.txt.py,202,11266,17. Zone Commands,set_loop_par(),set_loop_par,"zone-id,loop-index,parameter,value","Sets the loop parameters of a user zone.
 <zone-id>: The ID of the zone.
 <loop-index>: The index of the loop (0 ... 7).
 <parameter>: The following parameters are available:
@@ -2770,7 +2781,7 @@ until the end of the callback, whichever comes first. So, if it is required to s
 parameters in batch, it is recommended to first collect all the async IDs into an array, and only
 then run any wait() commands, as shown in the description of wait_async() command.","wait_async(set_loop_par(%NI_USER_ZONE_IDS[0], 0, $LOOP_PAR_MODE, $SampleLoopOnA))","get_loop_par()
 wait_async()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,203,11284,17. Zone Commands,set_num_user_zones(),set_num_user_zones,value,"Creates empty user zones.
+KSP_Reference_Manual_Fixed.txt.py,203,11302,17. Zone Commands,set_num_user_zones(),set_num_user_zones,value,"Creates empty user zones.
 <value>: Defines the number of user zones to be created. %NI_USER_ZONE_IDS is the
 array of size <value> with all the user zone IDs.","- A maximum of 1024 user zones per instrument can be created.
 - User zones are shown with a different color in Kontakt's Mapping Editor.
@@ -2783,7 +2794,7 @@ should be used instead of the hard-coded zone IDs.","on init
     set_zone_par(%NI_USER_ZONE_IDS[1], $ZONE_PAR_GROUP, 1)
 end on
 Create two empty zones and place each to its own group.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,204,11309,17. Zone Commands,set_sample(),set_sample,"zone-id,path","Sets the user sample in a zone.
+KSP_Reference_Manual_Fixed.txt.py,204,11327,17. Zone Commands,set_sample(),set_sample,"zone-id,path","Sets the user sample in a zone.
 <zone-id>: The ID of the zone.
 <path>: The file path to the sample to be loaded.","- set_sample() only works on user zones.
 - When executed in the on init callback, this function runs synchronously and returns -1.
@@ -2802,7 +2813,7 @@ then run any wait() commands, as shown in the description of wait_async() comman
     end if
 end on","get_sample()
 wait_async()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,205,11343,17. Zone Commands,set_zone_par(),set_zone_par,"zone-id,parameter,value","Sets the user zone parameters.
+KSP_Reference_Manual_Fixed.txt.py,205,11361,17. Zone Commands,set_zone_par(),set_zone_par,"zone-id,parameter,value","Sets the user zone parameters.
 <zone-id>: The ID of the zone.
 <parameter>: The following flags are available:
 $ZONE_PAR_HIGH_KEY
@@ -2837,7 +2848,7 @@ forward, execution of this command has been delayed until the first wait() comma
 until the end of the callback, whichever comes first. So, if it is required to set a lot of zone
 parameters in batch, it is recommended to first collect all the async IDs into an array, and only
 then run any wait() commands, as shown in the description of wait_async() command.","set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 0)",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,208,11430,18. Load/Save Commands,get_folder(),get_folder,path-variable,"Returns the path specified with the built-in path variable.
+KSP_Reference_Manual_Fixed.txt.py,208,11448,18. Load/Save Commands,get_folder(),get_folder,path-variable,"Returns the path specified with the built-in path variable.
 <path-variable>: The following path variables are available:$GET_FOLDER_LIBRARY_DIR
 If used with an NKI which belongs to a Kontakt Player encoded library: library
 folder.
@@ -2858,7 +2869,7 @@ end on
 Displaying the path of Kontakt's factory data folder.","load_ir_sample()
 General: $GET_FOLDER_LIBRARY_DIR, $GET_FOLDER_FACTORY_DIR,
 $GET_FOLDER_PATCH_DIR",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,209,11463,18. Load/Save Commands,load_array(),load_array,"array-variable,mode","Loads an array from an external .nka file.
+KSP_Reference_Manual_Fixed.txt.py,209,11481,18. Load/Save Commands,load_array(),load_array,"array-variable,mode","Loads an array from an external .nka file.
 <array-variable>: The name of the array variable. This name must be present as the first line of the .nka file.
 <mode>:  0: A dialog window pops up, allowing you to select an .nka file to load. This
 mode can only be used in on persistence_changed, on ui_control and on
@@ -2942,7 +2953,7 @@ end on
 Exporting and loading the contents of a ui_table widget.","on async_complete
 save_array()
 General: $NI_ASYNC_ID, $NI_ASYNC_EXIT_STATUS",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,211,11563,18. Load/Save Commands,load_array_str(),load_array_str,"array-variable,path","Loads an array from an external .nka file, using an absolute path to the file.
+KSP_Reference_Manual_Fixed.txt.py,211,11581,18. Load/Save Commands,load_array_str(),load_array_str,"array-variable,path","Loads an array from an external .nka file, using an absolute path to the file.
 <array-variable>: The name of the array variable, this must be present as the first line of the .nka file.
 <path>:  The absolute path of the .nka file.","- The behaviour is similar to load_array() with mode set to 0, but instead of manually choosing
 an .nka file, you can specify it with an absolute path.
@@ -3007,7 +3018,7 @@ on ui_control ($file_browser)
 end on
 Loading different table presets with a browser. Make sure to first set the browser path of the file
 selector to point to a folder with compatible .nka files.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,213,11641,18. Load/Save Commands,load_ir_sample(),load_ir_sample,"path-or-filename,slot,generic","Loads an impulse response sample into Kontakt's convolution effect.
+KSP_Reference_Manual_Fixed.txt.py,213,11659,18. Load/Save Commands,load_ir_sample(),load_ir_sample,"path-or-filename,slot,generic","Loads an impulse response sample into Kontakt's convolution effect.
 <path-or-filename>: The absolute file path of the IR sample.If no path is specified, the command will look for the specified sample within
 the ir_samples folder of the resource container.
 If no resource container is available, the folder ir_samples within the Kontakt
@@ -3050,7 +3061,7 @@ end on
 Load an IR sample into a convolution reverb, placed in the first slot of send effect chain.","get_folder()
 on async_complete
 General: $NI_ASYNC_ID",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,215,11700,18. Load/Save Commands,save_array(),save_array,"array-variable,mode","Saves an array to an external .nka file
+KSP_Reference_Manual_Fixed.txt.py,215,11718,18. Load/Save Commands,save_array(),save_array,"array-variable,mode","Saves an array to an external .nka file
 <array-variable>: The name of the array variable to be saved.
 <mode>: 0: A dialog window pops up, allowing you to save the .nka file. This mode
 can only be used in on persistence_changed, on ui_control and on
@@ -3068,7 +3079,7 @@ line.
 - When using mode 0, the callback continues even if the loading dialog is still open.",,"on async_complete
 load_array()
 General: $NI_ASYNC_ID, $NI_ASYNC_EXIT_STATUS",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,216,11729,18. Load/Save Commands,save_array_str(),save_array_str,"array-variable,path","Saves an array to an external .nka file with the specified absolute path.
+KSP_Reference_Manual_Fixed.txt.py,216,11747,18. Load/Save Commands,save_array_str(),save_array_str,"array-variable,path","Saves an array to an external .nka file with the specified absolute path.
 <array-variable>: The name of the array variable to be saved.
 <path>: The absolute path of the .nka file to be saved.","- The behaviour is similar to save_array(), but instead of manually choosing a save location,
 you can directly save the file to the specified location.
@@ -3123,7 +3134,7 @@ on async_complete
 end on
 Save table presets with custom names. Make sure to set the path where the .nka files will be saved.","save_array()
 load_array_str()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,218,11800,18. Load/Save Commands,save_midi_file(),save_midi_file,path,"Saves a MIDI file with the range specified by the mf_set_export_area() command.
+KSP_Reference_Manual_Fixed.txt.py,218,11818,18. Load/Save Commands,save_midi_file(),save_midi_file,path,"Saves a MIDI file with the range specified by the mf_set_export_area() command.
 <path>: The absolute path of the MIDI file to be saved.",,"on init
     message("""")
 
@@ -3160,34 +3171,34 @@ on async_complete
 end on
 Saving a MIDI file.","mf_insert_file()
 mf_set_export_area()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,220,11860,19. Music Information Retrieval,detect_pitch(),detect_pitch,"zone-id,pitch-result","Returns a real value representing the fundamental frequency of an audio sample, in semitones and
+KSP_Reference_Manual_Fixed.txt.py,220,11878,19. Music Information Retrieval,detect_pitch(),detect_pitch,"zone-id,pitch-result","Returns a real value representing the fundamental frequency of an audio sample, in semitones and
 cents. If detection fails, the function will return ~NI_DETECT_PITCH_INVALID.
 <zone-id>: The ID of the zone.
 <pitch-result>: The MIDI note value of the detected pitch.",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,221,11869,19. Music Information Retrieval,detect_loudness(),detect_loudness,"zone-id,loudness-result","Returns a real value representing the loudness of an audio sample in decibels. Loudness is
+KSP_Reference_Manual_Fixed.txt.py,221,11887,19. Music Information Retrieval,detect_loudness(),detect_loudness,"zone-id,loudness-result","Returns a real value representing the loudness of an audio sample in decibels. Loudness is
 measured according to the standard established by the International Telecommunication Union:
 Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If
 detection fails, the function will return ~NI_DETECT_LOUDNESS_INVALID.
 <zone-id>: The ID of the zone.
 <loudness-result>: The real value of the detected loudness in decibels.",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,222,11880,19. Music Information Retrieval,detect_peak(),detect_peak,"zone-id,peak-result","Returns a real value representing peak level of an audio sample in decibels. Peak is measured
+KSP_Reference_Manual_Fixed.txt.py,222,11898,19. Music Information Retrieval,detect_peak(),detect_peak,"zone-id,peak-result","Returns a real value representing peak level of an audio sample in decibels. Peak is measured
 according to the standard established by the International Telecommunication Union: Algorithms to
 measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection
 fails, the function will set <peak-result> to ~NI_DETECT_PEAK_INVALID.
 <zone-id>: The ID of the zone.
 <peak-result>: The real value of the detected peak level in decibels.",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,223,11891,19. Music Information Retrieval,detect_rms(),detect_rms,"zone-id,rms-result","Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the
+KSP_Reference_Manual_Fixed.txt.py,223,11909,19. Music Information Retrieval,detect_rms(),detect_rms,"zone-id,rms-result","Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the
 function will return ~NI_DETECT_RMS_INVALID.
 <zone-id>: The ID of the zone.
 <rms-result>: The real value of the RMS level of the audio sample in decibels.",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,224,11900,19. Music Information Retrieval,detect_sample_type(),detect_sample_type,"zone-id,sample-type-result","Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether
+KSP_Reference_Manual_Fixed.txt.py,224,11918,19. Music Information Retrieval,detect_sample_type(),detect_sample_type,"zone-id,sample-type-result","Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether
 an audio sample is a drum or an instrument. If detection fails, the function will return
 $NI_DETECT_SAMPLE_TYPE_INVALID.
 <zone-id>: The ID of the zone.
 <sample-type-result>: The detected sample type, can be one of the following:$NI_DETECT_SAMPLE_TYPE_INVALID
 $NI_DETECT_SAMPLE_TYPE_INSTRUMENT
 $NI_DETECT_SAMPLE_TYPE_DRUM",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,225,11912,19. Music Information Retrieval,detect_drum_type(),detect_drum_type,"zone-id,drum-type-result","Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an
+KSP_Reference_Manual_Fixed.txt.py,225,11930,19. Music Information Retrieval,detect_drum_type(),detect_drum_type,"zone-id,drum-type-result","Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an
 audio sample. You can use this function if detect_sample_type() determines that a given audio
 sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return
 ~NI_DETECT_DRUM_TYPE_INVALID.
@@ -3203,7 +3214,7 @@ $NI_DETECT_DRUM_TYPE_CLAP
 $NI_DETECT_DRUM_TYPE_SHAKER
 $NI_DETECT_DRUM_TYPE_PERC_DRUM
 $NI_DETECT_DRUM_TYPE_PERC_OTHER",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,226,11933,19. Music Information Retrieval,detect_instrument_type(),detect_instrument_type,"zone-id,instr-type-result","Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the
+KSP_Reference_Manual_Fixed.txt.py,226,11951,19. Music Information Retrieval,detect_instrument_type(),detect_instrument_type,"zone-id,instr-type-result","Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the
 instrument type of an audio sample. Hint: use this function if detect_sample_type()
 determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT. If
 detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
@@ -3343,7 +3354,7 @@ on ui_control ($Drop)
 end on
 Detect whether a sample is of type instrument or drum, and detect the corresponding drum or
 instrument type.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,233,12154,20. MIDI Object Commands,by_track(),by_track,track,"Used to access events grouped by their track number.
+KSP_Reference_Manual_Fixed.txt.py,233,12172,20. MIDI Object Commands,by_track(),by_track,track,"Used to access events grouped by their track number.
 <track>: The track number of the events you wish to access.",- Similar in functionality to the by_marks() command.,,"mf_insert_file()
 mf_insert_event()
 mf_remove_event()
@@ -3353,7 +3364,7 @@ mf_set_mark()
 mf_get_mark()
 mf_get_id()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,234,12175,20. MIDI Object Commands,mf_copy_export_area(),mf_copy_export_area,index,Copies the contents of MIDI export area 0 to the export area with the specified <index>.,,"on init
+KSP_Reference_Manual_Fixed.txt.py,234,12193,20. MIDI Object Commands,mf_copy_export_area(),mf_copy_export_area,index,Copies the contents of MIDI export area 0 to the export area with the specified <index>.,,"on init
     message("""")
     make_perfview
 
@@ -3394,7 +3405,7 @@ end on
 Loads a MIDI file and distributes the content found in the first four MIDI channels to four separate
 MIDI areas.","mf_set_export_area()
 mf_set_num_export_areas()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,235,12228,20. MIDI Object Commands,mf_get_buffer_size(),mf_get_buffer_size,,Returns the size of the MIDI object's event buffer.,"- The maximum buffer size is 1000000 events, including both active and inactive events.
+KSP_Reference_Manual_Fixed.txt.py,235,12246,20. MIDI Object Commands,mf_get_buffer_size(),mf_get_buffer_size,,Returns the size of the MIDI object's event buffer.,"- The maximum buffer size is 1000000 events, including both active and inactive events.
 - Inserting a MIDI event will decrease the buffer size by one. Removing an event will increase it
 by one.",,"mf_insert_file()
 mf_set_buffer_size()
@@ -3402,7 +3413,7 @@ mf_reset()
 mf_insert_event()
 mf_remove_event()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,236,12247,20. MIDI Object Commands,mf_get_event_par(),mf_get_event_par,"event-id,parameter","Returns the value of an event parameter.
+KSP_Reference_Manual_Fixed.txt.py,236,12265,20. MIDI Object Commands,mf_get_event_par(),mf_get_event_par,"event-id,parameter","Returns the value of an event parameter.
 <event-id>: The ID of the event to be edited.
 <parameter>: The event parameter, either one of four freely assignable event parameters:
 $EVENT_PAR_0
@@ -3427,7 +3438,7 @@ mf_remove_event()
 mf_get_id()
 save_midi_file()
 Events and MIDI: $CURRENT_EVENT",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,237,12283,20. MIDI Object Commands,mf_get_first(),mf_get_first,track-index,"Moves the position marker to the first event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py,237,12301,20. MIDI Object Commands,mf_get_first(),mf_get_first,track-index,"Moves the position marker to the first event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.",- Using this command will also select the event at the position marker for editing.,,"mf_insert_file()
 mf_get_next()
 mf_get_next_at()
@@ -3436,14 +3447,14 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,238,12303,20. MIDI Object Commands,mf_get_id(),mf_get_id,,"Returns the ID of the currently selected event, when using the navigation commands like
+KSP_Reference_Manual_Fixed.txt.py,238,12321,20. MIDI Object Commands,mf_get_id(),mf_get_id,,"Returns the ID of the currently selected event, when using the navigation commands like
 mf_get_first(), mf_get_next(), etc.",,,"mf_get_first()
 mf_get_next()
 mf_get_next_at()
 mf_get_prev()
 mf_get_prev_at()
 mf_get_last()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,239,12318,20. MIDI Object Commands,mf_get_last(),mf_get_last,track-index,"Moves the position marker to the last event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py,239,12336,20. MIDI Object Commands,mf_get_last(),mf_get_last,track-index,"Moves the position marker to the last event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.",- Using this command will also select the event at the position marker for editing.,,"mf_insert_file()
 mf_get_first()
 mf_get_next()
@@ -3452,7 +3463,7 @@ mf_get_num_tracks()
 mf_get_prev()
 mf_get_prev_at()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,240,12338,20. MIDI Object Commands,mf_get_last_filename(),mf_get_last_filename,,"Returns the filename (not the full path!) of the last MIDI file that was inserted into Kontakt, either via
+KSP_Reference_Manual_Fixed.txt.py,240,12356,20. MIDI Object Commands,mf_get_last_filename(),mf_get_last_filename,,"Returns the filename (not the full path!) of the last MIDI file that was inserted into Kontakt, either via
 mf_insert_file(), or via drag and drop operation on ui_mouse_area.","- This command will pair Note On and Note Off events to a single Note On with a Note Length
 parameter. The Note Off events will be discarded.","on init
     message("""")
@@ -3495,7 +3506,7 @@ parameter. The Note Off events will be discarded.","on init
 end on
 MIDI file loader which allows exporting first four tracks as individual MIDI files. Utilizes
 mf_get_last_filename() to show the exact name of the MIDI file that was loaded.",mf_insert_file(),BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,242,12397,20. MIDI Object Commands,mf_get_mark(),mf_get_mark,"event-id,mark","Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
+KSP_Reference_Manual_Fixed.txt.py,242,12415,20. MIDI Object Commands,mf_get_mark(),mf_get_mark,"event-id,mark","Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
 <event-id>: The ID of the event to be edited
 <mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
 more than one mark to a single event, either by typing the command again, or
@@ -3509,7 +3520,7 @@ mf_set_mark()
 mf_get_mark()
 mf_get_id()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,243,12419,20. MIDI Object Commands,mf_get_next(),mf_get_next,track-index,"Moves the position marker to the next event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py,243,12437,20. MIDI Object Commands,mf_get_next(),mf_get_next,track-index,"Moves the position marker to the next event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.",- Using this command will also select the event at the position marker for editing.,,"load_midi_file()
 mf_get_first()
 mf_get_next_at()
@@ -3518,7 +3529,7 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,244,12439,20. MIDI Object Commands,mf_get_next_at(),mf_get_next_at,"track-index,pos","Moves the position marker to the next event in the MIDI track right after the defined position.
+KSP_Reference_Manual_Fixed.txt.py,244,12457,20. MIDI Object Commands,mf_get_next_at(),mf_get_next_at,"track-index,pos","Moves the position marker to the next event in the MIDI track right after the defined position.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.
 <pos>: Position in MIDI ticks.",- Using this command will also select the event at the position marker for editing.,,"load_midi_file()
 mf_get_first()
@@ -3528,7 +3539,7 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,245,12460,20. MIDI Object Commands,mf_get_num_tracks(),mf_get_num_tracks,,Returns the number of tracks in the MIDI object.,,,"mf_insert_file()
+KSP_Reference_Manual_Fixed.txt.py,245,12478,20. MIDI Object Commands,mf_get_num_tracks(),mf_get_num_tracks,,Returns the number of tracks in the MIDI object.,,,"mf_insert_file()
 mf_get_first()
 mf_get_next()
 mf_get_next_at()
@@ -3536,7 +3547,7 @@ mf_get_prev()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,246,12476,20. MIDI Object Commands,mf_get_prev(),mf_get_prev,track-index,"Moves the position marker to the previous event in the MIDI track.
+KSP_Reference_Manual_Fixed.txt.py,246,12494,20. MIDI Object Commands,mf_get_prev(),mf_get_prev,track-index,"Moves the position marker to the previous event in the MIDI track.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.",- Using this command will also select the event at the position marker for editing.,,"load_midi_file()
 mf_get_first()
 mf_get_next()
@@ -3545,7 +3556,7 @@ mf_get_num_tracks()
 mf_get_prev_at()
 mf_get_last()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,247,12496,20. MIDI Object Commands,mf_get_prev_at(),mf_get_prev_at,"track-index,pos","Moves the position marker to the first event before the defined position.
+KSP_Reference_Manual_Fixed.txt.py,247,12514,20. MIDI Object Commands,mf_get_prev_at(),mf_get_prev_at,"track-index,pos","Moves the position marker to the first event before the defined position.
 <track-index>: The number of the track you want to edit. -1 refers to the whole file.
 <pos>: Position in MIDI ticks.",- Using this command will also select the event at the position marker for editing.,,"load_midi_file()
 mf_get_first()
@@ -3555,7 +3566,7 @@ mf_get_num_tracks()
 mf_get_prev()
 mf_get_last()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,248,12517,20. MIDI Object Commands,mf_insert_event(),mf_insert_event,"track,pos,command,byte1,byte2","Activates an inactive MIDI event in the MIDI object. However, because the command and position
+KSP_Reference_Manual_Fixed.txt.py,248,12535,20. MIDI Object Commands,mf_insert_event(),mf_insert_event,"track,pos,command,byte1,byte2","Activates an inactive MIDI event in the MIDI object. However, because the command and position
 are defined in this command, it can be considered as an insertion.
 <track>: The track into which the event will be inserted.
 <pos>: The position at which the event will be inserted, in ticks.
@@ -3578,7 +3589,7 @@ mf_get_buffer_size()
 mf_reset()
 mf_remove_event()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,249,12551,20. MIDI Object Commands,mf_insert_file(),mf_insert_file,"path,track-offset,position-offset,mode","Inserts a MIDI file into the object.
+KSP_Reference_Manual_Fixed.txt.py,249,12569,20. MIDI Object Commands,mf_insert_file(),mf_insert_file,"path,track-offset,position-offset,mode","Inserts a MIDI file into the object.
 <path>: The absolute path of the MIDI file, including the file name.
 <track-offset>: Applies a track offset to the MIDI data.
 <position-offset>: Applies a position offset, in ticks, to the MIDI data.
@@ -3622,14 +3633,14 @@ save_midi_file()
 mf_set_event_par()
 mf_get_event_par()
 General: $NI_ASYNC_ID, $NI_ASYNC_EXIT_STATUS",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,251,12611,20. MIDI Object Commands,mf_remove_event(),mf_remove_event,event-id,"Deactivates an event in the MIDI object, effectively removing it.
+KSP_Reference_Manual_Fixed.txt.py,251,12629,20. MIDI Object Commands,mf_remove_event(),mf_remove_event,event-id,"Deactivates an event in the MIDI object, effectively removing it.
 <event-id>: The ID of the event to be deactivated.",- Using this command will decrease the MIDI event buffer size by one.,,"mf_insert_file()
 mf_set_buffer_size()
 mf_get_buffer_size()
 mf_reset()
 mf_insert_event()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,252,12629,20. MIDI Object Commands,mf_reset(),mf_reset,,"Resets the MIDI object, sets the event buffer to zero, and removes all events.","- This command purges all data in the MIDI object. Use with caution!
+KSP_Reference_Manual_Fixed.txt.py,252,12647,20. MIDI Object Commands,mf_reset(),mf_reset,,"Resets the MIDI object, sets the event buffer to zero, and removes all events.","- This command purges all data in the MIDI object. Use with caution!
 - This command is asynchronous, thus it returns an async ID and calls the on
 async_complete callback.",,"mf_insert_file()
 mf_set_buffer_size()
@@ -3637,7 +3648,7 @@ mf_reset()
 mf_insert_event()
 mf_remove_event()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,253,12648,20. MIDI Object Commands,mf_set_buffer_size(),mf_set_buffer_size,num-events,"Defines a number of inactive MIDI events, that can be activated and edited.
+KSP_Reference_Manual_Fixed.txt.py,253,12666,20. MIDI Object Commands,mf_set_buffer_size(),mf_set_buffer_size,num-events,"Defines a number of inactive MIDI events, that can be activated and edited.
 <num-events>: The size of the MIDI object edit buffer.","- Using the mf_insert_event() and mf_remove_event() technically activates or
 deactivates events in the buffer.
 - It is not possible to insert MIDI events without setting a buffer size first.
@@ -3653,7 +3664,7 @@ mf_reset()
 mf_insert_event()
 mf_remove_event()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,254,12675,20. MIDI Object Commands,mf_set_event_par(),mf_set_event_par,"event-id,parameter,value","Sets an event parameter.
+KSP_Reference_Manual_Fixed.txt.py,254,12693,20. MIDI Object Commands,mf_set_event_par(),mf_set_event_par,"event-id,parameter,value","Sets an event parameter.
 <event-id>: The ID of the event to be edited.
 <parameter>: The event parameter, either one of four freely assignable event parameters:
 $EVENT_PAR_0
@@ -3682,7 +3693,7 @@ by_track()
 mf_set_mark()
 mf_get_id()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,257,12771,20. MIDI Object Commands,mf_set_mark(),mf_set_mark,"event-id,mark,status","Marks an event, so that you may group events together and process that group quickly.
+KSP_Reference_Manual_Fixed.txt.py,257,12789,20. MIDI Object Commands,mf_set_mark(),mf_set_mark,"event-id,mark,status","Marks an event, so that you may group events together and process that group quickly.
 <event-id>: The ID of the event to be marked.
 <mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
 more than one mark to a single event, either by typing the command again, or
@@ -3696,7 +3707,7 @@ by_track()
 mf_get_mark()
 mf_get_id()
 save_midi_file()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,258,12793,20. MIDI Object Commands,mf_set_num_export_areas(),mf_set_num_export_areas,num-areas,"Sets the number of export areas, with a maximum of 512.","- Area index 0 is always set with mf_set_export_area().
+KSP_Reference_Manual_Fixed.txt.py,258,12811,20. MIDI Object Commands,mf_set_num_export_areas(),mf_set_num_export_areas,num-areas,"Sets the number of export areas, with a maximum of 512.","- Area index 0 is always set with mf_set_export_area().
 - The contents of area index 0 can be copied to other areas by calling
 mf_copy_export_area().",,"mf_set_export_area()
 mf_copy_export_area()",BUILT-IN
