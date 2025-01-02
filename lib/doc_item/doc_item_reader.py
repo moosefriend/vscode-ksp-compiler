@@ -87,7 +87,7 @@ class DocItemReader:
                 row: dict[str, str]
                 doc_item = self.create_doc_item(row)
                 if doc_item.name in self.doc_items:
-                    log.info(f"Override {doc_item.name}")
+                    log.info(f"- Override {doc_item.name}")
                 self.doc_items[doc_item.name] = doc_item
 
     def __enter__(self):
