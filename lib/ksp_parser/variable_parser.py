@@ -21,6 +21,7 @@ import re
 from typing import Optional
 
 from doc_item.variable_item import VariableItem
+from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
@@ -35,10 +36,11 @@ class VariableParser(ItemParser):
     """Pattern to find a variable or constant in a table, e.g. $VAR1: Description"""
     VAR_RANGE_PATTERN = re.compile(r"^(?:•\s*)?([$%!~@?][A-Z_]+)(\d+)\s+\.\.\.\s+([$%!~@?][A-Z_]+)(\d+)$")
     """Pattern to find variable ranges, e.g. $MARK_1 ... $MARK_28"""
-    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
-    """Pattern to find the headline for the content start"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
-    """Pattern to find the headline for the content end"""
+    CONTENT_PATTERNS = [ContentPattern(
+        start_pattern=re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE),
+        stop_pattern=re.compile(r"^(\d+\.\s+)?Advanced Concepts$", re.IGNORECASE)
+    )]
+    """Content start and stop patterns for headlines"""
 
     def __init__(self):
         """
@@ -46,8 +48,7 @@ class VariableParser(ItemParser):
         """
         super().__init__(
             VariableItem,
-            VariableParser.CONTENT_START_PATTERN,
-            VariableParser.CONTENT_STOP_PATTERN,
+            VariableParser.CONTENT_PATTERNS,
             SystemConfig().variables_csv,
             on_headline=self.reset_descriptions,
             on_category=self.reset_descriptions,

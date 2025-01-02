@@ -96,7 +96,7 @@ class RewindReader:
         :return: Next line
         """
         line = self.handle.readline()
-        if line is None:
+        if line == "":
             raise StopIteration
         if self.right_strip:
             line = line.rstrip(self.right_strip)

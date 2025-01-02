@@ -21,6 +21,7 @@ import re
 from typing import Optional
 
 from doc_item.widget_item import WidgetItem
+from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
@@ -32,10 +33,11 @@ class WidgetParser(ItemParser):
     # Example: declare ui_table %<array-name>[num-elements] (<grid-width>, <grid-height>, <range>)
     WIDGET_PATTERN = re.compile(r"^declare\s+([a-z_]+)\s+([$%]<[a-z-]+>)(?:\[([^]]+)])?(?:\s+\((.*)\))?$")
     """Pattern to find a widget, e.g. declare ui_button $<variable-name>"""
-    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?User Interface Widgets$", re.IGNORECASE)
-    """Pattern to find the start headline for scanning the content"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?User-defined Functions$", re.IGNORECASE)
-    """Pattern to find the end headline for scanning the content"""
+    CONTENT_PATTERNS = [ContentPattern(
+        start_pattern=re.compile(r"^(\d+\.\s+)?User Interface Widgets$", re.IGNORECASE),
+        stop_pattern=re.compile(r"^(\d+\.\s+)?User-defined Functions$", re.IGNORECASE)
+    )]
+    """Content start and stop patterns for headlines"""
 
     def __init__(self):
         """
@@ -43,8 +45,7 @@ class WidgetParser(ItemParser):
         """
         super().__init__(
             WidgetItem,
-            WidgetParser.CONTENT_START_PATTERN,
-            WidgetParser.CONTENT_STOP_PATTERN,
+            WidgetParser.CONTENT_PATTERNS,
             SystemConfig().widgets_csv
         )
 

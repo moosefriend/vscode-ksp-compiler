@@ -21,6 +21,7 @@ import re
 from typing import Optional
 
 from doc_item.function_item import FunctionItem
+from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
@@ -31,10 +32,11 @@ log = logging.getLogger(__name__)
 class FunctionParser(ItemParser):
     FUNCTION_PATTERN = re.compile(r"^([a-z_]+)\((x(?:, y)?|<expression>, <shift-bits>)\)(?::\s+(.*))?$")
     """Pattern to find a function, e.g. inc(x)"""
-    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE)
-    """Pattern to find the start headline for scanning the content"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Control Statements$", re.IGNORECASE)
-    """Pattern to find the end headline for scanning the content"""
+    CONTENT_PATTERNS = [ContentPattern(
+        start_pattern=re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE),
+        stop_pattern=re.compile(r"^(\d+\.\s+)?Control Statements$", re.IGNORECASE)
+    )]
+    """Content start and stop patterns for headlines"""
 
     def __init__(self):
         """
@@ -42,8 +44,7 @@ class FunctionParser(ItemParser):
         """
         super().__init__(
             FunctionItem,
-            FunctionParser.CONTENT_START_PATTERN,
-            FunctionParser.CONTENT_STOP_PATTERN,
+            FunctionParser.CONTENT_PATTERNS,
             SystemConfig().functions_csv,
         )
 

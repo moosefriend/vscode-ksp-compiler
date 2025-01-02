@@ -22,6 +22,7 @@ from copy import deepcopy
 from typing import Optional
 
 from doc_item.command_item import CommandItem
+from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
@@ -32,10 +33,11 @@ log = logging.getLogger(__name__)
 class CommandParser(ItemParser):
     COMMAND_PATTERN = re.compile(r"^([a-z_]+)(?:\((.*)\))?$")
     """Pattern to find a command, e.g. random(<min>, <max>)"""
-    CONTENT_START_PATTERN = re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE)
-    """Pattern to find the start headline for scanning the content"""
-    CONTENT_STOP_PATTERN = re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
-    """Pattern to find the end headline for scanning the content"""
+    CONTENT_PATTERNS = [ContentPattern(
+        start_pattern=re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE),
+        stop_pattern=re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
+    )]
+    """Content start and stop patterns for headlines"""
 
     def __init__(self):
         """
@@ -43,8 +45,7 @@ class CommandParser(ItemParser):
         """
         super().__init__(
             CommandItem,
-            CommandParser.CONTENT_START_PATTERN,
-            CommandParser.CONTENT_STOP_PATTERN,
+            CommandParser.CONTENT_PATTERNS,
             SystemConfig().commands_csv
         )
 

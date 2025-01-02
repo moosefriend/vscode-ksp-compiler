@@ -1,5 +1,5 @@
 File,Page No,Line No,Headline,Category,Name,Variable Name,Index Name,Parameter List,Description,Remarks,Examples,See Also,Source
-KSP_Reference_Manual_Fixed.txt.py,52,3404,7. User Interface Widgets,ui_button,ui_button,$<variable-name>,,,Creates a button in the performance view.,"- UI callback for button is triggered when releasing the mouse (on mouse up).
+KSP_Reference_Manual_Fixed.txt.py,52,14803,7. User Interface Widgets,ui_button,ui_button,$<variable-name>,,,Creates a button in the performance view.,"- UI callback for button is triggered when releasing the mouse (on mouse up).
 - A button cannot be MIDI learned or host automated.","on init
     declare ui_button $free_sync_button
     $free_sync_button := 1
@@ -24,7 +24,7 @@ on ui_control ($free_sync_button)
     end if
 end on
 A simple freerun/tempo sync button implementation.",ui_switch,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,53,3444,7. User Interface Widgets,ui_file_selector,ui_file_selector,$<variable-name>,,,Creates a file selector in the performance view.,,"on init
+KSP_Reference_Manual_Fixed.txt.py,53,14843,7. User Interface Widgets,ui_file_selector,ui_file_selector,$<variable-name>,,,Creates a file selector in the performance view.,,"on init
     message("""")
     set_ui_height(5)
 
@@ -85,10 +85,10 @@ on ui_control ($next)
     $next := 0
 end on
 Loading MIDI files via the file selector.",fs_navigate(),BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,55,3518,7. User Interface Widgets,ui_label,ui_label,$<variable-name>,,"grid-width,grid-height","Creates a text or image label in the performance view
+KSP_Reference_Manual_Fixed.txt.py,55,14917,7. User Interface Widgets,ui_label,ui_label,$<variable-name>,,"grid-width,grid-height","Creates a text or image label in the performance view
 <grid-width>: The width of the label in grid units (1 to 6)
 <grid-height>: The height of the label in grid units (1 to 16)",,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,56,3551,7. User Interface Widgets,ui_level_meter,ui_level_meter,$<variable-name>,,,Creates a level meter in the performance view.,"- The level meter can display the output levels of instrument buses, main instrument output, and
+KSP_Reference_Manual_Fixed.txt.py,56,14950,7. User Interface Widgets,ui_level_meter,ui_level_meter,$<variable-name>,,,Creates a level meter in the performance view.,"- The level meter can display the output levels of instrument buses, main instrument output, and
 gain reduction from compressor and limiter effects.","on init
     declare ui_level_meter $Level1
     declare ui_level_meter $Level2
@@ -101,7 +101,7 @@ Specific: $CONTROL_PAR_BG_COLOR, $CONTROL_PAR_OFF_COLOR,
 $CONTROL_PAR_ON_COLOR, $CONTROL_PAR_OVERLOAD_COLOR,
 $CONTROL_PAR_PEAK_COLOR, $CONTROL_PAR_VERTICAL, $CONTROL_PAR_RANGE_MIN,
 $CONTROL_PAR_RANGE_MAX",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,57,3579,7. User Interface Widgets,ui_knob,ui_knob,$<variable-name>,,"min,max,display-ratio","Creates a knob in the performance view.
+KSP_Reference_Manual_Fixed.txt.py,57,14978,7. User Interface Widgets,ui_knob,ui_knob,$<variable-name>,,"min,max,display-ratio","Creates a knob in the performance view.
 <min>: The minimum value of the knob.
 <max>: The maximum value of the knob.
 <display-ratio>: The knob value is divided by <display-ratio> for display purposes.",,"on init
@@ -148,7 +148,7 @@ on ui_control ($Note)
     set_knob_label($Note, !note_names[$Note])
 end on
 Knob displaying MIDI note names.",,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,58,3635,7. User Interface Widgets,ui_menu,ui_menu,$<variable-name>,,,Creates a drop-down menu in the performance view.,,"on init
+KSP_Reference_Manual_Fixed.txt.py,58,15034,7. User Interface Widgets,ui_menu,ui_menu,$<variable-name>,,,Creates a drop-down menu in the performance view.,,"on init
     declare ui_menu $menu
 
     add_menu_item($menu, ""First Entry"", 0)
@@ -175,7 +175,7 @@ get_menu_item_visibility()
 set_menu_item_str()
 set_menu_item_value()
 set_menu_item_visibility()",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,59,3675,7. User Interface Widgets,ui_mouse_area,ui_mouse_area,$<variable-name>,,,Creates a mouse area in the performance view.,"- A mouse area supports drag and drop of the following file types: audio (WAV, AIF, AIFF, NCW),
+KSP_Reference_Manual_Fixed.txt.py,59,15074,7. User Interface Widgets,ui_mouse_area,ui_mouse_area,$<variable-name>,,,Creates a mouse area in the performance view.,"- A mouse area supports drag and drop of the following file types: audio (WAV, AIF, AIFF, NCW),
 MIDI and KSP array (NKA).
 - It is possible to define which types of files are accepted as drop targets and whether to accept
 just one or multiple files.
@@ -213,7 +213,7 @@ on ui_control ($waveDnD)
     end if
 end on","Specific: $NI_MOUSE_EVENT_TYPE, $NI_MOUSE_EVENT_TYPE_DND_DROP,
 $NI_MOUSE_EVENT_TYPE_DND_DRAG, $NI_MOUSE_OVER_CONTROL",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,60,3728,7. User Interface Widgets,ui_panel,ui_panel,$<variable-name>,,,Creates a panel for grouping widgets in the performance view.,"- A panel is a control which can contain one or multiple widgets. Unlike the rest of the UI
+KSP_Reference_Manual_Fixed.txt.py,60,15127,7. User Interface Widgets,ui_panel,ui_panel,$<variable-name>,,,Creates a panel for grouping widgets in the performance view.,"- A panel is a control which can contain one or multiple widgets. Unlike the rest of the UI
 widgets, panels don’t have size. They are very useful for grouping controls that are meant
 to be handled together, then one can simultaneously modify the $CONTROL_PAR_HIDE,
 $CONTROL_PAR_POS_X, $CONTROL_PAR_POS_Y or $CONTROL_PAR_Z_LAYER properties of
@@ -230,7 +230,7 @@ performance view.","on init
 get_ui_id($mixer))
 end on
 Adds the volume knob in the mixer panel.",General: $CONTROL_PAR_PARENT_PANEL,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,61,3760,7. User Interface Widgets,ui_slider,ui_slider,$<variable-name>,,"min,max","Creates a slider in the performance view.
+KSP_Reference_Manual_Fixed.txt.py,61,15159,7. User Interface Widgets,ui_slider,ui_slider,$<variable-name>,,"min,max","Creates a slider in the performance view.
 <min>: The minimum value of the slider.
 <max>: The maximum value of the slider.",,"on init
     declare ui_slider $test (0, 100)
@@ -254,7 +254,7 @@ Creating a bipolar slider by loading a different picture background. See the cha
 Container in order to learn more about how to use graphical assets with KSP.","ui_knob
 set_control_par_arr()
 Specific: $CONTROL_PAR_MOUSE_BEHAVIOUR",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,62,3796,7. User Interface Widgets,ui_switch,ui_switch,$<variable-name>,,,Creates a switch in the performance view.,"- UI callback for switch is triggered when pressing the mouse (on mouse down).
+KSP_Reference_Manual_Fixed.txt.py,62,15195,7. User Interface Widgets,ui_switch,ui_switch,$<variable-name>,,,Creates a switch in the performance view.,"- UI callback for switch is triggered when pressing the mouse (on mouse down).
 - A switch can be MIDI learned and host automated, as opposed to a button.","on init
     declare ui_switch $rec_button
 
@@ -269,7 +269,7 @@ KSP_Reference_Manual_Fixed.txt.py,62,3796,7. User Interface Widgets,ui_switch,ui
     set_control_par_str($rec_button, $CONTROL_PAR_TEXT, ""Record"")
 end on
 Switch with various settings utilizing set_control_par() and set_control_par_str().",ui_button,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,63,3826,7. User Interface Widgets,ui_table,ui_table,%<array-name>,num-elements,"grid-width,grid-height,range","Creates a table in the performance view.
+KSP_Reference_Manual_Fixed.txt.py,63,15225,7. User Interface Widgets,ui_table,ui_table,%<array-name>,num-elements,"grid-width,grid-height,range","Creates a table in the performance view.
 <width>: The width of the table in grid units (1 ... 6).
 <height>: The height of the table in grid units (1 ... 16).
 <range>: The range of the table. If negative values are used, a bipolar table is created.",- The maximum number of columns (elements) in the table is 128.,"on init
@@ -309,7 +309,7 @@ end on
 Hiding the value indicator in top left corner of the table and replacing it with a value readout in a label.","set_table_steps_shown()
 hide_part()
 Specific: $NI_CONTROL_PAR_IDX",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,66,3914,7. User Interface Widgets,ui_value_edit,ui_value_edit,$<variable-name>,,"min,max,$display-ratio","Creates a value edit field (number box) in the performance view.
+KSP_Reference_Manual_Fixed.txt.py,66,15313,7. User Interface Widgets,ui_value_edit,ui_value_edit,$<variable-name>,,"min,max,$display-ratio","Creates a value edit field (number box) in the performance view.
 <min>: The minimum value of the value edit.
 <max>: The maximum value of the value edit.
 <display-ratio>: The value is divided by <display-ratio> for display purposes.
@@ -331,7 +331,7 @@ on init
     set_text($test, ""Value"")
 end on
 Value edit with three decimal spaces.","Specific: $CONTROL_PAR_SHOW_ARROWS, $VALUE_EDIT_MODE_NOTE_NAMES",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,67,3948,7. User Interface Widgets,ui_waveform,ui_waveform,$<variable-name>,,"grid-width,grid-height","Creates a waveform display for displaying samples and optionally their slices. This widget can also
+KSP_Reference_Manual_Fixed.txt.py,67,15347,7. User Interface Widgets,ui_waveform,ui_waveform,$<variable-name>,,"grid-width,grid-height","Creates a waveform display for displaying samples and optionally their slices. This widget can also
 be used to control specific parameters per slice and for MIDI drag and drop functionality.
 <width>: The width of the waveform in grid units (1 ... 6).
 <height>: The height of the waveform in grid units (1 ... 16).",,"on init
@@ -347,7 +347,7 @@ Specific: Waveform Flag Constants, Waveform Property
 Constants, $CONTROL_PAR_WAVE_COLOR, $CONTROL_PAR_BG_COLOR,
 $CONTROL_PAR_WAVE_CURSOR_COLOR, $CONTROL_PAR_SLICEMARKERS_COLOR,
 $CONTROL_PAR_BG_ALPHA",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,68,3976,7. User Interface Widgets,ui_wavetable,ui_wavetable,$<variable-name>,,,"Creates a wavetable display in the performance view, visualizing the state of a zone which is used as
+KSP_Reference_Manual_Fixed.txt.py,68,15375,7. User Interface Widgets,ui_wavetable,ui_wavetable,$<variable-name>,,,"Creates a wavetable display in the performance view, visualizing the state of a zone which is used as
 a wavetable.",,"on init
     declare ui_wavetable $wavetable
     set_control_par(get_ui_id($wavetable), $CONTROL_PAR_WT_ZONE,
