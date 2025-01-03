@@ -1,4 +1,150 @@
 File,Page No,Line No,Headline,Category,Name,Parameter List,Description,Remarks,Examples,See Also,Source
+KSP_Reference_Manual_Fixed.txt.py,71,2669,8. User-defined Functions,,call,function-name,Calls a previously declared function.,"- The function has to be declared before it is called.
+- Empty parentheses can be optionally used when declaring and calling the function.",,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,134,4844,14. User Interface Commands,,get_control_par_str,"ui-id,control-parameter","Retrieve various parameters of the specified UI widget.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.",- Flavor of the command for use with strings (i.e. retrieving text from ui_label or automation name from ui_slider).,"on init
+    declare ui_value_edit $Test (0, 100, 1)
+    message(get_control_par(get_ui_id($Test), $CONTROL_PAR_WIDTH))
+end on
+Retrieving the width of a value edit in pixels.","set_control_par()
+General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,135,4871,14. User Interface Commands,,get_control_par_str_arr,"ui-id,control-parameter,index","Retrieve various parameters of the specified UI widget
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
+<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving automation name of a particular ui_xy cursor,"on init
+    declare ui_xy ?XY1[2]
+    declare ui_xy ?XY2[2]
+    declare ui_xy ?XY3[2]
+    declare ui_xy ?XY4[2]
+    declare ui_button $Random
+
+    declare $i
+    declare ~val
+end on
+
+on ui_control ($Random)
+    $i := 0
+    while ($i < 8)
+        { randomize X axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, $i mod 2)
+
+        { randomize Y axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, ($i mod 2) + 1)
+
+        inc($i)
+    end while
+
+    $Random := 0
+end on
+Randomize the values of the first cursor for 4 different XY pads in one loop.","get_control_par()
+set_control_par()
+set_control_par_arr()
+General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,135,4873,14. User Interface Commands,,get_control_par_real_arr,"ui-id,control-parameter,index","Retrieve various parameters of the specified UI widget
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
+<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving values of ui_xy cursor X and Y axes,"on init
+    declare ui_xy ?XY1[2]
+    declare ui_xy ?XY2[2]
+    declare ui_xy ?XY3[2]
+    declare ui_xy ?XY4[2]
+    declare ui_button $Random
+
+    declare $i
+    declare ~val
+end on
+
+on ui_control ($Random)
+    $i := 0
+    while ($i < 8)
+        { randomize X axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, $i mod 2)
+
+        { randomize Y axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, ($i mod 2) + 1)
+
+        inc($i)
+    end while
+
+    $Random := 0
+end on
+Randomize the values of the first cursor for 4 different XY pads in one loop.","get_control_par()
+set_control_par()
+set_control_par_arr()
+General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,149,5363,14. User Interface Commands,,set_control_par_str,"ui-id,control-parameter,value","Change various parameters of the specified UI widget.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI control we wish to set, i.e. $CONTROL_PAR_WIDTH.
+<value>: The value of the control parameter we wish to set.","- Flavor of the command for use with strings (i.e. setting the text of a ui_label, or automation name of a ui_slider).","on init
+    declare ui_value_edit $test (0, 100, $VALUE_EDIT_MODE_NOTE_NAMES)
+    set_text($test,"""")
+    set_control_par(get_ui_id($test), $CONTROL_PAR_WIDTH, 45)
+    move_control_px($test, 100, 10)
+end on
+Changing the width of a value edit to 45 pixels. Note that you also have to specify its position in
+pixels once you use pixel-based control parameters.
+
+on init
+    declare ui_label $test (1, 1)
+    set_control_par_str(get_ui_id($test), $CONTROL_PAR_TEXT, ""This is Text"")
+    set_control_par(get_ui_id($test), $CONTROL_PAR_TEXT_ALIGNMENT, 1)
+end on
+Set and center text in labels.","get_control_par()
+set_control_par_arr()
+get_ui_id()",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,150,5401,14. User Interface Commands,,set_control_par_str_arr,"ui-id,control-parameter,value,index","Change various parameters of an element within an array-based UI widget, e.g. ui_xy cursors.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widgetwe wish to set,e.g. $CONTROL_PAR_AUTOMATION_ID.
+<value>: The value of the control parameter we wish to set.
+<index>: The array index of the UI control we wish to set.",- i.e. setting automation names of individual ui_xy cursors,"on init
+    make_perfview
+    set_ui_height_px(350)
+
+    declare ui_xy ?myXY[4]
+    declare $xyID
+    $xyID := get_ui_id(?myXY)
+
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 0, 0)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 1, 1)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 2, 2)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 3, 3)
+
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Cutoff"", 0)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Resonance"", 1)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Pan"", 2)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Feedback"", 3)
+end on
+Setting automation IDs and names of an XY pad with two cursors.","General: $CONTROL_PAR_AUTOMATION_ID, $CONTROL_PAR_AUTOMATION_NAME
+Specific: $CONTROL_PAR_CURSOR_PICTURE, $HIDE_PART_CURSOR",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,150,5403,14. User Interface Commands,,set_control_par_real_arr,"ui-id,control-parameter,value,index","Change various parameters of an element within an array-based UI widget, e.g. ui_xy cursors.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widgetwe wish to set,e.g. $CONTROL_PAR_AUTOMATION_ID.
+<value>: The value of the control parameter we wish to set.
+<index>: The array index of the UI control we wish to set.",- i.e. values of individual ui_xy cursor X and Y axes,"on init
+    make_perfview
+    set_ui_height_px(350)
+
+    declare ui_xy ?myXY[4]
+    declare $xyID
+    $xyID := get_ui_id(?myXY)
+
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 0, 0)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 1, 1)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 2, 2)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 3, 3)
+
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Cutoff"", 0)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Resonance"", 1)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Pan"", 2)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Feedback"", 3)
+end on
+Setting automation IDs and names of an XY pad with two cursors.","General: $CONTROL_PAR_AUTOMATION_ID, $CONTROL_PAR_AUTOMATION_NAME
+Specific: $CONTROL_PAR_CURSOR_PICTURE, $HIDE_PART_CURSOR",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,323,11251,25. Advanced Concepts,Preprocessor & System Scripts,SET_CONDITION,condition-symbol,Define a symbol to be used as a condition.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,323,11255,25. Advanced Concepts,Preprocessor & System Scripts,RESET_CONDITION,condition-symbol,Delete a condition definition.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,323,11259,25. Advanced Concepts,Preprocessor & System Scripts,USE_CODE_IF,condition-symbol,Interpret code when <condition-symbol> is defined.,,,,BUILT-IN
@@ -117,84 +263,6 @@ KSP_Reference_Manual_Fixed.txt.py,326,11405,26. Advanced Concepts,PGS String Com
 KSP_Reference_Manual_Fixed.txt.py,326,11406,26. Advanced Concepts,PGS String Commands,pgs_str_key_exists,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,326,11407,26. Advanced Concepts,PGS String Commands,pgs_set_str_key_val,"key-id,value",The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,326,11408,26. Advanced Concepts,PGS String Commands,pgs_get_str_key_val,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,71,2669,8. User-defined Functions,,call,function-name,Calls a previously declared function.,"- The function has to be declared before it is called.
-- Empty parentheses can be optionally used when declaring and calling the function.",,,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,135,4871,14. User Interface Commands,,get_control_par_str_arr,,"Retrieve various parameters of the specified UI widget
-<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
-<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
-<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving automation name of a particular ui_xy cursor,"on init
-    declare ui_xy ?XY1[2]
-    declare ui_xy ?XY2[2]
-    declare ui_xy ?XY3[2]
-    declare ui_xy ?XY4[2]
-    declare ui_button $Random
-
-    declare $i
-    declare ~val
-end on
-
-on ui_control ($Random)
-    $i := 0
-    while ($i < 8)
-        { randomize X axis value }
-        ~val := int_to_real(random(0, 1000000)) / 1000000.0
-        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, $i mod 2)
-
-        { randomize Y axis value }
-        ~val := int_to_real(random(0, 1000000)) / 1000000.0
-        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, ($i mod 2) + 1)
-
-        inc($i)
-    end while
-
-    $Random := 0
-end on
-Randomize the values of the first cursor for 4 different XY pads in one loop.","get_control_par()
-set_control_par()
-set_control_par_arr()
-General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,135,4873,14. User Interface Commands,,get_control_par_real_arr,,"Retrieve various parameters of the specified UI widget
-<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
-<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
-<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving values of ui_xy cursor X and Y axes,"on init
-    declare ui_xy ?XY1[2]
-    declare ui_xy ?XY2[2]
-    declare ui_xy ?XY3[2]
-    declare ui_xy ?XY4[2]
-    declare ui_button $Random
-
-    declare $i
-    declare ~val
-end on
-
-on ui_control ($Random)
-    $i := 0
-    while ($i < 8)
-        { randomize X axis value }
-        ~val := int_to_real(random(0, 1000000)) / 1000000.0
-        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, $i mod 2)
-
-        { randomize Y axis value }
-        ~val := int_to_real(random(0, 1000000)) / 1000000.0
-        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, ($i mod 2) + 1)
-
-        inc($i)
-    end while
-
-    $Random := 0
-end on
-Randomize the values of the first cursor for 4 different XY pads in one loop.","get_control_par()
-set_control_par()
-set_control_par_arr()
-General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,134,4844,14. User Interface Commands,,get_control_par_str,,"Retrieve various parameters of the specified UI widget.
-<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
-<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.",- Flavor of the command for use with strings (i.e. retrieving text from ui_label or automation name from ui_slider).,"on init
-    declare ui_value_edit $Test (0, 100, 1)
-    message(get_control_par(get_ui_id($Test), $CONTROL_PAR_WIDTH))
-end on
-Retrieving the width of a value edit in pixels.","set_control_par()
-General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,333,11634,26. Multi Script,,ignore_midi,,Ignores the event which triggered the callback.,"- Like ignore_event(), ignore_midi is a very ""strong"" command. Keep in mind that
 ignore_midi will ignore all incoming events.
 - If you just want to change the MIDI channel and/or any of the MIDI bytes of incoming events,
@@ -209,3 +277,17 @@ you can also use set_event_par().","on midi_in
 end on
 Ignoring Note On and Note Off messages. Note that some keyboards use a Note On command with
 a velocity of 0 to designate a Note Off command.",ignore_event(),BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,335,11701,26. Multi Script,,set_midi,"channel,command,byte-1,byte-2",Create any type of MIDI event.,"- If you simply want to change the MIDI channel and/or any of the MIDI bytes, you can use set_event_par() command.","on midi_in
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 > 0)
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 4, $MIDI_BYTE_2)
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 7, $MIDI_BYTE_2)
+    end if
+
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_OFF or ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 = 0))
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 4, 0)
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 7, 0)
+    end if
+end on
+A simple harmonizer – note that you also have to supply the correct Note Off commands!","set_event_par()
+Events and MIDI: $EVENT_PAR_MIDI_CHANNEL, $EVENT_PAR_MIDI_COMMAND,
+$EVENT_PAR_MIDI_BYTE_1, $EVENT_PAR_MIDI_BYTE_2",BUILT-IN

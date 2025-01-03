@@ -118,11 +118,11 @@ class ItemParser:
         log.info(f"{self.item_cnt} {self.doc_item_class.plural()} found")
         log.info(f"{self.duplicate_cnt} duplicate {self.doc_item_class.plural()}")
 
-    def search_content_start(self) -> bool:
+    def search_content_start(self) -> ContentPattern:
         """
         Find the line where the content will start.
 
-        :return: True if content has been found, False otherwise
+        :return: ContentPattern or None if not content was found
         """
         for line in self.reader:
             # Search for the content
@@ -134,7 +134,7 @@ class ItemParser:
                     break
             if self.content_pattern:
                 break
-        return self.content_pattern is not None
+        return self.content_pattern
 
     def scan_items(self):
         """

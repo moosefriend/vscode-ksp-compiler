@@ -107,6 +107,10 @@ class RewindReader:
         Rollback to the beginning of the file.
         """
         self.handle.seek(0)
+        self.line_no = 0
+        self.line_inc = 1
+        self.page_no = 0
+        self.pos_last_line = 0
 
     def rewind(self):
         """

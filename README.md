@@ -20,7 +20,7 @@ As IDE for the Python script development it's recommended to use PyCharm Communi
 * Parse the *.txt and generate *.csv for built-in commands (done)
 * Parse the *.txt and generate *.csv for built-in variables (done)
  
-### Parsing external libraries (open)
+## Parsing external libraries (open)
 * Parse Koala library and generate *.csv for variables and functions incl. their documentation (open)
 
 ## Visual Studio Code Extension (planned)

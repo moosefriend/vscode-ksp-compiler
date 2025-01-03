@@ -1,26 +1,26 @@
 File,Page No,Line No,Headline,Category,Name,Parameter List,Description,Source
-KSP_Reference_Manual_Fixed.txt.py,36,39275,5. Arithmetic Commands & Operators,Basic Operators,abs,x,Absolute value.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,36,39276,5. Arithmetic Commands & Operators,Basic Operators,signbit,x,"Sign bit (returns 1 if the number is negative, 0 otherwise).",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,36,39277,5. Arithmetic Commands & Operators,Basic Operators,sgn,x,"Signum function (returns -1 if the number is negative, 0 if it's zero, 1 if it's positive).",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,37,39284,5. Arithmetic Commands & Operators,Integer Number Commands,inc,x,Increments an expression by 1 (x := x + 1).,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,37,39288,5. Arithmetic Commands & Operators,Integer Number Commands,dec,x,Decrements an expression by 1 (x := x – 1).,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,38,39306,5. Arithmetic Commands & Operators,Real Number Commands,exp,x,Exponential function (returns the value of e^x).,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,38,39314,5. Arithmetic Commands & Operators,Real Number Commands,log,x,Natural logarithmic function (base e).,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,38,39326,5. Arithmetic Commands & Operators,Real Number Commands,pow,"x,y",Power function (returns the value of x^y).,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,38,39330,5. Arithmetic Commands & Operators,Real Number Commands,sqrt,x,Square root function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,38,39334,5. Arithmetic Commands & Operators,Real Number Commands,cbrt,x,Cube root function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,39,39342,5. Arithmetic Commands & Operators,Rounding Commands,ceil,x,"Ceiling (round up).
+KSP_Reference_Manual_Fixed.txt.py,36,1568,5. Arithmetic Commands & Operators,Basic Operators,abs,x,Absolute value.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,36,1569,5. Arithmetic Commands & Operators,Basic Operators,signbit,x,"Sign bit (returns 1 if the number is negative, 0 otherwise).",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,36,1570,5. Arithmetic Commands & Operators,Basic Operators,sgn,x,"Signum function (returns -1 if the number is negative, 0 if it's zero, 1 if it's positive).",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,37,1577,5. Arithmetic Commands & Operators,Integer Number Commands,inc,x,Increments an expression by 1 (x := x + 1).,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,37,1581,5. Arithmetic Commands & Operators,Integer Number Commands,dec,x,Decrements an expression by 1 (x := x – 1).,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,38,1599,5. Arithmetic Commands & Operators,Real Number Commands,exp,x,Exponential function (returns the value of e^x).,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,38,1607,5. Arithmetic Commands & Operators,Real Number Commands,log,x,Natural logarithmic function (base e).,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,38,1619,5. Arithmetic Commands & Operators,Real Number Commands,pow,"x,y",Power function (returns the value of x^y).,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,38,1623,5. Arithmetic Commands & Operators,Real Number Commands,sqrt,x,Square root function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,38,1627,5. Arithmetic Commands & Operators,Real Number Commands,cbrt,x,Cube root function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,39,1635,5. Arithmetic Commands & Operators,Rounding Commands,ceil,x,"Ceiling (round up).
 ceil(2.3) = 3.0",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,39,39347,5. Arithmetic Commands & Operators,Rounding Commands,floor,x,"Floor (round down).
+KSP_Reference_Manual_Fixed.txt.py,39,1640,5. Arithmetic Commands & Operators,Rounding Commands,floor,x,"Floor (round down).
 floor(2.8) = 2.0",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,39,39352,5. Arithmetic Commands & Operators,Rounding Commands,round,x,"Round (round to nearest).
+KSP_Reference_Manual_Fixed.txt.py,39,1645,5. Arithmetic Commands & Operators,Rounding Commands,round,x,"Round (round to nearest).
 round(2.3) = 2.0
 round(2.8) = 3.0",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,40,39362,5. Arithmetic Commands & Operators,Trigonometric Commands,cos,x,Cosine function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,40,39366,5. Arithmetic Commands & Operators,Trigonometric Commands,sin,x,Sine function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,40,39370,5. Arithmetic Commands & Operators,Trigonometric Commands,tan,x,Tangent function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,40,39374,5. Arithmetic Commands & Operators,Trigonometric Commands,acos,x,Arccosine (inverse cosine) function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,40,39378,5. Arithmetic Commands & Operators,Trigonometric Commands,asin,x,Arcsine (inverse sine) function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,40,39382,5. Arithmetic Commands & Operators,Trigonometric Commands,atan,x,Arctangent (inverse tangent) function.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,41,39395,5. Arithmetic Commands & Operators,Bitwise Operators,sh_left,"<expression>,<shift-bits>",Shifts the bits in <expression> by the amount of <shift-bits> to the left. Effectively multiplies the expression by 2.,BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,41,39398,5. Arithmetic Commands & Operators,Bitwise Operators,sh_right,"<expression>,<shift-bits>",Shifts the bits in <expression> by the amount of <shift-bits> to the right. Effectively divides the expression by 2.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,40,1655,5. Arithmetic Commands & Operators,Trigonometric Commands,cos,x,Cosine function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,40,1659,5. Arithmetic Commands & Operators,Trigonometric Commands,sin,x,Sine function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,40,1663,5. Arithmetic Commands & Operators,Trigonometric Commands,tan,x,Tangent function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,40,1667,5. Arithmetic Commands & Operators,Trigonometric Commands,acos,x,Arccosine (inverse cosine) function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,40,1671,5. Arithmetic Commands & Operators,Trigonometric Commands,asin,x,Arcsine (inverse sine) function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,40,1675,5. Arithmetic Commands & Operators,Trigonometric Commands,atan,x,Arctangent (inverse tangent) function.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,41,1688,5. Arithmetic Commands & Operators,Bitwise Operators,sh_left,"<expression>,<shift-bits>",Shifts the bits in <expression> by the amount of <shift-bits> to the left. Effectively multiplies the expression by 2.,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,41,1691,5. Arithmetic Commands & Operators,Bitwise Operators,sh_right,"<expression>,<shift-bits>",Shifts the bits in <expression> by the amount of <shift-bits> to the right. Effectively divides the expression by 2.,BUILT-IN

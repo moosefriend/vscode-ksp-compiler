@@ -34,7 +34,7 @@ class CommandParser(ItemParser):
     COMMAND_PATTERN = re.compile(r"^([a-z_]+)(?:\((.*)\))?$")
     """Pattern to find a command, e.g. random(<min>, <max>)"""
     CONTENT_PATTERNS = [ContentPattern(
-        start_pattern=re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE),
+        start_pattern=re.compile(r"^(\d+\.\s+)?Variables$"),
         stop_pattern=re.compile(r"^(\d+\.\s+)?Built-in Variables and Constants$", re.IGNORECASE)
     )]
     """Content start and stop patterns for headlines"""
@@ -49,8 +49,8 @@ class CommandParser(ItemParser):
             SystemConfig().commands_csv
         )
 
-    def scan_items(self):
-        super().scan_items()
+    def parse(self):
+        super().parse()
         # Special handling for set_rpn()/set_nrpn()
         # Copy the documentation from set_nrpn() to set_rpn()
         set_nrpn_doc_item = self.all_items["set_nrpn"][0]

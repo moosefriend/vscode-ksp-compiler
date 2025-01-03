@@ -32,10 +32,12 @@ log = logging.getLogger(__name__)
 class FunctionParser(ItemParser):
     FUNCTION_PATTERN = re.compile(r"^([a-z_]+)\((x(?:, y)?|<expression>, <shift-bits>)\)(?::\s+(.*))?$")
     """Pattern to find a function, e.g. inc(x)"""
-    CONTENT_PATTERNS = [ContentPattern(
-        start_pattern=re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE),
-        stop_pattern=re.compile(r"^(\d+\.\s+)?Control Statements$", re.IGNORECASE)
-    )]
+    CONTENT_PATTERNS = [
+        ContentPattern(
+            start_pattern=re.compile(r"^(\d+\.\s+)?Arithmetic Commands & Operators$", re.IGNORECASE),
+            stop_pattern=re.compile(r"^(\d+\.\s+)?Control Statements$", re.IGNORECASE)
+        )
+    ]
     """Content start and stop patterns for headlines"""
 
     def __init__(self):
