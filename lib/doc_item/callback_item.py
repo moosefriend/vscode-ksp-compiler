@@ -79,3 +79,9 @@ class CallbackItem(DocItem):
         else:
             snippet_parameter = ""
         return snippet_parameter
+
+    def format_sections(self) -> str:
+        text = DocItem.check_section("Remarks", self.remarks)
+        text += DocItem.check_section("Example", self.examples)
+        text += DocItem.check_section("See also", self.see_also)
+        return text

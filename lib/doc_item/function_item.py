@@ -54,3 +54,7 @@ class FunctionItem(DocItem):
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name,
                 ",".join(self.parameter_list), self.description, self.source)
+
+    def format_sections(self) -> str:
+        # No specific sections
+        return ""

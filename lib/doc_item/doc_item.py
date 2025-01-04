@@ -96,3 +96,51 @@ class DocItem:
         self.description = self.description.replace("( ", "(")
         self.description = self.description.replace(" )", ")")
         self.description = self.fix_bullet_items(self.description)
+
+    def format_description(self) -> str:
+        """
+        Format the description for type script export.
+
+        :return: Formatted description
+        """
+        text = self.description.replace("\n", "\\n")
+        text += self.format_sections()
+        text += "\\n"
+        text += self.format_reference()
+        return text
+
+    @abstractmethod
+    def format_sections(self) -> str:
+        """
+        Format additional doc item type specific sections for type script export.
+
+        :return: Formatted sections
+        """
+
+    @staticmethod
+    def check_section(title: str, text: str) -> str:
+        """
+        Format the section if it exists for the type script export.
+
+        :param title: Title to be used for the section
+        :param text: Text of the section if any
+        :return: Formatted section or an empty string the the text is emtpy
+        """
+        if text:
+            formatted_text = f"\\n\\n{title}:\\n{text.replace("\n", "\\n")}"
+        else:
+            formatted_text = ""
+        return formatted_text
+
+    def format_reference(self) -> str:
+        """
+        Format the reference for type script export.
+
+        :return: Formatted reference
+        """
+        if self.category:
+            category = f"Category: {self.category}\\n"
+        else:
+            category = ""
+        text = f"\\n{category}Chapter: {self.headline}\\nPage: {self.page_no}"
+        return text

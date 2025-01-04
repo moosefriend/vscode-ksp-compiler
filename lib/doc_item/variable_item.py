@@ -71,3 +71,8 @@ class VariableItem(DocItem):
     def as_csv_list(self) -> tuple[str, int, int, str, str, str, str, str, str, str, str, str, str]:
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.block_headline,
                 self.item_list_headline,  self.name, self.parameter, self.comment, self.description, self.see_also, self.source)
+
+    def format_sections(self) -> str:
+        text = DocItem.check_section("Comment", self.comment)
+        text += DocItem.check_section("See also", self.see_also)
+        return text

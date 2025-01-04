@@ -21,9 +21,17 @@ from abc import abstractmethod
 from inspect import cleandoc
 
 from config.constants import ItemType
+from doc_item.callback_item import CallbackItem
+from doc_item.command_item import CommandItem
+from doc_item.doc_item import DocItem
 from doc_item.doc_item_reader import DocItemReader
+from doc_item.function_item import FunctionItem
+from doc_item.variable_item import VariableItem
+from doc_item.widget_item import WidgetItem
 
 log = logging.getLogger(__name__)
+
+ANY_ITEM_TYPE = CallbackItem | CommandItem | FunctionItem | VariableItem | WidgetItem
 
 
 class BaseGenerator:
@@ -53,14 +61,30 @@ class BaseGenerator:
         """
         From the *.csv file read the Name column.
 
-        :param item_type: ItemType for get the file to read
+        :param item_type: ItemType for the file to read
         :return: Set of names read from the *.csv file
         """
+        # Use a set to overwrite duplicates
         name_list = set()
         with DocItemReader(item_type) as csv_reader:
             for doc_item in csv_reader:
                 name_list.add(doc_item.name)
         return name_list
+
+    @staticmethod
+    def read_doc_items(item_type: ItemType) -> dict[str, ANY_ITEM_TYPE]:
+        """
+        From the *.csv file read all columns as doc_items.
+
+        :param item_type: ItemType for the file to read
+        :return: Dictionary where the key is the name and the value is the DocItem object read from the *.csv file
+        """
+        # Use a dictionary to overwrite duplicates
+        all_doc_items: dict[str, ANY_ITEM_TYPE] = {}
+        with DocItemReader(item_type) as csv_reader:
+            for doc_item in csv_reader:
+                all_doc_items[doc_item.name] = doc_item
+        return all_doc_items
 
     @staticmethod
     @abstractmethod

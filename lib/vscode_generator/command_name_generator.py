@@ -46,7 +46,7 @@ class CommandNameGenerator(BaseGenerator):
             f.write(f"// - Parsed Functions: {SystemConfig().get_csv_file(ItemType.FUNCTION).as_posix()}\n")
             f.write(f"// - Manual Overrides: {SystemConfig().get_patch_csv_file(ItemType.FUNCTION).as_posix()}\n")
             f.write(f"// Generated at: {strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"export var CommandNames: string[] = [\n")
+            f.write(f"export var NameList: string[] = [\n")
             for name in natsorted(name_list):
                 f.write(f'    "{name}",\n')
             f.write(f"]\n")

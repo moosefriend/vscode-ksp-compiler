@@ -68,3 +68,9 @@ class CommandItem(DocItem):
         return (self.file.name, self.page_no, self.line_no, self.headline, self.category, self.name,
                 ",".join(self.parameter_list), self.description, self.remarks, self.examples, self.see_also,
                 self.source)
+
+    def format_sections(self) -> str:
+        text = DocItem.check_section("Remarks", self.remarks)
+        text += DocItem.check_section("Example", self.examples)
+        text += DocItem.check_section("See also", self.see_also)
+        return text

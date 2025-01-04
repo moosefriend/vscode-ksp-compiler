@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import vscode = require('vscode');
-import CommandNameList = require('./generated/commandNames');
-import VariableNameList = require('./generated/variableNames');
+import CommandNames = require('./generated/commandNames');
+import VariableNames = require('./generated/variableNames');
 
 import { SymbolUtil } from './symbolUtil';
 import { SymbolType } from './symbolUtil';
@@ -49,7 +49,7 @@ export class ReferenceProvider implements vscode.ReferenceProvider {
             words.forEach(w => {
                 let found: boolean = false;
                 if (w == symbol) {
-                    CommandNameList.CommandNames.forEach(cmd => {
+                    CommandNames.NameList.forEach(cmd => {
                         if (cmd == symbol) {
                             result.push(new vscode.Location(
                                 document.uri,
@@ -68,7 +68,7 @@ export class ReferenceProvider implements vscode.ReferenceProvider {
             words.forEach(w => {
                 let found: boolean = false;
                 if (w == symbol) {
-                    VariableNameList.VariableNames.forEach(v => {
+                    VariableNames.NameList.forEach(v => {
                         if (v == symbol) {
                             result.push(new vscode.Location(
                                 document.uri,
