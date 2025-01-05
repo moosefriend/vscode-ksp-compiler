@@ -103,10 +103,25 @@ class DocItem:
 
         :return: Formatted description
         """
-        text = self.description.replace("\n", "\\n")
+        text = self.description
         text += self.format_sections()
-        text += "\\n"
+        text += "\n"
         text += self.format_reference()
+        text = text.strip()
+        text = DocItem.convert_special_characters(text)
+        return text
+
+    @staticmethod
+    def convert_special_characters(text: str) -> str:
+        """
+        Convert newlines to \\n and quotes to \\".
+
+        :param text: Text to analyze
+        :return: Converted text
+        """
+        text = text.replace("\n", "\\n")
+        text = text.replace("\r", "")
+        text = text.replace('"', '\\"')
         return text
 
     @abstractmethod
@@ -127,7 +142,7 @@ class DocItem:
         :return: Formatted section or an empty string the the text is emtpy
         """
         if text:
-            formatted_text = f"\\n\\n{title}:\\n{text.replace("\n", "\\n")}"
+            formatted_text = f"\n\n{title}:\n{text}"
         else:
             formatted_text = ""
         return formatted_text
@@ -139,8 +154,8 @@ class DocItem:
         :return: Formatted reference
         """
         if self.category:
-            category = f"Category: {self.category}\\n"
+            category = f"Category: {self.category}\n"
         else:
             category = ""
-        text = f"\\n{category}Chapter: {self.headline}\\nPage: {self.page_no}"
+        text = f"\n{category}Chapter: {self.headline}\nPage: {self.page_no}"
         return text

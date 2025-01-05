@@ -24,6 +24,7 @@ from pathlib import Path
 import find_lib
 from config.system_config import SystemConfig
 from util.file_util import headline, yml2json
+from vscode_generator.command_completion_generator import CommandCompletionGenerator
 from vscode_generator.command_name_generator import CommandNameGenerator
 from vscode_generator.grammar_generator import GrammarGenerator
 from vscode_generator.snippet_generator import SnippetGenerator
@@ -52,5 +53,5 @@ headline("Generate command names as type script file")
 CommandNameGenerator.process()
 headline("Generate variable completion as type script file")
 VariableCompletionGenerator.process()
-# headline("Generate command completion as type script file")
-# CommandCompletionGenerator.process()
+headline("Generate command completion as type script file")
+CommandCompletionGenerator.process()
