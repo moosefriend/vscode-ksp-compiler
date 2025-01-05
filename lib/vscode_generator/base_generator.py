@@ -23,7 +23,6 @@ from inspect import cleandoc
 from config.constants import ItemType
 from doc_item.callback_item import CallbackItem
 from doc_item.command_item import CommandItem
-from doc_item.doc_item import DocItem
 from doc_item.doc_item_reader import DocItemReader
 from doc_item.function_item import FunctionItem
 from doc_item.variable_item import VariableItem

@@ -53,6 +53,7 @@ class SystemConfig(metaclass=Singleton):
         """
         self.ini_file: Path = ini_file
         self.ini_dir = ini_file.parent
+        self.root_dir = self.ini_dir.parent.parent.resolve()
         config = ConfigParser(interpolation=ExtendedInterpolation())
         config.read(self.ini_file)
         self.settings = config["General"]
@@ -206,11 +207,12 @@ class SystemConfig(metaclass=Singleton):
             file_handler.setFormatter(file_format)
             logger.addHandler(file_handler)
 
-    def get_csv_file(self, item_type: ItemType) -> Path:
+    def get_csv_file(self, item_type: ItemType, rel_path: bool = False) -> Path:
         """
         Get the *.csv file for the specified item type, e.g. for callbacks.
 
         :param item_type: ItemType to get the path for
+        :param rel_path: If True then the relative path to the root folder is returned
         :return: Path of the *.csv file
         """
         match item_type:
@@ -226,13 +228,16 @@ class SystemConfig(metaclass=Singleton):
                 path = self.variables_csv
             case _:
                 raise ValueError(f"No *.csv file for {item_type.name}")
+        if rel_path:
+            path = path.relative_to(self.root_dir)
         return path
 
-    def get_patch_csv_file(self, item_type: ItemType) -> Optional[Path]:
+    def get_patch_csv_file(self, item_type: ItemType, rel_path: bool = False) -> Optional[Path]:
         """
         Get the patch *.csv file for the specified item type, e.g. for callbacks.
 
         :param item_type: ItemType to get the path for
+        :param rel_path: If True then the relative path to the root folder is returned
         :return: Path of the patch *.csv file or None if there is no file
         """
         match item_type:
@@ -252,6 +257,18 @@ class SystemConfig(metaclass=Singleton):
         path = path.parent / filename
         if not path.is_file():
             path = None
+        elif rel_path:
+            path = path.relative_to(self.root_dir)
+        return path
+
+    def rel_to_root(self, file: Path) -> str:
+        """
+        Get the file path relative to the root directory.
+
+        :param file: File to get the relative path for
+        :return: Path of the file relative to the root directory
+        """
+        path = file.relative_to(self.root_dir).as_posix()
         return path
 
 
