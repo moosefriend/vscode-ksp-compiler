@@ -8,38 +8,39 @@ Features:
 * The `doc_parser` scans the KSP manuals (*.pdf) provided by Native Instruments to generate
   autocompletion incl. documentation hints
 
-# Status
-## Parsing the KSP manuals (done)
-Currently, the `doc_parser` is developed using Python.
-As IDE for the Python script development it's recommended to use PyCharm Community Edition.
-* Convert *.pdf manual into a *.txt file (done)
-* Parse the *.txt for table of content (done)
-* Parse the *.txt and generate *.csv for built-in callbacks (done)
-* Parse the *.txt and generate *.csv for built-in widgets (done)
-* Parse the *.txt and generate *.csv for built-in functions (done)
-* Parse the *.txt and generate *.csv for built-in commands (done)
-* Parse the *.txt and generate *.csv for built-in variables (done)
- 
-## Parsing external libraries (open)
-* Parse Koala library and generate *.csv for variables and functions incl. their documentation (open)
+## Parsing KSP Manuals (done)
+The `doc_parser` is developed in Python.
+As IDE for the Python script development it's recommended to use PyCharm.
 
-## Visual Studio Code Extension (planned)
-* Read the *.csv files and generate the necessary TypeScript files (open)
+Features:
+* Convert *.pdf manual into a *.txt file (the *.txt file must be fixed manually)
+* Parse the *.txt for table of content
+* Parse the *.txt and generate *.csv for built-in callbacks
+* Parse the *.txt and generate *.csv for built-in widgets
+* Parse the *.txt and generate *.csv for built-in functions
+* Parse the *.txt and generate *.csv for built-in commands
+* Parse the *.txt and generate *.csv for built-in variables
+
+For details check [doc_parser README.md](doc_parser/REAMDE.md).
+ 
+## Visual Studio Code Extension (in progress)
+* Read the *.csv files and generate the necessary TypeScript files (done)
+* Provide patch files to override or add certain elements (done)
 * Create tree view incl. icons for KSP scripts (*.ksp) (open)
 * Create configuration settings for the KSP compiler (open)
 * Call the compiler and copy the result into the clipboard (open)
 * The generated code shall be copied to the clipboard so that it can be applied in the KONTAKT
   editor (open)
 
-# References
+## References
 This project
 * integrates the [SublimeKSP Compiler](https://github.com/nojanath/SublimeKSP) by [Jonathan Thompson](https://github.com/nojanath)
   which was forked from [Nils Liberg's official SublimeKSP plugin, v1.11](http://nilsliberg.se/ksp/) released under the [GPL v3.0 license](https://github.com/nojanath/SublimeKSP/blob/master/LICENSE)
 * is highly inspired from the [Visual Studio Code Extension for NI KONTAKT Script Processor (KSP)](https://github.com/r-koubou/vscode-ksp) by [Hiroaki@R-Koubou](https://github.com/r-koubou) released under the
   [MIT license](https://github.com/r-koubou/vscode-ksp/blob/main/LICENSE)
 
-# License
+## License
 * [GPL v3.0](LICENSE)
 
-# Author
+## Author
 * [MooseFriend](https://github.com/moosefriend)

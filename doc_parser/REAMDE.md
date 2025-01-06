@@ -9,15 +9,25 @@
   - v7.5: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP_Reference_Manual_en_7_5_0823.pdf
   - v6.0: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KONTAKT_602_KSP_Reference_Manual.pdf
   - v5.7: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/KSP_5.7_Reference_Manual_0917.pdf
-- The PyPI package [pypdf](https://pypi.org/project/pypdf) is used to extract the text from the PDF file
-- Therefore, the method `extract_text(extraction_mode="layout")` is used
-- To avoid a ZeroDivion error for the new "layout" mode a special hack was necessary, see `fixed_char_width_hack(a, b)`
-  which overwrites the internal `pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width`
+- Copy/Update the `cfg/ksp_<major>_<minor>/system.ini` containing configuration data
+    - Especially update the `kontakt_version`
+    - Check the comments in the `system.ini` file for the different settings
+- In the root directory of this project, call `python doc_parser/bin/pdf2txt.py --config-file=cfg/ksp_<major>_<minor>/system.ini`
 - The converted file will be stored in `txt/ksp_<major>_<minor>/KSP_Reference_Manual_Original.txt.py`
 - Note: The \*.py extension for the converted file is necessary to be able within PyCharm to navigate via links directly
   to that line where a certain item is found while parsing. For other file types the navigation by clicking on the link
   would not work. Therefore, in PyCharm after converting a file, select the converted file and choose "Override File
   Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
+
+Implementation Note:
+- The PyPI package [pypdf](https://pypi.org/project/pypdf) is used to extract the text from the PDF file
+- Therefore, the method `extract_text(extraction_mode="layout")` is used
+- To avoid a ZeroDivion error for the new "layout" mode a special hack was necessary, see `fixed_char_width_hack(a, b)`
+  which overwrites the internal `pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width`
+
+## Update Text Document to new Kontakt Version
+- Download the new PDF and save it in `doc_parser/pdf`folder and rename it to "KSP_Reference_\<major>_\<minor>_Manual_en.pdf"
+- 
 
 ## Definitions
 ### Table of Contents
