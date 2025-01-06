@@ -61,8 +61,7 @@ class CommandCompletionGenerator(BaseGenerator):
                     snippet_string = f"{doc_item.name}"
                     signature = snippet_string
                 description = doc_item.format_description()
-                f.write(f'    "{doc_item.name}":\n')
-                f.write(f'    {{\n')
+                f.write(f'    "{doc_item.name}": {{\n')
                 f.write(f'        "snippet_string": "{snippet_string}",\n')
                 f.write(f'        "signature": "{signature}",\n')
                 f.write(f'        "description": "{description}"\n')

@@ -8659,8 +8659,7 @@ save_midi_file()
 
 mf_set_export_area()
 
-mf_set_export_area(<name>, <start-pos>, <end-pos>, <start-track>,
-<end-track>)
+mf_set_export_area(<name>, <start-pos>, <end-pos>, <start-track>, <end-track>)
 Defines the part of the object that will be exported when using a drag and drop area, or when using
 save_midi_file() command.
 <name>: Sets the name of the exported file.

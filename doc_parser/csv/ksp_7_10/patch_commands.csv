@@ -1,4 +1,24 @@
 File,Page No,Line No,Headline,Category,Name,Parameter List,Description,Remarks,Examples,See Also,Source
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,cc_delivery_request,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,change_time_with_pitch,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,connect_view,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,get_engine_par_disp_m,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,get_engine_par_m,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,load_ir_sample_m,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,load_patch,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_byte_one,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_byte_two,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_channel,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_command,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_note_length,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_pos,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_track_idx,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_byte_one,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_byte_two,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_channel,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_command,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_pos,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,num_slices,value,Undocumented,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,71,2669,8. User-defined Functions,,call,function-name,Calls a previously declared function.,"- The function has to be declared before it is called.
 - Empty parentheses can be optionally used when declaring and calling the function.",,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,134,4844,14. User Interface Commands,,get_control_par_str,"ui-id,control-parameter","Retrieve various parameters of the specified UI widget.
@@ -145,6 +165,28 @@ KSP_Reference_Manual_Fixed.txt.py,150,5403,14. User Interface Commands,,set_cont
 end on
 Setting automation IDs and names of an XY pad with two cursors.","General: $CONTROL_PAR_AUTOMATION_ID, $CONTROL_PAR_AUTOMATION_NAME
 Specific: $CONTROL_PAR_CURSOR_PICTURE, $HIDE_PART_CURSOR",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,218,7744,18. Load/Save Commands,Undocumented,load_midi_file,path,"Loads a MIDI file.
+<path>: The absolute path of the MIDI file to be loaded.",,"on init
+    declare $load_midi_file_id
+    declare ui_button $load_midi_file
+end on
+
+on ui_control ($load_midi_file)
+    $load_midi_file_id := load_midi_file(<midi-file-path>)
+
+    while ($load_midi_file_id # -1)
+        wait(1)
+    end while
+
+    message(""MIDI file loaded!"")
+end on
+
+on async_complete
+    if ($NI_ASYNC_ID = $load_midi_file_id)
+        $load_midi_file_id := -1
+    end if
+end on
+Example that pauses the ui_control callback until the file is loaded.",,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,323,11251,25. Advanced Concepts,Preprocessor & System Scripts,SET_CONDITION,condition-symbol,Define a symbol to be used as a condition.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,323,11255,25. Advanced Concepts,Preprocessor & System Scripts,RESET_CONDITION,condition-symbol,Delete a condition definition.,,,,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,323,11259,25. Advanced Concepts,Preprocessor & System Scripts,USE_CODE_IF,condition-symbol,Interpret code when <condition-symbol> is defined.,,,,BUILT-IN
