@@ -1,7 +1,8 @@
 # Kontakt Script (KSP) Manual Parser
 ## Convert KSP PDF Manual to Text Document
-- Download the PDF to the `doc_parser/in`folder and rename it to "KSP_Reference_\<major>_\<minor>_Manual_en.pdf"
+- Download the PDF to the `doc_parser/pdf`folder and rename it to "KSP_Reference_\<major>_\<minor>_Manual_en.pdf"
 - The KSP manuals as PDF can be downloaded from
+  - v8.1: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/Kontakt_8_KSP_Reference_Manual_EN_221024.pdf
   - v7.10: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP-7-10-reference-manual-english.pdf
   - v7.8: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP-7-8-reference-manual-english.pdf
   - v7.6: https://www.native-instruments.com/fileadmin/ni_media/downloads/manuals/kontakt/KSP_Reference_7_6_Manual_en.pdf
@@ -12,10 +13,10 @@
 - Therefore, the method `extract_text(extraction_mode="layout")` is used
 - To avoid a ZeroDivion error for the new "layout" mode a special hack was necessary, see `fixed_char_width_hack(a, b)`
   which overwrites the internal `pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width`
-- The converted file will be stored in `out/ksp_<major>_<minor>/KSP_Reference_Manual.txt.py`
+- The converted file will be stored in `txt/ksp_<major>_<minor>/KSP_Reference_Manual_Original.txt.py`
 - Note: The \*.py extension for the converted file is necessary to be able within PyCharm to navigate via links directly
   to that line where a certain item is found while parsing. For other file types the navigation by clicking on the link
-  would not work. Therefore, in PyCharm after converting a file select the converted file and choose "Override File
+  would not work. Therefore, in PyCharm after converting a file, select the converted file and choose "Override File
   Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
 
 ## Definitions
@@ -28,7 +29,7 @@
 ### Category
 - Categories are inside a chapter which are some kind of sub headline without a chapter number
 - Most of the categories are mentioned in the table of contents
-- But some categories are only in the content (manually marked with `[C]`)
+- But some categories are only in the content (manually marked with `[C]` for the parser to identify)
 
 ### Block Headline
 - For variables there are blocks starting with a block headline followed by a description
@@ -41,15 +42,15 @@
 ## Fix the converted KSP Text Manual
 ### Preparation
 - Copy the converted KSP text manual
-  - from `out/ksp_<major>_<minor>/KSP_Reference_Manual.txt.py`
-  - to `cfg/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
+  - from `txt/ksp_<major>_<minor>/KSP_Reference_Manual_Original.txt.py`
+  - to `txt/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
 - Note: The \*.py extension for the converted file is necessary to be able within PyCharm to navigate via links directly
   to that line where a certain item is found while parsing. For other file types the navigation by clicking on the link
   would not work. Therefore, in PyCharm after converting a file select the converted file and choose "Override File
   Type" and set it to "Plain text". This will avoid that the syntax check for Python files is done for this file.
 - In PyCharm select the copied file and select "Override File Type" from the context menu
 - In the upcoming dialog choose "Plain Text" to avoid that the file is interpreted as a Python file
-- Open `cfg/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
+- Open `txt/ksp_<major>_<minor>/KSP_Reference_Manual_Fixed.txt.py`
 
 ### Categories not found in Table of Content
 - Some categories in the text are not found in the table of content
@@ -72,6 +73,7 @@
 
 ### Wrapped Command Parameters
 - In the PDF there are tables with 2 columns, where inside the cell wrapping is done
+- In the converted text file this looks strange and needs to be fixed
 - Example:
   ```
   get_target_idx(<group-index>, <mod-index>, <target-name>)
@@ -95,6 +97,7 @@
  
 ### Wrapped Variable Parameters
 - In the PDF there are tables with 2 columns, where inside the cell wrapping is done
+- In the converted text file this looks strange and needs to be fixed
 - Example:
   ```
   Additional Color and Alpha Parameters
@@ -198,8 +201,8 @@
   ```
   
 ## Automatically Parsed Elements
-### Page Number in PDF (Done)
-#### Table of Content Page Number (Done)
+### Page Number in PDF
+#### Table of Content Page Number
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Table of Contents Page 2 >>>>>>>>>>>>>>>>>>>>
@@ -208,44 +211,67 @@
 - Since after the table of contents start again with 1 it's important to tell the parser how many pages are used for the
   table of contents, see `page_offset` in `BaseMainParser`
 
-#### Normal Content Page Number (Done)
+#### Normal Content Page Number
 - Example:
   ```
   <<<<<<<<<<<<<<<<<<<< Page 321 >>>>>>>>>>>>>>>>>>>>
   ```
 - It starts with "Page"
 
-### Table of Contents (Done)
+### Table of Contents
 - Table of contents is needed to identify the headlines in the scanned chapters
 
-#### Headline (Done)
+#### Headline
 - Example:
   ```
   21. Built-in Variables and Constants      ............................................................................       259
   ```
 - A headline starts with a chapter number
 
-#### Category (Done)
+#### Category
 - Example:
   ```
   General ................................................................................................................                             259
   ```
 - Categories are in the table of content, but don't have a chapter number
 - Categories are handled only for the chapter they are located
+- If a line starts with `[C]` then it is a forced category which is not in the table of contents
 
-### Callbacks (Done)
-- Callback start with `on <callback>`
+### Callbacks
+- Callbacks start with `on <callback>`
+- `<callback>` is a lower case string having only letters (a-z) or underscores (_)
+- There might be one parameter separated by space, e.g. `on ui_control (<ui-widget-name>)`
 
 ### Widgets
-- UI Widgets are used with `declare`
+- UI Widgets start with `declare <widget-type> <variable>`
+- `<widget-type>` is a lower case string having only letters (a-z) or underscores (_)
+- `<variable>` is a `$` or `%` followed by a lower case string having only letters (a-z) or hyphen (-)
+- There might be a parameter list, e.g. `declare ui_label $<variable-name> (<grid-width>, <grid-height>)`
+- For arrays there might be also a dimension, e.g. `declare ui_table %<array-name>[num-elements] (<grid-width>, <grid-height>, <range>)`
 
-### Commands and Functions (Done)
-- Commands are search starting and ending with a specified chapter
+### Commands
+- Commands start with `<command>` which is always a category
+- `<command>` is a lower case string having only letters (a-z) or underscores (_) and optionally a pair of brackets
+- After an empty line the command is repeated with its parameter list, e.g. `message(<variable-or-string>)`
 
-### Variables and Constants (Nearly Done)
-- Variables and Constants are search starting and ending with a specified chapter
+### Functions
+- Functions start with `<function>(<parameter-list>)` having the documentation
+    - either separated by a colon, e.g. `abs(x): Absolute value.`
+    - or in the next line
+- In order to separate functions from commands, parameter list is one out of
+    - `x`
+    - `x, y`
+    - `<expression>, <shift-bits>`
 
-#### Normal Variable in Header (Done)
+### Variables and Constants
+- Variables and Constants might start with an item character (`• `)
+- The variable or constant is build of `<type><identifier>`
+- The `<type>` is either `$`, `%`, `!`, `~`, `@` or `?`
+- The `<identifier>` is an upper case string having only letters (A-Z), numbers (0-9) or underscores (_)
+- For arrays there might be also a parameter, e.g. `%GROUPS_SELECTED[<group-idx>]`
+- Quite some different use cases are implemented to find the documentation, see the following subchapters
+
+#### Normal Variable in Header
 - Example:
   ```
   $NI_BUS_OFFSET
@@ -256,7 +282,7 @@
 - The variable is in the first line
 - The documentation follows in the next lines
 
-#### Multiple Variables in Header (Done)
+#### Multiple Variables in Header
 - Example:
   ```
   $NI_SIGNAL_TIMER_BEAT
@@ -269,7 +295,7 @@
 - The variables are in the first lines
 - The documentation is valid for all those variables
 
-#### Array in Header (Done)
+#### Array in Header
 - Example:
   ```
   %GROUPS_SELECTED[<group-idx>]
@@ -278,7 +304,7 @@
   ```
 - The parameter of the variable is parsed separately in the square brackets
 
-#### Variable Range in Header (Done)
+#### Variable Range in Header
 - Example:
   ```
   $MARK_1 ... $MARK_28
@@ -288,7 +314,7 @@
   ```
 - The documentation is meant for the variables 1 ... n, so the variables in that range must be created
 
-#### Variable Comments (Done)
+#### Variable Comments
 - Example:
   ```
   •  $EVENT_PAR_PLAY_POS (Returns the absolute position of the play cursor within a zone in
@@ -296,7 +322,7 @@
   ```
 - Comments for variables are directly after the variable in brackets
 
-#### Block Headline in Header (Done)
+#### Block Headline in Header
 - Example:
   ```
   Path Variables
@@ -313,7 +339,7 @@
 - The headline is meant for all variables in the block
 - The description is variable specific
 
-#### Block Description (Done)
+#### Block Description
 - Example:
   ```
   Time Machine Pro Variables
@@ -324,7 +350,7 @@
   ```
 - The headline and the following description is meant for all the variables in the block
 
-#### Item List (Done)
+#### Item List
 - Example:
   ```
   Event Parameter Constants
