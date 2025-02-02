@@ -26,8 +26,18 @@ Implementation Note:
   which overwrites the internal `pypdf._text_extraction._layout_mode._fixed_width_page.fixed_char_width`
 
 ## Update Text Document to new Kontakt Version
-- Download the new PDF and save it in `doc_parser/pdf`folder and rename it to "KSP_Reference_\<major>_\<minor>_Manual_en.pdf"
-- 
+- Follow the instruction in the previous section to download the PDF and convert it to `txt/ksp_<major>_<minor>/KSP_Reference_Manual_Original.txt.py`
+- Don't forget to override the file types!
+- Open a terminal (DOS PROMPT) in the root of the project and change into the `doc_parser/txt` subdirectory. There call:
+  ```
+  "C:\Program Files\JetBrains\PyCharm Community Edition <PyCharm version>\bin\pycharm64.exe" merge ksp_<new_version>/KSP_Reference_Manual_Original.txt.py ksp_<old_version>/KSP_Reference_Manual_Fixed.txt.py ksp_<old_version>/KSP_Reference_Manual_Original.txt.py ksp_<new_version>/KSP_Reference_Manual_Fixed.txt.py
+  ```
+  Example: Upgrade from 7.10 to 8.1:
+  ```
+  "C:\Program Files\JetBrains\PyCharm Community Edition 2023.3.2\bin\pycharm64.exe" merge ksp_8_1/KSP_Reference_Manual_Original.txt.py ksp_7_10/KSP_Reference_Manual_Fixed.txt.py ksp_7_10/KSP_Reference_Manual_Original.txt.py ksp_8_1/KSP_Reference_Manual_Fixed.txt.py
+  ```
+- There run the wizard to "resolve simple conflicts"
+- Now using Ctrl-F7 navigate through each conflict to resolve it
 
 ## Definitions
 ### Table of Contents

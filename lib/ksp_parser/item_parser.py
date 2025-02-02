@@ -271,6 +271,7 @@ class ItemParser:
         Export the internal parsed items to the *.csv file.
         """
         log_step(f"Export {self.doc_item_class.plural()} to {self.csv_file}")
+        self.csv_file.parent.mkdir(parents=True, exist_ok=True)
         with open(self.csv_file, 'w', newline='', encoding='utf-8') as f:
             csv_writer = csv.writer(f, delimiter=SystemConfig().delimiter, quoting=csv.QUOTE_MINIMAL)
             # Write the headline
