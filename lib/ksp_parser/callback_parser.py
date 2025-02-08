@@ -22,7 +22,6 @@ from copy import deepcopy
 from typing import Optional
 
 from doc_item.callback_item import CallbackItem
-from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
@@ -33,11 +32,6 @@ log = logging.getLogger(__name__)
 class CallbackParser(ItemParser):
     CALLBACK_PATTERN = re.compile(r"^on\s+([a-z_]+)(?:/([a-z_]+))?(?:\s+\(<([a-z-]+)>\))?$")
     """Pattern to find a callback, e.g. on init"""
-    CONTENT_PATTERNS = [ContentPattern(
-        start_pattern=re.compile(r"^(\d+\.\s+)?Callbacks$", re.IGNORECASE),
-        stop_pattern=re.compile(r"^(\d+\.\s+)?Variables$", re.IGNORECASE)
-    )]
-    """Content start and stop patterns for headlines"""
 
     def __init__(self):
         """
@@ -45,7 +39,7 @@ class CallbackParser(ItemParser):
         """
         super().__init__(
             CallbackItem,
-            CallbackParser.CONTENT_PATTERNS,
+            SystemConfig().callbacks_content_patterns,
             SystemConfig().callbacks_csv
         )
 

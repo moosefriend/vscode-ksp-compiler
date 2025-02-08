@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Optional, TYPE_CHECKING
 
 from config.constants import ItemType
+from ksp_parser.content_pattern import ContentPattern
 from util.rewind_reader import RewindReader
 
 if TYPE_CHECKING:
@@ -44,6 +45,9 @@ class Singleton(type):
 class SystemConfig(metaclass=Singleton):
     KSP_PATTERN = re.compile(r"^ksp_(\d+)_(\d+)$")
     """Pattern to find the Kontakt version specific parser"""
+
+    CONTENT_START_STOP_PATTERN = re.compile(r"^\s*(.+?)\s*==>\s*(.+)\s*")
+    """Pattern to get the content start and stop patterns from the *.ini file"""
 
     def __init__(self, ini_file: Path = None):
         """
@@ -76,10 +80,15 @@ class SystemConfig(metaclass=Singleton):
         self.page_offset: int = self._get_int("page_offset")
         self.page_header_lines: int = self._get_int("page_header_lines")
         self.csv_dir: Path = self._get_dir("csv_dir")
+        self.callbacks_content_patterns: list[ContentPattern] = self._get_content_patterns("callbacks_content_patterns")
         self.callbacks_csv: Path = self._get_file("callbacks_csv")
+        self.widgets_content_patterns: list[ContentPattern] = self._get_content_patterns("widgets_content_patterns")
         self.widgets_csv: Path = self._get_file("widgets_csv")
+        self.functions_content_patterns: list[ContentPattern] = self._get_content_patterns("functions_content_patterns")
         self.functions_csv: Path = self._get_file("functions_csv")
+        self.commands_content_patterns: list[ContentPattern] = self._get_content_patterns("commands_content_patterns")
         self.commands_csv: Path = self._get_file("commands_csv")
+        self.variables_content_patterns: list[ContentPattern] = self._get_content_patterns("variables_content_patterns")
         self.variables_csv: Path = self._get_file("variables_csv")
         self.delimiter: str = self.settings["delimiter"]
         self.dump: bool = self._get_bool("dump")
@@ -160,6 +169,25 @@ class SystemConfig(metaclass=Singleton):
                 else:
                     log.warning(f"Phase {item_type.value} will allways be called and needs not to be specified")
         return phases
+
+    def _get_content_patterns(self, name: str) -> list[ContentPattern]:
+        """
+        Get the list of content start and end patterns.
+
+        :param name: Name of the setting in the *.ini file
+        :return: List of ContentPattern objects for each section to be parsed
+        """
+        content_pattern_list: list[ContentPattern] = []
+        for line in self.settings[name].splitlines():
+            if line:
+                if m := SystemConfig.CONTENT_START_STOP_PATTERN.match(line):
+                    start_pattern = re.compile(m.group(1))
+                    stop_pattern = re.compile(m.group(2))
+                    content_pattern = ContentPattern(start_pattern, stop_pattern)
+                    content_pattern_list.append(content_pattern)
+                else:
+                    log.error(f"Can't parse start and stop pattern: {line}")
+        return content_pattern_list
 
     def _get_log_level(self, name: str) -> int:
         """
