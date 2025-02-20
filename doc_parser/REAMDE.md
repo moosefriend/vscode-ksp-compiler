@@ -180,7 +180,16 @@ Implementation Note:
   Waveform Property Constants
   ...
   ```
-- Delete those lines incl. the repeated header (if any) manually
+- To find multiple empty lines search for the regex:
+  ```
+  >>>>>>>>>>>>>>>>>>>>\n{3,}
+  ```
+  and replace it with (Note that there is a return at the end):
+  ```
+  >>>>>>>>>>>>>>>>>>>>
+  
+  ```
+  Only replace it if it is not a new headline, or category
 
 ### Wrapped Variable Comment
 - Sometimes variable comments (= text in brackets after a variable) are not properly identified, because they are wrapped into the next line

@@ -2020,21 +2020,20 @@ Events and MIDI: $RPN_ADDRESS, $RPN_VALUE
 
 Boolean Operators
 
-x > yGreater than.
-x < yLess than.
-x >= yGreater than or equal.
-x <= yLess than or equal.
-x = yEqual.
-x # yNot equal.
-in_range(x,True if x is between (and including) y and z.
-y, z)
+x > y: Greater than.
+x < y: Less than.
+x >= y: Greater than or equal.
+x <= y: Less than or equal.
+x = y: Equal.
+x # y: Not equal.
+in_range(x, y, z): True if x is between (and including) y and z.
 not aTrue if a is false and vice versa.
 
-a and bTrue if a is true and b is true.
+a and b: True if a is true and b is true.
 
-a or bTrue if a is true or b is true.
+a or b: True if a is true or b is true.
 
-a xor bTrue only if either a or b is true, but not both.
+a xor b: True only if either a or b is true, but not both.
 
 Remarks
 •     Boolean operators are used in if and while statements, since they return if the condition
@@ -2244,10 +2243,6 @@ end on
 
 on ui_control ($button_3)
 <<<<<<<<<<<<<<<<<<<< Page 55 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     $root_note := 60
     call func_play_triad()
 
@@ -2844,8 +2839,7 @@ Examples
 
 on init
     declare ui_wavetable $wavetable
-    set_control_par(get_ui_id($wavetable), $CONTROL_PAR_WT_ZONE,
-find_zone("Wavetable01"))
+    set_control_par(get_ui_id($wavetable), $CONTROL_PAR_WT_ZONE, find_zone("Wavetable01"))
 end on
 Displays the zone “Wavetable01” in the wavetable widget. Use a wavetable named Wavetable01.wav
 (or .aiff, etc.) to test the above code.
@@ -3050,7 +3044,6 @@ Time and Transport: $ENGINE_UPTIME, $KSP_TIMER
 
 note_off()
 
-note_off(<event-id>)
 note_off(<event-id>, <time-offset>)
 
 Sends a MIDI Note Off message for a specific note event ID.
@@ -3103,9 +3096,6 @@ on ui_control ($KillAll)
     $KillAll := 0
 end on
 <<<<<<<<<<<<<<<<<<<< Page 80 >>>>>>>>>>>>>>>>>>>>
-
-
-
 Prior to Kontakt 8, we could not use the note_off() command on events which had a predefined
 duration, like in the above case where it is 5 seconds. Using the optional time offset argument, we
 can now do this.
@@ -3203,15 +3193,15 @@ set_note_controller(<controller>, <note-number>, <value>)
 
 Sends a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable Per-Note Controller or MIDI 2.0
 Per-Note Pitch Bend message.
-<controller>This parameter sets the message type
+<controller>: This parameter sets the message type
 • A number between 0 ... 255 designates a MIDI 2.0 Registered Per-Note
 Controller
 • A number between 256 ... 511 designates a MIDI 2.0 Assignable Per-Note
 Controller
 • $VNC_PITCH_BEND indicates MIDI 2.0 Per-Note Pitch Bend
-<note-The MIDI note number for which the MIDI 2.0 per-note controller will be
-number>generated (0 ... 127).
-<value>The value of the specified per-note controller.
+<note-number>: The MIDI note number for which the MIDI 2.0 per-note controller will be
+generated (0 ... 127).
+<value>: The value of the specified per-note controller.
 • MIDI 2.0 Per-Note Controller value range: 0 ... 127
 • MIDI 2.0 Per-Note Pitch Bend value range: -8192 ... 8191
 
@@ -3253,10 +3243,6 @@ $HIDE_PART_VALUE)
                  "C2                               " & ...
                  "C3                               " & ...
 <<<<<<<<<<<<<<<<<<<< Page 84 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
                  "C4                               " & ...
                  "C5                               " & ...
                  "C6")
@@ -3319,9 +3305,6 @@ $BEND_RANGE, 0)
     end if
 end on
 <<<<<<<<<<<<<<<<<<<< Page 85 >>>>>>>>>>>>>>>>>>>>
-
-
-
 An example similar to the one for set_poly_at() command, however this one requires two
 script slots: the first slot sends the MIDI 2.0 note controller messages, and the second acts upon
 those messages by applying a custom per-note pitch bend change.
@@ -3336,9 +3319,9 @@ set_poly_at()
 set_poly_at(<note-number>, <value>)
 
 Sends a MIDI Polyphonic Aftertouch message.
-<note-The MIDI note for which the Polyphonic Aftertouch messages will be generated
-number>(0 ... 127).
-<value>The value of the Polyphonic Aftertouch message (0 ... 127).
+<note-number>: The MIDI note for which the Polyphonic Aftertouch messages will be generated
+(0 ... 127).
+<value>: The value of the Polyphonic Aftertouch message (0 ... 127).
 
 Remarks
 •  set_poly_at() cannot be used in the on init callback. If for some reason you wat to send
@@ -3355,8 +3338,7 @@ on init
     declare ui_table %BG[61] (6, 1, 1)
     declare ui_table %KB[61] (6, 1, 127)
 
-    set_control_par(get_ui_id(%KB), $CONTROL_PAR_HIDE, $HIDE_PART_BG .or.
-$HIDE_PART_VALUE)
+    set_control_par(get_ui_id(%KB), $CONTROL_PAR_HIDE, $HIDE_PART_BG .or. $HIDE_PART_VALUE)
     set_control_par(get_ui_id(%KB), $CONTROL_PAR_WIDTH, 555)
     set_control_par(get_ui_id(%KB), $CONTROL_PAR_HEIGHT, 110)
 
@@ -3390,10 +3372,6 @@ $HIDE_PART_VALUE)
 
     move_control_px($L, 55, 0)
 <<<<<<<<<<<<<<<<<<<< Page 87 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     move_control_px(%BG, 62, 15)
     move_control_px(%Active, 62, 15)
     move_control_px(%KB, 62, 15)
@@ -3542,8 +3520,7 @@ num_elements(<array-variable>)
 Returns the number of elements in an array.
 
 Remarks
-•     With this function you can, e.g., check how many groups are affected by the current event,
-using num_elements(%GROUPS_AFFECTED).
+•     With this function you can, e.g., check how many groups are affected by the current event, using num_elements(%GROUPS_AFFECTED).
 
 Examples
 
@@ -3561,17 +3538,15 @@ Events and MIDI: %GROUPS_AFFECTED
 
 search()
 
-search(<array-variable>, <value>)
 search(<array-variable>, <value>, <from>, <to>)
 
 Searches the specified array for the specified value (optionally within the range specified by <from>
 and <to>) and returns the index of its first position. If the value is not found, the function returns -1.
-<array-Array to be searched through
-variable>
-<value>Value to be found in the specified array.
-<from>Optional argument which specifies the array index from which to start the
+<array-variable>: Array to be searched through
+<value>: Value to be found in the specified array.
+<from>: Optional argument which specifies the array index from which to start the
 searching operation.
-<to>Optional argument which specifies the array index at which searching operation
+<to>: Optional argument which specifies the array index at which searching operation
 will end.
 
 Remarks
@@ -3614,10 +3589,6 @@ through }
 
         inc($i)
 <<<<<<<<<<<<<<<<<<<< Page 93 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     end while
 end on
 
@@ -3641,18 +3612,16 @@ sort()
 
 sort()
 
-sort(<array-variable>, <direction>)
 sort(<array-variable>, <direction>, <from>, <to>)
 
 Sorts an array in ascending or descending order (optionally within the range specified by <from>
 and <to>).
-<array-The array to be sorted.
-variable>
-<direction>When equal to 0, the array is sorted in ascending order.
+<array-variable>: The array to be sorted.
+<direction>: When equal to 0, the array is sorted in ascending order.
 When not equal to 0, the array is sorted in descending order.
-<from>Optional argument which specifies the array index from which to start the
+<from>: Optional argument which specifies the array index from which to start the
 sorting operation.
-<to>Optional argument which specifies the array index at which sorting operation
+<to>: Optional argument which specifies the array index at which sorting operation
 will end.
 
 Examples
@@ -3695,10 +3664,6 @@ end on
 on ui_control ($Randomize)
     $i := 0
 <<<<<<<<<<<<<<<<<<<< Page 95 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     while ($i < num_elements(%T))
         %T[$i] := random(-100, 100)
 
@@ -3734,9 +3699,9 @@ get_mod_idx()
 get_mod_idx(<group-index>, <mod-name>)
 
 Returns the slot index of an internal modulator or external modulation slot.
-<group-The index of the group (see Index column in Monitor -> Groups pane in
-index>Kontakt).
-<mod-name>The name of the internal (LFO, envelope, step modulator...) or external (velocity,
+<group-index>: The index of the group (see Index column in Monitor -> Groups pane in
+Kontakt).
+<mod-name>: The name of the internal (LFO, envelope, step modulator...) or external (velocity,
 key position, mono aftertouch...) modulator.
 
 Remarks
@@ -3763,8 +3728,7 @@ end on
 
 on ui_control ($Attack)
     set_engine_par($ENGINE_PAR_ATTACK, $Attack, $grp_idx, $env_idx, -1)
-    set_knob_label($Attack, get_engine_par_disp($ENGINE_PAR_ATTACK, $grp_idx,
-$env_idx, -1))
+    set_knob_label($Attack, get_engine_par_disp($ENGINE_PAR_ATTACK, $grp_idx, $env_idx, -1))
 end on
 Controlling the attack time of the volume envelope of the first  group. Note: the envelope has been
 manually renamed to "VOL_ENV".
@@ -3780,10 +3744,6 @@ on init
         $VelAmt := get_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY, 0, $mod_idx, -1)
     end if
 <<<<<<<<<<<<<<<<<<<< Page 97 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     make_persistent($VelAmt)
 end on
 
@@ -3793,8 +3753,7 @@ on ui_control ($VelAmt)
         $mod_idx := get_mod_idx($count, "VEL_VOLUME")
 
         if ($mod_idx # $NI_NOT_FOUND)
-            set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY, $VelAmt, $count,
-$mod_idx, -1)
+            set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY, $VelAmt, $count, $mod_idx, -1)
         end if
 
         inc($count)
@@ -3813,12 +3772,11 @@ get_target_idx()
 get_target_idx(<group-index>, <mod-index>, <target-name>)
 
 Returns the modulation target slot index of an internal modulator
-<group-The index of the group (see Index column in Monitor -> Groups pane in
-index>Kontakt).
-<mod-index>The slot index of an internal modulator (LFO, envelope, step modulator...). Can
+<group-index>: The index of the group (see Index column in Monitor -> Groups pane in
+Kontakt).
+<mod-index>: The slot index of an internal modulator (LFO, envelope, step modulator...). Can
 be retrieved with get_mod_idx().
-<target-The name of the modulation target slot.
-name>
+<target-name>: The name of the modulation target slot.
 
 Remarks
 •     Each modulator has a predefined name, based on its type and the parameter it targets.
@@ -3843,8 +3801,7 @@ end on
 
 on ui_control ($FilterEnv)
     if ($mod_idx # $NI_NOT_FOUND and $target_idx # $NI_NOT_FOUND)
-        set_engine_par($ENGINE_PAR_MOD_TARGET_MP_INTENSITY, 500000 + ($FilterEnv *
-500), 0, $mod_idx, $target_idx)
+        set_engine_par($ENGINE_PAR_MOD_TARGET_MP_INTENSITY, 500000 + ($FilterEnv * 500), 0, $mod_idx, $target_idx)
     end if
 end on
 Controlling the envelope to filter  cutoff modulation amount in the first  group. Note: the filter  envelope
@@ -3860,20 +3817,20 @@ get_engine_par()
 get_engine_par(<parameter>, <group>, <slot>, <generic>)
 
 Returns the value of a specific engine parameter.
-<parameter>Specifies the parameter by using one of the built-in engine parameter
+<parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
-<group>The index (zero-based) of the group in which the specified parameter resides.
+<group>: The index (zero-based) of the group in which the specified parameter resides.
 If the specified parameter resides on an Instrument level, enter -1.
 Buses and Main FX also reside on Instrument level, so you must set <group> to
 -1 if you want to address a bus.
-<slot>The slot index (zero-based) of the specified parameter. It applies only to group/
+<slot>: The slot index (zero-based) of the specified parameter. It applies only to group/
 instrument effects, modulators and modulation intensities.
 For group/instrument effects, this parameter specifies the slot in which the
 effect resides (zero-based).
 For modulators and modulation intensities, this parameters specifies the index
 which you can retrieve by using get_mod_idx().
 For all other applications, set this parameter to -1.
-<generic>This parameter applies to instrument effects and to internal modulators.
+<generic>: This parameter applies to instrument effects and to internal modulators.
 For instrument effects, this parameter distinguishes between:
 $NI_SEND_BUS: Send Effect
 $NI_INSERT_BUS: Insert Effect
@@ -3907,8 +3864,6 @@ on init
 end on
 <<<<<<<<<<<<<<<<<<<< Page 100 >>>>>>>>>>>>>>>>>>>>
 
-
-
 Output the name and index of release trigger group
 on init
     declare ui_label $label (2, 6)
@@ -3927,8 +3882,7 @@ on init
 
     while ($i < 8)
         add_text_line($label, "Slot: " & $i + 1 & ": " & ...
-                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1,
-$i, -1)])
+                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1, $i, -1)])
 
         inc($i)
     end while
@@ -3939,8 +3893,7 @@ on ui_control ($Refresh)
 
     while ($i < 8)
         add_text_line($label, "Slot: " & $i + 1 & ": " & ...
-                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1,
-$i, -1)])
+                      !effect_name[get_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE, -1, $i, -1)])
 
         inc($i)
     end while
@@ -3958,20 +3911,20 @@ get_engine_par_disp()
 get_engine_par_disp(<parameter>, <group>, <slot>, <generic>)
 
 Returns the displayed value of a specific engine parameter, as a string.
-<parameter>Specifies the parameter by using one of the built-in engine parameter
+<parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
-<group>The index (zero-based) of the group in which the specified parameter resides.
+<group>: The index (zero-based) of the group in which the specified parameter resides.
 If the specified parameter resides on an Instrument level, enter -1.
 Buses and Main FX also reside on Instrument level, so you must set <group> to
 -1 if you want to address a bus.
-<slot>The slot index (zero-based) of the specified parameter. It applies only to group/
+<slot>: The slot index (zero-based) of the specified parameter. It applies only to group/
 instrument effects, modulators and modulation intensities.
 For group/instrument effects, this parameter specifies the slot in which the
 effect resides (zero-based).
 For modulators and modulation intensities, this parameters specifies the index
 which you can retrieve by using get_mod_idx().
 For all other applications, set this parameter to -1.
-<generic>This parameter applies to instrument effects and to internal modulators.
+<generic>: This parameter applies to instrument effects and to internal modulators.
 For instrument effects, this parameter distinguishes between:
 $NI_SEND_BUS: Send Effect
 $NI_INSERT_BUS: Insert Effect
@@ -4003,38 +3956,34 @@ get_engine_par_disp($ENGINE_PAR_VOLUME, $i, -1, -1) & " dB")
     end while
 end on
 <<<<<<<<<<<<<<<<<<<< Page 102 >>>>>>>>>>>>>>>>>>>>
-
-
-
 Query the group volume settings in an instrument.
 <<<<<<<<<<<<<<<<<<<< Page 103 >>>>>>>>>>>>>>>>>>>>
 
 get_engine_par_disp_ext()
 
-get_engine_par_disp_ext(<parameter>, <value>, <group>, <slot>,
-<generic>)
+get_engine_par_disp_ext(<parameter>, <value>, <group>, <slot>, <generic>)
 
 Returns the display value of a specific engine parameter with an arbitrary value, as a string.
-<parameter>Specifies the parameter by using one of the built-in engine parameter
+<parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
-<value>The value to which the specified parameter is set.
+<value>: The value to which the specified parameter is set.
 The range of values is always 0 to 1000000, except for switches, in which
 case it is 0 or 1, and certain engine parameters which are stepped instead
 of continuous. These will either have specific constants provided, or a generic
 integer span of values, which will be separately noted in the Engine Parameters
 section.
-<group>The index (zero-based) of the group in which the specified parameter resides.
+<group>: The index (zero-based) of the group in which the specified parameter resides.
 If the specified parameter resides on an Instrument level, enter -1.
 Buses and Main FX also reside on Instrument level, so you must set <group> to
 -1 if you want to address a bus.
-<slot>The slot index (zero-based) of the specified parameter. It applies only to group/
+<slot>: The slot index (zero-based) of the specified parameter. It applies only to group/
 instrument effects, modulators and modulation intensities.
 For group/instrument effects, this parameter specifies the slot in which the
 effect resides (zero-based).
 For modulators and modulation intensities, this parameters specifies the index
 which you can retrieve by using get_mod_idx().
 For all other applications, set this parameter to -1.
-<generic>This parameter applies to instrument effects and to internal modulators.
+<generic>: This parameter applies to instrument effects and to internal modulators.
 For instrument effects, this parameter distinguishes between:
 $NI_SEND_BUS: Send Effect
 $NI_INSERT_BUS: Insert Effect
@@ -4059,10 +4008,6 @@ on init
     declare ui_knob $Cutoff (0, 1000000, 1)
     declare ui_knob $Macro (0, 1000000, 10000)
 <<<<<<<<<<<<<<<<<<<< Page 104 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     declare ui_knob $MacroAmt (-1000000, 1000000, 10000)
 
     $MacroAmt := -500000
@@ -4078,8 +4023,7 @@ on init
     make_persistent($Macro)
     make_persistent($MacroAmt)
 
-    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_FILTER, -1, 0,
-$NI_INSERT_BUS)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_FILTER, -1, 0, $NI_INSERT_BUS)
 end on
 
 function SetCutoff()
@@ -4094,8 +4038,7 @@ function SetCutoff()
     end if
 
     set_engine_par($ENGINE_PAR_CUTOFF, $value, -1, 0, $NI_INSERT_BUS)
-    set_knob_label($Cutoff, get_engine_par_disp_ext($ENGINE_PAR_CUTOFF, $Cutoff,
--1, 0, $NI_INSERT_BUS))
+    set_knob_label($Cutoff, get_engine_par_disp_ext($ENGINE_PAR_CUTOFF, $Cutoff, -1, 0, $NI_INSERT_BUS))
 end function
 
 on persistence_changed
@@ -4114,7 +4057,7 @@ get_voice_limit()
 get_voice_limit(<voice-type>)
 
 Returns the voice limit for the Time Machine Pro sampler mode of the Source module.
-<voice-type>The voice type, can be one of the following:
+<voice-type>: The voice type, can be one of the following:
 •  $NI_VL_TMPRO_STANDARD: Standard quality mode
 •  $NI_VL_TMPRO_HQ: High quality mode
 
@@ -4122,8 +4065,7 @@ Examples
 on init
     declare ui_label $label (3, 2)
 
-    add_text_line($label, "Standard Voice Limit: " &
-get_voice_limit($NI_VL_TMPRO_STANDARD))
+    add_text_line($label, "Standard Voice Limit: " & get_voice_limit($NI_VL_TMPRO_STANDARD))
     add_text_line($label, "HQ Voice Limit: " & get_voice_limit($NI_VL_TMPRO_HQ))
 end on
 Displaying TM Pro voice limits.
@@ -4137,8 +4079,8 @@ output_channel_name()
 output_channel_name(<output-number>)
 
 Returns the channel name for the specified output.
-<output-The number of the output channel (zero-based, i.e. the first output is 0).
-number>
+<output-number>: The number of the output channel (zero-based, i.e. the first output is 0).
+
 
 Examples
 on init
@@ -4165,32 +4107,31 @@ Mirroring the output channel assignment menu of the first  group.
 See Also
 General: $NUM_OUTPUT_CHANNELS, $ENGINE_PAR_OUTPUT_CHANNEL
 <<<<<<<<<<<<<<<<<<<< Page 107 >>>>>>>>>>>>>>>>>>>>
-
 set_engine_par()
 
 set_engine_par(<parameter>, <value>, <group>, <slot>, <generic>)
 
 Controls various Kontakt engine parameters.
-<parameter>Specifies the parameter by using one of the built-in engine parameter
+<parameter>: Specifies the parameter by using one of the built-in engine parameter
 constants.
-<value>The value to which the specified parameter is set.
+<value>: The value to which the specified parameter is set.
 The range of values is always 0 to 1000000, except for switches, in which
 case it is 0 or 1, and certain engine parameters which are stepped instead
 of continuous. These will either have specific constants provided, or a generic
 integer span of values, which will be separately noted in the Engine Parameters
 section.
-<group>The index (zero-based) of the group in which the specified parameter resides.
+<group>: The index (zero-based) of the group in which the specified parameter resides.
 If the specified parameter resides on an Instrument level, enter -1.
 Buses and Main FX also reside on Instrument level, so you must set <group> to
 -1 if you want to address a bus.
-<slot>The slot index (zero-based) of the specified parameter. It applies only to group/
+<slot>: The slot index (zero-based) of the specified parameter. It applies only to group/
 instrument effects, modulators and modulation intensities.
 For group/instrument effects, this parameter specifies the slot in which the
 effect resides (zero-based).
 For modulators and modulation intensities, this parameters specifies the index
 which you can retrieve by using get_mod_idx().
 For all other applications, set this parameter to -1.
-<generic>This parameter applies to instrument effects and to internal modulators.
+<generic>: This parameter applies to instrument effects and to internal modulators.
 For instrument effects, this parameter distinguishes between:
 $NI_SEND_BUS: Send Effect
 $NI_INSERT_BUS: Insert Effect
@@ -4214,7 +4155,6 @@ executed synchronously, which can greatly affect the initial loading time of the
 especially if this is done for a large amount of effect slots. It is advisable to move any such
 operations to on persistence_changed callback.
 <<<<<<<<<<<<<<<<<<<< Page 108 >>>>>>>>>>>>>>>>>>>>
-
 
 Examples
 on init
@@ -4269,10 +4209,10 @@ set_voice_limit()
 set_voice_limit(<voice-type>, <value>)
 
 Sets the voice limit for the Time Machine Pro mode of the Source module.
-<voice-type>The voice type, can be one of the following:
+<voice-type>: The voice type, can be one of the following:
 •  $NI_VL_TMPRO_STANDARD: Standard quality mode
 •  $NI_VL_TMPRO_HQ: High quality mode
-<value>The voice limit of the Time Machine Pro mode.
+<value>: The voice limit of the Time Machine Pro mode.
 
 Remarks
 •     Changing voice limits is an asynchronous operation. This means that one cannot
@@ -5067,7 +5007,7 @@ Assigns an event parameter array to a specific event.
 script" modulator (clamped internally between -1000000 and 1000000)
 •  $EVENT_PAR_MOD_VALUE_EX_ID: the modulation value to be sent to
 "from script" modulator (unbounded value range)
-<index>When used with:
+<index>: When used with:
 •  $EVENT_PAR_ALLOW_GROUP: the group index (0 ... 4095, however this
 depends on the amount of groups present in a particular Kontakt
 instrument)
@@ -5159,7 +5099,7 @@ allow_group(<group-index>)
 Allows the specified group, i.e. makes it available for playback.
 
 Remarks
-•     This commmand is only available in on note and on release callbacks.
+•     This command is only available in on note and on release callbacks.
 •     The numbering of the group index is zero-based, i.e. index of the first instrument group is 0.
 •     The group allow states can only be changed if the voice is not running.
 
@@ -5592,10 +5532,8 @@ set_key_color()
 set_key_color(<note-number>, <key-color-constant>)
 
 Sets the color of the specified key, i.e. MIDI note, on the Kontakt virtual keyboard.
-<note-MIDI note number of the key (0 ... 127).
-number>
-<key-color-One of available key color constant to specify the color used. The following
-constant>constants are available:
+<note-number>: MIDI note number of the key (0 ... 127).
+<key-color-constant>: One of available key color constant to specify the color used. The followingconstants are available:
 $KEY_COLOR_RED
 $KEY_COLOR_ORANGE
 $KEY_COLOR_LIGHT_ORANGE
@@ -5638,10 +5576,6 @@ on init
         $KEY_COLOR_RED, ...
         $KEY_COLOR_ORANGE, ...
 <<<<<<<<<<<<<<<<<<<< Page 148 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
         $KEY_COLOR_LIGHT_ORANGE, ...
         $KEY_COLOR_WARM_YELLOW, ...
         $KEY_COLOR_YELLOW, ...
@@ -5706,9 +5640,8 @@ set_key_name()
 set_key_name(<note-number>, <name>)
 
 Assigns a text string to the specified note number.
-<note-MIDI note number of the key (0 ... 127).
-number>
-<name>Text string to assign.
+<note-number>: MIDI note number of the key (0 ... 127).
+<name>: Text string to assign.
 
 Remarks
 •     Key names are instrument parameters and reside outside of KSP, i.e. changing the key name
@@ -5740,9 +5673,8 @@ set_key_pressed()
 set_key_pressed(<note-number>, <value>)
 
 Sets the trigger state of the specified key on Kontakt's keyboard.
-<note-MIDI note number of the key (0 ... 127).
-number>
-<value>0: Key is released
+<note-number>: MIDI note number of the key (0 ... 127).
+<value>: 0: Key is released
 1: Key is pressed
 
 Remarks
@@ -5775,7 +5707,7 @@ set_key_pressed_support()
 set_key_pressed_support(<mode>)
 
 Sets the pressed state support mode for Kontakt's keyboard.
-<mode>0: Kontakt handles all pressed states. set_key_pressed() commands are
+<mode>: 0: Kontakt handles all pressed states. set_key_pressed() commands are
 ignored (this is the default).
 1: Kontakt's keyboard is only affected by set_key_pressed() commands.
 
@@ -5821,10 +5753,8 @@ set_key_type()
 set_key_type(<note-number>, <key-type-constant>)
 
 Assigns a key type to the specified key.
-<note-MIDI note number of the key (0 ... 127).
-number>
-<key-type-The following key types are available:
-constant>$NI_KEY_TYPE_DEFAULT Normally mapped keys that produce sound.
+<note-number>: MIDI note number of the key (0 ... 127).
+<key-type-constant>: The following key types are available:$NI_KEY_TYPE_DEFAULT Normally mapped keys that produce sound.
 
 $NI_KEY_TYPE_CONTROL Keyswitches or other keysthat do not produce
 sound.
@@ -5868,9 +5798,9 @@ set_keyrange()
 set_keyrange(<min-note>, <max-note>, <name>)
 
 Assigns a text string to the specified range of keys.
-<min-note>First key of the key range (0 ... 127).
-<max-note>Last key of the key range (0 ... 127).
-<name>Text string specifying the name of the key range.
+<min-note>: First key of the key range (0 ... 127).
+<max-note>: Last key of the key range (0 ... 127).
+<name>: Text string specifying the name of the key range.
 
 Remarks
 •     Key ranges are instrument parameters and reside outside of KSP, i.e. changing the key range is
@@ -5968,8 +5898,7 @@ get_folder()
 get_folder(<path-variable>)
 
 Returns the path specified with the built-in path variable.
-<path-The following path variables are available:
-variable>$GET_FOLDER_LIBRARY_DIR
+<path-variable>: The following path variables are available:$GET_FOLDER_LIBRARY_DIR
 
 If used with a patch which belongs to a Kontakt Player encoded library: library
 folder.
@@ -6014,9 +5943,6 @@ folder called Data in the main folder of the library.
 See Also
 load_ir_sample()
 <<<<<<<<<<<<<<<<<<<< Page 157 >>>>>>>>>>>>>>>>>>>>
-
-
-
 General: $GET_FOLDER_LIBRARY_DIR, $GET_FOLDER_FACTORY_DIR,
 $GET_FOLDER_PATCH_DIR
 <<<<<<<<<<<<<<<<<<<< Page 158 >>>>>>>>>>>>>>>>>>>>
@@ -6026,17 +5952,15 @@ load_array()
 load_array(<array-variable>, <mode>)
 
 Loads an array from an external .nka file.
-<array-The name of the array variable. This name must be present as the first line of
-variable> the .nka file.
+<array-variable>: The name of the array variable. This name must be present as the first line of the .nka file.
 
-<mode> 0: A dialog window pops up, allowing you to select an .nka file to load. This
+<mode>: 0: A dialog window pops up, allowing you to select an .nka file to load. This
 mode can only be used in on persistence_changed, on ui_control and on
 pgs_changed callbacks (asynchronously).
 1: The array is directly loaded from the Data folder.
 For user instruments, the Data folder is located beside the resource container.
 For Kontakt Player encoded library instruments, the Data folder is located here:
-macOS: /Users/<UserName>/Library/Application Support/
-<LibraryName>/
+macOS: /Users/<UserName>/Library/Application Support/<LibraryName>/
 Windows: C:\Users\<UserName>\AppData\Local\<LibraryName>\
 This mode can be used synchronously in on init, and asynchronously in on
 persistence_changed, on ui_control and on pgs_changed callbacks.
@@ -6073,10 +5997,6 @@ on init
 
     declare ui_button $Load
 <<<<<<<<<<<<<<<<<<<< Page 159 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     declare ui_button $Save
     declare ui_table %table[8] (2,2,100)
 
@@ -6133,10 +6053,9 @@ load_array_str()
 load_array_str(<array-variable>, <path>)
 
 Loads an array from an external .nka file, using an absolute path to the file.
-<array-The name of the array variable, this must be present as the first line of the .nka
-variable> file.
+<array-variable>: The name of the array variable, this must be present as the first line of the .nka file.
 
-<path> The absolute path of the .nka file.
+<path>: The absolute path of the .nka file.
 
 Remarks
 •     The behaviour is similar to load_array() with mode set to 0, but instead of manually choosing
@@ -6186,10 +6105,6 @@ on async_complete
 
         if ($NI_ASYNC_EXIT_STATUS = 0)
 <<<<<<<<<<<<<<<<<<<< Page 161 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
             message("Array not found!")
         else
             message("")
@@ -6217,8 +6132,7 @@ load_ir_sample()
 load_ir_sample(<path-or-filename>, <slot>, <generic>)
 
 Loads an impulse response sample into Kontakt's convolution effect.
-<path-or-The absolute file path of the IR sample.
-filename>If no path is specified, the command will look for the specified sample within
+<path-or-filename>: The absolute file path of the IR sample.If no path is specified, the command will look for the specified sample within
 the ir_samples folder of the resource container.
 If no resource container is available, the folder ir_samples within the Kontakt
 user folder will be checked.
@@ -6227,8 +6141,8 @@ macOS: /Users/<username>/Documents/Native Instruments/
 Kontakt 8/
 Windows: C:\Users\<username>\Documents\Native
 Instruments\Kontakt 8\
-<slot>The slot index of the convolution effect (zero-based).
-<generic>Specifies whether the convolution effect is used as an:
+<slot>: The slot index of the convolution effect (zero-based).
+<generic>: Specifies whether the convolution effect is used as an:
 $NI_SEND_BUS: Send effect
 $NI_INSERT_BUS: Insert effect
 $NI_MAIN_BUS: Main effect
@@ -6264,10 +6178,6 @@ on async_complete
             message("IR sample not found!")
         else
 <<<<<<<<<<<<<<<<<<<< Page 163 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
             message("IR sample loaded!")
         end if
     end if
@@ -6285,16 +6195,14 @@ save_array()
 save_array(<array-variable>, <mode>)
 
 Saves an array to an external .nka file
-<array-The name of the array variable to be saved.
-variable>
-<mode>0: A dialog window pops up, allowing you to save the .nka file. This mode
+<array-variable>: The name of the array variable to be saved.
+<mode>: 0: A dialog window pops up, allowing you to save the .nka file. This mode
 can only be used in on persistence_changed, on ui_control and on
 pgs_changed callbacks.
 1: The array is directly saved in the Data folder.
 For user instruments, the Data folder is located beside the resource container.
 For Kontakt Player encoded library instruments, the Data folder is located here:
-macOS: /Users/<UserName>/Library/Application Support/
-<LibraryName>/
+macOS: /Users/<UserName>/Library/Application Support/<LibraryName>/
 Windows: C:\Users\<UserName>\AppData\Local\<LibraryName>\
 This mode can be used synchronously in on init, and asynchronously
 in on persistence_changed, on ui_control and on pgs_changed
@@ -6317,9 +6225,8 @@ save_array_str()
 save_array_str(<array-variable>, <path>)
 
 Saves an array to an external .nka file with the specified absolute path.
-<array-The name of the array variable to be saved.
-variable>
-<path>The absolute path of the .nka file to be saved.
+<array-variable>: The name of the array variable to be saved.
+<path>: The absolute path of the .nka file to be saved.
 
 Remarks
 •     The behaviour is similar to save_array(), but instead of manually choosing a save location,
@@ -6369,9 +6276,6 @@ on ui_control (%table)
 end on
 <<<<<<<<<<<<<<<<<<<< Page 166 >>>>>>>>>>>>>>>>>>>>
 
-
-
-
 on ui_control ($Save)
     $save_arr_id := save_array_str(%preset, @path & @preset_name & ".nka")
 end on
@@ -6388,13 +6292,12 @@ See Also
 save_array()
 load_array_str()
 <<<<<<<<<<<<<<<<<<<< Page 167 >>>>>>>>>>>>>>>>>>>>
-
 save_midi_file()
 
 save_midi_file(<path>)
 
 Saves a MIDI file with the range specified by the mf_set_export_area() command.
-<path>The absolute path of the MIDI file to be saved.
+<path>: The absolute path of the MIDI file to be saved.
 
 Remarks
 •     Always use forwards slash (/) when working with absolute file paths in Kontakt!
@@ -6487,9 +6390,6 @@ single event at a time, allowing you to use a variety of commands to access or e
 parameters. You have the option to either navigate from one event to the next, or to specify exact
 positions in MIDI ticks.
 <<<<<<<<<<<<<<<<<<<< Page 169 >>>>>>>>>>>>>>>>>>>>
-
-
-
 It should be noted that MIDI Note Off messages are not used. When you load a MIDI file using the
 mf_insert_file() command, the Note Off events are used to give a length parameter to the
 respective Note On event, and then discarded.
@@ -6500,7 +6400,7 @@ by_marks()
 by_marks(<mark>)
 
 Used to access a user-defined group of MIDI object events.
-<mark>The event mark number, $MARK_1 ... $MARK_10 .
+<mark>: The event mark number, $MARK_1 ... $MARK_10 .
 
 See Also
 mf_insert_file()
@@ -6519,7 +6419,7 @@ by_track()
 by_track(<track>)
 
 Used to access events grouped by their track number.
-<track>The track number of the events you wish to access.
+<track>: The track number of the events you wish to access.
 
 Remarks
 •     Similar in functionality to the by_marks() command.
@@ -6615,8 +6515,8 @@ mf_get_event_par()
 mf_get_event_par(<event-id>, <parameter>)
 
 Returns the value of an event parameter.
-<event-id>The ID of the event to be edited.
-<parameter>The event parameter, either one of four freely assignable event parameters:
+<event-id>: The ID of the event to be edited.
+<parameter>: The event parameter, either one of four freely assignable event parameters:
 $EVENT_PAR_0
 $EVENT_PAR_1
 $EVENT_PAR_2
@@ -6652,8 +6552,7 @@ mf_get_first()
 mf_get_first(<track-index>)
 
 Moves the position marker to the first event in the MIDI track.
-<track-The number of the track you want to edit. -1 refers to the whole file.
-index>
+<track-index>: The number of the track you want to edit. -1 refers to the whole file.
 
 Remarks
 •     Using this command will also select the event at the position marker for editing.
@@ -6690,8 +6589,7 @@ mf_get_last()
 mf_get_last(<track-index>)
 
 Moves the position marker to the last event in the MIDI track.
-<track-The number of the track you want to edit. -1 refers to the whole file.
-index>
+<track-index>: The number of the track you want to edit. -1 refers to the whole file.
 
 Remarks
 •     Using this command will also select the event at the position marker for editing.
@@ -6764,7 +6662,6 @@ MIDI file  loader which allows exporting first  four tracks as individual MIDI f
 mf_get_last_filename() to show the exact name of the MIDI file  that was loaded.
 <<<<<<<<<<<<<<<<<<<< Page 179 >>>>>>>>>>>>>>>>>>>>
 
-
 See Also
 mf_insert_file()
 <<<<<<<<<<<<<<<<<<<< Page 180 >>>>>>>>>>>>>>>>>>>>
@@ -6774,8 +6671,8 @@ mf_get_mark()
 mf_get_mark(<event-id>, <mark>)
 
 Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
-<event-id>The ID of the event to be edited
-<mark>The event mark number, $MARK_1 ... $MARK_10 . You can also assign
+<event-id>: The ID of the event to be edited
+<mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
 more than one mark to a single event, either by typing the command again, or
 by using the bitwise .or. operator, or by simply summing the event marks.
 
@@ -6797,8 +6694,7 @@ mf_get_next()
 mf_get_next(<track-index>)
 
 Moves the position marker to the next event in the MIDI track.
-<track-The number of the track you want to edit. -1 refers to the whole file.
-index>
+<track-index>: The number of the track you want to edit. -1 refers to the whole file.
 
 Remarks
 •     Using this command will also select the event at the position marker for editing.
@@ -6819,9 +6715,8 @@ mf_get_next_at()
 mf_get_next_at(<track-index>, <pos>)
 
 Moves the position marker to the next event in the MIDI track right after the defined position.
-<track-The number of the track you want to edit. -1 refers to the whole file.
-index>
-<pos>Position in MIDI ticks.
+<track-index>: The number of the track you want to edit. -1 refers to the whole file.
+<pos>: Position in MIDI ticks.
 
 Remarks
 •     Using this command will also select the event at the position marker for editing.
@@ -6859,8 +6754,7 @@ mf_get_prev()
 mf_get_prev(<track-index>)
 
 Moves the position marker to the previous event in the MIDI track.
-<track-The number of the track you want to edit. -1 refers to the whole file.
-index>
+<track-index>: The number of the track you want to edit. -1 refers to the whole file.
 
 Remarks
 •     Using this command will also select the event at the position marker for editing.
@@ -6881,9 +6775,8 @@ mf_get_prev_at()
 mf_get_prev_at(<track-index>, <pos>)
 
 Moves the position marker to the first event before the defined position.
-<track-The number of the track you want to edit. -1 refers to the whole file.
-index>
-<pos>Position in MIDI ticks.
+<track-index>: The number of the track you want to edit. -1 refers to the whole file.
+<pos>: Position in MIDI ticks.
 
 Remarks
 •     Using this command will also select the event at the position marker for editing.
@@ -6905,9 +6798,9 @@ mf_insert_event(<track>, <pos>, <command>, <byte1>, <byte2>)
 
 Activates an inactive MIDI event in the MIDI object. However, because the command and position
 are defined in this command, it can be considered as an insertion.
-<track>The track into which the event will be inserted.
-<pos>The position at which the event will be inserted, in ticks.
-<command>Defines the command type of the event, can be one of the following:
+<track>: The track into which the event will be inserted.
+<pos>: The position at which the event will be inserted, in ticks.
+<command>: Defines the command type of the event, can be one of the following:
 $MIDI_COMMAND_NOTE_ON
 $MIDI_COMMAND_POLY_AT
 $MIDI_COMMAND_CC
@@ -6939,12 +6832,10 @@ mf_insert_file()
 mf_insert_file(<path>, <track-offset>, <position-offset>, <mode>)
 
 Inserts a MIDI file into the object.
-<path>The absolute path of the MIDI file, including the file name.
-<track-Applies a track offset to the MIDI data.
-offset>
-<position-Applies a position offset, in ticks, to the MIDI data.
-offset>
-<mode>Defines the mode of insertion:
+<path>: The absolute path of the MIDI file, including the file name.
+<track-offset>: Applies a track offset to the MIDI data.
+<position-offset>: Applies a position offset, in ticks, to the MIDI data.
+<mode>: Defines the mode of insertion:
 0: Replaces all existing events
 1: Replaces only overlapping events
 2: Merges all events
@@ -6990,7 +6881,6 @@ called "test.mid" into your Kontakt factory data folder. Otherwise, the defined 
 be displayed.
 <<<<<<<<<<<<<<<<<<<< Page 188 >>>>>>>>>>>>>>>>>>>>
 
-
 See Also
 on async_complete
 save_midi_file()
@@ -7004,7 +6894,7 @@ mf_remove_event()
 mf_remove_event(<event-id>)
 
 Deactivates an event in the MIDI object, effectively removing it.
-<event-id>The ID of the event to be deactivated.
+<event-id>: The ID of the event to be deactivated.
 
 Remarks
 •     Using this command will decrease the MIDI event buffer size by one.
@@ -7043,7 +6933,7 @@ mf_set_buffer_size()
 mf_set_buffer_size(<num-events>)
 
 Defines a number of inactive MIDI events, that can be activated and edited.
-<num-events>The size of the MIDI object edit buffer.
+<num-events>: The size of the MIDI object edit buffer.
 
 Remarks
 •     Using the mf_insert_event() and mf_remove_event() technically activates or
@@ -7071,8 +6961,8 @@ mf_set_event_par()
 mf_set_event_par(<event-id>, <parameter>, <value>)
 
 Sets an event parameter.
-<event-id>The ID of the event to be edited.
-<parameter>The event parameter, either one of four freely assignable event parameters:
+<event-id>: The ID of the event to be edited.
+<parameter>: The event parameter, either one of four freely assignable event parameters:
 $EVENT_PAR_0
 $EVENT_PAR_1
 $EVENT_PAR_2
@@ -7086,7 +6976,7 @@ $EVENT_PAR_POS
 $EVENT_PAR_NOTE_LENGTH
 $EVENT_PAR_ID
 $EVENT_PAR_TRACK_NR
-<value>The value of the event parameter.
+<value>: The value of the event parameter.
 
 Remarks
 •     You can control all events in the MIDI object by using the $ALL_EVENTS constant as the event
@@ -7109,20 +6999,18 @@ save_midi_file()
 
 mf_set_export_area()
 
-mf_set_export_area(<name>, <start-pos>, <end-pos>, <start-track>,
-<end-track>)
+mf_set_export_area(<name>, <start-pos>, <end-pos>, <start-track>, <end-track>)
 
 Defines the part of the object that will be exported when using a drag and drop area, or when using
 save_midi_file() command.
-<name>Sets the name of the exported file.
-<start-pos>Defines the start position (in ticks) of the export area.
+<name>: Sets the name of the exported file.
+<start-pos>: Defines the start position (in ticks) of the export area.
 Use -1 to set this to the start of the object.
-<end-pos>Defines the end position (in ticks) of the export area.
+<end-pos>: Defines the end position (in ticks) of the export area.
 Use -1 to set this to the end of the object.
-<start-Defines the first track to be included in the export area.
-track>Use -1 to set this to the first track of the object.
+<start-track>: Defines the first track to be included in the export area.Use -1 to set this to the first track of the object.
 
-<end-track>Defines the last track to be included in the export area.
+<end-track>: Defines the last track to be included in the export area.
 Use -1 to set this to the last track of the object.
 
 Remarks
@@ -7160,9 +7048,6 @@ file  called "test.mid" into your Kontakt factory data folder.
 See Also
 mf_insert_file()
 <<<<<<<<<<<<<<<<<<<< Page 194 >>>>>>>>>>>>>>>>>>>>
-
-
-
 save_midi_file()
 Specific UI Widgets: $CONTROL_PAR_DND_BEHAVIOUR
 <<<<<<<<<<<<<<<<<<<< Page 195 >>>>>>>>>>>>>>>>>>>>
@@ -7172,11 +7057,11 @@ mf_set_mark()
 mf_set_mark(<event-id>, <mark>, <status>)
 
 Marks an event, so that you may group events together and process that group quickly.
-<event-id>The ID of the event to be marked.
-<mark>The event mark number, $MARK_1 ... $MARK_10 . You can also assign
+<event-id>: The ID of the event to be marked.
+<mark>: The event mark number, $MARK_1 ... $MARK_10 . You can also assign
 more than one mark to a single event, either by typing the command again, or
 by using the bitwise .or. operator, or by simply summing the event marks.
-<status>Set this to 1 to mark an event or to 0 to unmark an event.
+<status>: Set this to 1 to mark an event or to 0 to unmark an event.
 
 See Also
 mf_insert_file()
@@ -7223,8 +7108,8 @@ detect_key(<zone-id>, <key-result>)
 
 Assigns <key-result> a $NI_DETECT_KEY tag describing the musical key of the audio sample.
 If detection fails, the function will return $NI_DETECT_KEY_INVALID.
-<zone-id>The ID of the zone.
-<key-result>The detected musical key, can be one of the following:
+<zone-id>: The ID of the zone.
+<key-result>: The detected musical key, can be one of the following:
 $NI_DETECT_KEY_C_MAJOR
 $NI_DETECT_KEY_CSHARP_MAJOR
 $NI_DETECT_KEY_D_MAJOR
@@ -7257,9 +7142,8 @@ detect_pitch(<zone-id>, <pitch-result>)
 
 Returns a real value representing the fundamental frequency of an audio sample, in semitones and
 cents. If detection fails, the function will return ~NI_DETECT_PITCH_INVALID.
-<zone-id>The ID of the zone.
-<pitch-The MIDI note value of the detected pitch.
-result>
+<zone-id>: The ID of the zone.
+<pitch-result>: The MIDI note value of the detected pitch.
 <<<<<<<<<<<<<<<<<<<< Page 200 >>>>>>>>>>>>>>>>>>>>
 
 detect_loudness()
@@ -7270,9 +7154,8 @@ Returns a real value representing the loudness of an audio sample in decibels. L
 measured according to the standard established by the International Telecommunication Union:
 Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If
 detection fails, the function will return ~NI_DETECT_LOUDNESS_INVALID.
-<zone-id>The ID of the zone.
-<loudness-The real value of the detected loudness in decibels.
-result>
+<zone-id>: The ID of the zone.
+<loudness-result>: The real value of the detected loudness in decibels.
 <<<<<<<<<<<<<<<<<<<< Page 201 >>>>>>>>>>>>>>>>>>>>
 
 detect_peak()
@@ -7283,9 +7166,8 @@ Returns a real value representing peak level of an audio sample in decibels. Pea
 according to the standard established by the International Telecommunication Union: Algorithms
 to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection
 fails, the function will set <peak-result> to ~NI_DETECT_PEAK_INVALID.
-<zone-id>The ID of the zone.
-<peak-The real value of the detected peak level in decibels.
-result>
+<zone-id>: The ID of the zone.
+<peak-result>: The real value of the detected peak level in decibels.
 <<<<<<<<<<<<<<<<<<<< Page 202 >>>>>>>>>>>>>>>>>>>>
 
 detect_rms()
@@ -7294,8 +7176,8 @@ detect_rms(<zone-id>, <rms-result>)
 
 Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the
 function will return ~NI_DETECT_RMS_INVALID.
-<zone-id>The ID of the zone.
-<rms-result>The real value of the RMS level of the audio sample in decibels.
+<zone-id>: The ID of the zone.
+<rms-result>: The real value of the RMS level of the audio sample in decibels.
 <<<<<<<<<<<<<<<<<<<< Page 203 >>>>>>>>>>>>>>>>>>>>
 
 detect_tempo()
@@ -7304,9 +7186,8 @@ detect_tempo(<zone-id>, <tempo-result>)
 
 Returns a real value representing the detected tempo of the audio sample, in BPM. If detection fails,
 the function will return ~NI_DETECT_TEMPO_INVALID.
-<zone-id>The ID of the zone.
-<tempo-The BPM value of the detected tempo.
-result>
+<zone-id>: The ID of the zone.
+<tempo-result>: The BPM value of the detected tempo.
 <<<<<<<<<<<<<<<<<<<< Page 204 >>>>>>>>>>>>>>>>>>>>
 
 detect_sample_type()
@@ -7316,9 +7197,8 @@ detect_sample_type(<zone-id>, <sample-type-result>)
 Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether
 an audio sample is a drum or an instrument. If detection fails, the function will return
 $NI_DETECT_SAMPLE_TYPE_INVALID.
-<zone-id>The ID of the zone.
-<sample-The detected sample type, can be one of the following:
-type-result>$NI_DETECT_SAMPLE_TYPE_INVALID
+<zone-id>: The ID of the zone.
+<sample-type-result>: The detected sample type, can be one of the following:$NI_DETECT_SAMPLE_TYPE_INVALID
 $NI_DETECT_SAMPLE_TYPE_INSTRUMENT
 $NI_DETECT_SAMPLE_TYPE_DRUM
 <<<<<<<<<<<<<<<<<<<< Page 205 >>>>>>>>>>>>>>>>>>>>
@@ -7331,9 +7211,8 @@ Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type o
 audio sample. You can use this function if detect_sample_type() determines that a given audio
 sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return
 ~NI_DETECT_DRUM_TYPE_INVALID.
-<zone-id>The ID of the zone.
-<drum-type-The detected drum type, can be one of the following:
-result>$NI_DETECT_DRUM_TYPE_INVALID
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following:$NI_DETECT_DRUM_TYPE_INVALID
 $NI_DETECT_DRUM_TYPE_KICK
 $NI_DETECT_DRUM_TYPE_SNARE
 $NI_DETECT_DRUM_TYPE_CLOSED_HH
@@ -7354,9 +7233,8 @@ Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the
 instrument type of an audio sample. Hint: use this function if detect_sample_type()
 determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT. If
 detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
-<zone-id>The ID of the zone
-<instr-type-The detected instrument type, can be one of the following:
-result>$NI_DETECT_INSTRUMENT_TYPE_INVALID
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following:$NI_DETECT_INSTRUMENT_TYPE_INVALID
 $NI_DETECT_INSTRUMENT_TYPE_BASS
 $NI_DETECT_INSTRUMENT_TYPE_BOWED_STRING
 $NI_DETECT_INSTRUMENT_TYPE_BRASS
@@ -7433,10 +7311,6 @@ on init
     !drum_types[$NI_DETECT_DRUM_TYPE_TOM]        := "Tomr"
     !drum_types[$NI_DETECT_DRUM_TYPE_CYMBAL]     := "Cymbal"
 <<<<<<<<<<<<<<<<<<<< Page 208 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     !drum_types[$NI_DETECT_DRUM_TYPE_CLAP]       := "Clap"
     !drum_types[$NI_DETECT_DRUM_TYPE_SHAKER]     := "Shaker"
     !drum_types[$NI_DETECT_DRUM_TYPE_PERC_DRUM]  := "Drum Percussion"
@@ -7500,10 +7374,6 @@ instrument_types[$instrument_type])
                 set_text($Info, "Instrument: " & !drum_types[$drum_type])
             end if
 <<<<<<<<<<<<<<<<<<<< Page 209 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
         end if
     end if
 end on
@@ -8178,7 +8048,6 @@ get_control_par()
 set_control_par()
 set_control_par_arr()
 <<<<<<<<<<<<<<<<<<<< Page 229 >>>>>>>>>>>>>>>>>>>>
-
 General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT,
 $CONTROL_PAR_KEY_CONTROL
 <<<<<<<<<<<<<<<<<<<< Page 230 >>>>>>>>>>>>>>>>>>>>
@@ -8469,7 +8338,7 @@ load_komplete_ui()
 load_komplete_ui(<filename>)
 
 Loads a Komplete UI file (.kscript) that defines the modern user interface.
-<filename>The filename of the .kscriptfile without extension, entered as a string.
+<filename>: The filename of the .kscriptfile without extension, entered as a string.
 
 Remarks
 •     Only one Komplete UI file can be loaded for the whole instrument.
@@ -9698,7 +9567,6 @@ Examples
 
 set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 0)
 <<<<<<<<<<<<<<<<<<<< Page 274 >>>>>>>>>>>>>>>>>>>>
-
 
 See Also
 get_zone_par()
@@ -11091,10 +10959,6 @@ $ENGINE_PAR_WT_MOD_TYPE
 $ENGINE_PAR_WT_MOD_WAVE
     $NI_WT_MOD_WAVE_SINE
 <<<<<<<<<<<<<<<<<<<< Page 308 >>>>>>>>>>>>>>>>>>>>
-
-
-
-Source Module
     $NI_WT_MOD_WAVE_TRIANGLE
     $NI_WT_MOD_WAVE_TX2
     $NI_WT_MOD_WAVE_TX3
@@ -12564,10 +12428,6 @@ on init
 
     set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 0)
 <<<<<<<<<<<<<<<<<<<< Page 344 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
     set_zone_par(%NI_USER_ZONE_IDS[1], $ZONE_PAR_GROUP, 1)
     set_zone_par(%NI_USER_ZONE_IDS[2], $ZONE_PAR_GROUP, 2)
     set_zone_par(%NI_USER_ZONE_IDS[3], $ZONE_PAR_GROUP, 3)
@@ -12993,10 +12853,6 @@ A preprocessor is used to exclude code elements from interpreting. <condition-sy
 to a symbolic name which consists of alphanumeric symbols, started by a letter. For example, you
 could write:
 <<<<<<<<<<<<<<<<<<<< Page 356 >>>>>>>>>>>>>>>>>>>>
-
-
-
-
 on note
     { do something general }
     $var := 5
@@ -13047,7 +12903,7 @@ pgs_set_key_val(<key-id>, <index>, <value>)
 pgs_get_key_val(<key-id>, <index>)
 
 
-<key-id> is similar to a variable name; it can only contain alphanumerics and must not start with
+<key-id>:  is similar to a variable name; it can only contain alphanumerics and must not start with
 a number. It also cannot be longer than 64 characters. It is a good idea to always write them with
 capital letters to emphasize their unique status.
 Here's an example. Insert the following script into any slot:
@@ -13190,9 +13046,6 @@ created by Creator Tools.
 filename next to them. Note that wallpapers, instrument icons and custom picture fonts also
 need a .txt file, or they will be ignored!
 <<<<<<<<<<<<<<<<<<<< Page 361 >>>>>>>>>>>>>>>>>>>>
-
-
-
 •     Check the scripts subfolder for any .txt files.
 •     Pack all valid files into the Resource Container.
 After that, rename your Resources folder and reopen your Instrument. Now that the Resources
@@ -13240,9 +13093,6 @@ you can tell all of the NKIs that are part of your library to use this particula
 Just open up the Instrument Options dialog and use the Browse function (click on the open folder
 button to the left of Create button).
 <<<<<<<<<<<<<<<<<<<< Page 362 >>>>>>>>>>>>>>>>>>>>
-
-
-
 As long as the Resources folder exist besides the NKR file (which is the resource container
 monolith), Kontakt will read all files directly from this folder structure.
 For loading scripts from the scripts subfolder, use the “Apply from… → Resources folder”
