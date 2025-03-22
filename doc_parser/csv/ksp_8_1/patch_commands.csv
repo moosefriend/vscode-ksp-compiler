@@ -1,0 +1,377 @@
+File,Page No,Line No,Headline,Category,Name,Parameter List,Description,Remarks,Examples,See Also,Source
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,cc_delivery_request,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,change_time_with_pitch,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,connect_view,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,get_engine_par_disp_m,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,get_engine_par_m,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,load_ir_sample_m,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,load_patch,arg1,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_byte_one,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_byte_two,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_channel,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_command,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_note_length,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_pos,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_get_track_idx,,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_byte_one,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_byte_two,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_channel,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_command,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,mf_set_pos,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,,Undocumented,num_slices,value,Undocumented,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,54,2198,7. User-defined Functions,,call,function-name,Calls a previously declared function.,"- The function has to be declared before it is called.
+- Empty parentheses can be optionally used when declaring and calling the function.
+- Function arguments and return values are not supported. However, any variable assignments prior to function call can be used to emulate function arguments, and any variable used within a function can of course be used later as if it were a return value. In this case it is advised to add comments to the code to explain the intent.","on init
+    declare $root_note := 60
+
+    declare ui_button $button_1
+    declare ui_button $button_2
+    declare ui_button $button_3
+
+    set_text($button_1, ""Play C Major"")
+    set_text($button_2, ""Play F# Major"")
+    set_text($button_3, ""Play C7 (b9, #11)"")
+end on
+
+function func_play_triad()
+    play_note($root_note, 100, 0, 300000)
+    play_note($root_note + 4, 100, 0, 300000)
+    play_note($root_note + 7, 100, 0, 300000)
+end function
+
+on ui_control ($button_1)
+    $root_note := 60
+    call func_play_triad()
+
+    $button_1 := 0
+end on
+
+on ui_control ($button_2)
+    $root_note := 66
+    call func_play_triad()
+
+    $button_2 := 0
+end on
+
+on ui_control ($button_3)
+    $root_note := 60
+    call func_play_triad()
+
+    $root_note := 66
+    call func_play_triad()
+
+    $button_3 := 0
+end on
+Jazz Harmony 101.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,227,7983,19. User Interface Commands,,get_control_par_str,"ui-id,control-parameter","Retrieve various parameters of the specified UI widget.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.",- Flavor of the command for use with strings (i.e. retrieving text from ui_label or automation name from ui_slider).,"on init
+    declare ui_value_edit $Test (0, 100, 1)
+    message(get_control_par(get_ui_id($Test), $CONTROL_PAR_WIDTH))
+end on
+Retrieving the width of a value edit in pixels.","set_control_par()
+General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,228,8011,19. User Interface Commands,,get_control_par_str_arr,"ui-id,control-parameter,index","Retrieve various parameters of the specified UI widget
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
+<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving automation name of a particular ui_xy cursor,"on init
+    declare ui_xy ?XY1[2]
+    declare ui_xy ?XY2[2]
+    declare ui_xy ?XY3[2]
+    declare ui_xy ?XY4[2]
+    declare ui_button $Random
+
+    declare $i
+    declare ~val
+end on
+
+on ui_control ($Random)
+    $i := 0
+    while ($i < 8)
+        { randomize X axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, $i mod 2)
+
+        { randomize Y axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, ($i mod 2) + 1)
+
+        inc($i)
+    end while
+
+    $Random := 0
+end on
+Randomize the values of the first cursor for 4 different XY pads in one loop.","get_control_par()
+set_control_par()
+set_control_par_arr()
+General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,228,8013,19. User Interface Commands,,get_control_par_real_arr,"ui-id,control-parameter,index","Retrieve various parameters of the specified UI widget
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
+<index>: Array index of the UI widget we want to retrieve.",- i.e. retrieving values of ui_xy cursor X and Y axes,"on init
+    declare ui_xy ?XY1[2]
+    declare ui_xy ?XY2[2]
+    declare ui_xy ?XY3[2]
+    declare ui_xy ?XY4[2]
+    declare ui_button $Random
+
+    declare $i
+    declare ~val
+end on
+
+on ui_control ($Random)
+    $i := 0
+    while ($i < 8)
+        { randomize X axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, $i mod 2)
+
+        { randomize Y axis value }
+        ~val := int_to_real(random(0, 1000000)) / 1000000.0
+        set_control_par_real_arr(get_ui_id(?XY1) + $i / 2, $CONTROL_PAR_VALUE, ~val, ($i mod 2) + 1)
+
+        inc($i)
+    end while
+
+    $Random := 0
+end on
+Randomize the values of the first cursor for 4 different XY pads in one loop.","get_control_par()
+set_control_par()
+set_control_par_arr()
+General: $CONTROL_PAR_KEY_SHIFT, $CONTROL_PAR_KEY_ALT, $CONTROL_PAR_KEY_CONTROL",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,243,8553,19. User Interface Commands,,set_control_par_str,"ui-id,control-parameter,value","Change various parameters of the specified UI widget.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI control we wish to set, i.e. $CONTROL_PAR_WIDTH.
+<value>: The value of the control parameter we wish to set.","- Flavor of the command for use with strings (i.e. setting the text of a ui_label, or automation name of a ui_slider).","on init
+    declare ui_value_edit $test (0, 100, $VALUE_EDIT_MODE_NOTE_NAMES)
+    set_text($test,"""")
+    set_control_par(get_ui_id($test), $CONTROL_PAR_WIDTH, 45)
+    move_control_px($test, 100, 10)
+end on
+Changing the width of a value edit to 45 pixels. Note that you also have to specify its position in
+pixels once you use pixel-based control parameters.
+
+on init
+    declare ui_label $test (1, 1)
+    set_control_par_str(get_ui_id($test), $CONTROL_PAR_TEXT, ""This is Text"")
+    set_control_par(get_ui_id($test), $CONTROL_PAR_TEXT_ALIGNMENT, 1)
+end on
+Set and center text in labels.","get_control_par()
+set_control_par_arr()
+get_ui_id()",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,244,8592,19. User Interface Commands,,set_control_par_str_arr,"ui-id,control-parameter,value,index","Change various parameters of an element within an array-based UI widget, e.g. ui_xy cursors.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widgetwe wish to set,e.g. $CONTROL_PAR_AUTOMATION_ID.
+<value>: The value of the control parameter we wish to set.
+<index>: The array index of the UI control we wish to set.",- i.e. setting automation names of individual ui_xy cursors,"on init
+    make_perfview
+    set_ui_height_px(350)
+
+    declare ui_xy ?myXY[4]
+    declare $xyID
+    $xyID := get_ui_id(?myXY)
+
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 0, 0)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 1, 1)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 2, 2)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 3, 3)
+
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Cutoff"", 0)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Resonance"", 1)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Pan"", 2)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Feedback"", 3)
+end on
+Setting automation IDs and names of an XY pad with two cursors.","General: $CONTROL_PAR_AUTOMATION_ID, $CONTROL_PAR_AUTOMATION_NAME
+Specific: $CONTROL_PAR_CURSOR_PICTURE, $HIDE_PART_CURSOR",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,244,8594,19. User Interface Commands,,set_control_par_real_arr,"ui-id,control-parameter,value,index","Change various parameters of an element within an array-based UI widget, e.g. ui_xy cursors.
+<ui-id>: The ID number of the UI widget. You can retrieve it with get_ui_id().
+<control-parameter>: Parameter of the UI widgetwe wish to set,e.g. $CONTROL_PAR_AUTOMATION_ID.
+<value>: The value of the control parameter we wish to set.
+<index>: The array index of the UI control we wish to set.",- i.e. values of individual ui_xy cursor X and Y axes,"on init
+    make_perfview
+    set_ui_height_px(350)
+
+    declare ui_xy ?myXY[4]
+    declare $xyID
+    $xyID := get_ui_id(?myXY)
+
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 0, 0)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 1, 1)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 2, 2)
+    set_control_par_arr($xyID, $CONTROL_PAR_AUTOMATION_ID, 3, 3)
+
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Cutoff"", 0)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Resonance"", 1)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Pan"", 2)
+    set_control_par_str_arr($xyID, $CONTROL_PAR_AUTOMATION_NAME, ""Delay Feedback"", 3)
+end on
+Setting automation IDs and names of an XY pad with two cursors.","General: $CONTROL_PAR_AUTOMATION_ID, $CONTROL_PAR_AUTOMATION_NAME
+Specific: $CONTROL_PAR_CURSOR_PICTURE, $HIDE_PART_CURSOR",BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,0,0,15. Load/Save Commands,Undocumented,load_midi_file,path,"Loads a MIDI file.
+<path>: The absolute path of the MIDI file to be loaded.",,"on init
+    declare $load_midi_file_id
+    declare ui_button $load_midi_file
+end on
+
+on ui_control ($load_midi_file)
+    $load_midi_file_id := load_midi_file(<midi-file-path>)
+
+    while ($load_midi_file_id # -1)
+        wait(1)
+    end while
+
+    message(""MIDI file loaded!"")
+end on
+
+on async_complete
+    if ($NI_ASYNC_ID = $load_midi_file_id)
+        $load_midi_file_id := -1
+    end if
+end on
+Example that pauses the ui_control callback until the file is loaded.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12799,26. Advanced Concepts,Preprocessor & System Scripts,SET_CONDITION,condition-symbol,Define a symbol to be used as a condition.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12804,26. Advanced Concepts,Preprocessor & System Scripts,RESET_CONDITION,condition-symbol,Delete a condition definition.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12809,26. Advanced Concepts,Preprocessor & System Scripts,USE_CODE_IF,condition-symbol,Interpret code when <condition-symbol> is defined.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12811,26. Advanced Concepts,Preprocessor & System Scripts,END_USE_CODE,,Interpret code when <condition-symbol> is defined.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12816,26. Advanced Concepts,Preprocessor & System Scripts,USE_CODE_IF_NOT,condition-symbol,Interpret code when <condition-symbol> is not defined.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12823,26. Advanced Concepts,Preprocessor & System Scripts,NO_SYS_SCRIPT_GROUP_START,,"Condition; if defined with SET_CONDITION(), the system script which handles Group Start Options will be bypassed.",,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12829,26. Advanced Concepts,Preprocessor & System Scripts,NO_SYS_SCRIPT_PEDAL,,"Condition; if defined with SET_CONDITION(), the system script which sustains notes when CC# 64 is received will be bypassed.",,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12835,26. Advanced Concepts,Preprocessor & System Scripts,NO_SYS_SCRIPT_RLS_TRIG,,"Condition; if defined with SET_CONDITION(), the system script which triggers samples upon key release is bypassed.",,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12841,26. Advanced Concepts,Preprocessor & System Scripts,reset_rls_trig_counter,note,Resets the release trigger counter (used by the release trigger system script).,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,355,12846,26. Advanced Concepts,Preprocessor & System Scripts,will_never_terminate,Event-id,Tells the script engine that this event will never be finished (used by the release trigger system script).,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,357,12900,26. Advanced Concepts,PGS Commands,pgs_create_key,"key-id,size","It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read or written by any script.
+<key-id> is similar to a variable name; it can only contain letters and numbers and must not start with a number. It also cannot be longer than 64 characters. It is a good idea to always write them in capitals to emphasize their unique status.",,"on init
+    declare ui_button $Just_Do_It
+    pgs_create_key(FIRST_KEY, 1)  { defines a key with 1 element }
+    pgs_create_key(NEXT_KEY, 128) { defines a key with 128 elements }
+end on
+
+on ui_control($Just_Do_It)     { writes 70 into the first and only memory location of FIRST_KEY }
+    pgs_set_key_val(FIRST_KEY, 0, 70)      { writes 50 into the first and 60 into the last memory location of NEXT_KEY }
+    pgs_set_key_val(NEXT_KEY, 0, 50)
+    pgs_set_key_val(NEXT_KEY, 127, 60)
+end on
+Then, insert the following script into any other slot:
+on init
+    declare ui_knob $First (0, 100, 1)
+    declare ui_table %Next[128] (5, 2, 100)
+end on
+
+on pgs_changed     { checks if FIRST_KEY and NEXT_KEY have been declared }
+    if (pgs_key_exists(FIRST_KEY) and _pgs_key_exists(NEXT_KEY))
+        $First := pgs_get_key_val(FIRST_KEY, 0)      { in this case 70 }
+        %Next[0] := pgs_get_key_val(NEXT_KEY, 0)     { in this case 50 }
+        %Next[127] := pgs_get_key_val(NEXT_KEY, 127) { in this case 60 }
+    end if
+end on
+As illustrated above, there is also a callback that is executed whenever a pgs_set_key_val() command has been executed.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,357,12901,26. Advanced Concepts,PGS Commands,pgs_key_exists,key-id,"It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read or written by any script.
+<key-id> is similar to a variable name; it can only contain letters and numbers and must not start with a number. It also cannot be longer than 64 characters. It is a good idea to always write them in capitals to emphasize their unique status.",,"on init
+    declare ui_button $Just_Do_It
+    pgs_create_key(FIRST_KEY, 1)  { defines a key with 1 element }
+    pgs_create_key(NEXT_KEY, 128) { defines a key with 128 elements }
+end on
+
+on ui_control($Just_Do_It)     { writes 70 into the first and only memory location of FIRST_KEY }
+    pgs_set_key_val(FIRST_KEY, 0, 70)      { writes 50 into the first and 60 into the last memory location of NEXT_KEY }
+    pgs_set_key_val(NEXT_KEY, 0, 50)
+    pgs_set_key_val(NEXT_KEY, 127, 60)
+end on
+Then, insert the following script into any other slot:
+on init
+    declare ui_knob $First (0, 100, 1)
+    declare ui_table %Next[128] (5, 2, 100)
+end on
+
+on pgs_changed     { checks if FIRST_KEY and NEXT_KEY have been declared }
+    if (pgs_key_exists(FIRST_KEY) and _pgs_key_exists(NEXT_KEY))
+        $First := pgs_get_key_val(FIRST_KEY, 0)      { in this case 70 }
+        %Next[0] := pgs_get_key_val(NEXT_KEY, 0)     { in this case 50 }
+        %Next[127] := pgs_get_key_val(NEXT_KEY, 127) { in this case 60 }
+    end if
+end on
+As illustrated above, there is also a callback that is executed whenever a pgs_set_key_val() command has been executed.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,357,12902,26. Advanced Concepts,PGS Commands,pgs_set_key_val,"key-id,index,value","It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read or written by any script.
+<key-id> is similar to a variable name; it can only contain letters and numbers and must not start with a number. It also cannot be longer than 64 characters. It is a good idea to always write them in capitals to emphasize their unique status.",,"on init
+    declare ui_button $Just_Do_It
+    pgs_create_key(FIRST_KEY, 1)  { defines a key with 1 element }
+    pgs_create_key(NEXT_KEY, 128) { defines a key with 128 elements }
+end on
+
+on ui_control($Just_Do_It)     { writes 70 into the first and only memory location of FIRST_KEY }
+    pgs_set_key_val(FIRST_KEY, 0, 70)      { writes 50 into the first and 60 into the last memory location of NEXT_KEY }
+    pgs_set_key_val(NEXT_KEY, 0, 50)
+    pgs_set_key_val(NEXT_KEY, 127, 60)
+end on
+Then, insert the following script into any other slot:
+on init
+    declare ui_knob $First (0, 100, 1)
+    declare ui_table %Next[128] (5, 2, 100)
+end on
+
+on pgs_changed     { checks if FIRST_KEY and NEXT_KEY have been declared }
+    if (pgs_key_exists(FIRST_KEY) and _pgs_key_exists(NEXT_KEY))
+        $First := pgs_get_key_val(FIRST_KEY, 0)      { in this case 70 }
+        %Next[0] := pgs_get_key_val(NEXT_KEY, 0)     { in this case 50 }
+        %Next[127] := pgs_get_key_val(NEXT_KEY, 127) { in this case 60 }
+    end if
+end on
+As illustrated above, there is also a callback that is executed whenever a pgs_set_key_val() command has been executed.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,357,12903,26. Advanced Concepts,PGS Commands,pgs_get_key_val,"key-id,index","It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read or written by any script.
+<key-id> is similar to a variable name; it can only contain letters and numbers and must not start with a number. It also cannot be longer than 64 characters. It is a good idea to always write them in capitals to emphasize their unique status.",,"on init
+    declare ui_button $Just_Do_It
+    pgs_create_key(FIRST_KEY, 1)  { defines a key with 1 element }
+    pgs_create_key(NEXT_KEY, 128) { defines a key with 128 elements }
+end on
+
+on ui_control($Just_Do_It)     { writes 70 into the first and only memory location of FIRST_KEY }
+    pgs_set_key_val(FIRST_KEY, 0, 70)      { writes 50 into the first and 60 into the last memory location of NEXT_KEY }
+    pgs_set_key_val(NEXT_KEY, 0, 50)
+    pgs_set_key_val(NEXT_KEY, 127, 60)
+end on
+Then, insert the following script into any other slot:
+on init
+    declare ui_knob $First (0, 100, 1)
+    declare ui_table %Next[128] (5, 2, 100)
+end on
+
+on pgs_changed     { checks if FIRST_KEY and NEXT_KEY have been declared }
+    if (pgs_key_exists(FIRST_KEY) and _pgs_key_exists(NEXT_KEY))
+        $First := pgs_get_key_val(FIRST_KEY, 0)      { in this case 70 }
+        %Next[0] := pgs_get_key_val(NEXT_KEY, 0)     { in this case 50 }
+        %Next[127] := pgs_get_key_val(NEXT_KEY, 127) { in this case 60 }
+    end if
+end on
+As illustrated above, there is also a callback that is executed whenever a pgs_set_key_val() command has been executed.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,358,12951,26. Advanced Concepts,PGS String Commands,pgs_create_str_key,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,358,12952,26. Advanced Concepts,PGS String Commands,pgs_str_key_exists,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,358,12953,26. Advanced Concepts,PGS String Commands,pgs_set_str_key_val,"key-id,value",The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,358,12954,26. Advanced Concepts,PGS String Commands,pgs_get_str_key_val,key-id,The basic handling for PGS strings is the same as for normal PGS keys; there’s only one difference: PGS strings keys aren’t arrays like the standard PGS keys you already know – they resemble normal string variables.,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,348,12556,25. Multi Script,,ignore_midi,,Ignores the event which triggered the callback.,"- Like ignore_event(), ignore_midi is a very ""strong"" command. Keep in mind that
+ignore_midi will ignore all incoming events.
+- If you just want to change the MIDI channel and/or any of the MIDI bytes of incoming events,
+you can also use set_event_par().","on midi_in
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 > 0)
+        ignore_midi
+    end if
+
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_OFF or ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 = 0))
+        ignore_midi
+    end if
+end on
+Ignoring Note On and Note Off messages. Note that some keyboards use a Note On command with
+a velocity of 0 to designate a Note Off command.",ignore_event(),BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,350,12622,25. Multi Script,,set_midi,"channel,command,byte-1,byte-2",Create any type of MIDI event.,"- If you simply want to change the MIDI channel and/or any of the MIDI bytes, you can use set_event_par() command.","on midi_in
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 > 0)
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 4, $MIDI_BYTE_2)
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 7, $MIDI_BYTE_2)
+    end if
+
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_OFF or ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 = 0))
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 4, 0)
+        set_midi($MIDI_CHANNEL, $MIDI_COMMAND_NOTE_ON, $MIDI_BYTE_1 + 7, 0)
+    end if
+end on
+A simple harmonizer – note that you also have to supply the correct Note Off commands!","set_event_par()
+Events and MIDI: $EVENT_PAR_MIDI_CHANNEL, $EVENT_PAR_MIDI_COMMAND,
+$EVENT_PAR_MIDI_BYTE_1, $EVENT_PAR_MIDI_BYTE_2",BUILT-IN

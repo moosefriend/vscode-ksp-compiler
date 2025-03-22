@@ -20,7 +20,6 @@ import logging
 
 from config.constants import ItemType
 from config.system_config import SystemConfig
-from doc_item.doc_item_reader import DocItemReader
 from util.file_util import replace_in_file
 from vscode_generator.base_generator import BaseGenerator
 

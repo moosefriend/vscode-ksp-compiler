@@ -2027,7 +2027,7 @@ x <= y: Less than or equal.
 x = y: Equal.
 x # y: Not equal.
 in_range(x, y, z): True if x is between (and including) y and z.
-not aTrue if a is false and vice versa.
+not a: True if a is false and vice versa.
 
 a and b: True if a is true and b is true.
 
@@ -8396,7 +8396,7 @@ on ui_control ($testButton)
         set_control_par(get_ui_id($testSlider), $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
     end if
 end on
-Loads a performance view file  and then defines  some basic behavior involving two of the contained
+Loads a performance view file and then defines some basic behavior involving two of the contained
 controls.
 
 See Also

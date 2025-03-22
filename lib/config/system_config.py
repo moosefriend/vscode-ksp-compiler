@@ -289,6 +289,34 @@ class SystemConfig(metaclass=Singleton):
             path = path.relative_to(self.root_dir)
         return path
 
+    def get_csv_path(self, item_type: ItemType) -> str:
+        """
+        Get the path of the *.csv file for the specified item type.
+
+        :param item_type: ItemType to get the *.csv file for
+        :return: Path of the *.csv file or "None" if there is no file
+        """
+        csv_file = self.get_csv_file(item_type, rel_path=True)
+        if csv_file:
+            csv_path = csv_file.as_posix()
+        else:
+            csv_path = "None"
+        return csv_path
+
+    def get_patch_csv_path(self, item_type: ItemType) -> str:
+        """
+        Get the path of the patch *.csv file for the specified item type.
+
+        :param item_type: ItemType to get the patch *.csv file for
+        :return: Path of the patch *.csv file or "None" if there is no file
+        """
+        patch_csv_file = self.get_patch_csv_file(item_type, rel_path=True)
+        if patch_csv_file:
+            patch_csv_path = patch_csv_file.as_posix()
+        else:
+            patch_csv_path = "None"
+        return patch_csv_path
+
     def rel_to_root(self, file: Path) -> str:
         """
         Get the file path relative to the root directory.

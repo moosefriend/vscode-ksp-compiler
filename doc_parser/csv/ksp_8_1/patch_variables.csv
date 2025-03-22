@@ -1,0 +1,230 @@
+File,Page No,Line No,Headline,Category,Block Headline,Item List Headline,Name,Parameter,Comment,Description,See Also,Source
+KSP_Reference_Manual_Fixed.txt.py,63,2560,8. User Interface Widgets,ui_mouse_area,,,!NI_DND_ITEMS_AUDIO,,,A mouse area widget which can accept a single audio or NKA file. The on ui_control callback is triggered by a drop action. It has 3 built-in array.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,63,2561,8. User Interface Widgets,ui_mouse_area,,,!NI_DND_ITEMS_MIDI,,,A mouse area widget which can accept a single audio or NKA file. The on ui_control callback is triggered by a drop action. It has 3 built-in array.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,63,2562,8. User Interface Widgets,ui_mouse_area,,,!NI_DND_ITEMS_ARRAY,,,A mouse area widget which can accept a single audio or NKA file. The on ui_control callback is triggered by a drop action. It has 3 built-in array.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,70,2777,8. User Interface Widgets,ui_value_edit,,,$VALUE_EDIT_MODE_NOTE_NAMES,,,"declare ui_value_edit $<variable-name> (<min>, <max>, <$display-ratio>)
+Creates a value edit field (number box) in the performance view.
+<min>: The minimum value of the value edit.
+<max>: The maximum value of the value edit.
+<display-ratio>: The value is divided by <display-ratio> for display purposes. You can also use $VALUE_EDIT_MODE_NOTE_NAMES here to display note names instead of numbers.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,75,2941,9. General Commands,,,,$NI_LOG_MESSAGE,,,"disable_logging(<event-type>)
+Disables emission of messages, warnings or watched variable events to both the Kontakt status bar and Creator Tools Debugger.
+<event-type>: Which event type emission to deactivate. This is one of the available options.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,75,2942,9. General Commands,,,,$NI_LOG_WARNING,,,"disable_logging(<event-type>)
+Disables emission of messages, warnings or watched variable events to both the Kontakt status bar and Creator Tools Debugger.
+<event-type>: Which event type emission to deactivate. This is one of the available options.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,75,2943,9. General Commands,,,,$NI_LOG_WATCHING,,,"disable_logging(<event-type>)
+Disables emission of messages, warnings or watched variable events to both the Kontakt status bar and Creator Tools Debugger.
+<event-type>: Which event type emission to deactivate. This is one of the available options.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,112,4671,12. Event Commands,,,,$EVENT_PAR_REL_VELOCITY,,,Built-in parameters of a note event,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,127,4817,12. Event Commands,redirect_output(),,,$OUTPUT_TYPE_DEFAULT,,,The audio signal of the event is routed to the default instrument output.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,127,4819,12. Event Commands,redirect_output(),,,$OUTPUT_TYPE_MASTER_OUT,,,"The audio signal of the event is routed directly to the output channel specified with <index> (0 ... 63, depending on number of output channels defined in Kontakt). The audio signal will not be affected by any instrument effect.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,127,4823,12. Event Commands,redirect_output(),,,$OUTPUT_TYPE_AUX_OUT,,,The audio signal of the event is routed directly to the Aux channel specified with <index>. (0 ... 3) The audio signal will not be affected by any instrument effect.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,127,4826,12. Event Commands,redirect_output(),,,$OUTPUT_TYPE_BUS_OUT,,,The audio signal of the event is routed to the instrument bus specified with <index> (0 ... 15).,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,136,5165,12. Group Commands,get_group_idx(),,,$NI_NOT_FOUND,,,"If no group with the specified name is found, this contant is returned.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,238,8394,19. User Interface Commands,,,,$HIDE_PART_WHOLE_CONTROL,,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5537,14. Keyboard Commands,,,,$KEY_COLOR_RED,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5538,14. Keyboard Commands,,,,$KEY_COLOR_ORANGE,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5539,14. Keyboard Commands,,,,$KEY_COLOR_LIGHT_ORANGE,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5540,14. Keyboard Commands,,,,$KEY_COLOR_WARM_YELLOW,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5541,14. Keyboard Commands,,,,$KEY_COLOR_YELLOW,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5542,14. Keyboard Commands,,,,$KEY_COLOR_LIME,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5543,14. Keyboard Commands,,,,$KEY_COLOR_GREEN,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5544,14. Keyboard Commands,,,,$KEY_COLOR_MINT,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5545,14. Keyboard Commands,,,,$KEY_COLOR_CYAN,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5546,14. Keyboard Commands,,,,$KEY_COLOR_TURQUOISE,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5547,14. Keyboard Commands,,,,$KEY_COLOR_BLUE,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5548,14. Keyboard Commands,,,,$KEY_COLOR_PLUM,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5549,14. Keyboard Commands,,,,$KEY_COLOR_VIOLET,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5550,14. Keyboard Commands,,,,$KEY_COLOR_PURPLE,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5551,14. Keyboard Commands,,,,$KEY_COLOR_MAGENTA,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5552,14. Keyboard Commands,,,,$KEY_COLOR_FUCHSIA,,,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5553,14. Keyboard Commands,,,,$KEY_COLOR_DEFAULT,,Sets the key to Kontakt's standard color for mapped notes,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5555,14. Keyboard Commands,,,,$KEY_COLOR_INACTIVE,,Resets the key to standard black and white2,"The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,147,5556,14. Keyboard Commands,,,,$KEY_COLOR_NONE,,"Resets the key to its normal Kontakt color, e.g. red for internal keyswitches","The keyboard colors reside outside of KSP, i.e. changing the color of a key is similar to changing a Kontakt knob with set_engine_par(). It is therefore a good practice to set all keys to either $KEY_COLOR_INACTIVE or $KEY_COLOR_NONE in the on init callback.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,178,6342,14. Keyboard Commands,,,,$NI_KEY_TYPE_DEFAULT,,,Normally mapped keys that produce sound.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,178,6343,14. Keyboard Commands,,,,$NI_KEY_TYPE_CONTROL,,,Keyswitches or other keysthat do not produce sound.,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,178,6344,14. Keyboard Commands,,,,$NI_KEY_TYPE_NONE,,,Resets the key to its standard Kontakt behaviour. ,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,162,6146,11. Engine Parameter Commands,,,,$NI_SEND_BUS,,,Send Effect,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,162,6147,11. Engine Parameter Commands,,,,$NI_INSERT_BUS,,,Insert Effect,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,162,6148,11. Engine Parameter Commands,,,,$NI_MAIN_BUS,,,Main Effect,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,184,6604,11. Engine Parameter Commands,,,,$ENGINE_PAR_RELEASE_TRIGGER,,,,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,268,9371,20. Zone Commands,get_zone_par(),,,$ZONE_PAR_BPM,,,"Returns the BPM value multiplied by 1000, so 120 BPM would be 120000.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,269,9390,20. Zone Commands,get_zone_status(),,,$NI_ZONE_STATUS_EMPTY,,,Zone is a user zone and has no sample loaded,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,269,9391,20. Zone Commands,get_zone_status(),,,$NI_ZONE_STATUS_LOADED,,,Zone is a user zone and has a sample loaded,,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,269,9392,20. Zone Commands,get_zone_status(),,,$NI_ZONE_STATUS_PURGED,,,Zone is purged from memory (valid for both regular and user zones),,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,269,9394,20. Zone Commands,get_zone_status(),,,$NI_ZONE_STATUS_IGNORED,,,Zone is ignored by the user response in the Content Missing dialog (valid for both regular and user zones),,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,271,9467,20. Zone Commands,set_num_user_zones(),,,%NI_USER_ZONE_IDS,,,"set_num_user_zones(<value>)
+Creates empty user zones.
+<value>: Defines the number of user zones to be created. %NI_USER_ZONE_IDS is the array of size <value> with all the user zone Ids.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,199,7144,17. Music Information Retrieval,detect_pitch(),,,~NI_DETECT_PITCH_INVALID,,,"detect_pitch(<zone-id>, <pitch-result>)
+Returns a real value representing the fundamental frequency of an audio sample, in semitones and cents. If detection fails, the function will return ~NI_DETECT_PITCH_INVALID.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,200,7156,17. Music Information Retrieval,detect_loudness(),,,~NI_DETECT_LOUDNESS_INVALID,,,"detect_loudness(<zone-id>, <loudness-result>)
+Returns a real value representing the loudness of an audio sample in decibels. Loudness is measured according to the standard established by the International Telecommunication Union: Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection fails, the function will return ~NI_DETECT_LOUDNESS_INVALID.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,201,7168,17. Music Information Retrieval,detect_peak(),,,~NI_DETECT_PEAK_INVALID,,,"detect_peak(<zone-id>, <peak-result>)
+Returns a real value representing peak level of an audio sample in decibels. Peak is measured according to the standard established by the International Telecommunication Union: Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection fails, the function will set <peak-result> to ~NI_DETECT_PEAK_INVALID.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,202,7178,17. Music Information Retrieval,detect_rms(),,,~NI_DETECT_RMS_INVALID,,,"detect_rms(<zone-id>, <rms-result>)
+Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the function will return ~NI_DETECT_RMS_INVALID. ",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,203,7188,17. Music Information Retrieval,detect_tempo(),,,~NI_DETECT_TEMPO_INVALID,,,"detect_rms(<zone-id>, <rms-result>)
+Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the function will return ~NI_DETECT_RMS_INVALID. ",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,204,7199,17. Music Information Retrieval,detect_sample_type(),,,$NI_DETECT_SAMPLE_TYPE_INVALID,,,"detect_sample_type(<zone-id>, <sample-type-result>)
+Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether an audio sample is a drum or an instrument. If detection fails, the function will return $NI_DETECT_SAMPLE_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<sample-type-result>: The detected sample type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,204,7202,17. Music Information Retrieval,detect_sample_type(),,,$NI_DETECT_SAMPLE_TYPE_INSTRUMENT,,,"detect_sample_type(<zone-id>, <sample-type-result>)
+Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether an audio sample is a drum or an instrument. If detection fails, the function will return $NI_DETECT_SAMPLE_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<sample-type-result>: The detected sample type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,204,7203,17. Music Information Retrieval,detect_sample_type(),,,$NI_DETECT_SAMPLE_TYPE_DRUM,,,"detect_sample_type(<zone-id>, <sample-type-result>)
+Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag describing the whether an audio sample is a drum or an instrument. If detection fails, the function will return $NI_DETECT_SAMPLE_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<sample-type-result>: The detected sample type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7213,17. Music Information Retrieval,detect_drum_type(),,,~NI_DETECT_DRUM_TYPE_INVALID,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7215,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_INVALID,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7216,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_KICK,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7217,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_SNARE,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7218,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_CLOSED_HH,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7219,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_OPEN_HH,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7220,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_TOM,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7221,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_CYMBAL,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7222,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_CLAP,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7223,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_SHAKER,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7224,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_PERC_DRUM,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,205,7225,17. Music Information Retrieval,detect_drum_type(),,,$NI_DETECT_DRUM_TYPE_PERC_OTHER,,,"detect_drum_type(<zone-id>, <drum-type-result>)
+Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
+<zone-id>: The ID of the zone.
+<drum-type-result>: The detected drum type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7235,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_INVALID,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7238,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_BASS,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7239,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_BOWED_STRING,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7240,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_BRASS,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7241,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_FLUTE,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7242,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_GUITAR,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7243,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_KEYBOARD,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7244,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_MALLET,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7245,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_ORGAN,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7246,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_PLUCKED_STRING,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7247,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_REED,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7248,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_SYNTH,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,206,7249,17. Music Information Retrieval,detect_instrument_type(),,,$NI_DETECT_INSTRUMENT_TYPE_VOCAL,,,"detect_instrument_type(<zone-id>, <instr-type-result>)
+Assigns <instr-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample.
+Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT.
+If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
+<zone-id>: The ID of the zone
+<instr-type-result>: The detected instrument type, can be one of the following constants",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,63,2571,8. User Interface Widgets,,,,$NI_MOUSE_EVENT_TYPE_DROP,,,"$NI_MOUSE_EVENT_TYPE
+Returns the type of mouse event that triggered the on ui_controlcallback of a ui_xy widget. Can only be used within the on ui_control callback. This is one of the mouse event types. ",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12658,25. Multi Script,Multi Script Command Arguments,,,$MIDI_CHANNEL,,,"The MIDI channel of the received MIDI event. Since Kontakt can handle four different MIDI ports, this number is in 0 ... 63 range (4 ports, 16 MIDI channels).",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12664,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND,,,"The command type, i.e Note, CC, Program Change etc. of the received MIDI event. There are various constants for this variable (see below).",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12670,25. Multi Script,Multi Script Command Arguments,,,$MIDI_BYTE_1,,,"The two MIDI bytes of the message, can be 0 ... 127.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12671,25. Multi Script,Multi Script Command Arguments,,,$MIDI_BYTE_2,,,"The two MIDI bytes of the message, can be 0 ... 127.",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12676,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_NOTE_ON,,,"$MIDI_BYTE_1: note number
+$MIDI_BYTE_2: velocity
+Note: a velocity value of 0 is equivalent to a Note Off command ",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12683,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_NOTE_OFF,,,"$MIDI_BYTE_1: note number
+$MIDI_BYTE_2: release velocity",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12689,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_POLY_AT,,,"$MIDI_BYTE_1: note number
+$MIDI_BYTE_2: polyphonic key pressure value",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12695,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_CC,,,"$MIDI_BYTE_1: controller number
+$MIDI_BYTE_2: controller value",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12701,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_PROGRAM_CHANGE,,,"$MIDI_BYTE_1: program number
+$MIDI_BYTE_2: not used",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,351,12707,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_MONO_AT,,,"$MIDI_BYTE_1: channel pressure value
+$MIDI_BYTE_2: not used",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,352,12715,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_PITCH_BEND,,,"$MIDI_BYTE_1: LSB value
+$MIDI_BYTE_2: MSB value",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,352,12721,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_RPN,,,"$MIDI_BYTE_1: address
+$MIDI_BYTE_2: value",,BUILT-IN
+KSP_Reference_Manual_Fixed.txt.py,352,12722,25. Multi Script,Multi Script Command Arguments,,,$MIDI_COMMAND_NRPN,,,"$MIDI_BYTE_1: address
+$MIDI_BYTE_2: value",,BUILT-IN
