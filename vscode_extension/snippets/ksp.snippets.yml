@@ -16,11 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-# This file will be converted to *out/ksp.snippets.json
+# This file will be converted to out/json/ksp.snippets.json
 # Then callbacks and widgets will be injected at the end
 const:
     body:
-    - declare const $${1:name} := ${2:value}
+    - declare const \$${1:name} := ${2:value}
     description: Declare a user-defined polyphonic variable to store a single integer
         value per note event
     prefix: const
@@ -31,7 +31,7 @@ declare:
     prefix: declare
 int:
     body:
-    - declare $${1:name}
+    - declare \$${1:name}
     description: Declare a user-defined variable to store a single integer value
     prefix: int
 inta:
@@ -42,7 +42,7 @@ inta:
     prefix: int array
 polyphonicv:
     body:
-    - declare polyphonic $${1:name}
+    - declare polyphonic \$${1:name}
     description: Declare a user-defined polyphonic variable to store a single integer
         value per note event
     prefix: polyphonic

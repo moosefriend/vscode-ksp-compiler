@@ -80,6 +80,9 @@ class WidgetItem(DocItem):
         snippet_variable_name = self.variable_name
         snippet_variable_name = snippet_variable_name.replace("<", "${1:")
         snippet_variable_name = snippet_variable_name.replace(">", "}")
+        if snippet_variable_name.startswith("$"):
+            # Escape the snippet variable name
+            snippet_variable_name = r"\\" + snippet_variable_name
         return snippet_variable_name
 
     def get_snippet_index_name(self):

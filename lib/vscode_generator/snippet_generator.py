@@ -33,7 +33,7 @@ class SnippetGenerator(BaseGenerator):
     CALLBACK_TEMPLATE = cleandoc("""
     "on <<name>>": {
         "body": [
-            "// ${1:<<description>>}",
+            "// ${1:<<one_line_description>>}",
             "on <<name>><<parameter>>",
             "    ${2:// your code here}",
             "end on"
@@ -45,7 +45,7 @@ class SnippetGenerator(BaseGenerator):
     WIDGET_TEMPLATE = cleandoc("""
     "<<name>>": {
         "body": [
-            "// ${1:<<description>>}",
+            "// ${1:<<one_line_description>>}",
             "declare <<name>> <<variable_name>><<index_name>><<parameter_list>>"
         ],
         "description": "<<description>>",
@@ -61,7 +61,7 @@ class SnippetGenerator(BaseGenerator):
         #     "on ui_control": {
         #         "body": [
         #             "{ ${1:UI callback, executed whenever the user changes the respective UI element} }",
-        #             "on ui_control($${2:uiVariable})",
+        #             "on ui_control(\\$${2:uiVariable})",
         #             "    ${3:{your code here\\}}",
         #             "end on"
         #         ],
@@ -74,8 +74,9 @@ class SnippetGenerator(BaseGenerator):
             for doc_item in csv_reader:
                 json = SnippetGenerator.CALLBACK_TEMPLATE
                 json = json.replace("<<name>>", doc_item.name)
-                json = json.replace("<<description>>", doc_item.description.replace("\n", " "))
+                json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " "))
                 json = json.replace("<<parameter>>", doc_item.get_snippet_parameter())
+                json = json.replace("<<description>>", doc_item.description.replace("\n", "\\n"))
                 json = indent(json, "    ")
                 json_list.append(json)
         return ",\n".join(json_list)
@@ -102,7 +103,8 @@ class SnippetGenerator(BaseGenerator):
                 json = json.replace("<<variable_name>>", doc_item.get_snippet_variable_name())
                 json = json.replace("<<index_name>>", doc_item.get_snippet_index_name())
                 json = json.replace("<<parameter_list>>", doc_item.get_snippet_parameter_list())
-                json = json.replace("<<description>>", doc_item.description.replace("\n", " "))
+                json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " "))
+                json = json.replace("<<description>>", doc_item.description.replace("\n", "\\n"))
                 json = indent(json, "    ")
                 json_list.append(json)
         return ",\n".join(json_list)
