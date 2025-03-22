@@ -51,20 +51,20 @@
                     ".ksp",
                     ".ksp.txt"
                 ],
-                "configuration": "./out/language-configuration.json"
+                "configuration": "./out/json/language-configuration.json"
             }
         ],
         "grammars": [
             {
                 "language": "ksp",
                 "scopeName": "source.ksp",
-                "path": "./out/ksp.tmGrammar.json"
+                "path": "./out/json/ksp.tmGrammar.json"
             }
         ],
         "snippets": [
             {
                 "language": "ksp",
-                "path": "./out/ksp.snippets.json"
+                "path": "./out/json/ksp.snippets.json"
             }
         ],
         "commands": [
