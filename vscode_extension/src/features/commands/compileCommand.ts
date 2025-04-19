@@ -25,7 +25,7 @@ import * as clipboard from 'clipboardy';
 import { CompileBuilder } from '../compileBuilder';
 import { CompileExecutor } from '../compileExecutor';
 
-export function doLint(context: vscode.ExtensionContext) {
+export function doCompile(context: vscode.ExtensionContext) {
     let editor: vscode.TextEditor | undefined= vscode.window.activeTextEditor;
     let textDocument: vscode.TextDocument;
     let baseName: string;
@@ -56,7 +56,7 @@ export function doLint(context: vscode.ExtensionContext) {
     baseName = path.basename(textDocument.fileName);
 
     //--------------------------------------------------------------------------
-    // Run Syntax parser
+    // Run compiler
     //--------------------------------------------------------------------------
     function runCompiler(callback?: (exitCode: number) => void) {
         tmpFile = tmp.fileSync();
@@ -80,7 +80,7 @@ export function doLint(context: vscode.ExtensionContext) {
 
         compiler.execute(textDocument, argBuilder);
 
-    }; //~function runParser
+    }; //~function runCompiler
 
     // Output to Clipboard
     // TODO: Copy compiler output instead of script to clipboard

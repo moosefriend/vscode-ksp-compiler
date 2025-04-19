@@ -18,7 +18,7 @@
  */
 import * as vscode from 'vscode';
 
-import LintCommand = require('./lintCommand');
+import LintCommand = require('./compileCommand');
 //import WhatsNew = require( '../webview/whatsNew' );
 
 /**
@@ -26,7 +26,7 @@ import LintCommand = require('./lintCommand');
  */
 export function setupCommands(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerCommand('ksp.compile', LintCommand.doLint)
+        vscode.commands.registerCommand('ksp.compile', LintCommand.doCompile)
     );
 
     // context.subscriptions.push(

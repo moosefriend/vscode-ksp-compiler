@@ -2,12 +2,18 @@
 	"configuration.title": "KSP Compiler",
 	"configuration.python.location": "Location of python executable. Default is \"python\" (Search from $PATH variable)",
 	"configuration.compiler.script": "Path to the KSP compiler python script",
-	"configuration.compiler.compact": "Minimize whitespace in compiled code",
-	"configuration.compiler.extra_syntax_check": "Additional syntax checks",
-	"configuration.compiler.optimize": "Optimize the generated code",
-	"configuration.compiler.date": "Add current date comment at the beginning of compiled file",
+	"configuration.compiler.force": "Force all specified compiler options, overriding any compile_with pragma directives from the script",
+	"configuration.compiler.compact": "Remove indents in compiled code",
+	"configuration.compiler.compact_variables": "Shorten and obfuscate variable names in compiled code",
+	"configuration.compiler.combine_callbacks": "Combine duplicate callbacks - but not functions or macros",
+	"configuration.compiler.extra_syntax_check": "Additional syntax checks during compilation",
+	"configuration.compiler.optimize": "Optimize the compiled code",
+	"configuration.compiler.extra_branch_optimization": "Add branch optimization checks earlier in compile process, allowing define constant based branching etc.",
+	"configuration.compiler.indent_size": "specifies how many spaces is used for indentation, if --compact compiler option is not used",
+	"configuration.compiler.add_compile_date": "Add current date comment at the beginning of compiled file",
+	"configuration.compiler.sanitize_exit_command": "Add a dummy no-op command before every exit function call",
 	"configuration.validate.enable": "Enable/disable KSP syntax validation",
-	"configuration.validate.delay": "Delay time to start validation in milliseconds. Set it to 0 to disable realtime checking.",
+	"configuration.validate.delay": "Delay time to start validation in milliseconds. Set it to 0 to disable realtime checks.",
 
     "command.compile": "NI KSP: Run Compiler & copy script to clipboard"
 }

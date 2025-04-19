@@ -104,15 +104,25 @@
                     "default": "ksp_compiler/ksp_compiler.py",
                     "description": "%configuration.compiler.script%"
                 },
-                "ksp.validate.enable": {
+                "ksp.compiler.force": {
                     "type": "boolean",
                     "default": false,
-                    "description": "%configuration.validate.enable%"
+                    "description": "%configuration.compiler.force%"
                 },
-                "ksp.validate.delay": {
-                    "type": "number",
-                    "default": 500,
-                    "description": "%configuration.validate.delay%"
+                "ksp.compiler.compact": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%configuration.compiler.compact%"
+                },
+                "ksp.compiler.compact_variables": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%configuration.compiler.compact_variables%"
+                },
+                "ksp.compiler.combine_callbacks": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%configuration.compiler.combine_callbacks%"
                 },
                 "ksp.compiler.extra_syntax_check": {
                     "type": "boolean",
@@ -124,15 +134,35 @@
                     "default": false,
                     "description": "%configuration.compiler.optimize%"
                 },
-                "ksp.compiler.compact": {
+                "ksp.compiler.extra_branch_optimization": {
                     "type": "boolean",
                     "default": false,
-                    "description": "%configuration.compiler.compact%"
+                    "description": "%configuration.compiler.extra_branch_optimization%"
                 },
-                "ksp.compiler.date": {
+                "ksp.compiler.indent_size": {
+                    "type": "number",
+                    "default": 4,
+                    "description": "%configuration.compiler.indent_sizey%"
+                },
+                "ksp.compiler.add_compile_date": {
                     "type": "boolean",
                     "default": true,
-                    "description": "%configuration.compiler.date%"
+                    "description": "%configuration.compiler.add_compile_date%"
+                },
+                "ksp.compiler.sanitize_exit_command": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%configuration.compiler.sanitize_exit_command%"
+                },
+                "ksp.validate.enable": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%configuration.validate.enable%"
+                },
+                "ksp.validate.delay": {
+                    "type": "number",
+                    "default": 500,
+                    "description": "%configuration.validate.delay%"
                 }
             }
         }

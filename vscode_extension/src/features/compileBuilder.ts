@@ -32,11 +32,16 @@ export class CompileBuilder {
     public inputFile: string;
     public outputFile: string | undefined;
     public compiler_script: string;
+    public force: boolean = false;
     public compact: boolean = false;
-    public obfuscate: boolean = false;
+    public compact_variables: boolean = false;
+    public combine_callbacks: boolean = false;
     public extra_syntax_check: boolean = false;
     public optimize: boolean = false;
-    public compile_date: boolean = false;
+    public extra_branch_optimization: boolean = false;
+    public indent_size: number = 4;
+    public add_compile_date: boolean = false;
+    public sanitize_exit_command: boolean = false;
 
     /**
      * Commandline options initialized by configuration
@@ -45,23 +50,35 @@ export class CompileBuilder {
         this.compiler_script = ConfigurationManager.getConfig<string>(configkey.KEY_COMPILER_SCRIPT, "");
         this.inputFile = inputFile;
         this.outputFile = outputFile;
-        this.compact = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT, false);
-        this.obfuscate = ConfigurationManager.getConfig<boolean>(configkey.KEY_OBFUSCATE, false);
-        this.extra_syntax_check = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_SYNTAX_CHECK, false);
-        this.optimize = ConfigurationManager.getConfig<boolean>(configkey.KEY_OPTIMIZE, false);
-        this.compile_date = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPILE_DATE, false);
+        this.force = ConfigurationManager.getConfig<boolean>(configkey.KEY_FORCE, configkey.DEFAULT_FORCE);
+        this.compact = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT, configkey.DEFAULT_COMPACT);
+        this.compact_variables = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT_VARIABLES, configkey.DEFAULT_COMPACT_VARIABLES);
+        this.combine_callbacks = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMBINE_CALLBACKS, configkey.DEFAULT_COMBINE_CALLBACKS);
+        this.extra_syntax_check = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_SYNTAX_CHECK, configkey.DEFAULT_EXTRA_SYNTAX_CHECK);
+        this.optimize = ConfigurationManager.getConfig<boolean>(configkey.KEY_OPTIMIZE, configkey.DEFAULT_OPTIMIZE);
+        this.extra_branch_optimization = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_BRANCH_OPTIMIZATION, configkey.DEFAULT_EXTRA_BRANCH_OPTIMIZATION);
+        this.indent_size = ConfigurationManager.getConfig<number>(configkey.KEY_INDENT_SIZE, configkey.DEFAULT_INDENT_SIZE);
+        this.add_compile_date = ConfigurationManager.getConfig<boolean>(configkey.KEY_ADD_COMPILE_DATE, configkey.DEFAULT_ADD_COMPILE_DATE);
+        this.sanitize_exit_command = ConfigurationManager.getConfig<boolean>(configkey.KEY_SANITIZE_EXIT_COMMAND, configkey.DEFAULT_SANITIZE_EXIT_COMMAND);
     }
 
     /**
      * Build a commandline option string
      */
     public build(): string[] {
-        let args: string[] = [].concat(this.compiler_script);
+        let args: string[] = []
+        args.push(this.compiler_script);
+        if (this.force) {
+            args.push("--force");
+        }
         if (this.compact) {
             args.push("--compact");
         }
-        if (this.obfuscate) {
+        if (this.compact_variables) {
             args.push("--compact_variables");
+        }
+        if (this.combine_callbacks) {
+            args.push("--combine_callbacks");
         }
         if (this.extra_syntax_check) {
             args.push("--extra_syntax_check");
@@ -69,8 +86,13 @@ export class CompileBuilder {
         if (this.optimize) {
             args.push("--optimize");
         }
-        if (!this.compile_date) {
-            args.push("--nocompiledate");
+        if (this.extra_branch_optimization) {
+            args.push("--extra_branch_optimization");
+        }
+        args.push("--indent-size");
+        args.push(String(this.indent_size))
+        if (this.add_compile_date) {
+            args.push("--add_compile_date");
         }
         args.push(this.inputFile);
         if (this.outputFile) {
