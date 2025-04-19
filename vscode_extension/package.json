@@ -67,10 +67,6 @@
             {
                 "command": "ksp.parse.syntax",
                 "title": "%command.parse.syntax%"
-            },
-            {
-                "command": "ksp.obfuscate",
-                "title": "%command.obfuscate%"
             }
         ],
         "keybindings": [
@@ -98,50 +94,45 @@
             "title": "%configuration.title%",
             "type": "object",
             "properties": {
+                "ksp.python.location": {
+                    "type": "string",
+                    "default": "python",
+                    "description": "%configuration.python.location%"
+                },
+                "ksp.compiler.script": {
+                    "type": "string",
+                    "default": "ksp_compiler/ksp_compiler.py",
+                    "description": "%configuration.compiler.script%"
+                },
                 "ksp.validate.enable": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.validate.enable%"
                 },
-                "ksp.validate.realtime.enable": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%configuration.realtime.validate.enable%"
-                },
-                "ksp.validate.realtime.delay": {
+                "ksp.validate.delay": {
                     "type": "number",
                     "default": 500,
-                    "description": "%configuration.realtime.validate.delay%"
+                    "description": "%configuration.validate.delay%"
                 },
-                "ksp.validate.syntax.only": {
+                "ksp.compiler.extra_syntax_check": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%configuration.compiler.extra_syntax_check%"
+                },
+                "ksp.compiler.optimize": {
                     "type": "boolean",
                     "default": false,
-                    "description": "%configuration.validate.syntax.only%"
+                    "description": "%configuration.compiler.optimize%"
                 },
-                "ksp.validate.strict": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%configuration.validate.strict%"
-                },
-                "ksp.validate.unused": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%configuration.validate.unused%"
-                },
-                "ksp.obfuscator.suffix": {
-                    "type": "string",
-                    "default": ".out.txt",
-                    "description": "%configuration.obfuscator.suffix%"
-                },
-                "ksp.obfuscator.inline.function": {
+                "ksp.compiler.compact": {
                     "type": "boolean",
                     "default": false,
-                    "description": "%configuration.obfuscator.inline.function%"
+                    "description": "%configuration.compiler.compact%"
                 },
-                "ksp.obfuscator.dest.clipboard": {
+                "ksp.compiler.date": {
                     "type": "boolean",
                     "default": true,
-                    "description": "%configuration.obfuscator.dest.clipboard%"
+                    "description": "%configuration.compiler.date%"
                 }
             }
         }
