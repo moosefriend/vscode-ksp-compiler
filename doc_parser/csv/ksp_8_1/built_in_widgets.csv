@@ -302,7 +302,7 @@ end on
 Hiding the value indicator in top left corner of the table and replacing it with a value readout in a label.","set_table_steps_shown()
 hide_part()
 Specific UI Widgets: $NI_CONTROL_PAR_IDX",BUILT-IN
-KSP_Reference_Manual_Fixed.txt.py,70,2771,8. User Interface Widgets,ui_value_edit,ui_value_edit,$<variable-name>,,"min,max,$display-ratio","Creates a value edit field (number box) in the performance view.
+KSP_Reference_Manual_Fixed.txt.py,70,2771,8. User Interface Widgets,ui_value_edit,ui_value_edit,$<variable-name>,,"min,max,display-ratio","Creates a value edit field (number box) in the performance view.
 <min>: The minimum value of the value edit.
 <max>: The maximum value of the value edit.
 <display-ratio>: The value is divided by <display-ratio> for display purposes.

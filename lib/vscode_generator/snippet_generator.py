@@ -33,9 +33,9 @@ class SnippetGenerator(BaseGenerator):
     CALLBACK_TEMPLATE = cleandoc("""
     "on <<name>>": {
         "body": [
-            "// ${1:<<one_line_description>>}",
+            "$LINE_COMMENT ${<<index>>:<<one_line_description>>}",
             "on <<name>><<parameter>>",
-            "    ${2:// your code here}",
+            "    ${<<index>>:$LINE_COMMENT your code here}",
             "end on"
         ],
         "description": "<<description>>",
@@ -45,7 +45,7 @@ class SnippetGenerator(BaseGenerator):
     WIDGET_TEMPLATE = cleandoc("""
     "<<name>>": {
         "body": [
-            "// ${1:<<one_line_description>>}",
+            "$LINE_COMMENT ${<<index>>:<<one_line_description>>}",
             "declare <<name>> <<variable_name>><<index_name>><<parameter_list>>"
         ],
         "description": "<<description>>",
@@ -74,9 +74,10 @@ class SnippetGenerator(BaseGenerator):
             for doc_item in csv_reader:
                 json = SnippetGenerator.CALLBACK_TEMPLATE
                 json = json.replace("<<name>>", doc_item.name)
-                json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " "))
+                json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " ").replace("$", "\\\\$"))
                 json = json.replace("<<parameter>>", doc_item.get_snippet_parameter())
                 json = json.replace("<<description>>", doc_item.description.replace("\n", "\\n"))
+                json = SnippetGenerator.set_placeholder_index(json)
                 json = indent(json, "    ")
                 json_list.append(json)
         return ",\n".join(json_list)
@@ -103,8 +104,9 @@ class SnippetGenerator(BaseGenerator):
                 json = json.replace("<<variable_name>>", doc_item.get_snippet_variable_name())
                 json = json.replace("<<index_name>>", doc_item.get_snippet_index_name())
                 json = json.replace("<<parameter_list>>", doc_item.get_snippet_parameter_list())
-                json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " "))
+                json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " ").replace("$", "\\\\$"))
                 json = json.replace("<<description>>", doc_item.description.replace("\n", "\\n"))
+                json = SnippetGenerator.set_placeholder_index(json)
                 json = indent(json, "    ")
                 json_list.append(json)
         return ",\n".join(json_list)
@@ -121,3 +123,19 @@ class SnippetGenerator(BaseGenerator):
         search_string = f'    "<<{ItemType.WIDGET.category()}>>": null'
         replace_string = SnippetGenerator.read_widgets()
         replace_in_file(SystemConfig().snippets_json, search_string, replace_string)
+
+    @staticmethod
+    def set_placeholder_index(json: str) -> str:
+        """
+        Search for "<<index>>" in the json and replace it with index values.
+
+        :param json: JSON to check for "<<index>>"
+        :return: JSON where the "<<index>>" are replaced with the placeholder index values
+        """
+        # Find all <<index>> in the JSON and replace them with the index values
+        index = 1
+        while "<<index>>" in json:
+            json = json.replace("<<index>>", str(index), 1)
+            index += 1
+        return json
+

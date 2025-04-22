@@ -78,8 +78,10 @@ class WidgetItem(DocItem):
         :return: Variable name to be used in snippets
         """
         snippet_variable_name = self.variable_name
-        snippet_variable_name = snippet_variable_name.replace("<", "${1:")
-        snippet_variable_name = snippet_variable_name.replace(">", "}")
+        snippet_variable_name = snippet_variable_name.replace("<", "${<<index>>:")
+        # Replace the last occurrence of ">" with "}"
+        pre, post = snippet_variable_name.rsplit(">", 1)
+        snippet_variable_name = pre + "}" + post
         if snippet_variable_name.startswith("$"):
             # Escape the snippet variable name
             snippet_variable_name = r"\\" + snippet_variable_name
@@ -92,7 +94,7 @@ class WidgetItem(DocItem):
         :return: Index name to be used in snippets
         """
         if self.index_name:
-            snippet_index_name = f"[${{2:{self.index_name}}}]"
+            snippet_index_name = f"[${{<<index>>:{self.index_name}}}]"
         else:
             snippet_index_name = ""
         return snippet_index_name
@@ -106,8 +108,8 @@ class WidgetItem(DocItem):
         # "declare ui_table %${1:array}[${2:colmns}](${3:width}, ${4:height}, ${5:range})"
         if self.parameter_list:
             par_list = []
-            for i, cur_parameter in enumerate(self.parameter_list):
-                snippet_parameter = f"${{{i + 2}:{cur_parameter}}}"
+            for cur_parameter in self.parameter_list:
+                snippet_parameter = f"${{<<index>>:{cur_parameter}}}"
                 par_list.append(snippet_parameter)
             snippet_parameter_list = f"({', '.join(par_list)})"
         else:

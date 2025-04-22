@@ -75,7 +75,7 @@ class CallbackItem(DocItem):
         :return: Parameter to be used in snippets
         """
         if self.parameter:
-            snippet_parameter = f"($${{2:{self.parameter}}})"
+            snippet_parameter = f"(\\\\$${{<<index>>:{self.parameter}}})"
         else:
             snippet_parameter = ""
         return snippet_parameter

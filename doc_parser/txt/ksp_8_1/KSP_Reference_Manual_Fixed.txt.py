@@ -2768,7 +2768,7 @@ See Also
 
 ui_value_edit
 
-declare ui_value_edit $<variable-name> (<min>, <max>, <$display-ratio>)
+declare ui_value_edit $<variable-name> (<min>, <max>, <display-ratio>)
 
 Creates a value edit field (number box) in the performance view.
 <min>: The minimum value of the value edit.

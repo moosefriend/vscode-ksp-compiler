@@ -65,19 +65,14 @@
         ],
         "commands": [
             {
-                "command": "ksp.parse.syntax",
-                "title": "%command.parse.syntax%"
+                "command": "ksp.compile",
+                "title": "%command.compile%"
             }
         ],
         "keybindings": [
             {
-                "command": "ksp.parse.syntax",
+                "command": "ksp.compile",
                 "key": "f7",
-                "when": "editorLangId == ksp"
-            },
-            {
-                "command": "ksp.obfuscate",
-                "key": "shift+f7",
                 "when": "editorLangId == ksp"
             }
         ],
@@ -85,7 +80,7 @@
             "editor/context": [
                 {
                     "when": "editorLangId == ksp",
-                    "command": "ksp.obfuscate",
+                    "command": "ksp.compile",
                     "group": "kspgroup@1"
                 }
             ]
@@ -94,72 +89,72 @@
             "title": "%configuration.title%",
             "type": "object",
             "properties": {
-                "ksp.python.location": {
+                "ksp.python.Location": {
                     "type": "string",
                     "default": "python",
                     "description": "%configuration.python.location%"
                 },
-                "ksp.compiler.script": {
+                "ksp.compiler.Script": {
                     "type": "string",
                     "default": "ksp_compiler/ksp_compiler.py",
                     "description": "%configuration.compiler.script%"
                 },
-                "ksp.compiler.force": {
+                "ksp.compiler.Force": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.force%"
                 },
-                "ksp.compiler.compact": {
+                "ksp.compiler.Compact": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.compact%"
                 },
-                "ksp.compiler.compact_variables": {
+                "ksp.compiler.Compact Variables": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.compact_variables%"
                 },
-                "ksp.compiler.combine_callbacks": {
+                "ksp.compiler.Combine Callbacks": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.combine_callbacks%"
                 },
-                "ksp.compiler.extra_syntax_check": {
+                "ksp.compiler.Extra Syntax Check": {
                     "type": "boolean",
                     "default": true,
                     "description": "%configuration.compiler.extra_syntax_check%"
                 },
-                "ksp.compiler.optimize": {
+                "ksp.compiler.Optimize": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.optimize%"
                 },
-                "ksp.compiler.extra_branch_optimization": {
+                "ksp.compiler.Extra Branch Optimization": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.extra_branch_optimization%"
                 },
-                "ksp.compiler.indent_size": {
+                "ksp.compiler.Indent Size": {
                     "type": "number",
                     "default": 4,
-                    "description": "%configuration.compiler.indent_sizey%"
+                    "description": "%configuration.compiler.indent_size%"
                 },
-                "ksp.compiler.add_compile_date": {
+                "ksp.compiler.Add Compile Date": {
                     "type": "boolean",
                     "default": true,
                     "description": "%configuration.compiler.add_compile_date%"
                 },
-                "ksp.compiler.sanitize_exit_command": {
+                "ksp.compiler.Sanitize Exit Command": {
                     "type": "boolean",
                     "default": false,
                     "description": "%configuration.compiler.sanitize_exit_command%"
                 },
-                "ksp.validate.enable": {
+                "ksp.validate.Enable": {
                     "type": "boolean",
-                    "default": false,
+                    "default": true,
                     "description": "%configuration.validate.enable%"
                 },
-                "ksp.validate.delay": {
+                "ksp.validate.Delay": {
                     "type": "number",
                     "default": 500,
                     "description": "%configuration.validate.delay%"

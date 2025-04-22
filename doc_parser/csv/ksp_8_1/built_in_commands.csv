@@ -3724,7 +3724,7 @@ on ui_control ($testButton)
         set_control_par(get_ui_id($testSlider), $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
     end if
 end on
-Loads a performance view file  and then defines  some basic behavior involving two of the contained
+Loads a performance view file and then defines some basic behavior involving two of the contained
 controls.",Resource Container,BUILT-IN
 KSP_Reference_Manual_Fixed.txt.py,239,8408,19. User Interface Commands,make_perfview,make_perfview,,Activates the performance view for the respective script slot.,"- This command can only be used in the on init callback.
 - Cannot be used alongside the load_performance_view() command.","on init
