@@ -1,7 +1,7 @@
 {
 	"configuration.title": "KSP Compiler",
-	"configuration.python.location": "Location of python executable. Default is \"python\" (Search from $PATH variable)",
-	"configuration.compiler.script": "Path to the KSP compiler python script",
+	"configuration.python.location": "Location of python executable. Default is \"python\" (searched via $PATH variable)",
+	"configuration.compiler.script": "Path to the KSP compiler python script. Default is \"ksp_compiler/ksp_compiler.py\" (relative to workspace root)",
 	"configuration.compiler.force": "Force all specified compiler options, overriding any compile_with pragma directives from the script",
 	"configuration.compiler.compact": "Remove indents in compiled code",
 	"configuration.compiler.compact_variables": "Shorten and obfuscate variable names in compiled code",
@@ -9,7 +9,7 @@
 	"configuration.compiler.extra_syntax_check": "Additional syntax checks during compilation",
 	"configuration.compiler.optimize": "Optimize the compiled code",
 	"configuration.compiler.extra_branch_optimization": "Add branch optimization checks earlier in compile process, allowing define constant based branching etc.",
-	"configuration.compiler.indent_size": "specifies how many spaces is used for indentation, if --compact compiler option is not used",
+	"configuration.compiler.indent_size": "Specifies how many spaces are used for indentation, if compact compiler option is not used",
 	"configuration.compiler.add_compile_date": "Add current date comment at the beginning of compiled file",
 	"configuration.compiler.sanitize_exit_command": "Add a dummy no-op command before every exit function call",
 	"configuration.validate.enable": "Enable/disable KSP syntax validation",

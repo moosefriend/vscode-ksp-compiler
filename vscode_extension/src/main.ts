@@ -19,16 +19,16 @@
 'use strict';
 
 import vscode  = require('vscode');
-import * as Constants from './features/constants';
-import {CompletionItemProvider} from './features/completionItemProvider';
-import {HoverProvider} from './features/hoverProvider';
-import {SignatureHelpProvider} from './features/signatureHelpProvider';
-import {DocumentSymbolProvider} from './features/documentSymbolProvider';
-import {DefinitionProvider} from './features/definitionProvider';
-import {ReferenceProvider} from './features/referenceProvider';
-import {ValidationProvider} from './features/validationProvider';
-import {RenameProvider} from './features/renameProvider';
-import CommandSetup = require('./features/commands/commandSetup');
+import * as Constants from './config/constants';
+import {CompletionItemProvider} from './provider/completionItemProvider';
+import {HoverProvider} from './provider/hoverProvider';
+import {SignatureHelpProvider} from './provider/signatureHelpProvider';
+import {DocumentSymbolProvider} from './provider/documentSymbolProvider';
+import {DefinitionProvider} from './provider/definitionProvider';
+import {ReferenceProvider} from './provider/referenceProvider';
+import {ValidationProvider} from './provider/validationProvider';
+import {RenameProvider} from './provider/renameProvider';
+import CommandSetup = require('./command/commandSetup');
 
 export function activate(context: vscode.ExtensionContext): any
 {
