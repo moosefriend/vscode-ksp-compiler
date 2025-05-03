@@ -21,37 +21,31 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import * as clipboard from 'clipboardy';
-
 import { CompileBuilder } from '../compiler/compileBuilder';
 import { CompileExecutor } from '../compiler/compileExecutor';
 
 export function doCompile(context: vscode.ExtensionContext) {
-    let editor: vscode.TextEditor | undefined= vscode.window.activeTextEditor;
+    let editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
     let textDocument: vscode.TextDocument;
     let baseName: string;
     let scriptFilePath: string;
     let tmpFile: tmp.FileResult;
-
     const MESSAGE_PREFIX: string = "KSP";
     const MESSAGE_FAILED: string = "Failed";
     const MESSAGE_CLIPBOARD: string = "Script has been copied to clipboard";
-
     //--------------------------------------------------------------------------
     // Preverify
     //--------------------------------------------------------------------------
-
     // Any files not opened
     if (!editor) {
         vscode.window.showErrorMessage("Editor not opened");
         return;
     }
-
     textDocument = editor.document;
     if (textDocument.languageId !== "ksp") {
         vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: Language mode is not 'ksp'`);
         return;
     }
-
     scriptFilePath = textDocument.fileName;
     baseName = path.basename(textDocument.fileName);
 
@@ -62,10 +56,9 @@ export function doCompile(context: vscode.ExtensionContext) {
         tmpFile = tmp.fileSync();
         let argBuilder: CompileBuilder = new CompileBuilder(scriptFilePath, tmpFile.name);
         let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument).init();
-
         compiler.OnExit = (exitCode: number) => {
             if (exitCode != 0) {
-                vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${MESSAGE_FAILED}. Please check your script : ${baseName}`);
+                vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${MESSAGE_FAILED}. Please check your script: ${baseName}`);
             }
             else {
                 vscode.window.showInformationMessage(`${MESSAGE_PREFIX}: ${MESSAGE_CLIPBOARD}`);
@@ -75,20 +68,17 @@ export function doCompile(context: vscode.ExtensionContext) {
             }
         };
         compiler.OnException = (e: Error) => {
-            vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${MESSAGE_FAILED} : ${baseName}`);
+            vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${MESSAGE_FAILED}: ${baseName}`);
         };
-
         compiler.execute(textDocument, argBuilder);
-
-    }; //~function runCompiler
+    };
 
     // Output to Clipboard
-    // TODO: Copy compiler output instead of script to clipboard
     {
         runCompiler((exitCode) => {
             if (exitCode == 0) {
                 let txt: string = fs.readFileSync(tmpFile.name).toString();
-                clipboard.writeSync(txt);
+                clipboard.default.writeSync(txt);
             }
             try {
                 tmpFile.removeCallback();

@@ -17,8 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import * as vscode from 'vscode';
-
-import LintCommand = require('./compileCommand');
+import CompileCommand = require('./compileCommand');
 //import WhatsNew = require( '../webview/whatsNew' );
 
 /**
@@ -26,7 +25,7 @@ import LintCommand = require('./compileCommand');
  */
 export function setupCommands(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerCommand('ksp.compile', LintCommand.doCompile)
+        vscode.commands.registerCommand('ksp.compile', CompileCommand.doCompile)
     );
 
     // context.subscriptions.push(

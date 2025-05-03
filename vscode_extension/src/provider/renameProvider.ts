@@ -25,42 +25,30 @@ import {
     ProviderResult,
     WorkspaceEdit
 } from 'vscode';
-
-import KSPExtensionConstants = require('../config/constants');
-import {
-    SymbolUtil,
-    SymbolType,
-    Symbol,
-    SymbolInformation
-} from '../util/symbolUtil';
-
+import { SymbolUtil, Symbol } from '../util/symbolUtil';
 import SyntaxUtil from '../util/syntaxUtil';
 
 export class RenameProvider implements vscode.RenameProvider {
     public provideRenameEdits(document: TextDocument,
         position: Position,
         newName: string,
-        token: CancellationToken): ProviderResult<WorkspaceEdit> {
+        token: CancellationToken
+    ): ProviderResult<WorkspaceEdit> {
         return new Promise<vscode.WorkspaceEdit>((ressolve, reject) => {
-
             if (!newName) {
                 reject();
             }
-
             const result: WorkspaceEdit = new WorkspaceEdit();
-            const symbols: SymbolInformation[] = SymbolUtil.collect(document);
             const org: string = SymbolUtil.parseSymbolAt(document, position);
             let renamed: boolean = false;
             let regex: RegExp | undefined = undefined;
-
             if (Symbol.isVariable(org)) {
                 regex = new RegExp("\\" + org, 'g');
             }
             else if (!SyntaxUtil.matchKeyword(org) && !SyntaxUtil.matchLiteral(org)) {
                 regex = new RegExp(org, "g");
             }
-
-            // replace
+            // Replace
             if (regex) {
                 for (let i = 0; i < document.lineCount; i++) {
                     let lineText = document.lineAt(i).text;
@@ -72,7 +60,6 @@ export class RenameProvider implements vscode.RenameProvider {
                 }
                 renamed = true;
             }
-
             if (renamed) {
                 ressolve(result);
             }

@@ -2,7 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
 export interface ITask<T> {
 	(): T;
 }
@@ -28,10 +27,9 @@ export interface ITask<T> {
  * 		}
  */
 export class Throttler<T> {
-
-	private activePromise: Promise<T>;
-	private queuedPromise: Promise<T>;
-	private queuedPromiseFactory: ITask<Promise<T>>;
+	private activePromise: Promise<T> | null;
+	private queuedPromise: Promise<T> | null;
+	private queuedPromiseFactory: ITask<Promise<T>> | null;
 
 	constructor() {
 		this.activePromise = null;
@@ -42,31 +40,24 @@ export class Throttler<T> {
 	public queue(promiseFactory: ITask<Promise<T>>): Promise<T> {
 		if (this.activePromise) {
 			this.queuedPromiseFactory = promiseFactory;
-
 			if (!this.queuedPromise) {
 				var onComplete = () => {
 					this.queuedPromise = null;
-
-					var result = this.queue(this.queuedPromiseFactory);
+					var result = this.queue(this.queuedPromiseFactory!);
 					this.queuedPromiseFactory = null;
-
 					return result;
 				};
-
 				this.queuedPromise = new Promise<T>((resolve, reject) => {
-					this.activePromise.then(onComplete, onComplete).then(resolve);
+					this.activePromise?.then(onComplete, onComplete).then(resolve);
 				});
 			}
-
 			return new Promise<T>((resolve, reject) => {
-				this.queuedPromise.then(resolve, reject);
+				this.queuedPromise?.then(resolve, reject);
 			});
 		}
-
 		this.activePromise = promiseFactory();
-
 		return new Promise<T>((resolve, reject) => {
-			this.activePromise.then((result: T) => {
+			this.activePromise?.then((result: T) => {
 				this.activePromise = null;
 				resolve(result);
 			}, (err: any) => {
@@ -101,12 +92,11 @@ export class Throttler<T> {
  * 		}
  */
 export class Delayer<T> {
-
 	public defaultDelay: number;
-	private timeout: NodeJS.Timer;
-	private completionPromise: Promise<T>;
-	private onResolve: (value: T | Thenable<T>) => void;
-	private task: ITask<T>;
+	private timeout: NodeJS.Timer | null;
+	private completionPromise: Promise<T> | null;
+	private onResolve: ((value: T | Thenable<T>) => void) | null;
+	private task: ITask<T> | null;
 
 	constructor(defaultDelay: number) {
 		this.defaultDelay = defaultDelay;
@@ -119,26 +109,27 @@ export class Delayer<T> {
 	public trigger(task: ITask<T>, delay: number = this.defaultDelay): Promise<T> {
 		this.task = task;
 		this.cancelTimeout();
-
 		if (!this.completionPromise) {
 			this.completionPromise = new Promise<T>((resolve, reject) => {
 				this.onResolve = resolve;
 			}).then(() => {
 				this.completionPromise = null;
 				this.onResolve = null;
-
+				if (!this.task) {
+					throw new Error('Task is null or undefined');
+				}
 				var result = this.task();
 				this.task = null;
-
 				return result;
 			});
 		}
 
 		this.timeout = setTimeout(() => {
 			this.timeout = null;
-			this.onResolve(null);
+			if (this.onResolve) {
+				this.onResolve(undefined as unknown as T);
+			}
 		}, delay);
-
 		return this.completionPromise;
 	}
 
@@ -148,7 +139,6 @@ export class Delayer<T> {
 
 	public cancel(): void {
 		this.cancelTimeout();
-
 		if (this.completionPromise) {
 			this.completionPromise = null;
 		}
@@ -156,7 +146,7 @@ export class Delayer<T> {
 
 	private cancelTimeout(): void {
 		if (this.timeout !== null) {
-			clearTimeout(this.timeout);
+			clearTimeout(this.timeout as NodeJS.Timeout);
 			this.timeout = null;
 		}
 	}
@@ -170,12 +160,10 @@ export class Delayer<T> {
  * helpers, for an analogy.
  */
 export class ThrottledDelayer<T> extends Delayer<Promise<T>> {
-
 	private throttler: Throttler<T>;
 
 	constructor(defaultDelay: number) {
 		super(defaultDelay);
-
 		this.throttler = new Throttler<T>();
 	}
 

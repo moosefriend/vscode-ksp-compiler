@@ -17,38 +17,31 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 // Implemented based on Part of PHP Validation Provider implementation. (validationProvider.ts)
-
 import * as vscode from 'vscode';
 import { ThrottledDelayer } from '../lib/async';
 import * as config from '../config/configurationConstants';
 import { ConfigurationManager } from '../config/configurationManager';
-import { CompileExecutor } from './compileExecutor';
-import { CompileBuilder } from './compileBuilder';
+import { CompileExecutor } from '../compiler/compileExecutor';
+import { CompileBuilder } from '../compiler/compileBuilder';
+import * as tmp from 'tmp';
 
 export class ValidationProvider {
-    private validationEnabled: boolean = config.DEFAULT_ENABLE_VALIDATE;
-    private realtimeValidationEnabled: boolean = config.DEFAULT_REALTIME_VALIDATE;
+    private validationEnabled: boolean = config.DEFAULT_VALIDATE_ENABLE;
+    private realtimeValidationEnabled: boolean = true;
     private realtimeValidationDelay: number = config.DEFAULT_VALIDATE_DELAY;
-
     private executable: string = config.DEFAULT_PYTHON_LOCATION;
     private pauseValidation: boolean = false;
     private realtimeTrigger: boolean = false;
+    private onSaveListener: vscode.Disposable | undefined;
+    private onChangedListener: vscode.Disposable | undefined;
 
-    private onSaveListener: vscode.Disposable;
-    private onChangedListener: vscode.Disposable;
-
-    /**
-     * ctor
-     */
-    constructor(private workspaceStore: vscode.Memento) {
-    }
+    constructor(private workspaceStore: vscode.Memento) { }
 
     /**
-     * provider activated
+     * Provider activated
      */
     public activate(context: vscode.ExtensionContext) {
         const subscriptions: vscode.Disposable[] = context.subscriptions;
-
         this.initConfiguration();
         this.loadConfiguration();
         vscode.workspace.onDidChangeConfiguration(this.loadConfiguration, this, subscriptions);
@@ -69,7 +62,7 @@ export class ValidationProvider {
 
     /**
      * Initialize configuration.
-     * When first time of activate this extention, store default values.
+     * When this is the first time to activate this extention, store default values.
      */
     private initConfiguration(): void {
         let section: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration(config.CONFIG_SECTION_NAME);
@@ -79,9 +72,8 @@ export class ValidationProvider {
                     section.update(key, defaultValue, true);
                 }
             };
-            initConfig<boolean>(config.KEY_ENABLE_VALIDATE, config.DEFAULT_ENABLE_VALIDATE);
-            initConfig<boolean>(config.KEY_ENABLE_REALTIME_VALIDATE, config.DEFAULT_REALTIME_VALIDATE);
-            initConfig<number>(config.KEY_REALTIME_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY);
+            initConfig<boolean>(config.KEY_VALIDATE_ENABLE, config.DEFAULT_VALIDATE_ENABLE);
+            initConfig<number>(config.KEY_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY);
         }
     }
 
@@ -93,28 +85,30 @@ export class ValidationProvider {
         let oldExecutable = this.executable;
         if (section) {
             // Get configurations
-            this.validationEnabled = ConfigurationManager.getConfig<boolean>(config.KEY_ENABLE_VALIDATE, config.DEFAULT_ENABLE_VALIDATE);
+            this.validationEnabled = ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE, config.DEFAULT_VALIDATE_ENABLE);
             this.executable = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION, config.DEFAULT_PYTHON_LOCATION);
-            //this.executable                 = ConfigurationManager.getConfig<string>( config.KEY_JAVA_LOCATION, config.DEFAULT_JAVA_LOCATION );
-            this.realtimeValidationEnabled = ConfigurationManager.getConfig<boolean>(config.KEY_ENABLE_REALTIME_VALIDATE, config.DEFAULT_REALTIME_VALIDATE);
-            ConfigurationManager.getConfigComplex<number>(config.KEY_REALTIME_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY, (v, user) => {
-                if (v < 16) {
-                    this.realtimeValidationDelay = config.DEFAULT_VALIDATE_DELAY;
-                    section.update(config.KEY_REALTIME_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY, true);
-                    vscode.window.showWarningMessage("KSP Configuration: " + config.KEY_REALTIME_VALIDATE_DELAY + ": too short or negative. Reset default time.");
+            ConfigurationManager.getConfigComplex<number>(config.KEY_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY, (value, user) => {
+                if (value == 0) {
+                    this.realtimeValidationEnabled = false;
                 }
                 else {
-                    this.realtimeValidationDelay = v;
+                    this.realtimeValidationEnabled = true;
+                    if (value < 16) {
+                        this.realtimeValidationDelay = config.DEFAULT_VALIDATE_DELAY;
+                        section.update(config.KEY_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY, true);
+                        vscode.window.showWarningMessage("KSP Configuration: " + config.KEY_VALIDATE_DELAY + ": too short or negative. Reset default time.");
+                    }
+                    else {
+                        this.realtimeValidationDelay = value;
+                    }
                 }
             });
             // ~Get configurations
-
             if (this.pauseValidation) {
                 this.pauseValidation = oldExecutable === this.executable;
             }
             this.doDispose(this.onChangedListener);
             this.doDispose(this.onSaveListener);
-
             if (!this.validationEnabled) {
                 return;
             }
@@ -122,14 +116,12 @@ export class ValidationProvider {
                 this.realtimeTrigger = false;
                 this.doValidate(e);
             }, this);
-
             this.onChangedListener = vscode.workspace.onDidChangeTextDocument((e) => {
                 if (this.realtimeValidationEnabled) {
                     this.realtimeTrigger = true;
                     this.doValidate(e.document);
                 }
             });
-
             if (this.validationEnabled) {
                 let documents: readonly vscode.TextDocument[] = vscode.workspace.textDocuments;
                 if (documents) {
@@ -138,7 +130,6 @@ export class ValidationProvider {
                     });
                 }
             }
-
         }
     }
 
@@ -150,19 +141,17 @@ export class ValidationProvider {
         if (!this.validationEnabled) {
             return;
         }
-
         //return new Promise<void>( (resolve, reject) =>
         {
             let src: string = textDocument.fileName;
             let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument).init();
-            let argBuilder: CompileBuilder = new CompileBuilder(src);
+            let tmpFile = tmp.fileSync();
+            let argBuilder: CompileBuilder = new CompileBuilder(src, tmpFile.name);
             let delayer: ThrottledDelayer<void> = compiler.Delayer;
             let delay = this.realtimeTrigger ? this.realtimeValidationDelay : 0;
-
             if (this.realtimeValidationEnabled) {
                 delayer.defaultDelay = delay;
             }
-
             compiler.OnError = (text: string) => {
                 if (this.pauseValidation) {
                     //resolve();
@@ -171,19 +160,15 @@ export class ValidationProvider {
                 this.pauseValidation = true;
                 //resolve();
             };
-
             compiler.OnStdout = (text: string) => {
                 //resolve();
             };
-
             compiler.OnStderr = (text: string) => {
                 //resolve();
             };
-
             compiler.OnEnd = () => {
                 //resolve();
             };
-
             compiler.execute(textDocument, argBuilder, false);
         }//);
     }

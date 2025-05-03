@@ -19,7 +19,6 @@
 import vscode = require('vscode');
 import * as path from 'path';
 import * as fs from 'fs';
-import * as tmp from 'tmp';
 import * as constant from '../config/constants';
 
 export function show() {

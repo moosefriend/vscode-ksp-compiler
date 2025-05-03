@@ -17,12 +17,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
-
-'use strict';
 import vscode = require('vscode');
 
-const kspCommands = require('./generated/commandCompletion');
-
+const commands = require('./generated/commandCompletion');
 const _NL = '\n'.charCodeAt(0);
 const _TAB = '\t'.charCodeAt(0);
 const _WSB = ' '.charCodeAt(0);
@@ -79,11 +76,7 @@ export class BackwardIterator {
 }
 
 export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
-    /**
-     * Ctor.
-     */
-    constructor() {
-    }
+    constructor() { }
 
     /**
      * Implementation of function signatuire behaviour
@@ -98,7 +91,7 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
         if (!ident) {
             return null;
         }
-        let entry = kspCommands.CompletionList[ident];
+        let entry = commands.CompletionList[ident];
         if (!entry || !entry.signature) {
             return null;
         }
@@ -171,7 +164,7 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
         return false;
     }
 
-    private readIdent = function (iterator: any) {
+    private readIdent(iterator: any) {
         let identStarted = false;
         let ident = '';
         while (iterator.hasNext()) {

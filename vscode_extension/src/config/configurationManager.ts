@@ -20,9 +20,6 @@ import * as vscode from 'vscode';
 import * as config from './configurationConstants';
 
 export class ConfigurationManager {
-    /**
-     * Constructor
-     */
     private constructor() { }
 
     /**
@@ -44,12 +41,10 @@ export class ConfigurationManager {
         let value: T = defaultValue;
         let userDefined: boolean = false;
         let inspect = section.inspect<T>(key);
-
         if (!section) {
             callback(defaultValue, userDefined);
             return;
         }
-
         if (inspect) {
             if (inspect.workspaceValue !== undefined && inspect.workspaceValue !== null) {
                 value = inspect.workspaceValue;

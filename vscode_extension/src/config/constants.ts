@@ -21,5 +21,6 @@ import * as path from 'path';
 
 export const EXTENSION_ID: string = 'source.ksp';
 export const LANG_ID: string = 'ksp';
-export const EXTENSION_DIR = vscode.extensions.getExtension(EXTENSION_ID).extensionPath;
+const extension = vscode.extensions.getExtension(EXTENSION_ID);
+export const EXTENSION_DIR = extension ? extension.extensionPath : '';
 export const RES_BASEDIR = path.join(EXTENSION_DIR, 'etc', 'images', 'icon');

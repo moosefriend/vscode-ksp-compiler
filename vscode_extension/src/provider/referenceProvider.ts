@@ -19,21 +19,17 @@
 import vscode = require('vscode');
 import CommandNames = require('../generated/commandNames');
 import VariableNames = require('../generated/variableNames');
-
-import { SymbolUtil } from '../util/symbolUtil';
-import { SymbolType } from '../util/symbolUtil';
-import { Symbol } from '../util/symbolUtil';
-import { SymbolInformation } from '../util/symbolUtil';
+import { SymbolUtil, Symbol, SymbolInformation } from '../util/symbolUtil';
 
 export class ReferenceProvider implements vscode.ReferenceProvider {
-    constructor() {
-    }
+    constructor() { }
 
     public provideReferences(
         document: vscode.TextDocument,
         position: vscode.Position,
         context: vscode.ReferenceContext,
-        token: vscode.CancellationToken): Thenable<Array<vscode.Location>> | null {
+        token: vscode.CancellationToken
+    ): Thenable<Array<vscode.Location>> | null {
         let symbols: SymbolInformation[] = SymbolUtil.collect(document);
         if (!symbols) {
             return null;
@@ -44,7 +40,6 @@ export class ReferenceProvider implements vscode.ReferenceProvider {
         for (let i = 0; i < lineCount; i++) {
             let text: string = document.lineAt(i).text.trim();
             let words: string[] = text.split(/[\s|,|\[|\]|\(|\)]+/);
-
             // Builtin-Commands?
             words.forEach(w => {
                 let found: boolean = false;

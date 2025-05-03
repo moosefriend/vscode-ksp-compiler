@@ -3,6 +3,7 @@
 ## What's in the folder
 
 This folder contains all files necessary for your extension.
+
 * `package.json`: Manifest file in which you declare your language support and define the location of the grammar file that has been copied into your extension.
 * `syntaxes/ksp.tmGrammar.yml`: Text mate grammar file that is used for tokenization.
 * `language-configuration.yml`: Language configuration, defining the tokens that are used for comments and brackets.
@@ -23,9 +24,9 @@ Note: The `*.yml` files will be converted to `out/json/*.json` files when packag
 
 ## Add more language features
 
-* To add features such as IntelliSense, hovers and validators check out the VS Code extenders documentation at https://code.visualstudio.com/docs
+* To add features such as IntelliSense, hovers and validators check out the VS Code extenders documentation at <https://code.visualstudio.com/docs>
 
 ## Install your extension
 
 * To start using your extension with Visual Studio Code copy it into the `<user home>/.vscode/extensions` folder and restart Code.
-* To share your extension with the world, read on https://code.visualstudio.com/docs about publishing an extension.
+* To share your extension with the world, read on <https://code.visualstudio.com/docs> about publishing an extension.

@@ -17,21 +17,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import vscode = require('vscode');
-import * as path from 'path';
-
 import { SymbolUtil, SymbolInformation, SymbolType, Symbol } from '../util/symbolUtil';
 
 export class DocumentSymbolProvider implements vscode.DocumentSymbolProvider {
-    constructor() {
-    }
+    constructor() { }
 
     public provideDocumentSymbols(
         document: vscode.TextDocument,
-        token: vscode.CancellationToken): Thenable<vscode.DocumentSymbol[]> {
-        const filaName = path.basename(document.fileName);
+        token: vscode.CancellationToken
+    ): Thenable<vscode.DocumentSymbol[]> {
         let result: vscode.DocumentSymbol[] = [];
         const symbols: SymbolInformation[] = SymbolUtil.collect(document);
-
         let createSymbol = function (v: SymbolInformation, kind: vscode.SymbolKind) {
             let range: vscode.Range = v.location.range;
             let selectionRange: vscode.Range = v.location.range;
@@ -45,7 +41,6 @@ export class DocumentSymbolProvider implements vscode.DocumentSymbolProvider {
                 range,
                 selectionRange)
         }
-
         for (const v of symbols) {
             const ksp = v.Symbol;
             //------------------------------------------------------------------
@@ -64,7 +59,6 @@ export class DocumentSymbolProvider implements vscode.DocumentSymbolProvider {
             if (ksp.symbolType >= SymbolType.VARIABLE_TYPE_BEGIN && ksp.symbolType <= SymbolType.VARIABLE_TYPE_END) {
                 let sym = createSymbol(v, vscode.SymbolKind.Variable);
                 sym.name = Symbol.variableType2Char(ksp.symbolType) + sym.name;
-
                 if (ksp.isPolyphonic) {
                     sym.name += ": " + ksp.variableTypeName + ", Polyphonic";
                 }
@@ -74,14 +68,12 @@ export class DocumentSymbolProvider implements vscode.DocumentSymbolProvider {
                 else {
                     sym.name += ": " + ksp.variableTypeName;
                 }
-
                 if (ksp.isConst) {
                     sym.kind = vscode.SymbolKind.Constant;
                 }
                 else if (Symbol.isArrayVariable(ksp.symbolType)) {
                     sym.kind = vscode.SymbolKind.Array;
                 }
-
                 result.push(sym);
             }
             //------------------------------------------------------------------

@@ -17,15 +17,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 import vscode = require('vscode');
-
 import { SymbolUtil } from '../util/symbolUtil';
 import { SymbolType } from '../util/symbolUtil';
 import { Symbol } from '../util/symbolUtil';
 import { SymbolInformation } from '../util/symbolUtil';
 
 export class DefinitionProvider implements vscode.DefinitionProvider {
-    constructor() {
-    }
+    constructor() { }
 
     public provideDefinition(
         document: vscode.TextDocument,
@@ -38,12 +36,10 @@ export class DefinitionProvider implements vscode.DefinitionProvider {
         let result: vscode.Location[] = [];
         let textLine: vscode.TextLine = document.lineAt(position.line);
         let symbol: string = SymbolUtil.parseSymbolAt(document, position);
-
         symbols.forEach(x => {
             let sym: Symbol = x.Symbol;
             let symName: string = sym.name;
             let declaredLine: boolean = sym.lineNumber == textLine.lineNumber;
-
             // User Function?
             if (!declaredLine && symName == symbol) {
                 result.push(x.location);
@@ -53,7 +49,6 @@ export class DefinitionProvider implements vscode.DefinitionProvider {
                 if (!declaredLine) {
                     result.push(x.location);
                 }
-
                 // For UI Callback?
                 if (x.Symbol.isUI) {
                     symbols.forEach(y => {

@@ -17,18 +17,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 // Implemented based on Part of PHP HOver Provider implementation. (hoverProvider.ts)
-
-'use strict';
-
 import vscode = require('vscode');
-
-var builtinVariables = require('./generated/variableCompletion');
-var commands = require('./generated/commandCompletion');
+import VariableCompletions = require('../generated/variableCompletion');
+import CommandCompletions = require('../generated/commandCompletion');
 
 export class HoverProvider implements vscode.HoverProvider {
-    /**
-     * Ctor.
-     */
     constructor() { }
 
     /**
@@ -39,10 +32,8 @@ export class HoverProvider implements vscode.HoverProvider {
         if (!wordRange) {
             return null;
         }
-
         let name: string = textDocument.getText(wordRange);
-        let entry: any = commands.CompletionList[name] || builtinVariables.CompletionList[name];
-
+        let entry: any = CommandCompletions.CompletionList[name] || VariableCompletions.CompletionList[name];
         if (entry && entry.description) {
             let signature = entry.signature || '';
             let contents = [entry.description, { language: 'ksp', value: signature }];

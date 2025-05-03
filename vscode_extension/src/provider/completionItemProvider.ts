@@ -18,41 +18,28 @@
  */
 // Implemented based on Part of PHP Completion ItemProvider implementation. (completionItemProvider.ts)
 
-'use strict';
-
 import vscode = require('vscode');
-
-import * as KSPVariables from "../generated/variableCompletion";
-import * as KSPCommands from "../generated/commandCompletion";
-
+import * as Variables from "../generated/variableCompletion";
+import * as Commands from "../generated/commandCompletion";
 export const VARIABLE_PREFIX_LIST: string[] = ['$', '%', '~', '?', '@', '!'];
 export const VARIABLE_REGEX: RegExp = /([\$%~\?@!][0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)/g;
 export const FUNCTION_REGEX: RegExp = /function\s+([0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*/g
 
 export class CompletionItemProvider implements vscode.CompletionItemProvider {
-    private triggerCharacters: string[];
+    constructor() { }
 
     /**
-     * Constructor
-     */
-    constructor() {
-        this.triggerCharacters = VARIABLE_PREFIX_LIST;
-    }
-
-    /**
-     * Implementation of Completion behaviour
+     * Implementation of completion behaviour
      */
     public provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<any[]> {
         let result: vscode.CompletionItem[] = [];
         let range = textDocument.getWordRangeAtPosition(position);
         let prefix = range ? textDocument.getText(range) : '';
         let text = textDocument.getText();
-
         if (!range) {
             range = new vscode.Range(position, position);
         }
         let added: Record<string, boolean> = {};
-
         //----------------------------------------------------------------------
         // Proposal component
         //----------------------------------------------------------------------
@@ -72,7 +59,6 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
             }
             return proposal;
         };
-
         //----------------------------------------------------------------------
         // Matcher
         //----------------------------------------------------------------------
@@ -81,7 +67,6 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
                 name.length >= prefix.length &&
                 name.substring(0, prefix.length) === prefix;
         };
-
         //----------------------------------------------------------------------
         // Key-Value Validate
         //----------------------------------------------------------------------
@@ -91,32 +76,29 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
                 result.push(createNewProposal(kind, name, table[name]));
             }
         }
-
         //----------------------------------------------------------------------
         // Built-In Variables
         //----------------------------------------------------------------------
-        for (let name in KSPVariables.CompletionList) {
-            validateProposal(name, KSPVariables.CompletionList, vscode.CompletionItemKind.Variable);
+        for (let name in Variables.CompletionList) {
+            validateProposal(name, Variables.CompletionList, vscode.CompletionItemKind.Variable);
         }
         //----------------------------------------------------------------------
         // Commands
         //----------------------------------------------------------------------
-        for (let name in KSPCommands.CompletionList) {
-            validateProposal(name, KSPCommands.CompletionList, vscode.CompletionItemKind.Function);
+        for (let name in Commands.CompletionList) {
+            validateProposal(name, Commands.CompletionList, vscode.CompletionItemKind.Function);
         }
         //----------------------------------------------------------------------
         // User Variables in File
         //----------------------------------------------------------------------
         {
             let prefixMatched = false;
-
             VARIABLE_PREFIX_LIST.forEach(function (element) {
                 if (prefixMatched) return;
                 if (prefix[0] === element) {
                     prefixMatched = true;
                 }
             });
-
             if (prefixMatched) {
                 let variableMatch = VARIABLE_REGEX;
                 let match = null;
@@ -143,9 +125,9 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
                 }
             }
         }
-
         return Promise.resolve(result);
     }
+
     /**
      * Given a completion item fill in more data
      */

@@ -16,22 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-'use strict';
-
-import vscode  = require('vscode');
+import vscode = require('vscode');
 import * as Constants from './config/constants';
-import {CompletionItemProvider} from './provider/completionItemProvider';
-import {HoverProvider} from './provider/hoverProvider';
-import {SignatureHelpProvider} from './provider/signatureHelpProvider';
-import {DocumentSymbolProvider} from './provider/documentSymbolProvider';
-import {DefinitionProvider} from './provider/definitionProvider';
-import {ReferenceProvider} from './provider/referenceProvider';
-import {ValidationProvider} from './provider/validationProvider';
-import {RenameProvider} from './provider/renameProvider';
-import CommandSetup = require('./command/commandSetup');
+import { CompletionItemProvider } from './provider/completionItemProvider';
+import { HoverProvider } from './provider/hoverProvider';
+import { SignatureHelpProvider } from './provider/signatureHelpProvider';
+import { DocumentSymbolProvider } from './provider/documentSymbolProvider';
+import { DefinitionProvider } from './provider/definitionProvider';
+import { ReferenceProvider } from './provider/referenceProvider';
+import { ValidationProvider } from './provider/validationProvider';
+import { RenameProvider } from './provider/renameProvider';
+import CommandSetup = require('./compiler/commandSetup');
 
-export function activate(context: vscode.ExtensionContext): any
-{
+export function activate(context: vscode.ExtensionContext): any {
     // Providers
     context.subscriptions.push(
         vscode.languages.registerCompletionItemProvider(
@@ -55,15 +52,12 @@ export function activate(context: vscode.ExtensionContext): any
     context.subscriptions.push(
         vscode.languages.registerRenameProvider(Constants.LANG_ID, new RenameProvider())
     );
-
     // Commands
     CommandSetup.setupCommands(context);
-
     // Language Configuration
     vscode.languages.setLanguageConfiguration(Constants.LANG_ID,
-        {wordPattern: /(-?\d*\.\d\w*)|([^\-\`\#\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/g}
+        { wordPattern: /(-?\d*\.\d\w*)|([^\-\`\#\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/g }
     );
-    
     // Other setup
     const validator = new ValidationProvider(context.workspaceState);
     validator.activate(context);
