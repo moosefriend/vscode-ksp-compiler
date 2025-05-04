@@ -4,7 +4,7 @@
         // "module": "Node16",
         "module": "CommonJS",
         "target": "ES2022",
-        "outDir": "out",
+        "outDir": "out/js",
         "lib": [
             "ES2022"
         ],

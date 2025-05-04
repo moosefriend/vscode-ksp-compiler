@@ -33,7 +33,7 @@ export class HoverProvider implements vscode.HoverProvider {
             return null;
         }
         let name: string = textDocument.getText(wordRange);
-        let entry: any = CommandCompletions.CompletionList[name] || VariableCompletions.CompletionList[name];
+        let entry: any = CommandCompletions.CompletionList.get(name) || VariableCompletions.CompletionList.get(name);
         if (entry && entry.description) {
             let signature = entry.signature || '';
             let contents = [entry.description, { language: 'ksp', value: signature }];

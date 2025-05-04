@@ -6,5 +6,8 @@
 	],
 	"settings": {
 		"typescript.tsc.autoDetect": "off"
-	}
+	},
+	"python.analysis.extraPaths": [
+		"../lib" // Adjust the path if necessary
+	]
 }
