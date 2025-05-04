@@ -20,8 +20,7 @@ import argparse
 import sys
 from pathlib import Path
 
-# noinspection PyUnresolvedReferences
-import find_lib
+import _find_lib  # noqa
 from config.system_config import SystemConfig
 from util.file_util import headline, yml2json
 from vscode_generator.command_completion_generator import CommandCompletionGenerator
