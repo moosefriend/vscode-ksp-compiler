@@ -26,7 +26,7 @@
         "url": "https://github.com/moosefriend/vscode-ksp-compiler/issues"
     },
     "icon": "images/icon.png",
-    "main": "./out/src/main",
+    "main": "./out/js/main",
     "engines": {
         "vscode": "^1.89.0"
     },

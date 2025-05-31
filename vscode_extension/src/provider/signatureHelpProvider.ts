@@ -19,7 +19,7 @@
 // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
 import vscode = require('vscode');
 
-const commands = require('./generated/commandCompletion');
+const commands = require('../generated/commandCompletion');
 const _NL = '\n'.charCodeAt(0);
 const _TAB = '\t'.charCodeAt(0);
 const _WSB = ' '.charCodeAt(0);
