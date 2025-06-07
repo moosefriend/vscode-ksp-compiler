@@ -35,16 +35,16 @@ patterns:
 - include: '#string_literal'
 - include: '#numeric_literal'
 - include: '#comments'
-#- include: '#callback'
-#- include: '#user_function'
-#- include: '#constants'
-#- include: '#variables'
-#- include: '#ui_controls'
-#- include: '#control_statements'
-#- include: '#operators'
-#- include: '#builtin_commands'
-#- include: '#other_keyword'
-#- include: '#ident'
+- include: '#callback'
+- include: '#user_function'
+- include: '#constants'
+- include: '#variables'
+- include: '#ui_controls'
+- include: '#control_statements'
+- include: '#operators'
+- include: '#builtin_commands'
+- include: '#other_keyword'
+- include: '#ident'
 
 repository:
     # Extended Syntax
@@ -77,20 +77,20 @@ repository:
 
     numeric_literal:
         patterns:
-        -   name: constant.numeric.float1.ksp
+        -   name: constant.numeric.float.ksp
             match: ((0|[1-9][0-9]*)\.[0-9]+)\b
-        -   name: constant.numeric.float2.ksp
+        -   name: constant.numeric.float.ksp
             match: (\.[0-9]+)\b
         -   name: constant.numeric.dec.ksp
-            match: (0|[1-9][0-9]*)\b
-        -   name: constant.numeric.hex1.ksp
-            match: (0[0-9a-fA-F]+[hH])\b
+            match: ([0-9]+)\b
+        -   name: constant.numeric.hex.ksp
+            match: ([0-9|a-f|A-F]+[hH])\b
         # Extended Syntax
-        -   name: constant.numeric.hex2.ksp
-            match: (0[xX](0[0-9a-fA-F]+))\b
-        -   name: constant.numeric.bin1.ksp
+        -   name: constant.numeric.hex.ksp
+            match: (0[xX]([0-9|a-f|A-F]+))\b
+        -   name: constant.numeric.bin.ksp
             match: (b[01]+)\b
-        -   name: constant.numeric.bin2.ksp
+        -   name: constant.numeric.bin.ksp
             match: ([01]+b)\b
 
     comments:
@@ -114,24 +114,20 @@ repository:
                     name = punctuation.definition.comment.ksp
             end: \*/
 
-    ident:
-        patterns:
-        -   match: ([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)
-
     callback:
         patterns:
-        -   name: keyword.callback.ksp
+        -   name: keyword.callback.begin.ksp
             # List of built_in_callbacks.csv column Name
             match: ^\s*on\s+(<<built_in_callbacks>>)\b
-        -   name: keyword.callback.ksp
+        -   name: keyword.callback.end.ksp
             match: ^\s*end\s+on\b
 
     user_function:
         patterns:
-        -   name: keyword.userfunction.ksp
-            match: ^\s*function\s+\b
-        -   name: keyword.userfunction.ksp
+        -   name: keyword.userfunction.end.ksp
             match: ^\s*end\s+function\b
+        -   name: keyword.userfunction.begin.ksp
+            match: ^\s*function\b
 
     # Extended Syntax
     constants:
@@ -144,9 +140,9 @@ repository:
     # Extended Syntax
     struct:
         patterns:
-        -   name: struct.block.ksp
+        -   name: struct.block.begin.ksp
             match: ^\s*struct\s+\b
-        -   name: struct.block.ksp
+        -   name: struct.block.end.ksp
             match: ^\s*end\s+struct\b
 
     variables:
@@ -195,3 +191,7 @@ repository:
         patterns:
         -   name: keyword.other.ksp
             match: (on|end|function)\b
+
+    ident:
+        patterns:
+        -   match: ([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)
