@@ -35,16 +35,16 @@ patterns:
 - include: '#string_literal'
 - include: '#numeric_literal'
 - include: '#comments'
-- include: '#callback'
-- include: '#user_function'
-- include: '#constants'
-- include: '#variables'
-- include: '#ui_controls'
-- include: '#control_statements'
-- include: '#operators'
-- include: '#builtin_commands'
-- include: '#other_keyword'
-- include: '#ident'
+#- include: '#callback'
+#- include: '#user_function'
+#- include: '#constants'
+#- include: '#variables'
+#- include: '#ui_controls'
+#- include: '#control_statements'
+#- include: '#operators'
+#- include: '#builtin_commands'
+#- include: '#other_keyword'
+#- include: '#ident'
 
 repository:
     # Extended Syntax
@@ -77,19 +77,21 @@ repository:
 
     numeric_literal:
         patterns:
-        -   name: constant.numeric.ksp
+        -   name: constant.numeric.float1.ksp
+            match: ((0|[1-9][0-9]*)\.[0-9]+)\b
+        -   name: constant.numeric.float2.ksp
+            match: (\.[0-9]+)\b
+        -   name: constant.numeric.dec.ksp
             match: (0|[1-9][0-9]*)\b
-        -   name: constant.numeric.ksp
-            match: (0[0-9|a-f|A-F]+[hH])\b
-        -   name: constant.numeric.ksp
-            match: (\.[0-9]*)\b
+        -   name: constant.numeric.hex1.ksp
+            match: (0[0-9a-fA-F]+[hH])\b
         # Extended Syntax
-        -   name: constant.numeric.ksp
-            match: (0[xX](0[0-9|a-f|A-F]+)\b
-        -   name: constant.numeric.ksp
-            match: (b[0-1]+)\b
-        -   name: constant.numeric.ksp
-            match: ([0-1]+b)\b
+        -   name: constant.numeric.hex2.ksp
+            match: (0[xX](0[0-9a-fA-F]+))\b
+        -   name: constant.numeric.bin1.ksp
+            match: (b[01]+)\b
+        -   name: constant.numeric.bin2.ksp
+            match: ([01]+b)\b
 
     comments:
         patterns:
@@ -132,7 +134,7 @@ repository:
             match: ^\s*end\s+function\b
 
     # Extended Syntax
-    constant:
+    constants:
         patterns:
         -   name: constant.block.ksp
             match: ^\s*const\s+\b
