@@ -19,20 +19,20 @@
 export const CONFIG_SECTION_NAME = 'ksp';
 
 // KSP Compiler configuration settings
-export const KEY_PYTHON_LOCATION = 'python.location';
-export const KEY_COMPILER_SCRIPT = 'compiler.script';
-export const KEY_FORCE = 'compiler.force';
-export const KEY_COMPACT = 'compiler.compact';
-export const KEY_COMPACT_VARIABLES = 'compiler.compact_variables';
-export const KEY_COMBINE_CALLBACKS = 'compiler.combine_callbacks';
-export const KEY_EXTRA_SYNTAX_CHECK = 'compiler.extra_syntax_check';
-export const KEY_OPTIMIZE = 'compiler.optimize';
-export const KEY_EXTRA_BRANCH_OPTIMIZATION = 'compiler.extra_branch_optimization';
-export const KEY_INDENT_SIZE = 'compiler.indent_size';
-export const KEY_ADD_COMPILE_DATE = 'compiler.add_compile_date';
-export const KEY_SANITIZE_EXIT_COMMAND = 'compiler.sanitize_exit_command';
-export const KEY_VALIDATE_ENABLE = 'validate.enable';
-export const KEY_VALIDATE_DELAY = 'validate.delay';
+export const KEY_PYTHON_LOCATION = 'python.Location';
+export const KEY_COMPILER_SCRIPT = 'compiler.Script';
+export const KEY_FORCE = 'compiler.Force';
+export const KEY_COMPACT = 'compiler.Compact';
+export const KEY_COMPACT_VARIABLES = 'compiler.Compact Variables';
+export const KEY_COMBINE_CALLBACKS = 'compiler.Combine Callbacks';
+export const KEY_EXTRA_SYNTAX_CHECK = 'compiler.Extra Syntax Check';
+export const KEY_OPTIMIZE = 'compiler.Optimize';
+export const KEY_EXTRA_BRANCH_OPTIMIZATION = 'compiler.Extra Branch Optimization';
+export const KEY_INDENT_SIZE = 'compiler.Indent Size';
+export const KEY_ADD_COMPILE_DATE = 'compiler.Add Compile Date';
+export const KEY_SANITIZE_EXIT_COMMAND = 'compiler.Sanitize Exit Command';
+export const KEY_VALIDATE_ENABLE = 'validate.Enable';
+export const KEY_VALIDATE_DELAY = 'validate.Delay';
 
 // Default values
 export const DEFAULT_PYTHON_LOCATION = 'python';

@@ -28,6 +28,7 @@ export class HoverProvider implements vscode.HoverProvider {
      * Implementation of Hover behaviour
      */
     public provideHover(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.Hover | null {
+        console.log('HoverProvider called');
         let wordRange: vscode.Range | undefined = textDocument.getWordRangeAtPosition(position);
         if (!wordRange) {
             return null;
