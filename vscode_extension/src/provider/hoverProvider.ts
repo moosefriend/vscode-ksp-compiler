@@ -28,17 +28,20 @@ export class HoverProvider implements vscode.HoverProvider {
      * Implementation of Hover behaviour
      */
     public provideHover(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.Hover | null {
-        console.log('HoverProvider called');
         let wordRange: vscode.Range | undefined = textDocument.getWordRangeAtPosition(position);
         if (!wordRange) {
             return null;
         }
         let name: string = textDocument.getText(wordRange);
         let entry: any = CommandCompletions.CompletionList.get(name) || VariableCompletions.CompletionList.get(name);
-        if (entry && entry.description) {
-            let signature = entry.signature || '';
-            let contents = [entry.description, { language: 'ksp', value: signature }];
-            return new vscode.Hover(contents, wordRange);
+        console.log('HoverProvider called for:', name, 'Entry:', entry);
+        if (entry) {
+            const description = entry.get('description');
+            const signature = entry.get('signature') || '';
+            if (description) {
+                let contents = [description, { language: 'ksp', value: signature }];
+                return new vscode.Hover(contents, wordRange);
+            }
         }
         return null;
     }
