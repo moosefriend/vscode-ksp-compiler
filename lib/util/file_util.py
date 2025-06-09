@@ -18,6 +18,7 @@
 ##############################################################################
 import json
 import logging
+import re
 from pathlib import Path
 
 import yaml
@@ -93,3 +94,16 @@ def yml2json(yml_file: Path, json_file: Path):
             json.dump(data, f, indent=4)
     else:
         raise FileNotFoundError(f"YAML input file {yml_file.as_posix()} not found")
+
+def text2markdown(text: str) -> str:
+    """
+    Convert text to Markdown format by escaping special characters and replacing newlines with 2 spaces and newline.
+
+    :param text: Text to convert
+    :return: Converted text in Markdown format
+    """
+    # Replace special characters for Markdown compatibility using regex replace
+    text = re.sub(r"([\\`*_{}\[\]()#+<>!~\-=:|])", r"\\\\\1", text)
+    # Replace newlines with two spaces and newline
+    text = text.replace("\n", "  \n")
+    return text

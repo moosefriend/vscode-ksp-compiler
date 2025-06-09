@@ -21,6 +21,8 @@ from abc import abstractmethod
 from pathlib import Path
 from typing import Any
 
+from util.file_util import text2markdown
+
 
 class DocItem:
     BULLET_PATTERN = re.compile(r"^•\s+", re.MULTILINE)
@@ -103,7 +105,7 @@ class DocItem:
 
         :return: Formatted description
         """
-        text = self.description
+        text = text2markdown(self.description)
         text += self.format_sections()
         text += "\n"
         text += self.format_reference()
@@ -142,7 +144,17 @@ class DocItem:
         :return: Formatted section or an empty string the the text is emtpy
         """
         if text:
-            formatted_text = f"\n\n{title}:\n{text}"
+            if title == "Example":
+                # Format example text with ksp syntax highlighting
+                formatted_text = f"\n\n**{title}:**  \n```ksp\n{text}\n```\n"
+            elif title == "See also":
+                # Prefix every line with a hyphen and a space
+                formatted_text = f"\n\n**{title}:**  \n- " + text2markdown(text).replace("  \n", "\n- ")
+            elif title == "Remarks":
+                # Remarks are already a bullet list
+                formatted_text = f"\n\n**{title}:**  \n{text}"
+            else:
+                formatted_text = f"\n\n**{title}:**  \n{text2markdown(text)}"
         else:
             formatted_text = ""
         return formatted_text
@@ -153,9 +165,5 @@ class DocItem:
 
         :return: Formatted reference
         """
-        if self.category:
-            category = f"Category: {self.category}\n"
-        else:
-            category = ""
-        text = f"\n{category}Chapter: {self.headline}\nPage: {self.page_no}"
+        text = f"\n**Chapter:** {self.headline}  \n**Page:** {self.page_no}"
         return text
