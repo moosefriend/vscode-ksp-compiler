@@ -47,7 +47,8 @@ class CommandCompletionGenerator(BaseGenerator):
             f.write(f"// - Parsed Functions: {SystemConfig().get_csv_path(ItemType.FUNCTION)}\n")
             f.write(f"// - Manual Overrides: {SystemConfig().get_patch_csv_path(ItemType.FUNCTION)}\n")
             f.write(f"// Generated at: {strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"export var CompletionList: Map<string, Map<string, string>> = new Map([\n")
+            f.write(f"import {{ CompletionRecord }} from \"../config/completionRecord\";\n")
+            f.write(f"export var CompletionList: Map<string, CompletionRecord> = new Map([\n")
             for doc_item in natsorted(doc_items.values(), key=lambda x: x.name):
                 if doc_item.parameter_list:
                     snippet_string = f"{doc_item.name}("
@@ -61,9 +62,10 @@ class CommandCompletionGenerator(BaseGenerator):
                     snippet_string = f"{doc_item.name}"
                     signature = snippet_string
                 description = doc_item.format_description()
-                f.write(f'    ["{doc_item.name}", new Map([\n')
-                f.write(f'        ["snippet_string", "{snippet_string}"],\n')
-                f.write(f'        ["signature", "{signature}"],\n')
-                f.write(f'        ["description", "{description}"]\n')
-                f.write(f'    ])],\n')
+                f.write(f'    ["{doc_item.name}", new CompletionRecord(\n')
+                f.write(f'        "{doc_item.name}",\n')
+                f.write(f'        "{description}",\n')
+                f.write(f'        "{signature}",\n')
+                f.write(f'        "{snippet_string}",\n')
+                f.write(f'    )],\n')
             f.write(f"]);\n")

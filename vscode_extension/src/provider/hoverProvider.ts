@@ -20,6 +20,7 @@
 import vscode = require('vscode');
 import VariableCompletions = require('../generated/variableCompletion');
 import CommandCompletions = require('../generated/commandCompletion');
+import { CompletionRecord } from '../config/completionRecord';
 
 export class HoverProvider implements vscode.HoverProvider {
     constructor() { }
@@ -33,15 +34,10 @@ export class HoverProvider implements vscode.HoverProvider {
             return null;
         }
         let name: string = textDocument.getText(wordRange);
-        let entry: any = CommandCompletions.CompletionList.get(name) || VariableCompletions.CompletionList.get(name);
-        console.log('HoverProvider called for:', name, 'Entry:', entry);
-        if (entry) {
-            const description = entry.get('description');
-            const signature = entry.get('signature') || '';
-            if (description) {
-                let contents = [description, { language: 'ksp', value: signature }];
-                return new vscode.Hover(contents, wordRange);
-            }
+        let entry: CompletionRecord | undefined = CommandCompletions.CompletionList.get(name) || VariableCompletions.CompletionList.get(name);
+        if (entry && entry.description) {
+            let contents = [entry.description, { language: 'ksp', value: entry.signature }];
+            return new vscode.Hover(contents, wordRange);
         }
         return null;
     }
