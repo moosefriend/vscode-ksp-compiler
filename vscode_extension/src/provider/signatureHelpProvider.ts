@@ -18,8 +18,9 @@
  */
 // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
 import vscode = require('vscode');
+import * as Commands from '../generated/commandCompletion';
+import { CompletionRecord } from '../config/completionRecord';
 
-const commands = require('../generated/commandCompletion');
 const _NL = '\n'.charCodeAt(0);
 const _TAB = '\t'.charCodeAt(0);
 const _WSB = ' '.charCodeAt(0);
@@ -91,7 +92,7 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
         if (!ident) {
             return null;
         }
-        let entry = commands.CompletionList[ident];
+        let entry: CompletionRecord | undefined= Commands.CompletionList.get(ident);
         if (!entry || !entry.signature) {
             return null;
         }

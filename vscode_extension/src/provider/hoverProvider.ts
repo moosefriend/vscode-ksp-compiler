@@ -18,8 +18,8 @@
  */
 // Implemented based on Part of PHP HOver Provider implementation. (hoverProvider.ts)
 import vscode = require('vscode');
-import VariableCompletions = require('../generated/variableCompletion');
-import CommandCompletions = require('../generated/commandCompletion');
+import * as Variables from "../generated/variableCompletion";
+import * as Commands from "../generated/commandCompletion";
 import { CompletionRecord } from '../config/completionRecord';
 
 export class HoverProvider implements vscode.HoverProvider {
@@ -34,7 +34,7 @@ export class HoverProvider implements vscode.HoverProvider {
             return null;
         }
         let name: string = textDocument.getText(wordRange);
-        let entry: CompletionRecord | undefined = CommandCompletions.CompletionList.get(name) || VariableCompletions.CompletionList.get(name);
+        let entry: CompletionRecord | undefined = Commands.CompletionList.get(name) || Variables.CompletionList.get(name);
         if (entry && entry.description) {
             let signature = entry.signature || name
             let contents = [{ language: 'ksp', value: signature }, entry.description];
