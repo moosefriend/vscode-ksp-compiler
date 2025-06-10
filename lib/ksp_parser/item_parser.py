@@ -29,7 +29,7 @@ from ksp_parser.content_pattern import ContentPattern
 from ksp_parser.toc_parser import TocParser
 from config.constants import DocState
 from config.system_config import SystemConfig
-from util.file_util import log_step
+from util.format_util import log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)

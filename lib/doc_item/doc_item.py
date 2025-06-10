@@ -21,7 +21,7 @@ from abc import abstractmethod
 from pathlib import Path
 from typing import Any
 
-from util.file_util import text2markdown
+from util.format_util import text2markdown
 
 
 class DocItem:

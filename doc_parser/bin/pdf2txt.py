@@ -24,7 +24,7 @@ from pathlib import Path
 import find_lib
 from config.system_config import SystemConfig
 from ksp_parser.main_parser import MainParser
-from util.file_util import headline
+from util.format_util import headline
 
 
 parser = argparse.ArgumentParser(description="Convert a *.pdf Kontakt KSP manual to *.txt")

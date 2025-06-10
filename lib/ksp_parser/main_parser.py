@@ -31,7 +31,7 @@ from ksp_parser.item_parser import ItemParser
 from ksp_parser.toc_parser import TocParser
 from config.constants import ItemType
 from config.system_config import SystemConfig
-from util.file_util import headline, log_step
+from util.format_util import headline, log_step
 from util.rewind_reader import RewindReader
 
 log = logging.getLogger(__name__)

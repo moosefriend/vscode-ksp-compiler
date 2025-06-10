@@ -18,48 +18,13 @@
 ##############################################################################
 import json
 import logging
-import re
+from _typeshed import SupportsWrite
 from pathlib import Path
 
 import yaml
 from yaml import SafeLoader
 
 log = logging.getLogger(__name__)
-
-
-def headline(text: str, level=1):
-    """
-    Logs a headline.
-
-    :param text: Text of the headline
-    :param level: level of the headline
-    """
-    match level:
-        case 1:
-            char = "#"
-        case 2:
-            char = "*"
-        case 3:
-            char = "-"
-        case _:
-            raise ValueError(f"Invalid level {level}: Only levels 1 to 3 are allowed")
-    if level == 3:
-        log.info(f"{char * 20} {text} {char * 20}")
-    else:
-        log.info(f"{char * 80}")
-        for line in text.splitlines():
-            log.info(f"{char} {line}")
-        log.info(f"{char * 80}")
-
-
-def log_step(text: str, prefix: str = ">>>>>"):
-    """
-    Logs a step headline.
-
-    :param text: Text of the step
-    :param prefix: Prefix to print before the step
-    """
-    log.info(f"{prefix} {text}")
 
 
 def replace_in_file(file: Path, search_string: str, replace_string: str):
@@ -91,19 +56,8 @@ def yml2json(yml_file: Path, json_file: Path):
         with yml_file.open("r") as f:
             data = yaml.load(f, Loader=SafeLoader)
         with json_file.open("w") as f:
+            # Supress type mismatch warning
+            f: SupportsWrite[str]
             json.dump(data, f, indent=4)
     else:
         raise FileNotFoundError(f"YAML input file {yml_file.as_posix()} not found")
-
-def text2markdown(text: str) -> str:
-    """
-    Convert text to Markdown format by escaping special characters and replacing newlines with 2 spaces and newline.
-
-    :param text: Text to convert
-    :return: Converted text in Markdown format
-    """
-    # Replace special characters for Markdown compatibility using regex replace
-    text = re.sub(r"([\\`*_{}\[\]()#+<>!~\-=:|])", r"\\\\\1", text)
-    # Replace newlines with two spaces and newline
-    text = text.replace("\n", "  \n")
-    return text
