@@ -66,6 +66,6 @@ class CommandCompletionGenerator(BaseGenerator):
                 f.write(f'        "{doc_item.name}",\n')
                 f.write(f'        "{description}",\n')
                 f.write(f'        "{signature}",\n')
-                f.write(f'        "{snippet_string}",\n')
+                f.write(f'        "{snippet_string}"\n')
                 f.write(f'    )],\n')
             f.write(f"]);\n")

@@ -2,7 +2,7 @@
  * This file is part of the vscode-ksp-compiler distribution
  * (https://github.com/moosefriend/vscode-ksp-compiler).
  *
- * Copyright (c) 2024 MooseFriend (https://github.com/moosefriend)
+ * Copyright (c) 2025 MooseFriend (https://github.com/moosefriend)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 import vscode = require('vscode');
 import * as Variables from "../generated/variableCompletion";
 import * as Commands from "../generated/commandCompletion";
+import { CompletionRecord } from '../config/completionRecord';
 export const VARIABLE_PREFIX_LIST: string[] = ['$', '%', '~', '?', '@', '!'];
 export const VARIABLE_REGEX: RegExp = /([\$%~\?@!][0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)/g;
 export const FUNCTION_REGEX: RegExp = /function\s+([0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*/g
@@ -43,7 +44,7 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
         //----------------------------------------------------------------------
         // Proposal component
         //----------------------------------------------------------------------
-        let createNewProposal = function (kind: vscode.CompletionItemKind, name: string, entry: any) {
+        let createNewProposal = function (kind: vscode.CompletionItemKind, name: string, entry: CompletionRecord | null) {
             let proposal = new vscode.CompletionItem(name);
             proposal.kind = kind;
             if (entry) {
@@ -53,14 +54,15 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
                 if (entry.signature) {
                     proposal.detail = entry.signature;
                 }
-                if (entry.snippet_string) {
-                    proposal.insertText = new vscode.SnippetString(entry.snippet_string);
+                if (entry.snippet) {
+                    proposal.insertText = new vscode.SnippetString(entry.snippet);
                 }
             }
             return proposal;
         };
         //----------------------------------------------------------------------
-        // Matcher
+        // Matcher: The prefix is the text entered by the user
+        // The matcher checks if the name starts with the prefix.
         //----------------------------------------------------------------------
         let matches = function (name: string) {
             return prefix.length === 0 ||
@@ -68,28 +70,25 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
                 name.substring(0, prefix.length) === prefix;
         };
         //----------------------------------------------------------------------
-        // Key-Value Validate
+        // Check if the prefix matches some built-in variables
         //----------------------------------------------------------------------
-        let validateProposal = function (name: string, table: any, kind: vscode.CompletionItemKind) {
-            if (table.hasOwnProperty(name) && matches(name)) {
+        Variables.CompletionList.forEach(function (entry: CompletionRecord, name: string) {
+            if (matches(name)) {
                 added[name] = true;
-                result.push(createNewProposal(kind, name, table[name]));
+                result.push(createNewProposal(vscode.CompletionItemKind.Variable, name, entry));
             }
-        }
+        });
         //----------------------------------------------------------------------
-        // Built-In Variables
+        // Check if the prefix mathes some commands
         //----------------------------------------------------------------------
-        for (let name in Variables.CompletionList) {
-            validateProposal(name, Variables.CompletionList, vscode.CompletionItemKind.Variable);
-        }
+        Commands.CompletionList.forEach(function (entry: CompletionRecord, name: string) {
+            if (matches(name)) {
+                added[name] = true;
+                result.push(createNewProposal(vscode.CompletionItemKind.Function, name, entry));
+            }
+        });
         //----------------------------------------------------------------------
-        // Commands
-        //----------------------------------------------------------------------
-        for (let name in Commands.CompletionList) {
-            validateProposal(name, Commands.CompletionList, vscode.CompletionItemKind.Function);
-        }
-        //----------------------------------------------------------------------
-        // User Variables in File
+        // Check if the prefix mathces some user variables in the same file
         //----------------------------------------------------------------------
         {
             let prefixMatched = false;
@@ -112,7 +111,7 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
             }
         }
         //----------------------------------------------------------------------
-        // User Functions in File
+        // Check if the prefix mathces some user functions in the same file
         //----------------------------------------------------------------------
         {
             let functionMatch = FUNCTION_REGEX;
