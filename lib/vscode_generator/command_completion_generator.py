@@ -55,9 +55,9 @@ class CommandCompletionGenerator(BaseGenerator):
                     signature = snippet_string
                     for i, cur_par in enumerate(doc_item.parameter_list):
                         snippet_string += f"${{{i + 1}:{cur_par}}}, "
-                        signature += f"{cur_par},"
+                        signature += f"{cur_par}, "
                     snippet_string = snippet_string[:-2] + ")"
-                    signature = signature[:-1] + ")"
+                    signature = signature[:-2] + ")"
                 else:
                     snippet_string = f"{doc_item.name}"
                     signature = snippet_string

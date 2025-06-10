@@ -27,6 +27,8 @@ from util.format_util import text2markdown
 class DocItem:
     BULLET_PATTERN = re.compile(r"^•\s+", re.MULTILINE)
     """Pattern for bullet list item"""
+    HYPHEN_PATTERN = re.compile(r"^-\s+(.*)")
+    """Pattern for hyphen list item"""
 
     def __init__(self, file: Path, page_no: int, line_no: int, headline: str, category: str, name: str,
                  description: str = None, source: str = None):
@@ -168,10 +170,16 @@ class DocItem:
         :param text: Text of the section if any
         :return: Formatted "Remarks" section or an empty string if the the text is emtpy
         """
+        new_text = ""
         if text:
-            # Format remarks text with ksp syntax highlighting
-            text = f"\n\n**Remarks:**  \n```ksp\n{text}\n```\n"
-        return text
+            # Remarks are already an item list
+            for line in text.split("\n"):
+                if m := DocItem.HYPHEN_PATTERN.match(line):
+                    new_text += f"- {text2markdown(m.group(1))}  \n"
+                else:
+                    new_text += f"{text2markdown(line)}  \n"
+            new_text = f"\n\n**Remarks:**  \n{new_text.rstrip()}"
+        return new_text
 
     @staticmethod
     def format_comment(text: str) -> str:
@@ -182,7 +190,7 @@ class DocItem:
         :return: Formatted "Comment" section or an empty string if the the text is emtpy
         """
         if text:
-            text = f"\n\n**Comment:** {text}"
+            text = f"\n\n**Comment:** {text2markdown(text)}"
         return text
 
     def format_reference(self) -> str:
@@ -191,5 +199,5 @@ class DocItem:
 
         :return: Formatted reference
         """
-        text = f"\n**Chapter:** {self.headline}  \n**Page:** {self.page_no}"
+        text = f"\n\n**Reference:** Chapter \"{text2markdown(self.headline)}\", Page {self.page_no}"
         return text

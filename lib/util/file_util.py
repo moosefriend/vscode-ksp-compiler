@@ -18,7 +18,6 @@
 ##############################################################################
 import json
 import logging
-from _typeshed import SupportsWrite
 from pathlib import Path
 
 import yaml
@@ -57,7 +56,6 @@ def yml2json(yml_file: Path, json_file: Path):
             data = yaml.load(f, Loader=SafeLoader)
         with json_file.open("w") as f:
             # Supress type mismatch warning
-            f: SupportsWrite[str]
             json.dump(data, f, indent=4)
     else:
         raise FileNotFoundError(f"YAML input file {yml_file.as_posix()} not found")
