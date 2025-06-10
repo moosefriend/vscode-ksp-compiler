@@ -28,7 +28,8 @@ export class DefinitionProvider implements vscode.DefinitionProvider {
     public provideDefinition(
         document: vscode.TextDocument,
         position: vscode.Position,
-        token: vscode.CancellationToken): Thenable<vscode.Location[]> | null {
+        token: vscode.CancellationToken
+    ): Thenable<vscode.Location[]> | null {
         let symbols: SymbolInformation[] = SymbolUtil.collect(document);
         if (!symbols) {
             return null;
