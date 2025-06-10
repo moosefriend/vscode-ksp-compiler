@@ -69,7 +69,7 @@ class CommandItem(DocItem):
                 self.source)
 
     def format_sections(self) -> str:
-        text = DocItem.check_section("Remarks", self.remarks)
-        text += DocItem.check_section("Example", self.examples)
-        text += DocItem.check_section("See also", self.see_also)
+        text = DocItem.format_remarks(self.remarks)
+        text += DocItem.format_example(self.examples)
+        text += DocItem.format_see_also(self.see_also)
         return text

@@ -135,29 +135,55 @@ class DocItem:
         """
 
     @staticmethod
-    def check_section(title: str, text: str) -> str:
+    def format_example(text: str) -> str:
         """
-        Format the section if it exists for the type script export.
+        Format the "Example" section if it exists for the type script export.
 
-        :param title: Title to be used for the section
         :param text: Text of the section if any
-        :return: Formatted section or an empty string the the text is emtpy
+        :return: Formatted "Example" section or an empty string if the the text is emtpy
         """
         if text:
-            if title == "Example":
-                # Format example text with ksp syntax highlighting
-                formatted_text = f"\n\n**{title}:**  \n```ksp\n{text}\n```\n"
-            elif title == "See also":
-                # Prefix every line with a hyphen and a space
-                formatted_text = f"\n\n**{title}:**  \n- " + text2markdown(text).replace("  \n", "\n- ")
-            elif title == "Remarks":
-                # Remarks are already a bullet list
-                formatted_text = f"\n\n**{title}:**  \n{text}"
-            else:
-                formatted_text = f"\n\n**{title}:**  \n{text2markdown(text)}"
-        else:
-            formatted_text = ""
-        return formatted_text
+            # Format example text with ksp syntax highlighting
+            text = f"\n\n**Example:**  \n```ksp\n{text}\n```\n"
+        return text
+
+    @staticmethod
+    def format_see_also(text: str) -> str:
+        """
+        Format the "See Also" section if it exists for the type script export.
+
+        :param text: Text of the section if any
+        :return: Formatted "See Also" section or an empty string if the the text is emtpy
+        """
+        if text:
+            # Prefix every line with a hyphen and a space
+            text = f"\n\n**See Also:**  \n- " + text2markdown(text).replace("  \n", "\n- ")
+        return text
+
+    @staticmethod
+    def format_remarks(text: str) -> str:
+        """
+        Format the "Remarks" section if it exists for the type script export.
+
+        :param text: Text of the section if any
+        :return: Formatted "Remarks" section or an empty string if the the text is emtpy
+        """
+        if text:
+            # Format remarks text with ksp syntax highlighting
+            text = f"\n\n**Remarks:**  \n```ksp\n{text}\n```\n"
+        return text
+
+    @staticmethod
+    def format_comment(text: str) -> str:
+        """
+        Format the "Comment" section if it exists for the type script export.
+
+        :param text: Text of the section if any
+        :return: Formatted "Comment" section or an empty string if the the text is emtpy
+        """
+        if text:
+            text = f"\n\n**Comment:** {text}"
+        return text
 
     def format_reference(self) -> str:
         """

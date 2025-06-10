@@ -73,6 +73,6 @@ class VariableItem(DocItem):
                 self.item_list_headline,  self.name, self.parameter, self.comment, self.description, self.see_also, self.source)
 
     def format_sections(self) -> str:
-        text = DocItem.check_section("Comment", self.comment)
-        text += DocItem.check_section("See also", self.see_also)
+        text = DocItem.format_comment(self.comment)
+        text += DocItem.format_see_also(self.see_also)
         return text
