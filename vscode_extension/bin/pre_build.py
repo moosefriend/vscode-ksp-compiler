@@ -22,7 +22,8 @@ from pathlib import Path
 
 import _find_lib  # noqa
 from config.system_config import SystemConfig
-from util.file_util import headline, yml2json
+from util.format_util import headline
+from util.file_util import yml2json
 from vscode_generator.command_completion_generator import CommandCompletionGenerator
 from vscode_generator.command_name_generator import CommandNameGenerator
 from vscode_generator.grammar_generator import GrammarGenerator
