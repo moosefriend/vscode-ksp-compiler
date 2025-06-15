@@ -22,9 +22,9 @@ import vscode = require('vscode');
 import * as Variables from "../generated/variableCompletion";
 import * as Commands from "../generated/commandCompletion";
 import { CompletionRecord } from '../config/completionRecord';
-export const VARIABLE_PREFIX_LIST: string[] = ['$', '%', '~', '?', '@', '!'];
-export const VARIABLE_REGEX: RegExp = /([\$%~\?@!][0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)/g;
-export const FUNCTION_REGEX: RegExp = /function\s+([0-9a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\s*/g
+export const VARIABLE_PREFIX_LIST: string[] = ['$', '%', '~', '?', '@', '!', '&'];
+export const VARIABLE_REGEX: RegExp = /([~?$%!@&][\w]+)/g;
+export const FUNCTION_REGEX: RegExp = /(?:function|taskfunc|macro)[\t ]+([\w.#]+)[\t ]*\(?/g
 
 export class CompletionItemProvider implements vscode.CompletionItemProvider {
     constructor() { }
@@ -111,7 +111,7 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
             }
         }
         //----------------------------------------------------------------------
-        // Check if the prefix mathces some user functions in the same file
+        // Check if the prefix matches some user functions in the same file
         //----------------------------------------------------------------------
         {
             let functionMatch = FUNCTION_REGEX;
