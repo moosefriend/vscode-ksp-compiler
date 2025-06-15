@@ -21,54 +21,66 @@ import vscode = require('vscode');
 import * as Commands from '../generated/commandCompletion';
 import { CompletionRecord } from '../config/completionRecord';
 
-const _NL = '\n'.charCodeAt(0);
+const _Newline = '\n'.charCodeAt(0);
 const _TAB = '\t'.charCodeAt(0);
-const _WSB = ' '.charCodeAt(0);
-const _LBracket = '['.charCodeAt(0);
-const _RBracket = ']'.charCodeAt(0);
-const _LCurly = '{'.charCodeAt(0);
-const _RCurly = '}'.charCodeAt(0);
-const _LParent = '('.charCodeAt(0);
-const _RParent = ')'.charCodeAt(0);
+const _Whitespace = ' '.charCodeAt(0);
+const _LSquareBracket = '['.charCodeAt(0);
+const _RSquareBracket = ']'.charCodeAt(0);
+const _LCurlyBracket = '{'.charCodeAt(0);
+const _RCurlyBracket = '}'.charCodeAt(0);
+const _LRoundBracket = '('.charCodeAt(0);
+const _RRoundBracket = ')'.charCodeAt(0);
 const _Comma = ','.charCodeAt(0);
-const _Quote = '\''.charCodeAt(0);
-const _DQuote = '"'.charCodeAt(0);
-const _USC = '_'.charCodeAt(0);
+const _SingleQuote = '\''.charCodeAt(0);
+const _DoubleQuote = '"'.charCodeAt(0);
+const _Underscore = '_'.charCodeAt(0);
 const _a = 'a'.charCodeAt(0);
 const _z = 'z'.charCodeAt(0);
 const _A = 'A'.charCodeAt(0);
 const _Z = 'Z'.charCodeAt(0);
 const _0 = '0'.charCodeAt(0);
 const _9 = '9'.charCodeAt(0);
-const BOF = 0;
+const BeginOfFile = 0;
 
 export class BackwardIterator {
-    lineNumber;
-    offset;
-    line;
-    model;
+    lineNumber: number;
+    offset: number;
+    line: string;
+    textDocument: vscode.TextDocument;
 
-    constructor(model: any, offset: any, lineNumber: any) {
+    /**
+     * Creates a backward iterator to check previous characters.
+     * @param textDocument Current text document
+     * @param offset Character offset in the line below
+     * @param lineNumber Line number in the text document
+     */
+    constructor(textDocument: vscode.TextDocument, offset: number, lineNumber: number) {
         this.lineNumber = lineNumber;
         this.offset = offset;
-        this.line = model.lineAt(this.lineNumber).text;
-        this.model = model;
+        this.line = textDocument.lineAt(this.lineNumber).text;
+        this.textDocument = textDocument;
     }
 
-    public hasNext() {
+    /**
+     * @returns True if there is still a current or previous lines
+     */
+    public hasPrevChar() {
         return this.lineNumber >= 0;
     }
 
-    public next() {
+    /**
+     * @returns Previous character of the current line. If it is at the beginning of the line it returns the last character for the previous line.
+     */
+    public prevChar() {
         if (this.offset < 0) {
             if (this.lineNumber > 0) {
                 this.lineNumber--;
-                this.line = this.model.lineAt(this.lineNumber).text;
+                this.line = this.textDocument.lineAt(this.lineNumber).text;
                 this.offset = this.line.length - 1;
-                return _NL;
+                return _Newline;
             }
             this.lineNumber = -1;
-            return BOF;
+            return BeginOfFile;
         }
         let ch = this.line.charCodeAt(this.offset);
         this.offset--;
@@ -80,24 +92,28 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
     constructor() { }
 
     /**
-     * Implementation of function signatuire behaviour
+     * Implementation of function signature behaviour
      */
-    public provideSignatureHelp(document: any, position: any, token: any) {
-        let iterator = new BackwardIterator(document, position.character - 1, position.line);
-        let paramCount = this.readArguments(iterator);
+    public provideSignatureHelp(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
+        let iterator = new BackwardIterator(textDocument, position.character - 1, position.line);
+        // Check how many parameters are currently entered by the user
+        let paramCount = this.countParameters(iterator);
+        // If no open round bracket is found (as beginning of the parameter list) then return null 
         if (paramCount < 0) {
             return null;
         }
-        let ident = this.readIdent(iterator);
-        if (!ident) {
+        // Get the function name
+        let identifier = this.getIdentifier(iterator);
+        if (!identifier) {
             return null;
         }
-        let entry: CompletionRecord | undefined= Commands.CompletionList.get(ident);
+        // Check if the function name matches one of the commands
+        let entry: CompletionRecord | undefined = Commands.CompletionList.get(identifier);
         if (!entry || !entry.signature) {
             return null;
         }
         let paramsString = entry.signature.substring(0, entry.signature.lastIndexOf(')') + 1);
-        let signatureInfo = new vscode.SignatureInformation(ident + paramsString, entry.description);
+        let signatureInfo = new vscode.SignatureInformation(identifier + paramsString, entry.description);
         let re = /\w*\s*[\w_\.]+|void/g;
         let match = null;
         while ((match = re.exec(paramsString)) !== null) {
@@ -110,42 +126,46 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
         return Promise.resolve(ret);
     }
 
-    private readArguments(iterator: any) {
-        let parentNesting = 0;
-        let bracketNesting = 0;
-        let curlyNesting = 0;
-        let paramCount = 0;
-        while (iterator.hasNext()) {
-            let ch = iterator.next();
+    /**
+     * Get the number of currently entered parameters of a function
+     * @param iterator Backward iterator which gets the previous character
+     * @returns Number of parameters or -1 if there are no round brackets
+     */
+    private countParameters(iterator: BackwardIterator): number {
+        let roundBracketNesting: number = 0;
+        let squareBracketNesting: number = 0;
+        let curlyBracketNesting: number = 0;
+        let paramCount: number = 0;
+        while (iterator.hasPrevChar()) {
+            let ch = iterator.prevChar();
             switch (ch) {
-                case _LParent:
-                    parentNesting--;
-                    if (parentNesting < 0) {
+                case _LRoundBracket:
+                    roundBracketNesting--;
+                    if (roundBracketNesting < 0) {
                         return paramCount;
                     }
                     break;
-                case _RParent:
-                    parentNesting++;
+                case _RRoundBracket:
+                    roundBracketNesting++;
                     break;
-                case _LCurly:
-                    curlyNesting--;
+                case _LCurlyBracket:
+                    curlyBracketNesting--;
                     break;
-                case _RCurly:
-                    curlyNesting++;
+                case _RCurlyBracket:
+                    curlyBracketNesting++;
                     break;
-                case _LBracket:
-                    bracketNesting--;
+                case _LSquareBracket:
+                    squareBracketNesting--;
                     break;
-                case _RBracket:
-                    bracketNesting++;
+                case _RSquareBracket:
+                    squareBracketNesting++;
                     break;
-                case _DQuote:
-                case _Quote:
-                    while (iterator.hasNext() && ch !== iterator.next()) {
-                    }
+                case _DoubleQuote:
+                case _SingleQuote:
+                    while (iterator.hasPrevChar() && ch !== iterator.prevChar()) { }
                     break;
                 case _Comma:
-                    if (!parentNesting && !bracketNesting && !curlyNesting) {
+                    if (!roundBracketNesting && !squareBracketNesting && !curlyBracketNesting) {
                         paramCount++;
                     }
                     break;
@@ -154,8 +174,12 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
         return -1;
     }
 
-    private isIdentPart = function (ch: number) {
-        if (ch === _USC ||
+    /**
+     * @param ch Character to check
+     * @returns True if the character is an identifier character, false otherwise
+     */
+    private static isIdentifierChar(ch: number) {
+        if (ch === _Underscore ||
             ch >= _a && ch <= _z ||
             ch >= _A && ch <= _Z ||
             ch >= _0 && ch <= _9 ||
@@ -165,22 +189,27 @@ export class SignatureHelpProvider implements vscode.SignatureHelpProvider {
         return false;
     }
 
-    private readIdent(iterator: any) {
-        let identStarted = false;
-        let ident = '';
-        while (iterator.hasNext()) {
-            let ch = iterator.next();
-            if (!identStarted && (ch === _WSB || ch === _TAB || ch === _NL)) {
+    /**
+     * Get identifier before the current position
+     * @param iterator Backward iterator to get the previous character
+     * @returns Found identifier or an empty string
+     */
+    private getIdentifier(iterator: BackwardIterator): string {
+        let identifierStarted: boolean = false;
+        let identifier: string = '';
+        while (iterator.hasPrevChar()) {
+            let ch = iterator.prevChar();
+            if (!identifierStarted && (ch === _Whitespace || ch === _TAB || ch === _Newline)) {
                 continue;
             }
-            if (this.isIdentPart(ch)) {
-                identStarted = true;
-                ident = String.fromCharCode(ch) + ident;
+            if (SignatureHelpProvider.isIdentifierChar(ch)) {
+                identifierStarted = true;
+                identifier = String.fromCharCode(ch) + identifier;
             }
-            else if (identStarted) {
-                return ident;
+            else if (identifierStarted) {
+                return identifier;
             }
         }
-        return ident;
+        return identifier;
     }
 }
