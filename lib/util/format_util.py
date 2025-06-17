@@ -16,13 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-import json
 import logging
 import re
-from pathlib import Path
-
-import yaml
-from yaml import SafeLoader
 
 log = logging.getLogger(__name__)
 
