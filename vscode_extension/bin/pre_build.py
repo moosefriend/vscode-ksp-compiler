@@ -24,6 +24,7 @@ import _find_lib  # noqa
 from config.system_config import SystemConfig
 from util.format_util import headline
 from util.file_util import yml2json
+from util.sublime_util import Sublime2TextMateConverter
 from vscode_generator.command_completion_generator import CommandCompletionGenerator
 from vscode_generator.command_name_generator import CommandNameGenerator
 from vscode_generator.grammar_generator import GrammarGenerator
@@ -39,7 +40,10 @@ if not ini_file.is_file():
     print(f"*** Error: Can't find configuration file {ini_file}")
     sys.exit(-1)
 config = SystemConfig(ini_file)
+headline("Convert Sublime syntax *.yml to TextMate *.yml")
+Sublime2TextMateConverter.convert(SystemConfig().sublime_syntax_yml, SystemConfig().text_mate_yml)
 headline("Convert *.yml to *.json")
+yml2json(SystemConfig().text_mate_yml, SystemConfig().text_mate_json)
 yml2json(SystemConfig().lang_config_yml, SystemConfig().lang_config_json)
 yml2json(SystemConfig().grammar_yml, SystemConfig().grammar_json)
 yml2json(SystemConfig().snippets_yml, SystemConfig().snippets_json)
