@@ -20,11 +20,10 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as tmp from 'tmp';
-import * as clipboard from 'clipboardy';
 import { CompileBuilder } from '../compiler/compileBuilder';
 import { CompileExecutor } from '../compiler/compileExecutor';
 
-export function doCompile(context: vscode.ExtensionContext) {
+export async function doCompile(context: vscode.ExtensionContext) {
     let editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
     let textDocument: vscode.TextDocument;
     let baseName: string;
@@ -33,6 +32,7 @@ export function doCompile(context: vscode.ExtensionContext) {
     const MESSAGE_PREFIX: string = "KSP";
     const MESSAGE_FAILED: string = "Failed";
     const MESSAGE_CLIPBOARD: string = "Script has been copied to clipboard";
+
     //--------------------------------------------------------------------------
     // Preverify
     //--------------------------------------------------------------------------
@@ -74,6 +74,8 @@ export function doCompile(context: vscode.ExtensionContext) {
     };
 
     // Output to Clipboard
+    // Dynamically import clipboardy
+    const clipboard = await import('clipboardy');
     {
         runCompiler((exitCode) => {
             if (exitCode == 0) {

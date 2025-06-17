@@ -1,4 +1,21 @@
-# Compiler
+# Prerequisites
+- VS Code
+- Python 3.12.*
+- Python Packages:
+   - pyaml
+   - natsort
+   - pypdf
+- [Node.js](https://nodejs.org/en)
+- npm packages:
+   - npm install -g typescript
+   - npm install -g vscode
+   - npm install -g fs
+   - npm install -g path
+   - npm install -g tmp
+   - npm install -g clipboardy
+   - npm install -g process
+
+# KSP Compiler Commandline
 ```
 ksp_compiler.py [-h] [-c] [-v] [-e] [-o] [-t] [-d] source_file [output_file]
 
