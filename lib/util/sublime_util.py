@@ -29,6 +29,22 @@ class Sublime2TextMateConverter:
     """
     Converts a Sublime Text syntax definition file to a TextMate grammar file.
     """
+    KEY_MAP: dict[str, str] = {
+        'name': 'name',
+        'scope': 'scopeName',
+        'file_extensions': 'fileTypes',
+        'comment': 'comment',
+        'contexts': 'repository',
+        'patterns': 'patterns',
+        'match': 'match',
+        'include': 'include',
+        'begin': 'begin',
+        'end': 'end',
+        'captures': 'captures',
+        'begin_captures': 'beginCaptures',
+        'end_captures': 'endCaptures'
+    }
+
 
     def __init__(self, sublime_syntax_file: Path, text_mate_file: Path):
         """
@@ -78,6 +94,8 @@ class Sublime2TextMateConverter:
         # Copy top-level keys
         for key in ['name', 'scope', 'scopeName', 'file_extensions', 'fileTypes', 'first_line_match', 'comment']:
             if key in self.sublime_yaml:
+                if key == 'scope':
+                    key
                 self.text_mate_yaml[key if key != 'scope' else 'scopeName'] = self.sublime_yaml[key]
         # Patterns
         self.text_mate_yaml['patterns']: list[dict[str, Any]] = []
