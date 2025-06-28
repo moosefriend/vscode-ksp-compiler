@@ -99,6 +99,9 @@ class SystemConfig(metaclass=Singleton):
         # VS Code Generator Settings
         self.lang_config_yml: Path = self._get_file("lang_config_yml")
         self.lang_config_json: Path = self._get_file("lang_config_json")
+        self.sublime_syntax_yml: Path = self._get_file("sublime_syntax_yml")
+        self.text_mate_yml: Path = self._get_file("text_mate_yml")
+        self.text_mate_json: Path = self._get_file("text_mate_json")
         self.grammar_yml: Path = self._get_file("grammar_yml")
         self.grammar_json: Path = self._get_file("grammar_json")
         self.snippets_yml: Path = self._get_file("snippets_yml")
