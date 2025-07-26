@@ -1,0 +1,170 @@
+name: KSP
+scopeName: source.sksp
+file_extensions:
+- ksp
+patterns: &id001
+- match: \{\{
+  push:
+  - meta_scope: comment.block.source.sksp, section.comment.source.sksp
+  - match: \}\}
+    pop: true
+- match: (f)(')
+  push: f-string
+  captures:
+    1: keyword.other.source.sksp
+    2: string.quoted.single.source.sksp
+- match: run\s*<<
+  name: entity.name.function.source.sksp
+- match: read\s*<<
+  name: entity.name.function.source.sksp
+- match: \{
+  push:
+  - meta_scope: comment.block.source.sksp
+  - match: \}
+    pop: true
+- match: \(\*
+  push:
+  - meta_scope: comment.block.source.sksp
+  - match: \*\)
+    pop: true
+- match: /\*
+  push:
+  - meta_scope: comment.block.source.sksp
+  - match: \*/
+    pop: true
+- match: //
+  push:
+  - meta_scope: comment.source.sksp
+  - match: \n|\r
+    pop: true
+- match: \band\b|\bor\b|\bxor\b|\bnot\b|[.]and[.]|[.]or[.]|[.]xor[.]|[.]not[.]
+  name: keyword.operator.source.sksp
+- match: \#{1}{{varchars}}+\#{1}
+  name: variable.parameter.source.sksp
+- match: (on\s+ui_control)\s*(\()\s*([$%@?]?[\w#.]+)\s*(\))
+  captures:
+    0: entity.name.callback.source.sksp
+    1: keyword.other.source.sksp
+    2: punctuation.source.sksp
+    3: variable.source.sksp
+    4: punctuation.source.sksp
+- match: (?x) \b(on\s+ (async_complete| controller| init| listener| midi_in| note(_controller)?|
+    (n)?rpn| release| persistence_changed| (_)?pgs_changed| poly_at| ui_(control(s)?|update)
+    )| on_pgs_changed|on_post_init|on_release) \b
+  name: keyword.other.source.sksp entity.name.callback.source.sksp
+- match: \b(end\s+on|end_on)\b
+  name: keyword.other.source.sksp
+- match: \)\s*(on)
+  captures:
+    1: keyword.other.source.sksp
+- match: (\s+-|(?<=[=,{}()\[\]])-)?((0x)[0-9a-fA-F]*|[0-9][0-9a-fA-F]*[hH]|b[01]+|[01]+b|(\d+\.\d+|\.\d+|\d+\.|\d+)([eE][+-]?\d+)?)\b
+  name: constant.numeric.source.sksp
+- match: '[,.()\[\]]'
+  name: punctuation
+- match: '{{builtin_param_shorthands}}'
+  captures:
+    1: operator.source.sksp
+    2: support.variable.source.sksp
+- match: (?!#)\b(if|to|downto|else|for|while|select|case|continue)\b(?!#)
+  name: keyword.control.source.sksp
+- match: ((function|macro|taskfunc) +([\w.#]+)\s*)\(?
+  push:
+  - meta_scope: function.sksp
+  - match: \)|$
+    pop: true
+  - match: override
+    scope: keyword.other.source.sksp
+  - match: out\s+|var\s+
+    scope: keyword.other.source.sksp
+    comment: Task function keywords
+  - match: '[\w#.]+'
+    scope: variable.parameter.function.source.sksp
+  - include: main
+  captures:
+    1: meta.function.source.sksp
+    2: keyword.other.source.sksp
+    3: entity.name.function.source.sksp
+- match: ^\s*(const +)({{varchars}}+)
+  name: constblock.sksp
+  captures:
+    0: meta.constblock.source.sksp
+    1: keyword.other.source.sksp
+    2: entity.name.type.source.sksp
+- match: ^\s*(family +)({{varchars}}+)
+  name: family.sksp
+  captures:
+    0: meta.family.source.sksp
+    1: keyword.other.source.sksp
+    2: entity.name.type.source.sksp
+- match: ^\s*(list +)({{varchars}}+)
+  name: list.sksp
+  captures:
+    0: meta.list.source.sksp
+    1: keyword.other.source.sksp
+    2: entity.name.type.source.sksp
+- match: ^\s*(struct +)({{varchars}}+)
+  name: struct.sksp
+  captures:
+    0: meta.struct.source.sksp
+    1: keyword.other.source.sksp
+    2: entity.name.type.source.sksp
+- match: \b(call) +({{varchars}}+)?
+  captures:
+    1: keyword.other.source.sksp
+    2: meta.function-call.source.sksp
+- match: (?x) (declare|define)\s+ (literals|global|local|(inst)?pers|read)?\s* ( ui_button|
+    ui_file_selector| ui_knob| ui_label| ui_level_meter| ui_menu| ui_mouse_area| ui_panel|
+    ui_slider| ui_switch| ui_table| ui_text_edit| ui_value_edit| ui_waveform| ui_wavetable
+    )\s* ((inst)?pers|read)?\s* (({{varchars}}+)?(\#(.+?)\#)?({{varchars}}+)?)\s*\(
+  push:
+  - match: \)|$
+    pop: true
+  - include: main
+  captures:
+    1: keyword.other.source.sksp
+    2: keyword.other.source.sksp
+    3: keyword.other.source.sksp
+    4: keyword.other.source.sksp
+    5: keyword.other.source.sksp
+    6: keyword.other.source.sksp
+    8: variable.source.sksp
+    9: operator.source.sksp
+    10: variable.source.sksp
+    11: variable.source.sksp
+- match: (?!#)\b(struct|define|literals|on|(inst)?pers|read|list|call|step|function|taskfunc|macro|mod|declare|const|polyphonic|end|local|global|family|import|as|property|override|ui_(label|button|switch|slider|menu|value_edit|waveform|wavetable|knob|table|xy|text_edit|level_meter|file_selector|panel|mouse_area))\b(?!#)
+  name: keyword.other.source.sksp
+- match: '"(?:[^"\\]|\\.)*"'
+  name: string.quoted.double.source.sksp
+- match: (?:f)?'(?:[^'\\]|\\.)*'
+  name: string.quoted.single.source.sksp
+- match: '{{builtin_consts_and_vars}}'
+  name: support.variable.source.sksp
+- match: '{{builtin_functions}}'
+  name: support.function.source.sksp
+- match: ({{varchars}}*)\s*(\()
+  push:
+  - match: (\))|$
+    captures:
+      1: meta.function-call.source.sksp punctuation.definition.arguments.end.source.sksp
+    pop: true
+  - include: main
+  captures:
+    1: meta.function-call.source.sksp meta.function-name
+    2: meta.function-call.source.sksp punctuation.definition.arguments.begin.source.sksp
+- match: (\b|[~?$%!@&]){{varchars}}+|\b\d+[A-Za-z_]\w*\b
+  name: variable.source.sksp
+- match: '[:+]=|[=][+]|&|<=|>=|<|>|#|=|->|\.\.\.'
+  name: operator.source.sksp
+- match: '[-+*/]'
+  name: arithmetic.source.sksp
+repository:
+  f-string:
+    patterns:
+    - match: <
+      name: operator.source.sksp
+    - match: ''''
+      name: string.quoted.single.source.sksp
+    - match: .
+      name: string.quoted.single.source.sksp
+  main:
+    patterns: *id001

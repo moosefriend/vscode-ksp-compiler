@@ -32,19 +32,20 @@ fileTypes:
 patterns:
 - include: '#pragma'
 - include: '#macro'
-- include: '#string_literal'
-- include: '#numeric_literal'
-- include: '#comments'
+- include: '#f_string'
+- include: '#string'
+- include: '#number'
+- include: '#comment'
 - include: '#callback'
 - include: '#user_function'
-- include: '#constants'
-- include: '#variables'
-- include: '#ui_controls'
-- include: '#control_statements'
-- include: '#operators'
-- include: '#builtin_commands'
+- include: '#constant'
+- include: '#variable'
+- include: '#ui_control'
+- include: '#control_statement'
+- include: '#operator'
+- include: '#builtin_command'
 - include: '#other_keyword'
-- include: '#ident'
+- include: '#identifier'
 
 repository:
     # Extended Syntax
@@ -60,7 +61,46 @@ repository:
             comment: Define macros
             match: define\s+[a-z|A-Z][a-z|A-Z|0-9]\s*:=\s*(\S.*)$
 
-    string_literal:
+    # Extended Syntax: F-String support f'...', with code highlighting inside <...>
+    f_string:
+        patterns:
+        -   name: source.interpolated.f.ksp
+            comment: f-string single quoted
+            begin: "(f)(')"
+            beginCaptures:
+                '1':
+                    name: keyword.other.ksp
+                '2':
+                    name: punctuation.definition.string.begin.ksp
+            end: "'"
+            endCaptures:
+                '0':
+                    name: punctuation.definition.string.end.ksp
+            patterns:
+                -   name: constant.character.escape.ksp
+                    match: '\\.'
+                -   name: meta.interpolation.ksp
+                    begin: '<'
+                    beginCaptures:
+                        '0':
+                            name: punctuation.section.interpolation.begin.ksp
+                    end: '>'
+                    endCaptures:
+                        '0':
+                            name: punctuation.section.interpolation.end.ksp
+                    patterns:
+                        # Recursively include all main patterns for code highlighting inside interpolation
+                        - include: '#number'
+                        - include: '#constant'
+                        - include: '#variable'
+                        - include: '#ui_control'
+                        - include: '#operator'
+                        - include: '#builtin_command'
+                        - include: '#identifier'
+                -   name: string.quoted.single.ksp
+                    match: "[^'\\<]+"
+
+    string:
         patterns:
         -   name: string.quoted.double.ksp
             comment: String literals
@@ -72,10 +112,25 @@ repository:
             endCaptures:
                 '0':
                     name: punctuation.definition.string.end.ksp
-        -   name: constant.character.escape.ksp
-            match: \\.
+            patterns:
+                -   name: constant.character.escape.ksp
+                    match: '\\.'
+        # Extended Syntax
+        -   name: string.quoted.single.ksp
+            comment: String literals
+            begin: "'"
+            beginCaptures:
+                '0':
+                    name: punctuation.definition.string.begin.ksp
+            end: "'"
+            endCaptures:
+                '0':
+                    name: punctuation.definition.string.end.ksp
+            patterns:
+                -   name: constant.character.escape.ksp
+                    match: '\\.'
 
-    numeric_literal:
+    number:
         patterns:
         -   name: constant.numeric.float.ksp
             match: ((0|[1-9][0-9]*)\.[0-9]+)\b
@@ -93,7 +148,7 @@ repository:
         -   name: constant.numeric.bin.ksp
             match: ([01]+b)\b
 
-    comments:
+    comment:
         patterns:
         -   name: comment.block.ksp
             begin: \{
@@ -130,7 +185,7 @@ repository:
             match: ^\s*function\b
 
     # Extended Syntax
-    constants:
+    constant:
         patterns:
         -   name: constant.block.ksp
             match: ^\s*const\s+\b
@@ -145,7 +200,7 @@ repository:
         -   name: struct.block.end.ksp
             match: ^\s*end\s+struct\b
 
-    variables:
+    variable:
         patterns:
         -   name: variable.other.ksp
             match: (\$|\~|\?|@|!|%)([0-9|a-z|A-Z|_]+)
@@ -154,13 +209,13 @@ repository:
         -   name: variable.preprocessor.ksp
             match: (SET_CONDITION|RESET_CONDITION|USE_CODE_IF|USE_CODE_IF_NOT|END_USE_CODE|NO_SYS_SCRIPT_GROUP_START|NO_SYS_SCRIPT_PEDAL|NO_SYS_SCRIPT_RLS_TRIG)\b
 
-    ui_controls:
+    ui_control:
         patterns:
         -   name: keyword.other.ui.ksp
             # List of built_in_widgets.csv column Name
             match: (<<built_in_widgets>>)\b
 
-    control_statements:
+    control_statement:
         patterns:
         -   name: keyword.other.statements.ksp
             match: (if|else|end\s+if|select|case|to|end\s+select|while|end\s+while|in_range)\b
@@ -168,7 +223,7 @@ repository:
         -   name: keyword.other.statements.ksp
             match: (for|downto|step|else\s+if)\b
 
-    operators:
+    operator:
         patterns:
         -   name: keyword.other.arithmeticop.ksp
             match: (mod)\b
@@ -177,7 +232,7 @@ repository:
         -   name: keyword.other.bitop2.ksp
             match: (\.and\.|\.or\.|\.xor\.|\.not\.)\b
 
-    builtin_commands:
+    builtin_command:
         patterns:
         -   name: support.function.builtin.ksp
             # List of built_in_commands.csv column Name
@@ -192,6 +247,7 @@ repository:
         -   name: keyword.other.ksp
             match: (on|end|function)\b
 
-    ident:
+    identifier:
         patterns:
-        -   match: ([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)
+        -   name: entity.name
+            match: ([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)
