@@ -38,11 +38,16 @@ patterns:
 - include: '#comment'
 - include: '#callback'
 - include: '#user_function'
+- include: '#family'
+- include: '#property'
+- include: '#struct'
+- include: '#const'
 - include: '#constant'
 - include: '#variable'
 - include: '#ui_control'
 - include: '#control_statement'
 - include: '#operator'
+- include: '#builtin_constant'
 - include: '#builtin_command'
 - include: '#other_keyword'
 - include: '#identifier'
@@ -52,13 +57,14 @@ repository:
     pragma:
         patterns:
         - name: pragma.compiler.ksp
-          match: \{\s*#pragma\s+(save_compiled_source|preserve_names|compile_with(|out)\s+(remove_whitespace|compact_variables|combine_callbacks|extra_syntax_checks|extra_branch_optimization|optimize_code|add_compile_date|sanitize_exit_command))\s*\}
+          comment: #pragma statement
+          match: \{\s*#pragma\s+(save_compiled_source|preserve_names|compile_with(|out)\s+(remove_whitespace|compact_variables|combine_callbacks|extra_syntax_checks|extra_branch_optimization|optimize_code|add_compile_date|sanitize_exit_command|write_log_on_fail))\s*\}
 
     # Extended Syntax
     macro:
         patterns:
         -   name: macro.define.ksp
-            comment: Define macros
+            comment: macro definition
             match: define\s+[a-z|A-Z][a-z|A-Z|0-9]\s*:=\s*(\S.*)$
 
     # Extended Syntax: F-String support f'...', with code highlighting inside <...>
@@ -81,13 +87,10 @@ repository:
                     match: '\\.'
                 -   name: meta.interpolation.ksp
                     begin: '<'
-                    beginCaptures:
-                        '0':
-                            name: punctuation.section.interpolation.begin.ksp
                     end: '>'
-                    endCaptures:
+                    captures:
                         '0':
-                            name: punctuation.section.interpolation.end.ksp
+                            name: punctuation.section.interpolation.ksp
                     patterns:
                         # Recursively include all main patterns for code highlighting inside interpolation
                         - include: '#number'
@@ -103,29 +106,23 @@ repository:
     string:
         patterns:
         -   name: string.quoted.double.ksp
-            comment: String literals
+            comment: Double quoted string
             begin: '"'
-            beginCaptures:
-                '0':
-                    name: punctuation.definition.string.begin.ksp
             end: '"'
-            endCaptures:
+            captures:
                 '0':
-                    name: punctuation.definition.string.end.ksp
+                    name: punctuation.definition.string.ksp
             patterns:
                 -   name: constant.character.escape.ksp
                     match: '\\.'
         # Extended Syntax
         -   name: string.quoted.single.ksp
-            comment: String literals
+            comment: Single quoted string
             begin: "'"
-            beginCaptures:
-                '0':
-                    name: punctuation.definition.string.begin.ksp
             end: "'"
-            endCaptures:
+            captures:
                 '0':
-                    name: punctuation.definition.string.end.ksp
+                    name: punctuation.definition.string.ksp
             patterns:
                 -   name: constant.character.escape.ksp
                     match: '\\.'
@@ -133,72 +130,118 @@ repository:
     number:
         patterns:
         -   name: constant.numeric.float.ksp
+            comment: Float number with leading number
             match: ((0|[1-9][0-9]*)\.[0-9]+)\b
         -   name: constant.numeric.float.ksp
+            comment: Float number without leading number e.g. .314
             match: (\.[0-9]+)\b
         -   name: constant.numeric.dec.ksp
+            comment: Decimal number
             match: ([0-9]+)\b
         -   name: constant.numeric.hex.ksp
+            comment: Hexadecimal number, e.g. 3Fh
             match: ([0-9|a-f|A-F]+[hH])\b
         # Extended Syntax
         -   name: constant.numeric.hex.ksp
+            comment: Hexadecimal number, e.g. 0x3F
             match: (0[xX]([0-9|a-f|A-F]+))\b
         -   name: constant.numeric.bin.ksp
+            comment: Binary number, e.g. b0110
             match: (b[01]+)\b
         -   name: constant.numeric.bin.ksp
+            comment: Binary number, e.g. 0110b
             match: ([01]+b)\b
 
     comment:
         patterns:
-        -   name: comment.block.ksp
-            begin: \{
-            captures:
-                '0':
-                    name: punctuation.definition.comment.ksp
-            end: \}
         # Extended Syntax
         -   name: comment.line.ksp
+            comment: C-Style line commnet, e.g. // Comment
             match: (//).*$\n?
             captures:
                 '1':
                     name: punctuation.definition.comment.ksp
         -   name: comment.block.ksp;
+            comment: C-Style block comment, e.g. /* Comment */
             begin: /\*
             captures:
                 '0':
-                    name = punctuation.definition.comment.ksp
+                    name: punctuation.definition.comment.ksp
             end: \*/
+        -   name: comment.block.ksp;
+            comment: Pascal like block comment, e.g. (* Comment *)
+            begin: \(\*
+            captures:
+                '0':
+                    name: punctuation.definition.comment.ksp
+            end: \*\)
+        -   name: comment.block.ksp
+            comment: Section comment
+            begin: \{\{
+            captures:
+                '0':
+                    name: punctuation.definition.comment.ksp
+            end: \}\}
+            contentName: section.comment.source.ksp
+        # Standard Syntax
+        -   name: comment.block.ksp
+            comment: KSP comment
+            begin: \{
+            captures:
+                '0':
+                    name: punctuation.definition.comment.ksp
+            end: \}
 
     callback:
         patterns:
         -   name: keyword.callback.begin.ksp
+            comment: Built-in callbacks, e.g. on init
             # List of built_in_callbacks.csv column Name
             match: ^\s*on\s+(<<built_in_callbacks>>)\b
         -   name: keyword.callback.end.ksp
+            comment: End of callback
             match: ^\s*end\s+on\b
 
     user_function:
         patterns:
         -   name: keyword.userfunction.end.ksp
+            comment: End of user function
             match: ^\s*end\s+function\b
         -   name: keyword.userfunction.begin.ksp
+            comment: User function definition
             match: ^\s*function\b
 
     # Extended Syntax
     constant:
         patterns:
-        -   name: constant.block.ksp
-            match: ^\s*const\s+\b
-        -   name: constant.block.ksp
+        -   name: keyword.constant.block.end.ksp
             match: ^\s*end\s+const\b
+        -   name: keyword.constant.block.begin.ksp
+            match: ^\s*const\b
 
     # Extended Syntax
     struct:
         patterns:
-        -   name: struct.block.begin.ksp
-            match: ^\s*struct\s+\b
-        -   name: struct.block.end.ksp
+        -   name: keyword.struct.block.end.ksp
             match: ^\s*end\s+struct\b
+        -   name: keyword.struct.block.begin.ksp
+            match: ^\s*struct\b
+
+    # Extended Syntax
+    family:
+        patterns:
+        -   name: keyword.family.block.end.ksp
+            match: ^\s*end\s+family\b
+        -   name: keyword.family.block.begin.ksp
+            match: ^\s*family\b
+
+    # Extended Syntax
+    property:
+        patterns:
+        -   name: keyword.property.block.end.ksp
+            match: ^\s*end\s+property\b
+        -   name: keyword.property.block.begin.ksp
+            match: ^\s*property\b
 
     variable:
         patterns:
@@ -212,6 +255,7 @@ repository:
     ui_control:
         patterns:
         -   name: keyword.other.ui.ksp
+            comment: Built-in widget
             # List of built_in_widgets.csv column Name
             match: (<<built_in_widgets>>)\b
 
@@ -231,23 +275,37 @@ repository:
             match: (and|or|xor|not)\b
         -   name: keyword.other.bitop2.ksp
             match: (\.and\.|\.or\.|\.xor\.|\.not\.)\b
+        # Extended syntax
+        -   name: keyword.other.arrow.ksp
+            match: ->
 
+    # Extended Syntax
+    builtin_constant:
+        patterns:
+        -   name: constant.time.ksp
+            match: (__SEC__|__MIN__|__HOUR__|__HOUR12__|__AMPM__|__DAY__|__MONTH__|__YEAR__|__YEAR2__|__LOCALE_MONTH__|__LOCALE_MONTH_ABBR__|__LOCALE_DATE__|__LOCALE_TIME__)\b
+    
     builtin_command:
         patterns:
         -   name: support.function.builtin.ksp
+            comment: Build-in command or function
             # List of built_in_commands.csv column Name
             # List of built_in_functions.csv column Name
             match: (<<built_in_commands>>|<<built_in_functions>>)\b
         # Extended Syntax
         -   name: support.function.builtin.ksp
-            match: import_nckp|concat\b
+            match: (import_nckp|concat|import|START_INC|END_INC|set_bounds|set_slider_properties|set_button_properties|set_knob_properties|set_label_properties|set_level_meter_properties|set_menu_properties|set_switch_properties|set_table_properties|set_text_edit_properties|set_value_edit_properties|set_waveform_properties|set_wavetable2d_properties|set_wavetable3d_properties)\b
 
     other_keyword:
         patterns:
         -   name: keyword.other.ksp
             match: (on|end|function)\b
+        # Extended Syntax
+        -   name: keyword.other.ksp
+            match: (pers|read|instpers|override|list)\b
 
     identifier:
         patterns:
         -   name: entity.name
+            comment: Identifier
             match: ([a-z|A-Z|_]+[a-z|A-Z|_|0-9]*)
