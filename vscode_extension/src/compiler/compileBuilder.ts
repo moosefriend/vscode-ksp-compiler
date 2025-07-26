@@ -18,6 +18,7 @@
  */
 import * as configkey from '../config/configurationConstants';
 import { ConfigurationManager } from '../config/configurationManager';
+import * as path from 'path';
 
 /**
  * Build an compiler commandline options.
@@ -43,7 +44,7 @@ export class CompileBuilder {
      * Commandline options initialized by configuration
      */
     constructor(inputFile: string, outputFile: string) {
-        this.compiler_script = ConfigurationManager.getConfig<string>(configkey.KEY_COMPILER_SCRIPT, "");
+        this.compiler_script = path.resolve(__dirname, '../../../sublime_ksp/compiler/ksp_compiler.py');
         this.inputFile = inputFile;
         this.outputFile = outputFile;
         this.force = ConfigurationManager.getConfig<boolean>(configkey.KEY_FORCE, configkey.DEFAULT_FORCE);
