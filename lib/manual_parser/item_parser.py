@@ -25,8 +25,8 @@ from abc import abstractmethod
 from typing import Optional, Callable
 
 from doc_item.doc_item import DocItem
-from ksp_parser.content_pattern import ContentPattern
-from ksp_parser.toc_parser import TocParser
+from manual_parser.content_pattern import ContentPattern
+from manual_parser.toc_parser import TocParser
 from config.constants import DocState
 from config.system_config import SystemConfig
 from util.format_util import log_step

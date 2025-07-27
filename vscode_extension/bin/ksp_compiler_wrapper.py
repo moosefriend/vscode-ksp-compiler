@@ -16,26 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
-import argparse
-import sys
-from pathlib import Path
+import _find_ksp_compiler  # noqa
+from ksp_compiler import main, ParseException
 
-# noinspection PyUnresolvedReferences
-import find_lib
-from config.system_config import SystemConfig
-from manual_parser.main_parser import MainParser
-from config.constants import ItemType
-from util.format_util import headline
+if __name__ == "__main__":
+    try:
+        # Call the main function from ksp_compiler
+        main()
+    except ParseException as ex:
+        # Handle the ParseException and print the error message
+        print(f"*** Error: {ex}")
+        exit(1)
 
-
-parser = argparse.ArgumentParser(description="Parse the text file of a Kontakt KSP manual which was converted from *.pdf to *.txt")
-parser.add_argument('-c', '--config-file', required=True, help="Path to the *.ini configuration file")
-args = parser.parse_args()
-ini_file = Path(args.config_file).resolve()
-if not ini_file.is_file():
-    print(f"*** Error: Can't find configuration file {ini_file}")
-    sys.exit(-1)
-config = SystemConfig(ini_file)
-headline("Loading Main Parser")
-main_parser = MainParser.get_parser(ItemType.MAIN)
-main_parser.parse()

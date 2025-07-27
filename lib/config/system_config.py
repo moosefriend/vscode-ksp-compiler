@@ -24,11 +24,11 @@ from pathlib import Path
 from typing import Optional, TYPE_CHECKING
 
 from config.constants import ItemType
-from ksp_parser.content_pattern import ContentPattern
+from manual_parser.content_pattern import ContentPattern
 from util.rewind_reader import RewindReader
 
 if TYPE_CHECKING:
-    from ksp_parser.toc_parser import TocParser
+    from manual_parser.toc_parser import TocParser
 
 log = logging.getLogger(__name__)
 

@@ -27,8 +27,8 @@ from typing import Optional, Any, Union
 import pypdf._text_extraction._layout_mode._fixed_width_page
 from pypdf import PageObject, PdfReader
 
-from ksp_parser.item_parser import ItemParser
-from ksp_parser.toc_parser import TocParser
+from manual_parser.item_parser import ItemParser
+from manual_parser.toc_parser import TocParser
 from config.constants import ItemType
 from config.system_config import SystemConfig
 from util.format_util import headline, log_step
@@ -186,7 +186,7 @@ class MainParser:
             else:
                 log.info(f"=> No {parser_name} parser for Kontakt KSP manual version {cur_major}.* found")
                 log.info(f"=> Fallback to base {parser_name} parser")
-                module_name = f"ksp_parser.{parser_name}_parser"
+                module_name = f"manual_parser.{parser_name}_parser"
                 class_name = f"{item_type.value}Parser"
                 module = import_module(module_name)
                 parser_class = getattr(module, class_name)

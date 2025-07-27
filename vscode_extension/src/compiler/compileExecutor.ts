@@ -229,6 +229,7 @@ export class CompileExecutor implements vscode.Disposable {
             try {
                 let args: string[] = argBuilder.build();
                 let python = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION, config.DEFAULT_PYTHON_LOCATION);
+                console.log(`[KSP] Executing: ${python} ${args.map(a => `"${a}"`).join(' ')}`);
                 let childProcess = child_process.spawn(python, args, undefined);
                 childProcess.on('error', (error: Error) => {
                     this.removeTempfile();

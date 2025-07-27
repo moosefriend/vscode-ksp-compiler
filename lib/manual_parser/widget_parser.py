@@ -20,62 +20,69 @@ import logging
 import re
 from typing import Optional
 
-from doc_item.function_item import FunctionItem
-from ksp_parser.item_parser import ItemParser
+from doc_item.widget_item import WidgetItem
+from manual_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
 
 log = logging.getLogger(__name__)
 
 
-class FunctionParser(ItemParser):
-    FUNCTION_PATTERN = re.compile(r"^([a-z_]+)\((x(?:, y)?|<expression>, <shift-bits>)\)(?::\s+(.*))?$")
-    """Pattern to find a function, e.g. inc(x)"""
+class WidgetParser(ItemParser):
+    # Example: declare ui_table %<array-name>[num-elements] (<grid-width>, <grid-height>, <range>)
+    WIDGET_PATTERN = re.compile(r"^declare\s+([a-z_]+)\s+([$%]<[a-z-]+>)(?:\[([^]]+)])?(?:\s+\((.*)\))?$")
+    """Pattern to find a widget, e.g. declare ui_button $<variable-name>"""
 
     def __init__(self):
         """
-        Parse commands in the Kontakt KSP text manual.
+        Parse widgets in the Kontakt KSP text manual.
         """
         super().__init__(
-            FunctionItem,
-            SystemConfig().functions_content_patterns,
-            SystemConfig().functions_csv,
+            WidgetItem,
+            SystemConfig().widgets_content_patterns,
+            SystemConfig().widgets_csv
         )
 
     def check_item(self, line) -> Optional[DocState]:
         doc_state: Optional[DocState] = None
-        if m := FunctionParser.FUNCTION_PATTERN.match(line):
+        # Check if the line contains a widget
+        if m := WidgetParser.WIDGET_PATTERN.match(line):
             name = m.group(1)
-            arguments = m.group(2)
-            description = m.group(3)
+            variable_name = m.group(2)
+            index_name = m.group(3)
+            arguments = m.group(4)
             parameter_list = []
             if arguments:
                 for parameter in arguments.split(","):
-                    parameter = parameter.strip()
+                    parameter = parameter.strip().replace("<", "").replace(">", "")
                     parameter_list.append(parameter)
-            self.add_function(name, parameter_list, description)
+            self.add_widget(name, variable_name, index_name, parameter_list)
             doc_state = DocState.DESCRIPTION
         return doc_state
 
-    def add_function(self, name: str, parameter_list: list[str], description: str):
+    def add_widget(self, name: str, var_name: str, index_name: str, parameter_list: list[str]):
         """
-        Add a function if it does not exist.
+        Add a widget if it does not exist.
 
-        :param name: Name of the function
-        :param parameter_list: List or parameter names
-        :param description: Description (if any)
+        :param name: Name of the widget
+        :param var_name: Name of the variable
+        :param index_name: Name of the index if any
+        :param parameter_list: List of parameter names
         """
-        if description is None:
-            description = ""
-        function = FunctionItem(
+        widget = WidgetItem(
             file=self.reader.file,
             page_no=self.reader.page_no,
             line_no=self.reader.line_no,
             headline=self.headline,
             category=self.category,
             name=name,
+            variable_name=var_name,
+            index_name=index_name,
             parameter_list=parameter_list,
-            description=description,
+            description="",
+            remarks="",
+            examples="",
+            see_also="",
             source="BUILT-IN"
         )
-        self.add_item(function)
+        self.add_item(widget)

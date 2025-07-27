@@ -23,7 +23,7 @@ from pathlib import Path
 # noinspection PyUnresolvedReferences
 import find_lib
 from config.system_config import SystemConfig
-from ksp_parser.main_parser import MainParser
+from manual_parser.main_parser import MainParser
 from util.format_util import headline
 
 

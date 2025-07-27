@@ -21,7 +21,7 @@ import re
 from typing import Optional
 
 from doc_item.variable_item import VariableItem
-from ksp_parser.item_parser import ItemParser
+from manual_parser.item_parser import ItemParser
 from config.constants import DocState
 from config.system_config import SystemConfig
 
