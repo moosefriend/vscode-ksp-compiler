@@ -21,9 +21,15 @@ import CompileCommand = require('./compileCommand');
 //import WhatsNew = require( '../webview/whatsNew' );
 
 /**
+ * Define the output window for the KSP Compiler
+ */
+export let outputChannel: vscode.OutputChannel;
+
+/**
  * Register this extension's commands
  */
 export function setupCommands(context: vscode.ExtensionContext) {
+    outputChannel = vscode.window.createOutputChannel('KSP Compiler');
     context.subscriptions.push(
         vscode.commands.registerCommand('ksp.compile', CompileCommand.doCompile)
     );

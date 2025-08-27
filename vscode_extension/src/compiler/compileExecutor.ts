@@ -27,13 +27,32 @@ import * as config from '../config/configurationConstants';
 import { ConfigurationManager } from '../config/configurationManager';
 import { CompileBuilder } from './compileBuilder';
 import { exit } from 'process';
+import { outputChannel } from './commandSetup';
+import { NONAME } from 'dns';
+
 
 const REGEX_PARSER_MESSAGE_NEWLINE: RegExp = /[\r]?\n/;
 const REGEX_ERROR_MESSAGE: RegExp = /(ERROR|WARNING)\s+(.+)\:(\d+)\:\s+(.*)/
 const PARSER_MESSAGE_DELIMITER: string = "\t";
 const REGEX_TOKEN_MGR_ERROR: RegExp = /.*?TokenMgrError\: Lexical error at line (\d+)/;
-const REGEX_PARSE_EXCEPTION: RegExp = /.*?ParseException\:.*?at line (\d+)/;
+const REGEX_PARSE_EXCEPTION: RegExp = /.*?ParseException\: (.+)/;
+/*
+ksp_compiler.ParseException: Incorrect parameters for START_INC! Expected: START_INC(<name>, <start-num>, <step-num>)
 
+
+START_INC()
+
+<main script>: 414
+*/
+const REGEX_LOCATION: RegExp = /(.+): (\d+)/;
+
+enum ErrorParseState {
+    None,
+    Message,
+    LineAfterMessage,
+    LineContent,
+    Location
+}
 /**
  * Execute KSP Compile program
  */
@@ -52,6 +71,9 @@ export class CompileExecutor implements vscode.Disposable {
     private _diagnosticCollection: vscode.DiagnosticCollection = vscode.languages.createDiagnosticCollection();
     private diagnostics: vscode.Diagnostic[] = [];
     private _delayer: ThrottledDelayer<void> = new ThrottledDelayer<void>(0);
+    private errorParseState: ErrorParseState = ErrorParseState.None
+    private errorMessage: string = ""
+    private errorLineContent: string = ""
 
     private constructor() {
         this._delayer.defaultDelay = config.DEFAULT_VALIDATE_DELAY;
@@ -154,6 +176,7 @@ export class CompileExecutor implements vscode.Disposable {
      * Parse stdout/stderr for generating diagnostics
      */
     private parseStdOut(lineText: string): void {
+        outputChannel.appendLine("STDOUT: " + lineText);
         let matches = lineText.match(REGEX_ERROR_MESSAGE);
         if (matches) {
             let level = matches[1];
@@ -178,22 +201,97 @@ export class CompileExecutor implements vscode.Disposable {
     }
 
     /**
+     * Set the error parse state
+     * 
+     * @param state New parse state to set
+     */
+    private setErrorParseState(state: ErrorParseState) {
+        this.errorParseState = state;
+        let strState = "";
+        switch (state) {
+            case ErrorParseState.None:
+                strState = "None";
+                break;
+            case ErrorParseState.Message:
+                strState = "Message";
+                break;
+            case ErrorParseState.LineAfterMessage:
+                strState = "LineAfterMessage";
+                break;
+            case ErrorParseState.LineContent:
+                strState = "LineContent";
+                break;
+            case ErrorParseState.Location:
+                strState = "Location";
+                break;
+            default:
+                strState = "Undefined";
+                break;
+        }
+        outputChannel.appendLine("NEW STATE: " + strState)
+    }
+    /**
      * Parse stderr for generating diagnostics
      */
     private parseStdErr(lineText: string): void {
-        let matches = lineText.match(REGEX_TOKEN_MGR_ERROR);
-        if (!matches) {
-            matches = lineText.match(REGEX_PARSE_EXCEPTION);
-        }
+        outputChannel.appendLine("STDERR: " + lineText);
+        let matches = lineText.match(REGEX_PARSE_EXCEPTION);
         if (matches) {
-            let message = "[KSP Compiler] FATAL: Check your script carefully again.";
-            let line = Number.parseInt(matches[1]) - 1; // zero origin
-            let diagnostic: vscode.Diagnostic = new vscode.Diagnostic(
-                new vscode.Range(line, 0, line, Number.MAX_VALUE),
-                message,
-                vscode.DiagnosticSeverity.Error,
-            );
-            this.diagnostics.push(diagnostic);
+            this.setErrorParseState(ErrorParseState.Message);
+            this.errorMessage = matches[1];
+        }
+        else if (lineText !== "") {
+            switch (this.errorParseState) {
+                // Multi-line error message
+                case ErrorParseState.Message:
+                    this.errorMessage = "\n" + lineText;
+                    break;
+                case ErrorParseState.LineContent:
+                    this.errorLineContent += lineText;
+                    break;
+                case ErrorParseState.Location:
+                    matches = lineText.match(REGEX_LOCATION);
+                    if (matches) {
+                        // TODO: CHECK
+                        let lineNo = Number.parseInt(matches[2]) - 1; // zero origin
+                        this.errorMessage = "[KSP Compiler] ERROR: " + this.errorMessage;
+                        let diagnostic: vscode.Diagnostic = new vscode.Diagnostic(
+                            new vscode.Range(lineNo, 0, lineNo, Number.MAX_VALUE),
+                            this.errorMessage,
+                            vscode.DiagnosticSeverity.Error,
+                        );
+                        this.diagnostics.push(diagnostic);
+                        // Reset the error variables
+                        this.setErrorParseState(ErrorParseState.None);
+                        this.errorMessage = "";
+                        this.errorLineContent = "";
+                    }
+                    else {
+                        vscode.window.showErrorMessage(this.errorMessage + "\n" + "*** Can't parse line number from '" + lineText + "'");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        // Empty line
+        else {
+            switch (this.errorParseState) {
+                // After the message there are 2 empty lines and then the line content,
+                // but the line content might be empty also
+                case ErrorParseState.Message:
+                    this.setErrorParseState(ErrorParseState.LineAfterMessage);
+                    break;
+                case ErrorParseState.LineAfterMessage:
+                    this.setErrorParseState(ErrorParseState.LineContent);
+                    break;
+                case ErrorParseState.LineContent:
+                    this.setErrorParseState(ErrorParseState.Location);
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 
@@ -229,7 +327,8 @@ export class CompileExecutor implements vscode.Disposable {
             try {
                 let args: string[] = argBuilder.build();
                 let python = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION, config.DEFAULT_PYTHON_LOCATION);
-                console.log(`[KSP] Executing: ${python} ${args.map(a => `"${a}"`).join(' ')}`);
+                outputChannel.clear();
+                outputChannel.appendLine(`Executing: ${python} ${args.map(a => `"${a}"`).join(' ')}`);
                 let childProcess = child_process.spawn(python, args, undefined);
                 childProcess.on('error', (error: Error) => {
                     this.removeTempfile();
