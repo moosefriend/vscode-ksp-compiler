@@ -33,23 +33,14 @@ import { NONAME } from 'dns';
 
 const REGEX_PARSER_MESSAGE_NEWLINE: RegExp = /[\r]?\n/;
 const REGEX_ERROR_MESSAGE: RegExp = /(ERROR|WARNING)\s+(.+)\:(\d+)\:\s+(.*)/
-const PARSER_MESSAGE_DELIMITER: string = "\t";
-const REGEX_TOKEN_MGR_ERROR: RegExp = /.*?TokenMgrError\: Lexical error at line (\d+)/;
-const REGEX_PARSE_EXCEPTION: RegExp = /.*?ParseException\: (.+)/;
-const REGEX_LOCATION: RegExp = /(.+): (\d+)/;
-
-enum ErrorParseState {
-    None,
-    Message,
-    LineAfterMessage,
-    LineContent,
-    Location
-}
+const REGEX_ERROR_BEGIN: RegExp = />>> BEGIN (Error|Exception)/;
+const REGEX_ERROR_COMMAND: RegExp = />>> Command: (.+)/;
+const REGEX_ERROR_LOCATION: RegExp = />>> Location: (.+): (\d+)/;
+const REGEX_ERROR_END: RegExp = />>> END (Error|Exception)/;
 
 enum Channel {
     StdOut,
-    StdErr,
-    ErrorState
+    StdErr
 }
 
 /**
@@ -70,12 +61,14 @@ export class CompileExecutor implements vscode.Disposable {
     private _diagnosticCollection: vscode.DiagnosticCollection = vscode.languages.createDiagnosticCollection();
     private diagnostics: vscode.Diagnostic[] = [];
     private _delayer: ThrottledDelayer<void> = new ThrottledDelayer<void>(0);
-    private errorParseState: ErrorParseState = ErrorParseState.None
-    private errorMessage: string = ""
-    private errorLineContent: string = ""
-    private showStdOut: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDOUT, config.DEFAULT_SHOW_STDOUT)
-    private showStdErr: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDERR, config.DEFAULT_SHOW_STDERR)
-    private showErrorState: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_ERROR_STATE, config.DEFAULT_SHOW_ERROR_STATE)
+    private errorParsing: boolean = false;
+    private errorMessage: string = "";
+    private errorCommand: string = "";
+    private errorFile: string = "";
+    private errorLineNo: number = 0;
+    private errorType: string = "";
+    private showStdOut: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDOUT, config.DEFAULT_SHOW_STDOUT);
+    private showStdErr: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDERR, config.DEFAULT_SHOW_STDERR);
 
 
     private constructor() {
@@ -185,13 +178,11 @@ export class CompileExecutor implements vscode.Disposable {
             outputChannel.appendLine("[STDOUT] " + lineText);
         } else if (channel == Channel.StdErr && this.showStdErr) {
             outputChannel.appendLine("[STDERR] " + lineText);
-        } else if (channel == Channel.ErrorState && this.showErrorState) {
-            outputChannel.appendLine("[NEW STATE] " + lineText);
         }
     }
 
     /**
-     * Parse stdout/stderr for generating diagnostics
+     * Parse stdout for generating diagnostics
      * 
      * @param lineText Line to parse
      */
@@ -222,98 +213,63 @@ export class CompileExecutor implements vscode.Disposable {
 
     /**
      * Parse stderr for generating diagnostics
+     * 
+     * @param lineText Line to parse
      */
     private parseStdErr(lineText: string): void {
         this.addLine(lineText, Channel.StdErr)
-        let matches = lineText.match(REGEX_PARSE_EXCEPTION);
+        let matches = lineText.match(REGEX_ERROR_BEGIN);
         if (matches) {
-            this.setErrorParseState(ErrorParseState.Message);
-            this.errorMessage = matches[1];
+            this.errorParsing = true
+            this.errorMessage = "";
+            this.errorCommand = "";
+            this.errorFile = "";
+            this.errorLineNo = 0;
+            this.errorType = "";
         }
-        else if (lineText !== "") {
-            switch (this.errorParseState) {
-                // Multi-line error message
-                case ErrorParseState.Message:
-                    this.errorMessage = "\n" + lineText;
-                    break;
-                case ErrorParseState.LineContent:
-                    this.errorLineContent += lineText;
-                    break;
-                case ErrorParseState.Location:
-                    matches = lineText.match(REGEX_LOCATION);
-                    if (matches) {
-                        // TODO: CHECK
-                        let lineNo = Number.parseInt(matches[2]) - 1; // zero origin
-                        this.errorMessage = "[KSP Compiler] ERROR: " + this.errorMessage;
-                        let diagnostic: vscode.Diagnostic = new vscode.Diagnostic(
-                            new vscode.Range(lineNo, 0, lineNo, Number.MAX_VALUE),
-                            this.errorMessage,
-                            vscode.DiagnosticSeverity.Error,
-                        );
-                        this.diagnostics.push(diagnostic);
-                        // Reset the error variables
-                        this.setErrorParseState(ErrorParseState.None);
-                        this.errorMessage = "";
-                        this.errorLineContent = "";
-                    }
-                    else {
-                        vscode.window.showErrorMessage(this.errorMessage + "\n" + "*** Can't parse line number from '" + lineText + "'");
-                    }
-                    break;
-                default:
-                    break;
+        else if (this.errorParsing) {
+            if (matches = lineText.match(REGEX_ERROR_COMMAND)) {
+                this.errorCommand = matches[1]
             }
-        }
-        // Empty line
-        else {
-            switch (this.errorParseState) {
-                // After the message there are 2 empty lines and then the line content,
-                // but the line content might be empty also
-                case ErrorParseState.Message:
-                    this.setErrorParseState(ErrorParseState.LineAfterMessage);
-                    break;
-                case ErrorParseState.LineAfterMessage:
-                    this.setErrorParseState(ErrorParseState.LineContent);
-                    break;
-                case ErrorParseState.LineContent:
-                    this.setErrorParseState(ErrorParseState.Location);
-                    break;
-                default:
-                    break;
+            else if (matches = lineText.match(REGEX_ERROR_LOCATION)) {
+                this.errorFile = matches[1]
+                this.errorLineNo = Number.parseInt(matches[2])
             }
-
+            else if (matches = lineText.match(REGEX_ERROR_END)) {
+                this.errorType = matches[1];
+                this.handleError()
+                this.errorParsing = false
+            }
+            else {
+                if (this.errorMessage.length > 0) {
+                    this.errorMessage += "\n"
+                }
+                this.errorMessage += lineText
+            }
         }
     }
 
     /**
-     * Set the error parse state
-     * 
-     * @param state New parse state to set
+     * Handle compiler errors
      */
-    private setErrorParseState(state: ErrorParseState) {
-        this.errorParseState = state;
-        let strState = "";
-        switch (state) {
-            case ErrorParseState.None:
-                strState = "None";
-                break;
-            case ErrorParseState.Message:
-                strState = "Message";
-                break;
-            case ErrorParseState.LineAfterMessage:
-                strState = "LineAfterMessage";
-                break;
-            case ErrorParseState.LineContent:
-                strState = "LineContent";
-                break;
-            case ErrorParseState.Location:
-                strState = "Location";
-                break;
-            default:
-                strState = "Undefined";
-                break;
+    private handleError() {
+        // Handle ParseException
+        if (this.errorType == "Error") {
+            let diagnostic: vscode.Diagnostic = new vscode.Diagnostic(
+                new vscode.Range(this.errorLineNo - 1, 0, this.errorLineNo - 1, Number.MAX_VALUE),
+                "[KSP Compiler] ERROR: " + this.errorMessage,
+                vscode.DiagnosticSeverity.Error,
+            );
+            this.diagnostics.push(diagnostic);                   
         }
-        this.addLine(strState, Channel.ErrorState)
+        // Handle generic Exception
+        else if (this.errorType == "Exception") {
+            vscode.window.showErrorMessage("[KSP Compiler] EXCEPTION: " + this.errorMessage);
+        }
+        // Handle everything else
+        else {
+            vscode.window.showErrorMessage("[KSP Compiler] " + this.errorType + ": " + this.errorMessage);
+        }
     }
 
     /**

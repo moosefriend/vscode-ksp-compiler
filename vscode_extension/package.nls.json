@@ -1,7 +1,6 @@
 {
 	"configuration.title": "KSP Compiler",
 	"configuration.python.location": "Location of python executable. Default is \"python\" (searched via $PATH variable)",
-	"configuration.compiler.script": "Path to the KSP compiler python script. Default is \"ksp_compiler/ksp_compiler.py\" (relative to workspace root)",
 	"configuration.compiler.force": "Force all specified compiler options, overriding any compile_with pragma directives from the script",
 	"configuration.compiler.compact": "Remove indents in compiled code",
 	"configuration.compiler.compact_variables": "Shorten and obfuscate variable names in compiled code",
@@ -14,7 +13,6 @@
 	"configuration.compiler.sanitize_exit_command": "Add a dummy no-op command before every exit function call",
 	"configuration.compiler.show_stdout": "Show STDOUT messages of the compiler (useful for debugging => in the Output window choose 'KSP Compiler'), choose Output)",
 	"configuration.compiler.show_stderr": "Show STDERR messages of the compiler (useful for debugging => in the Output window choose 'KSP Compiler')",
-	"configuration.compiler.show_error_state": "Show internal parsing state of error messages (useful for debugging => in the Output window choose 'KSP Compiler')",
 	"configuration.validate.enable": "Enable/disable KSP syntax validation",
 	"configuration.validate.delay": "Delay time to start validation in milliseconds. Set it to 0 to disable realtime checks.",
 

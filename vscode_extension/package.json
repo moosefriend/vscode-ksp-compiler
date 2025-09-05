@@ -94,11 +94,6 @@
                     "default": "python",
                     "description": "%configuration.python.location%"
                 },
-                "ksp.compiler.Script": {
-                    "type": "string",
-                    "default": "ksp_compiler/ksp_compiler.py",
-                    "description": "%configuration.compiler.script%"
-                },
                 "ksp.compiler.Force": {
                     "type": "boolean",
                     "default": false,
@@ -158,11 +153,6 @@
                     "type": "boolean",
                     "default": true,
                     "description": "%configuration.compiler.show_stderr%"
-                },
-                "ksp.compiler.Show Error State": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "%configuration.compiler.show_error_state%"
                 },
                 "ksp.validate.Enable": {
                     "type": "boolean",

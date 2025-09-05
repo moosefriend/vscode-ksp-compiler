@@ -18,6 +18,7 @@
 ##############################################################################
 import re
 import traceback
+import sys
 
 import _find_ksp_compiler  # noqa
 from ksp_compiler import main, ParseException
@@ -28,17 +29,17 @@ if __name__ == "__main__":
         # Call the main function from ksp_compiler
         main()
     except ParseException as ex:
-        print(">>> BEGIN Error")
+        print(">>> BEGIN Error", file=sys.stderr)
         message = ex.message
         message = message.split("\n\n", 1)[0].strip()  # Keep only the first paragraph
         message = re.sub(r" \(line \d+\)$", "", message)
-        print(message)
+        print(message, file=sys.stderr)
         if ex.line:
-            print(f">>> Command: {ex.line.command}")
-            print(f">>> Location: {ex.line.filename}({ex.line.lineno})")
-        print(">>> END Error")
+            print(f">>> Command: {ex.line.command}", file=sys.stderr)
+            print(f">>> Location: {ex.line.filename}: {ex.line.lineno}", file=sys.stderr)
+        print(">>> END Error", file=sys.stderr)
     except Exception as ex:
-        print(">>> BEGIN Exception")
+        print(">>> BEGIN Exception", file=sys.stderr)
         message = traceback.format_exc()
-        print(message)
-        print(">>> END Exception")
+        print(message, file=sys.stderr)
+        print(">>> END Exception", file=sys.stderr)

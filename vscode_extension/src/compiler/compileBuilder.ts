@@ -44,7 +44,7 @@ export class CompileBuilder {
      * Commandline options initialized by configuration
      */
     constructor(inputFile: string, outputFile: string) {
-        this.compiler_script = path.resolve(__dirname, '../../../sublime_ksp/compiler/ksp_compiler.py');
+        this.compiler_script = path.resolve(__dirname, '../../../bin/ksp_compiler_wrapper.py');
         this.inputFile = inputFile;
         this.outputFile = outputFile;
         this.force = ConfigurationManager.getConfig<boolean>(configkey.KEY_FORCE, configkey.DEFAULT_FORCE);
