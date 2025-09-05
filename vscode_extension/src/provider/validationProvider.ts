@@ -136,9 +136,10 @@ export class ValidationProvider {
     /**
      * Execute syntax parser program
      */
-    private doValidate(textDocument: vscode.TextDocument): void//Promise<void>
-    {
-        if (!this.validationEnabled) {
+    private doValidate(textDocument: vscode.TextDocument): void {
+        // If there is a programatic save command initiated, then avoid double validation
+        let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument);
+        if (!this.validationEnabled || compiler.isProgrammaticSave) {
             return;
         }
         //return new Promise<void>( (resolve, reject) =>
@@ -169,7 +170,7 @@ export class ValidationProvider {
             compiler.OnEnd = () => {
                 //resolve();
             };
-            compiler.execute(textDocument, argBuilder, false);
+            compiler.execute(textDocument, argBuilder);
         }//);
     }
 }

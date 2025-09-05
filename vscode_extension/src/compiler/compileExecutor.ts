@@ -47,6 +47,7 @@ enum Channel {
  * Execute KSP Compile program
  */
 export class CompileExecutor implements vscode.Disposable {
+    public isProgrammaticSave: boolean = false;
     // HashMap holding a compiler instance for each document    
     private static pool: { [key: string]: CompileExecutor } = {};
 
@@ -69,7 +70,6 @@ export class CompileExecutor implements vscode.Disposable {
     private errorType: string = "";
     private showStdOut: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDOUT, config.DEFAULT_SHOW_STDOUT);
     private showStdErr: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDERR, config.DEFAULT_SHOW_STDERR);
-
 
     private constructor() {
         this._delayer.defaultDelay = config.DEFAULT_VALIDATE_DELAY;
@@ -410,18 +410,20 @@ export class CompileExecutor implements vscode.Disposable {
         if (this.running || document.isClosed) {
             return;
         }
-        // Pre-Save.
-        // TODO Conflict: Save Document Event handling@KSPValidationProvider
-        // if( preSave && ( !document.isUntitled && document.isDirty ) )
-        // {
-        //     document.save().then((fulfilled)=>{
-        //         if( fulfilled )
-        //         {
-        //             this._delayer.trigger( () => this.executeImpl( document, argBuilder, useDiagnostics ) );
-        //         }
-        //     });
-        //     return;
-        // }
+        if (preSave && !document.isUntitled && document.isDirty) {
+            this.isProgrammaticSave = true;
+            document.save().then((fulfilled) => {
+                if (fulfilled) {
+                    this._delayer.trigger(() => {
+                        this.isProgrammaticSave = false;
+                        return this.executeImpl(document, argBuilder, useDiagnostics);
+                    });
+                } else {
+                    this.isProgrammaticSave = false;
+                }
+            });
+            return;
+        }
         this._delayer.trigger(() => this.executeImpl(document, argBuilder, useDiagnostics));
     }
 }
