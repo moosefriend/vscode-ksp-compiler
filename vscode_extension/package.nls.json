@@ -12,6 +12,9 @@
 	"configuration.compiler.indent_size": "Specifies how many spaces are used for indentation, if compact compiler option is not used",
 	"configuration.compiler.add_compile_date": "Add current date comment at the beginning of compiled file",
 	"configuration.compiler.sanitize_exit_command": "Add a dummy no-op command before every exit function call",
+	"configuration.compiler.show_stdout": "Show STDOUT messages of the compiler (useful for debugging => in the Output window choose 'KSP Compiler'), choose Output)",
+	"configuration.compiler.show_stderr": "Show STDERR messages of the compiler (useful for debugging => in the Output window choose 'KSP Compiler')",
+	"configuration.compiler.show_error_state": "Show internal parsing state of error messages (useful for debugging => in the Output window choose 'KSP Compiler')",
 	"configuration.validate.enable": "Enable/disable KSP syntax validation",
 	"configuration.validate.delay": "Delay time to start validation in milliseconds. Set it to 0 to disable realtime checks.",
 

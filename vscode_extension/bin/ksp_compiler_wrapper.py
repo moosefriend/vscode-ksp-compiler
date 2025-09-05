@@ -17,6 +17,9 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 import os
+import re
+from pathlib import Path
+from textwrap import dedent
 
 import _find_ksp_compiler  # noqa
 from ksp_compiler import main, ParseException, KSPCompiler
@@ -54,21 +57,40 @@ def do_compile(code,
 def test1():
     code = '''
         on init
-            declare ~x := 5 * 2.333
-            message(~x)
+            declare $b
+            $a := $b + 1
         end on'''
     do_compile(code, extra_syntax_checks=True, optimize=True)
 
+def test2(code: str):
+    code = dedent(code).strip()
+    file = Path(r"c:\zz_Kontakt_Script_IDE\test-project\test-in.ksp")
+    with file.open("w", encoding="utf-8") as f:
+        f.write(code)
+    print(f"Testing code:\n----------------------\n{code}\n----------------------\n")
+    main()
+
 if __name__ == "__main__":
-    test1()
-    exit(0)
+    # test2('''
+    # on init
+    #     declare $b
+    #     $a := $b + 1
+    #     $c := $e + 1
+    # end on
+    # ''')
+    #
+    # test1()
+    # exit(0)
     try:
         # Call the main function from ksp_compiler
         main()
     except ParseException as ex:
-        raise
-        # Handle the ParseException and print the error message
-        msg = ex.message.strip()
-        message, content, location = msg.rsplit('\n\n', 2)
-        print(f"*** Error: {message.strip()} at {location}")
+        error_message = ex.message
+        error_command = ex.line.command
+        error_filename = ex.line.filename
+        error_lineno = ex.line.lineno
+        print(f">>> Message:\n{error_message}")
+        print(f">>> Command:\n{error_command}")
+        print(f">>> File:\n{error_filename}")
+        print(f">>> Line:\n{error_lineno}")
 

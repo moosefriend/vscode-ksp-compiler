@@ -36,14 +36,6 @@ const REGEX_ERROR_MESSAGE: RegExp = /(ERROR|WARNING)\s+(.+)\:(\d+)\:\s+(.*)/
 const PARSER_MESSAGE_DELIMITER: string = "\t";
 const REGEX_TOKEN_MGR_ERROR: RegExp = /.*?TokenMgrError\: Lexical error at line (\d+)/;
 const REGEX_PARSE_EXCEPTION: RegExp = /.*?ParseException\: (.+)/;
-/*
-ksp_compiler.ParseException: Incorrect parameters for START_INC! Expected: START_INC(<name>, <start-num>, <step-num>)
-
-
-START_INC()
-
-<main script>: 414
-*/
 const REGEX_LOCATION: RegExp = /(.+): (\d+)/;
 
 enum ErrorParseState {
@@ -53,6 +45,13 @@ enum ErrorParseState {
     LineContent,
     Location
 }
+
+enum Channel {
+    StdOut,
+    StdErr,
+    ErrorState
+}
+
 /**
  * Execute KSP Compile program
  */
@@ -74,6 +73,10 @@ export class CompileExecutor implements vscode.Disposable {
     private errorParseState: ErrorParseState = ErrorParseState.None
     private errorMessage: string = ""
     private errorLineContent: string = ""
+    private showStdOut: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDOUT, config.DEFAULT_SHOW_STDOUT)
+    private showStdErr: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDERR, config.DEFAULT_SHOW_STDERR)
+    private showErrorState: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_ERROR_STATE, config.DEFAULT_SHOW_ERROR_STATE)
+
 
     private constructor() {
         this._delayer.defaultDelay = config.DEFAULT_VALIDATE_DELAY;
@@ -173,10 +176,27 @@ export class CompileExecutor implements vscode.Disposable {
     }
 
     /**
+     * Print text in the output channel (if configured)
+     * 
+     * @param lineText Text to print in the output channel
+     */
+    public addLine(lineText: string, channel: Channel): void {
+        if (channel == Channel.StdOut && this.showStdOut) {
+            outputChannel.appendLine("[STDOUT] " + lineText);
+        } else if (channel == Channel.StdErr && this.showStdErr) {
+            outputChannel.appendLine("[STDERR] " + lineText);
+        } else if (channel == Channel.ErrorState && this.showErrorState) {
+            outputChannel.appendLine("[NEW STATE] " + lineText);
+        }
+    }
+
+    /**
      * Parse stdout/stderr for generating diagnostics
+     * 
+     * @param lineText Line to parse
      */
     private parseStdOut(lineText: string): void {
-        outputChannel.appendLine("STDOUT: " + lineText);
+        this.addLine(lineText, Channel.StdOut)
         let matches = lineText.match(REGEX_ERROR_MESSAGE);
         if (matches) {
             let level = matches[1];
@@ -201,40 +221,10 @@ export class CompileExecutor implements vscode.Disposable {
     }
 
     /**
-     * Set the error parse state
-     * 
-     * @param state New parse state to set
-     */
-    private setErrorParseState(state: ErrorParseState) {
-        this.errorParseState = state;
-        let strState = "";
-        switch (state) {
-            case ErrorParseState.None:
-                strState = "None";
-                break;
-            case ErrorParseState.Message:
-                strState = "Message";
-                break;
-            case ErrorParseState.LineAfterMessage:
-                strState = "LineAfterMessage";
-                break;
-            case ErrorParseState.LineContent:
-                strState = "LineContent";
-                break;
-            case ErrorParseState.Location:
-                strState = "Location";
-                break;
-            default:
-                strState = "Undefined";
-                break;
-        }
-        outputChannel.appendLine("NEW STATE: " + strState)
-    }
-    /**
      * Parse stderr for generating diagnostics
      */
     private parseStdErr(lineText: string): void {
-        outputChannel.appendLine("STDERR: " + lineText);
+        this.addLine(lineText, Channel.StdErr)
         let matches = lineText.match(REGEX_PARSE_EXCEPTION);
         if (matches) {
             this.setErrorParseState(ErrorParseState.Message);
@@ -293,6 +283,37 @@ export class CompileExecutor implements vscode.Disposable {
             }
 
         }
+    }
+
+    /**
+     * Set the error parse state
+     * 
+     * @param state New parse state to set
+     */
+    private setErrorParseState(state: ErrorParseState) {
+        this.errorParseState = state;
+        let strState = "";
+        switch (state) {
+            case ErrorParseState.None:
+                strState = "None";
+                break;
+            case ErrorParseState.Message:
+                strState = "Message";
+                break;
+            case ErrorParseState.LineAfterMessage:
+                strState = "LineAfterMessage";
+                break;
+            case ErrorParseState.LineContent:
+                strState = "LineContent";
+                break;
+            case ErrorParseState.Location:
+                strState = "Location";
+                break;
+            default:
+                strState = "Undefined";
+                break;
+        }
+        this.addLine(strState, Channel.ErrorState)
     }
 
     /**
