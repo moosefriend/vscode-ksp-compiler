@@ -26,6 +26,14 @@ import CompileCommand = require('./compileCommand');
 export let outputChannel: vscode.OutputChannel;
 
 /**
+ * Define STDOUT and STDERR channels for the output winow
+ */
+export enum Channel {
+    StdOut,
+    StdErr
+}
+
+/**
  * Register this extension's commands
  */
 export function setupCommands(context: vscode.ExtensionContext) {

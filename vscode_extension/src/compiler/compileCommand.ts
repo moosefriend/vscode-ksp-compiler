@@ -22,6 +22,7 @@ import * as path from 'path';
 import * as tmp from 'tmp';
 import { CompileBuilder } from '../compiler/compileBuilder';
 import { CompileExecutor } from '../compiler/compileExecutor';
+import { Channel } from './commandSetup';
 
 export async function doCompile(context: vscode.ExtensionContext) {
     let editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
@@ -29,9 +30,7 @@ export async function doCompile(context: vscode.ExtensionContext) {
     let baseName: string;
     let scriptFilePath: string;
     let tmpFile: tmp.FileResult;
-    const MESSAGE_PREFIX: string = "KSP";
-    const MESSAGE_FAILED: string = "Failed";
-    const MESSAGE_CLIPBOARD: string = "Script has been copied to clipboard";
+    const clipboard = await import('clipboardy');
 
     //--------------------------------------------------------------------------
     // Preverify
@@ -43,7 +42,7 @@ export async function doCompile(context: vscode.ExtensionContext) {
     }
     textDocument = editor.document;
     if (textDocument.languageId !== "ksp") {
-        vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: Language mode is not 'ksp'`);
+        vscode.window.showErrorMessage("KSP Compiler: Language mode is not 'ksp'");
         return;
     }
     scriptFilePath = textDocument.fileName;
@@ -52,42 +51,28 @@ export async function doCompile(context: vscode.ExtensionContext) {
     //--------------------------------------------------------------------------
     // Run compiler
     //--------------------------------------------------------------------------
-    function runCompiler(callback?: (exitCode: number) => void) {
-        tmpFile = tmp.fileSync();
-        let argBuilder: CompileBuilder = new CompileBuilder(scriptFilePath, tmpFile.name);
-        let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument).init();
-        compiler.OnExit = (exitCode: number) => {
-            if (exitCode != 0) {
-                vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${MESSAGE_FAILED}. Please check your script: ${baseName}`);
-            }
-            else {
-                vscode.window.showInformationMessage(`${MESSAGE_PREFIX}: ${MESSAGE_CLIPBOARD}`);
-            }
-            if (callback) {
-                callback(exitCode);
-            }
-        };
-        compiler.OnException = (e: Error) => {
-            vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${MESSAGE_FAILED}: ${baseName}`);
-        };
-        compiler.execute(textDocument, argBuilder);
+    tmpFile = tmp.fileSync();
+    let argBuilder: CompileBuilder = new CompileBuilder(scriptFilePath, tmpFile.name);
+    let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument).init();
+    compiler.OnExit = (exitCode: number) => {
+        if (exitCode != 0) {
+            vscode.window.showErrorMessage(`KSP Compiler failed! Please check your script: ${baseName}`);
+        }
+        else
+        {
+            let txt: string = fs.readFileSync(tmpFile.name).toString();
+            clipboard.default.writeSync(txt);
+            vscode.window.showInformationMessage("KSP Compiler: Compiled script has been copied to clipboard");
+        }
+        try {
+            tmpFile.removeCallback();
+        }
+        catch (e) {
+            // Ignore exceptions
+        }
     };
-
-    // Output to Clipboard
-    // Dynamically import clipboardy
-    const clipboard = await import('clipboardy');
-    {
-        runCompiler((exitCode) => {
-            if (exitCode == 0) {
-                let txt: string = fs.readFileSync(tmpFile.name).toString();
-                clipboard.default.writeSync(txt);
-            }
-            try {
-                tmpFile.removeCallback();
-            }
-            catch (e) {
-                // Ignore exceptions
-            }
-        });
-    }
+    compiler.OnException = (e: Error) => {
+        vscode.window.showErrorMessage(`KSP Compiler Exception: ${e.message}`);
+    };
+    compiler.execute(textDocument, argBuilder);
 }

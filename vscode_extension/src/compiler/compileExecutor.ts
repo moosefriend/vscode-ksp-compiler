@@ -18,17 +18,12 @@
  */
 import vscode = require('vscode');
 
-import * as tmp from 'tmp';
-import * as fs from 'fs';
-import * as path from 'path';
 import * as child_process from 'child_process';
 import { ThrottledDelayer } from '../lib/async';
 import * as config from '../config/configurationConstants';
 import { ConfigurationManager } from '../config/configurationManager';
 import { CompileBuilder } from './compileBuilder';
-import { exit } from 'process';
-import { outputChannel } from './commandSetup';
-import { NONAME } from 'dns';
+import { outputChannel, Channel} from './commandSetup';
 
 
 const REGEX_PARSER_MESSAGE_NEWLINE: RegExp = /[\r]?\n/;
@@ -37,11 +32,6 @@ const REGEX_ERROR_BEGIN: RegExp = />>> BEGIN (Error|Exception)/;
 const REGEX_ERROR_COMMAND: RegExp = />>> Command: (.+)/;
 const REGEX_ERROR_LOCATION: RegExp = />>> Location: (.+): (\d+)/;
 const REGEX_ERROR_END: RegExp = />>> END (Error|Exception)/;
-
-enum Channel {
-    StdOut,
-    StdErr
-}
 
 /**
  * Execute KSP Compile program
@@ -173,11 +163,22 @@ export class CompileExecutor implements vscode.Disposable {
      * 
      * @param lineText Text to print in the output channel
      */
-    public addLine(lineText: string, channel: Channel): void {
+    public addLine(lineText: string, channel: Channel = Channel.StdOut): void {
         if (channel == Channel.StdOut && this.showStdOut) {
+            outputChannel.show(true)
             outputChannel.appendLine("[STDOUT] " + lineText);
         } else if (channel == Channel.StdErr && this.showStdErr) {
+            outputChannel.show(true)
             outputChannel.appendLine("[STDERR] " + lineText);
+        }
+    }
+
+    /**
+     * Clear the output window
+     */
+    public clearOutput(): void {
+        if (this.showStdOut || this.showStdErr) {
+            outputChannel.clear();
         }
     }
 
@@ -304,8 +305,8 @@ export class CompileExecutor implements vscode.Disposable {
             try {
                 let args: string[] = argBuilder.build();
                 let python = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION, config.DEFAULT_PYTHON_LOCATION);
-                outputChannel.clear();
-                outputChannel.appendLine(`Executing: ${python} ${args.map(a => `"${a}"`).join(' ')}`);
+                this.clearOutput();
+                this.addLine(`Executing: ${python} ${args.map(a => `"${a}"`).join(' ')}`, Channel.StdOut);
                 let childProcess = child_process.spawn(python, args, undefined);
                 childProcess.on('error', (error: Error) => {
                     this.removeTempfile();
@@ -349,8 +350,8 @@ export class CompileExecutor implements vscode.Disposable {
                         if (this._onExit) {
                             if (exitCode == null) {
                                 exitCode = -1;
-                                this._onExit(exitCode);
                             }
+                            this._onExit(exitCode);
                         }
                         resolve();
                     });
@@ -393,6 +394,8 @@ export class CompileExecutor implements vscode.Disposable {
                 reject(e)
             }
             finally {
+                // Clear programatic save flag (if set)
+                this.isProgrammaticSave = false
                 if (processFailed) {
                     this.removeTempfile();
                 }
@@ -414,10 +417,7 @@ export class CompileExecutor implements vscode.Disposable {
             this.isProgrammaticSave = true;
             document.save().then((fulfilled) => {
                 if (fulfilled) {
-                    this._delayer.trigger(() => {
-                        this.isProgrammaticSave = false;
-                        return this.executeImpl(document, argBuilder, useDiagnostics);
-                    });
+                    this._delayer.trigger(() => this.executeImpl(document, argBuilder, useDiagnostics));
                 } else {
                     this.isProgrammaticSave = false;
                 }

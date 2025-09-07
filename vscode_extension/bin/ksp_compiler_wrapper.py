@@ -25,6 +25,7 @@ from ksp_compiler import main, ParseException
 
 
 if __name__ == "__main__":
+    exit_code = 0
     try:
         # Call the main function from ksp_compiler
         main()
@@ -38,8 +39,11 @@ if __name__ == "__main__":
             print(f">>> Command: {ex.line.command}", file=sys.stderr)
             print(f">>> Location: {ex.line.filename}: {ex.line.lineno}", file=sys.stderr)
         print(">>> END Error", file=sys.stderr)
+        exit_code = 1
     except Exception as ex:
         print(">>> BEGIN Exception", file=sys.stderr)
         message = traceback.format_exc()
         print(message, file=sys.stderr)
         print(">>> END Exception", file=sys.stderr)
+        exit_code = -1
+    sys.exit(exit_code)

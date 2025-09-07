@@ -16,5 +16,5 @@
 	"configuration.validate.enable": "Enable/disable KSP syntax validation",
 	"configuration.validate.delay": "Delay time to start validation in milliseconds. Set it to 0 to disable realtime checks.",
 
-    "command.compile": "NI KSP: Run Compiler & copy script to clipboard"
+    "command.compile": "NI KSP: Run Compiler & Copy Script to Clipboard"
 }

@@ -23,6 +23,7 @@ import * as config from '../config/configurationConstants';
 import { ConfigurationManager } from '../config/configurationManager';
 import { CompileExecutor } from '../compiler/compileExecutor';
 import { CompileBuilder } from '../compiler/compileBuilder';
+import { Channel } from '../compiler/commandSetup';
 import * as tmp from 'tmp';
 
 export class ValidationProvider {
@@ -137,40 +138,26 @@ export class ValidationProvider {
      * Execute syntax parser program
      */
     private doValidate(textDocument: vscode.TextDocument): void {
-        // If there is a programatic save command initiated, then avoid double validation
         let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument);
+        // If there is a programatic save command initiated, then avoid double validation
         if (!this.validationEnabled || compiler.isProgrammaticSave) {
             return;
         }
-        //return new Promise<void>( (resolve, reject) =>
-        {
-            let src: string = textDocument.fileName;
-            let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument).init();
-            let tmpFile = tmp.fileSync();
-            let argBuilder: CompileBuilder = new CompileBuilder(src, tmpFile.name);
-            let delayer: ThrottledDelayer<void> = compiler.Delayer;
-            let delay = this.realtimeTrigger ? this.realtimeValidationDelay : 0;
-            if (this.realtimeValidationEnabled) {
-                delayer.defaultDelay = delay;
+        let src: string = textDocument.fileName;
+        let tmpFile = tmp.fileSync();
+        let argBuilder: CompileBuilder = new CompileBuilder(src, tmpFile.name);
+        let delayer: ThrottledDelayer<void> = compiler.Delayer;
+        let delay = this.realtimeTrigger ? this.realtimeValidationDelay : 0;
+        if (this.realtimeValidationEnabled) {
+            delayer.defaultDelay = delay;
+        }
+        compiler.init();
+        compiler.OnError = (text: string) => {
+            if (this.pauseValidation) {
+                return;
             }
-            compiler.OnError = (text: string) => {
-                if (this.pauseValidation) {
-                    //resolve();
-                    return;
-                }
-                this.pauseValidation = true;
-                //resolve();
-            };
-            compiler.OnStdout = (text: string) => {
-                //resolve();
-            };
-            compiler.OnStderr = (text: string) => {
-                //resolve();
-            };
-            compiler.OnEnd = () => {
-                //resolve();
-            };
-            compiler.execute(textDocument, argBuilder);
-        }//);
+            this.pauseValidation = true;
+        };
+        compiler.execute(textDocument, argBuilder);
     }
 }
