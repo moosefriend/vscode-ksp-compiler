@@ -22,7 +22,6 @@ import * as path from 'path';
 import * as tmp from 'tmp';
 import { CompileBuilder } from '../compiler/compileBuilder';
 import { CompileExecutor } from '../compiler/compileExecutor';
-import { Channel } from './commandSetup';
 
 export async function doCompile(context: vscode.ExtensionContext) {
     let editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
@@ -56,13 +55,13 @@ export async function doCompile(context: vscode.ExtensionContext) {
     let compiler: CompileExecutor = CompileExecutor.getCompiler(textDocument).init();
     compiler.OnExit = (exitCode: number) => {
         if (exitCode != 0) {
-            vscode.window.showErrorMessage(`KSP Compiler failed! Please check your script: ${baseName}`);
+            vscode.window.showErrorMessage(`KSP Compiler failed! Please check your script '${baseName}'`);
         }
         else
         {
             let txt: string = fs.readFileSync(tmpFile.name).toString();
             clipboard.default.writeSync(txt);
-            vscode.window.showInformationMessage("KSP Compiler: Compiled script has been copied to clipboard");
+            vscode.window.showInformationMessage(`KSP Compiler: Compiled '${baseName}' has been copied to clipboard`);
         }
         try {
             tmpFile.removeCallback();

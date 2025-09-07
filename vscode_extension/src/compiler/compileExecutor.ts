@@ -289,7 +289,7 @@ export class CompileExecutor implements vscode.Disposable {
     private executeImpl(document: vscode.TextDocument, argBuilder: CompileBuilder, useDiagnostics: boolean = true): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             if (!ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE, config.DEFAULT_VALIDATE_ENABLE)) {
-                vscode.window.showErrorMessage('KSP: Validate is disabled. See Preference of KSP');
+                vscode.window.showErrorMessage('KSP Compiler: Validate is disabled! See Preference of KSP.');
                 this.running = false;
                 resolve();
                 return;
