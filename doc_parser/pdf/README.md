@@ -1,1 +1,1 @@
-Copy the *.pdf KSP reference manual here and rename it to `KSP_Reference_<major>_<minor>_Manual_en.pdf`
+Copy the \*.pdf KSP reference manual here and rename it to `KSP_Reference_<major>_<minor>_Manual_en.pdf`

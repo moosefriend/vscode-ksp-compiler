@@ -1,5 +1,5 @@
 # Prerequisites
-- VS Code
+- Visual Studio Code
 - Python 3.12.*
 - Python Packages:
    - pyaml

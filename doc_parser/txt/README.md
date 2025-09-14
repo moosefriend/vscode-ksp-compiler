@@ -1,1 +1,1 @@
-Configuration files for the doc_parser
+Converted KSP Reference Manuals to Text Files
