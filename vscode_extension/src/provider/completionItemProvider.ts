@@ -49,7 +49,7 @@ export class CompletionItemProvider implements vscode.CompletionItemProvider {
             proposal.kind = kind;
             if (entry) {
                 if (entry.description) {
-                    proposal.documentation = entry.description;
+                    proposal.documentation = new vscode.MarkdownString(entry.description);
                 }
                 if (entry.signature) {
                     proposal.detail = entry.signature;
