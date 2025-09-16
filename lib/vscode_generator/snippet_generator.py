@@ -33,23 +33,23 @@ class SnippetGenerator(BaseGenerator):
     CALLBACK_TEMPLATE = cleandoc("""
     "on <<name>>": {
         "body": [
-            "$LINE_COMMENT ${<<index>>:<<one_line_description>>}",
+            "// ${<<index>>:<<one_line_description>>}",
             "on <<name>><<parameter>>",
-            "    ${<<index>>:$LINE_COMMENT your code here}",
+            "    ${<<index>>:// your code here}",
             "end on"
         ],
-        "description": "<<description>>",
+        "description": ["<<description>>", "\\n"],
         "prefix": "on <<name>>"
     }
     """)
     WIDGET_TEMPLATE = cleandoc("""
     "<<name>>": {
         "body": [
-            "$LINE_COMMENT ${<<index>>:<<one_line_description>>}",
+            "// ${<<index>>:<<one_line_description>>}",
             "declare <<name>> <<variable_name>><<index_name>><<parameter_list>>"
         ],
-        "description": "<<description>>",
-        "prefix": "on <<name>>"
+        "description": ["<<description>>", "\\n"],
+        "prefix": "<<name>>"
     }
     """)
 
@@ -76,7 +76,7 @@ class SnippetGenerator(BaseGenerator):
                 json = json.replace("<<name>>", doc_item.name)
                 json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " ").replace("$", "\\\\$"))
                 json = json.replace("<<parameter>>", doc_item.get_snippet_parameter())
-                json = json.replace("<<description>>", doc_item.description.replace("\n", "\\n"))
+                json = json.replace("<<description>>", doc_item.description.replace("\n", '", "'))
                 json = SnippetGenerator.set_placeholder_index(json)
                 json = indent(json, "    ")
                 json_list.append(json)
@@ -105,7 +105,7 @@ class SnippetGenerator(BaseGenerator):
                 json = json.replace("<<index_name>>", doc_item.get_snippet_index_name())
                 json = json.replace("<<parameter_list>>", doc_item.get_snippet_parameter_list())
                 json = json.replace("<<one_line_description>>", doc_item.description.replace("\n", " ").replace("$", "\\\\$"))
-                json = json.replace("<<description>>", doc_item.description.replace("\n", "\\n"))
+                json = json.replace("<<description>>", doc_item.description.replace("\n", '", "'))
                 json = SnippetGenerator.set_placeholder_index(json)
                 json = indent(json, "    ")
                 json_list.append(json)
