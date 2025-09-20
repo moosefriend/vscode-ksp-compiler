@@ -2,20 +2,34 @@
 Visual Studio Code Extension for compiling NI KONTAKT(TM) Script Processor (KSP) scripts
 
 ## Features
-* Press F7 to compile the KSP script and copy it to clipboard using the integrated
-  [SublimeKSP Compiler CLI](https://github.com/nojanath/SublimeKSP) as submodule at
-  `vscode_extension/sublime_ksp`:  
-  ![Compile](images/compile.png)
-* On the fly syntax checking using the KSP Compiler:  
-  ![Error Reporting](images/error_reporting.png)
-* Syntax Highlighting including the extended syntax of the KSP Compiler:  
-  ![Syntax Highlighting](images/syntax_highlighting.png)
-* Snippets for basic control statements, built-in callbacks, widgets, functions, commands:  
-  ![Snippets](images/snippets.png)
-* Autocompletion for built-in callbacks, widgets, functions, commands, and variables:  
-  ![Autocompletion](images/autocompletion.png)
-* Documentation on mouse hover:  
-  ![Hover Documentation](images/hover_documentation.png)
+### Compiler
+Press F7 to compile the KSP script and copy it to clipboard:  
+![Compile](images/compile.png)  
+Note: The [SublimeKSP Compiler CLI](https://github.com/nojanath/SublimeKSP) is used here which is integrated as submodule at `vscode_extension/sublime_ksp`
+
+### Syntax Check
+On the fly syntax checking using the KSP Compiler:  
+![Error Reporting](images/error_reporting.png)  
+   
+### Syntax Highlighting
+Syntax Highlighting including the extended syntax of the KSP Compiler:  
+![Syntax Highlighting](images/syntax_highlighting.png)
+
+### Snippets
+Snippets for basic control statements, built-in callbacks, widgets, functions, commands:  
+![Snippets](images/snippets.png)
+
+### Autocompletion
+Autocompletion for built-in callbacks, widgets, functions, commands, and variables:  
+![Autocompletion](images/autocompletion.png)
+
+### Documentation
+Documentation on mouse hover:  
+![Hover Documentation](images/hover_documentation.png)
+
+### Find References/Definition
+Find References and Go to Definition:  
+![References](images/references.png)
 
 ## Architecture
 ### Overview
@@ -29,7 +43,7 @@ Visual Studio Code Extension for compiling NI KONTAKT(TM) Script Processor (KSP)
 The Python scripts for parsing the documentation are located at `doc_parser/bin`:
 * **[pdf2txt.py](doc_parser/bin/pdf2txt.py):** Converts the KSP manual (\*.pdf) provided by Native Instruments to a
   text file (\*.txt). Note that the generated text file requires manual fixes before parsing.
-* **[txt_parser.py](doc_parser/bin/txt_parser.py):** Parses the manually fixed text file (\*.txt) and generate \*.csv
+* **[txt_parser.py](doc_parser/bin/txt_parser.py):** Parses the manually fixed text file (\*.txt) and generates \*.csv
   files for built-in callbacks, widgets, functions, commands, and variables as input for the VS Code Extension.
 
 For details check [doc_parser README.md](doc_parser/REAMDE.md).
@@ -38,23 +52,24 @@ For details check [doc_parser README.md](doc_parser/REAMDE.md).
 The VS Code extension is located at `vscode_extension` and have some Python helper scripts at `vscode_extension/bin`:
 * **[pre_build.py](vscode_extension/bin/pre_build.py):** This script is called before the VS Code Extension build
   process. Based on the \*.csv files provided by the [Document Parser](#document-parser) it performs the following steps:
-  * Converts some \*.yaml files to \*.json required by the VS Code Language Extension
-  * Generates TypeScript (\*.ts) files for the VS Code Extension at `vscode_extension/src/generated`
-  * Inject names into the grammar JSON file
-  * Inject callbacks and widgets into the snippets JSON file
+  * Converts some \*.yaml files to \*.json required by the VS Code Language Extension (Grammar, Snippets, Language
+    Configuration)
+  * Reads the \*.csv files provided by the Document Parser and generates TypeScript (\*.ts) files for the VS Code
+    Extension at `vscode_extension/src/generated`
+  * Inject names read from the \*.csv files into the grammar JSON file
+  * Inject callbacks and widgets read from the \*.csv files into the snippets JSON file
 * **[ksp_compiler_wrapper.py](vscode_extension/bin/ksp_compiler_wrapper.py):** This script is called from within the VS
   Code Extension to compile a KSP script and to extract the error messages from the KSP Compiler.
-
 
 ## References
 This project
 * integrates the [SublimeKSP Compiler](https://github.com/nojanath/SublimeKSP) by [Jonathan Thompson](https://github.com/nojanath)
   which was forked from [Nils Liberg's official SublimeKSP plugin, v1.11](http://nilsliberg.se/ksp/) released under the [GPL v3.0 license](https://github.com/nojanath/SublimeKSP/blob/master/LICENSE)
-* is highly inspired from the [Visual Studio Code Extension for NI KONTAKT Script Processor (KSP)](https://github.com/r-koubou/vscode-ksp) by
+* is highly inspired by the [Visual Studio Code Extension for NI KONTAKT Script Processor (KSP)](https://github.com/r-koubou/vscode-ksp) by
   [Hiroaki@R-Koubou](https://github.com/r-koubou) released under the [MIT license](https://github.com/r-koubou/vscode-ksp/blob/main/LICENSE)
 
 ## License
-* [GPL v3.0](LICENSE)
+[GPL v3.0](LICENSE)
 
 ## Author
-* [MooseFriend](https://github.com/moosefriend)
+[MooseFriend](https://github.com/moosefriend)

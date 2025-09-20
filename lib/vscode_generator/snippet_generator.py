@@ -38,7 +38,7 @@ class SnippetGenerator(BaseGenerator):
             "    ${<<index>>:// your code here}",
             "end on"
         ],
-        "description": ["<<description>>", "\\n"],
+        "description": ["<<description>>", "\\r"],
         "prefix": "on <<name>>"
     }
     """)
@@ -48,7 +48,7 @@ class SnippetGenerator(BaseGenerator):
             "// ${<<index>>:<<one_line_description>>}",
             "declare <<name>> <<variable_name>><<index_name>><<parameter_list>>"
         ],
-        "description": ["<<description>>", "\\n"],
+        "description": ["<<description>>", "\\r"],
         "prefix": "<<name>>"
     }
     """)
