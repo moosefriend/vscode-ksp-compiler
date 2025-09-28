@@ -15,6 +15,10 @@ On the fly syntax checking using the KSP Compiler:
 Syntax Highlighting including the extended syntax of the KSP Compiler:  
 ![Syntax Highlighting](images/syntax_highlighting.png)
 
+### Outline View
+Outline view of callbacks, functions and variables:  
+![Outline View](images/outline_view.png)
+
 ### Snippets
 Snippets for basic control statements, built-in callbacks, widgets, functions, commands:  
 ![Snippets](images/snippets.png)
@@ -33,7 +37,7 @@ Find References and Go to Definition:
 
 ## Architecture
 ### Overview
-![Overview](images/overview.svg)
+![Overview](images/overview.png)
 
 ### Configuration
 * For each KSP version a system configuration file must be created at `cfg/<ksp_version>/system.ini`.
