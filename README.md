@@ -37,7 +37,7 @@ Find References and Go to Definition:
 
 ## Architecture
 ### Overview
-![Overview](images/overview.png)
+<img src="images/overview.png" alt="Overview" width="861"/>
 
 ### Configuration
 * For each KSP version a system configuration file must be created at `cfg/<ksp_version>/system.ini`.
