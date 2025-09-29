@@ -45,16 +45,16 @@ Find References and Go to Definition:
 
 ### Document Parser
 The Python scripts for parsing the documentation are located at `doc_parser/bin`:
-* **[pdf2txt.py](doc_parser/bin/pdf2txt.py):** Converts the KSP manual (\*.pdf) provided by Native Instruments to a
+* **[`pdf2txt.py`](doc_parser/bin/pdf2txt.py):** Converts the KSP manual (\*.pdf) provided by Native Instruments to a
   text file (\*.txt). Note that the generated text file requires manual fixes before parsing.
-* **[txt_parser.py](doc_parser/bin/txt_parser.py):** Parses the manually fixed text file (\*.txt) and generates \*.csv
+* **[`txt_parser.py`](doc_parser/bin/txt_parser.py):** Parses the manually fixed text file (\*.txt) and generates \*.csv
   files for built-in callbacks, widgets, functions, commands, and variables as input for the VS Code Extension.
 
 For details check [doc_parser README.md](doc_parser/REAMDE.md).
 
 ### Visual Studio Code Extension
 The VS Code extension is located at `vscode_extension` and have some Python helper scripts at `vscode_extension/bin`:
-* **[pre_build.py](vscode_extension/bin/pre_build.py):** This script is called before the VS Code Extension build
+* **[`pre_build.py`](vscode_extension/bin/pre_build.py):** This script is called before the VS Code Extension build
   process. Based on the \*.csv files provided by the [Document Parser](#document-parser) it performs the following steps:
   * Converts some \*.yaml files to \*.json required by the VS Code Language Extension (Grammar, Snippets, Language
     Configuration)
@@ -62,7 +62,7 @@ The VS Code extension is located at `vscode_extension` and have some Python help
     Extension at `vscode_extension/src/generated`
   * Inject names read from the \*.csv files into the grammar JSON file
   * Inject callbacks and widgets read from the \*.csv files into the snippets JSON file
-* **[ksp_compiler_wrapper.py](vscode_extension/bin/ksp_compiler_wrapper.py):** This script is called from within the VS
+* **[`ksp_compiler_wrapper.py`](vscode_extension/bin/ksp_compiler_wrapper.py):** This script is called from within the VS
   Code Extension to compile a KSP script and to extract the error messages from the KSP Compiler.
 
 ## References
