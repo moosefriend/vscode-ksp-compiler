@@ -29,7 +29,7 @@ import { outputChannel, Channel} from './commandSetup';
 const REGEX_PARSER_MESSAGE_NEWLINE: RegExp = /[\r]?\n/;
 const REGEX_ERROR_MESSAGE: RegExp = /(ERROR|WARNING)\s+(.+)\:(\d+)\:\s+(.*)/
 const REGEX_ERROR_BEGIN: RegExp = />>> BEGIN (Error|Exception)/;
-const REGEX_ERROR_COMMAND: RegExp = />>> Command: (.+)/;
+const REGEX_ERROR_COMMAND: RegExp = />>> Command: (.*)/;
 const REGEX_ERROR_LOCATION: RegExp = />>> Location: (.+): (\d+)/;
 const REGEX_ERROR_END: RegExp = />>> END (Error|Exception)/;
 
@@ -193,7 +193,7 @@ export class CompileExecutor implements vscode.Disposable {
         if (matches) {
             let level = matches[1];
             let line = Number.parseInt(matches[3]) - 1; // zero origin
-            let message = "[KSP] " + matches[4];
+            let message = matches[4];
             let range = new vscode.Range(line, 0, line, Number.MAX_VALUE);
             let diagnostic: vscode.Diagnostic = new vscode.Diagnostic(range, message);
             if (level === "ERROR") {
@@ -208,6 +208,7 @@ export class CompileExecutor implements vscode.Disposable {
             else {
                 diagnostic.severity = vscode.DiagnosticSeverity.Error;
             }
+            diagnostic.code = "KSP Compiler"
             this.diagnostics.push(diagnostic);
         }
     }
@@ -258,9 +259,10 @@ export class CompileExecutor implements vscode.Disposable {
         if (this.errorType == "Error") {
             let diagnostic: vscode.Diagnostic = new vscode.Diagnostic(
                 new vscode.Range(this.errorLineNo - 1, 0, this.errorLineNo - 1, Number.MAX_VALUE),
-                "[KSP Compiler] ERROR: " + this.errorMessage,
+                this.errorMessage,
                 vscode.DiagnosticSeverity.Error,
             );
+            diagnostic.code = "KSP Compiler"
             this.diagnostics.push(diagnostic);                   
         }
         // Handle generic Exception
@@ -413,17 +415,20 @@ export class CompileExecutor implements vscode.Disposable {
         if (this.running || document.isClosed) {
             return;
         }
-        if (preSave && !document.isUntitled && document.isDirty) {
-            this.isProgrammaticSave = true;
-            document.save().then((fulfilled) => {
+        // Wait until the document has not been changed for a ceratin time before starting the compiler
+        // => Always use the delayer for compilation
+        this._delayer.trigger(async () => {
+            if (preSave && !document.isUntitled && document.isDirty) {
+                this.isProgrammaticSave = true;
+                const fulfilled = await document.save();
                 if (fulfilled) {
-                    this._delayer.trigger(() => this.executeImpl(document, argBuilder, useDiagnostics));
+                    await this.executeImpl(document, argBuilder, useDiagnostics);
                 } else {
                     this.isProgrammaticSave = false;
                 }
-            });
-            return;
-        }
-        this._delayer.trigger(() => this.executeImpl(document, argBuilder, useDiagnostics));
+                return;
+            }
+            await this.executeImpl(document, argBuilder, useDiagnostics);
+        });
     }
 }
