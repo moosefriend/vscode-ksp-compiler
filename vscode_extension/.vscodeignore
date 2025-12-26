@@ -1,4 +1,8 @@
 **/*.ts
 **/*.yml
+**/*.drawio
 **/tsconfig.json
 **/*.code-workspace
+**/__pycache__/
+/syntaxes/
+/src/
