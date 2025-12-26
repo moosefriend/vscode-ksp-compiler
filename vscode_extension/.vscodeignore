@@ -1,0 +1,3 @@
+**/*.ts
+**/*.yml
+**/tsconfig.json

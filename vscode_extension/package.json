@@ -28,7 +28,7 @@
     "icon": "images/logo.png",
     "main": "./out/js/main",
     "engines": {
-        "vscode": "^1.89.0"
+        "vscode": "^1.98.0"
     },
     "categories": [
         "Programming Languages",
