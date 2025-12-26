@@ -1,42 +1,49 @@
-# Prerequisites
-- Visual Studio Code
-- Python 3.12.*
-- Python Packages:
-   - pyaml
-   - natsort
-   - pypdf
-- [Node.js](https://nodejs.org/en)
-- npm packages:
-   - npm install -g typescript
-   - npm install -g vscode
-   - npm install -g fs
-   - npm install -g path
-   - npm install -g tmp
-   - npm install -g clipboardy
-   - npm install -g process
+# vscode-ksp-compiler
+Visual Studio Code Extension for compiling NI KONTAKT(TM) Script Processor (KSP) scripts
 
-# KSP Compiler Commandline
-```
-ksp_compiler.py [-h] [-c] [-v] [-e] [-o] [-t] [-d] source_file [output_file]
+## Features
+### Compiler
+Press F7 to compile the KSP script and copy it to clipboard:  
+![Compile](images/compile.png)  
+Note: The [SublimeKSP Compiler CLI](https://github.com/nojanath/SublimeKSP) is used here which is integrated as submodule at `vscode_extension/sublime_ksp`
 
-positional arguments:
-  source_file
-  output_file
+### Syntax Check
+On the fly syntax checking using the KSP Compiler:  
+![Error Reporting](images/error_reporting.png)  
+   
+### Syntax Highlighting
+Syntax Highlighting including the extended syntax of the KSP Compiler:  
+![Syntax Highlighting](images/syntax_highlighting.png)
 
-optional arguments:
-  -h, --help                               show this help message and exit
-  -f, --force                              force all specified compiler options, overriding any compile_with pragma directives from the script
-  -c, --compact                            remove indents in compiled code
-  -v, --compact_variables                  shorten and obfuscate variable names in compiled code
-  -d, --combine_callbacks                  combines duplicate callbacks - but not functions or macros
-  -e, --extra_syntax_checks                additional syntax checks during compilation
-  -o, --optimize                           optimize the compiled code
-  -b, --extra_branch_optimization          adds branch optimization checks earlier in compile process, allowing define constant based branching etc.
-  -l, --log                                dumps the compiler output to a log file on failed compilation
-  -i NUM_SPACES, --indent-size NUM_SPACES  specifies how many spaces is used for indentation, if --compact compiler option is not used
-  -t, --add_compile_date                   adds the date and time comment atop the compiled code
-  -x, --sanitize_exit_command              adds a dummy no-op command before every exit function call
+### Outline View
+Outline view of callbacks, functions and variables:  
+![Outline View](images/outline_view.png)
 
+### Snippets
+Snippets for basic control statements, built-in callbacks, widgets, functions, commands:  
+![Snippets](images/snippets.png)
 
-> python ksp_compiler.py --force -c -e -o "<source-file-path>" "<target-file-path>"
-```
+### Autocompletion
+Autocompletion for built-in callbacks, widgets, functions, commands, and variables:  
+![Autocompletion](images/autocompletion.png)
+
+### Documentation
+Documentation on mouse hover:  
+![Hover Documentation](images/hover_documentation.png)
+
+### Find References/Definition
+Find References and Go to Definition:  
+![References](images/references.png)
+
+## References
+This project
+* integrates the [SublimeKSP Compiler](https://github.com/nojanath/SublimeKSP) by [Jonathan Thompson](https://github.com/nojanath)
+  which was forked from [Nils Liberg's official SublimeKSP plugin, v1.11](http://nilsliberg.se/ksp/) released under the [GPL v3.0 license](https://github.com/nojanath/SublimeKSP/blob/master/LICENSE)
+* is highly inspired by the [Visual Studio Code Extension for NI KONTAKT Script Processor (KSP)](https://github.com/r-koubou/vscode-ksp) by
+  [Hiroaki@R-Koubou](https://github.com/r-koubou) released under the [MIT license](https://github.com/r-koubou/vscode-ksp/blob/main/LICENSE)
+
+## License
+[GPL v3.0](LICENSE)
+
+## Author
+[MooseFriend](https://github.com/moosefriend)

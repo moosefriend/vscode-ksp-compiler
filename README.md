@@ -1,40 +1,6 @@
 # vscode-ksp-compiler
 Visual Studio Code Extension for compiling NI KONTAKT(TM) Script Processor (KSP) scripts
 
-## Features
-### Compiler
-Press F7 to compile the KSP script and copy it to clipboard:  
-![Compile](images/compile.png)  
-Note: The [SublimeKSP Compiler CLI](https://github.com/nojanath/SublimeKSP) is used here which is integrated as submodule at `vscode_extension/sublime_ksp`
-
-### Syntax Check
-On the fly syntax checking using the KSP Compiler:  
-![Error Reporting](images/error_reporting.png)  
-   
-### Syntax Highlighting
-Syntax Highlighting including the extended syntax of the KSP Compiler:  
-![Syntax Highlighting](images/syntax_highlighting.png)
-
-### Outline View
-Outline view of callbacks, functions and variables:  
-![Outline View](images/outline_view.png)
-
-### Snippets
-Snippets for basic control statements, built-in callbacks, widgets, functions, commands:  
-![Snippets](images/snippets.png)
-
-### Autocompletion
-Autocompletion for built-in callbacks, widgets, functions, commands, and variables:  
-![Autocompletion](images/autocompletion.png)
-
-### Documentation
-Documentation on mouse hover:  
-![Hover Documentation](images/hover_documentation.png)
-
-### Find References/Definition
-Find References and Go to Definition:  
-![References](images/references.png)
-
 ## Architecture
 ### Overview
 <img src="images/overview.png" alt="Overview" width="861"/>
@@ -64,6 +30,8 @@ The VS Code extension is located at `vscode_extension` and have some Python help
   * Inject callbacks and widgets read from the \*.csv files into the snippets JSON file
 * **[`ksp_compiler_wrapper.py`](vscode_extension/bin/ksp_compiler_wrapper.py):** This script is called from within the VS
   Code Extension to compile a KSP script and to extract the error messages from the KSP Compiler.
+
+For details check [vscode_extension README.md](vscode_extension/README.md)
 
 ## References
 This project
