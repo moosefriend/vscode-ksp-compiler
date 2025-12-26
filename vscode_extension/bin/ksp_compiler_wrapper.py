@@ -20,32 +20,14 @@ import traceback
 import sys
 
 import _find_ksp_compiler  # noqa
-from ksp_compiler import main, ParseException as OriginalParseException
-import ksp_compiler
-
-class PatchedParseException(OriginalParseException):
-    """Patch the ParseException to save the clean message"""
-
-    def __init__(self, line, message):
-        """
-        Patch the ParseException to save the clean message.
-
-        :param line: Line object or None
-        :param message: Error message
-        """
-        super().__init__(line, message)
-        self.error_message = message.strip()
+from ksp_compiler import main, ParseException
 
 
 if __name__ == "__main__":
     exit_code = 0
     try:
-        # Monkey patch the ParseException in ksp_compiler
-        # This is needed to get the clean error message
-        ksp_compiler.ParseException = PatchedParseException
-        # Call the main function from ksp_compiler
         main()
-    except PatchedParseException as ex:
+    except ParseException as ex:
         print(">>> BEGIN Error", file=sys.stderr)
         message = ex.error_message
         print(message, file=sys.stderr)
