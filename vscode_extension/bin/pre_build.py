@@ -28,6 +28,7 @@ from util.sublime_util import Sublime2TextMateConverter
 from vscode_generator.command_completion_generator import CommandCompletionGenerator
 from vscode_generator.command_name_generator import CommandNameGenerator
 from vscode_generator.grammar_generator import GrammarGenerator
+from vscode_generator.readme_generator import ReadmeGenerator
 from vscode_generator.snippet_generator import SnippetGenerator
 from vscode_generator.variable_completion_generator import VariableCompletionGenerator
 from vscode_generator.variable_name_generator import VariableNameGenerator
@@ -59,3 +60,5 @@ headline("Generate variable completion as type script file")
 VariableCompletionGenerator.process()
 headline("Generate command completion as type script file")
 CommandCompletionGenerator.process()
+headline("Generate README.md")
+ReadmeGenerator.process()

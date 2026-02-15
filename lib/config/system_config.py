@@ -111,6 +111,8 @@ class SystemConfig(metaclass=Singleton):
         self.variable_completion_ts: Path = self._get_file("variable_completion_ts")
         self.command_names_ts: Path = self._get_file("command_names_ts")
         self.command_completion_ts: Path = self._get_file("command_completion_ts")
+        self.readme_local: Path = self._get_file("readme_local")
+        self.readme_packaging: Path = self._get_file("readme_packaging")
 
     def _get_dir(self, name: str, create: bool = False) -> Path:
         """

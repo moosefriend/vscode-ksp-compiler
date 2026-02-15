@@ -4,5 +4,6 @@
 **/tsconfig.json
 **/*.code-workspace
 **/__pycache__/
-/syntaxes/
-/src/
+syntaxes/**
+src/**
+README.local.md

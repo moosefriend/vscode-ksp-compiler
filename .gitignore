@@ -4,6 +4,7 @@ vscode_extension/dist/
 vscode_extension/node_modules/
 vscode_extension/src/generated/
 vscode_extension/*.vsix
+vscode_extension/README.md
 
 # doc_parser
 __pycache__/
