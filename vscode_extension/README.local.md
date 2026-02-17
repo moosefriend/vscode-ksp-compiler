@@ -13,8 +13,8 @@ Note: The [SublimeKSP Compiler CLI](https://github.com/nojanath/SublimeKSP) is u
 ### Syntax Check
 
 On the fly syntax checking using the KSP Compiler:  
-![Error Reporting](images/error_reporting.png)  
-   
+![Error Reporting](images/error_reporting.png)
+
 ### Syntax Highlighting
 
 Syntax Highlighting including the extended syntax of the KSP Compiler:  
