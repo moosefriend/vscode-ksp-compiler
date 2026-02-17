@@ -58,11 +58,11 @@ export class CompileExecutor implements vscode.Disposable {
     private errorFile: string = "";
     private errorLineNo: number = 0;
     private errorType: string = "";
-    private showStdOut: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDOUT, config.DEFAULT_SHOW_STDOUT);
-    private showStdErr: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDERR, config.DEFAULT_SHOW_STDERR);
+    private showStdOut: boolean = false;
+    private showStdErr: boolean = false;
 
     private constructor() {
-        this._delayer.defaultDelay = config.DEFAULT_VALIDATE_DELAY;
+        this._delayer.defaultDelay = ConfigurationManager.getConfig<number>(config.KEY_VALIDATE_DELAY);
     }
 
     /**
@@ -290,7 +290,7 @@ export class CompileExecutor implements vscode.Disposable {
      */
     private executeImpl(document: vscode.TextDocument, argBuilder: CompileBuilder, useDiagnostics: boolean = true): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            if (!ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE, config.DEFAULT_VALIDATE_ENABLE)) {
+            if (!ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE)) {
                 vscode.window.showErrorMessage('KSP Compiler: Validate is disabled! See Preference of KSP.');
                 this.running = false;
                 resolve();
@@ -306,7 +306,9 @@ export class CompileExecutor implements vscode.Disposable {
             let processFailed: boolean = false;
             try {
                 let args: string[] = argBuilder.build();
-                let python = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION, config.DEFAULT_PYTHON_LOCATION);
+                let python = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION);
+                this.showStdOut = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDOUT);
+                this.showStdErr = ConfigurationManager.getConfig<boolean>(config.KEY_SHOW_STDERR);
                 this.clearOutput();
                 this.addLine(`Executing: ${python} ${args.map(a => `"${a}"`).join(' ')}`, Channel.StdOut);
                 let childProcess = child_process.spawn(python, args, undefined);

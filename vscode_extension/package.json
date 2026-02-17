@@ -144,14 +144,14 @@
                     "default": false,
                     "description": "%configuration.compiler.sanitize_exit_command%"
                 },
-                "ksp.compiler.Show STDOOUT": {
+                "ksp.compiler.Show STDOUT": {
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "%configuration.compiler.show_stdout%"
                 },
                 "ksp.compiler.Show STDERR": {
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "%configuration.compiler.show_stderr%"
                 },
                 "ksp.validate.Enable": {

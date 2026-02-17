@@ -25,24 +25,24 @@ export class ConfigurationManager {
     /**
      * Get a user configuration value
      */
-    static getConfig<T>(key: string, defaultValue: T): T {
-        let ret: T = defaultValue;
-        ConfigurationManager.getConfigComplex(key, defaultValue, (v, u) => {
+    static getConfig<T>(key: string, defaultValue?: T): T {
+        let ret: T | undefined = defaultValue;
+        ConfigurationManager.getConfigComplex(key, (v, u) => {
             ret = v;
-        });
-        return ret;
+        }, defaultValue);
+        return ret as T;
     }
 
     /**
      * Get a user configuration value
      */
-    static getConfigComplex<T>(key: string, defaultValue: T, callback: (value: T, userDefined: boolean) => void): void {
+    static getConfigComplex<T>(key: string, callback: (value: T, userDefined: boolean) => void, defaultValue?: T): void {
         let section: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration(config.CONFIG_SECTION_NAME);
-        let value: T = defaultValue;
+        let value: T | undefined = defaultValue as T | undefined;
         let userDefined: boolean = false;
         let inspect = section.inspect<T>(key);
         if (!section) {
-            callback(defaultValue, userDefined);
+            callback(defaultValue as T, userDefined);
             return;
         }
         if (inspect) {
@@ -53,7 +53,10 @@ export class ConfigurationManager {
             else if (inspect.globalValue !== undefined && inspect.globalValue !== null) {
                 value = inspect.globalValue;
             }
+            else if (inspect.defaultValue !== undefined && inspect.defaultValue !== null) {
+                value = inspect.defaultValue;
+            }
         }
-        callback(value, userDefined);
+        callback(value as T, userDefined);
     }
 }

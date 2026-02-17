@@ -37,20 +37,5 @@ export const KEY_SHOW_ERROR_STATE = 'compiler.Show Error State';
 export const KEY_VALIDATE_ENABLE = 'validate.Enable';
 export const KEY_VALIDATE_DELAY = 'validate.Delay';
 
-// Default values
-export const DEFAULT_PYTHON_LOCATION = 'python';
-export const DEFAULT_FORCE = false;
-export const DEFAULT_COMPACT = false;
-export const DEFAULT_COMPACT_VARIABLES = false;
-export const DEFAULT_COMBINE_CALLBACKS = false;
-export const DEFAULT_EXTRA_SYNTAX_CHECK = true;
-export const DEFAULT_OPTIMIZE = false;
-export const DEFAULT_EXTRA_BRANCH_OPTIMIZATION = false;
-export const DEFAULT_INDENT_SIZE = 4;
-export const DEFAULT_ADD_COMPILE_DATE = false;
-export const DEFAULT_SANITIZE_EXIT_COMMAND = false;
-export const DEFAULT_SHOW_STDOUT = true;
-export const DEFAULT_SHOW_STDERR = true;
-export const DEFAULT_SHOW_ERROR_STATE = true;
-export const DEFAULT_VALIDATE_ENABLE = true;
-export const DEFAULT_VALIDATE_DELAY = 500;
+// Default values are defined in `package.json` under the `contributes.configuration` section.
+// The runtime retrieves those defaults via `vscode.workspace.getConfiguration().inspect(...).defaultValue`.

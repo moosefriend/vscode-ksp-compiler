@@ -47,16 +47,16 @@ export class CompileBuilder {
         this.compiler_script = path.resolve(__dirname, '../../../bin/ksp_compiler_wrapper.py');
         this.inputFile = inputFile;
         this.outputFile = outputFile;
-        this.force = ConfigurationManager.getConfig<boolean>(configkey.KEY_FORCE, configkey.DEFAULT_FORCE);
-        this.compact = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT, configkey.DEFAULT_COMPACT);
-        this.compact_variables = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT_VARIABLES, configkey.DEFAULT_COMPACT_VARIABLES);
-        this.combine_callbacks = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMBINE_CALLBACKS, configkey.DEFAULT_COMBINE_CALLBACKS);
-        this.extra_syntax_check = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_SYNTAX_CHECK, configkey.DEFAULT_EXTRA_SYNTAX_CHECK);
-        this.optimize = ConfigurationManager.getConfig<boolean>(configkey.KEY_OPTIMIZE, configkey.DEFAULT_OPTIMIZE);
-        this.extra_branch_optimization = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_BRANCH_OPTIMIZATION, configkey.DEFAULT_EXTRA_BRANCH_OPTIMIZATION);
-        this.indent_size = ConfigurationManager.getConfig<number>(configkey.KEY_INDENT_SIZE, configkey.DEFAULT_INDENT_SIZE);
-        this.add_compile_date = ConfigurationManager.getConfig<boolean>(configkey.KEY_ADD_COMPILE_DATE, configkey.DEFAULT_ADD_COMPILE_DATE);
-        this.sanitize_exit_command = ConfigurationManager.getConfig<boolean>(configkey.KEY_SANITIZE_EXIT_COMMAND, configkey.DEFAULT_SANITIZE_EXIT_COMMAND);
+        this.force = ConfigurationManager.getConfig<boolean>(configkey.KEY_FORCE);
+        this.compact = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT);
+        this.compact_variables = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMPACT_VARIABLES);
+        this.combine_callbacks = ConfigurationManager.getConfig<boolean>(configkey.KEY_COMBINE_CALLBACKS);
+        this.extra_syntax_check = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_SYNTAX_CHECK);
+        this.optimize = ConfigurationManager.getConfig<boolean>(configkey.KEY_OPTIMIZE);
+        this.extra_branch_optimization = ConfigurationManager.getConfig<boolean>(configkey.KEY_EXTRA_BRANCH_OPTIMIZATION);
+        this.indent_size = ConfigurationManager.getConfig<number>(configkey.KEY_INDENT_SIZE);
+        this.add_compile_date = ConfigurationManager.getConfig<boolean>(configkey.KEY_ADD_COMPILE_DATE);
+        this.sanitize_exit_command = ConfigurationManager.getConfig<boolean>(configkey.KEY_SANITIZE_EXIT_COMMAND);
     }
 
     /**

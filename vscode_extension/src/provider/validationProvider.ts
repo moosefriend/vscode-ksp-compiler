@@ -27,10 +27,10 @@ import { Channel } from '../compiler/commandSetup';
 import * as tmp from 'tmp';
 
 export class ValidationProvider {
-    private validationEnabled: boolean = config.DEFAULT_VALIDATE_ENABLE;
+    private validationEnabled: boolean = ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE);
     private realtimeValidationEnabled: boolean = true;
-    private realtimeValidationDelay: number = config.DEFAULT_VALIDATE_DELAY;
-    private executable: string = config.DEFAULT_PYTHON_LOCATION;
+    private realtimeValidationDelay: number = ConfigurationManager.getConfig<number>(config.KEY_VALIDATE_DELAY);
+    private executable: string = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION);
     private pauseValidation: boolean = false;
     private realtimeTrigger: boolean = false;
     private onSaveListener: vscode.Disposable | undefined;
@@ -68,13 +68,16 @@ export class ValidationProvider {
     private initConfiguration(): void {
         let section: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration(config.CONFIG_SECTION_NAME);
         if (section) {
-            let initConfig = function <T>(key: string, defaultValue: T) {
+            let initConfig = function <T>(key: string) {
                 if (!section.has(key)) {
-                    section.update(key, defaultValue, true);
+                    let inspect = section.inspect<T>(key);
+                    if (inspect && inspect.defaultValue !== undefined && inspect.defaultValue !== null) {
+                        section.update(key, inspect.defaultValue as T, true);
+                    }
                 }
             };
-            initConfig<boolean>(config.KEY_VALIDATE_ENABLE, config.DEFAULT_VALIDATE_ENABLE);
-            initConfig<number>(config.KEY_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY);
+            initConfig<boolean>(config.KEY_VALIDATE_ENABLE);
+            initConfig<number>(config.KEY_VALIDATE_DELAY);
         }
     }
 
@@ -86,17 +89,19 @@ export class ValidationProvider {
         let oldExecutable = this.executable;
         if (section) {
             // Get configurations
-            this.validationEnabled = ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE, config.DEFAULT_VALIDATE_ENABLE);
-            this.executable = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION, config.DEFAULT_PYTHON_LOCATION);
-            ConfigurationManager.getConfigComplex<number>(config.KEY_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY, (value, user) => {
+            this.validationEnabled = ConfigurationManager.getConfig<boolean>(config.KEY_VALIDATE_ENABLE);
+            this.executable = ConfigurationManager.getConfig<string>(config.KEY_PYTHON_LOCATION);
+            ConfigurationManager.getConfigComplex<number>(config.KEY_VALIDATE_DELAY, (value, user) => {
                 if (value == 0) {
                     this.realtimeValidationEnabled = false;
                 }
                 else {
                     this.realtimeValidationEnabled = true;
                     if (value < 16) {
-                        this.realtimeValidationDelay = config.DEFAULT_VALIDATE_DELAY;
-                        section.update(config.KEY_VALIDATE_DELAY, config.DEFAULT_VALIDATE_DELAY, true);
+                        let inspect = section.inspect<number>(config.KEY_VALIDATE_DELAY);
+                        let def = (inspect && inspect.defaultValue !== undefined && inspect.defaultValue !== null) ? inspect.defaultValue as number : 500;
+                        this.realtimeValidationDelay = def;
+                        section.update(config.KEY_VALIDATE_DELAY, def, true);
                         vscode.window.showWarningMessage("KSP Configuration: " + config.KEY_VALIDATE_DELAY + ": too short or negative. Reset default time.");
                     }
                     else {
