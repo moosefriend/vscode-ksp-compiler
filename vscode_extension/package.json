@@ -136,7 +136,7 @@
                 },
                 "ksp.compiler.Add Compile Date": {
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "%configuration.compiler.add_compile_date%"
                 },
                 "ksp.compiler.Sanitize Exit Command": {

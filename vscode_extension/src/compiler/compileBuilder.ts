@@ -91,6 +91,9 @@ export class CompileBuilder {
         if (this.add_compile_date) {
             args.push("--add_compile_date");
         }
+        if (this.sanitize_exit_command) {
+            args.push("--sanitize_exit_command");
+        }
         args.push(this.inputFile);
         if (this.outputFile) {
             args.push(this.outputFile);
