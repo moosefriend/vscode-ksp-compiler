@@ -6,4 +6,5 @@
 **/__pycache__/
 syntaxes/**
 src/**
+node_modules/**
 README.local.md
